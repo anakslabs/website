@@ -104,12 +104,6 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   box-shadow: 0 6px 18px rgba(20,26,58,.06);
 }
-.lang-float {
-  position: fixed; z-index: 3;
-  top: max(16px, env(safe-area-inset-top));
-  right: max(16px, env(safe-area-inset-right));
-  opacity: 0; animation: fade-in 800ms ease-out 700ms forwards;
-}
 .lang button {
   font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
   color: var(--gray); background: transparent; border: 0; border-radius: 100px;
