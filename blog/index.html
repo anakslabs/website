@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Blog — Anaks Labs</title>
+  <meta name="description" content="Notes on building Anaks Labs — the products, the decisions, and the craft behind a family of SaaS." />
+  <meta name="theme-color" content="#F6F7F9" />
+  <link rel="canonical" href="https://anakslabs.com/blog/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Blog — Anaks Labs" />
+  <meta property="og:description" content="Notes on building Anaks Labs — the products, the decisions, the craft." />
+  <meta property="og:url" content="https://anakslabs.com/blog/" />
+  <meta property="og:image" content="https://anakslabs.com/assets/icon-512.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Blog — Anaks Labs" />
+  <meta name="twitter:description" content="Notes on building Anaks Labs — the products, the decisions, the craft." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Blog","name":"Anaks Labs Blog","url":"https://anakslabs.com/blog/","isPartOf":{"@type":"WebSite","name":"Anaks Labs","url":"https://anakslabs.com"},"publisher":{"@type":"Organization","name":"Anaks Labs"}}
+  </script>
+</head>
+<body class="subpage">
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+
+  <div class="layer wash" aria-hidden="true"></div>
+  <canvas class="layer" id="net" aria-hidden="true"></canvas>
+  <div class="layer grid" aria-hidden="true"></div>
+  <div class="layer vignette" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Anaks Labs — home"><img src="/assets/logo-inline.png" width="680" height="431" alt="Anaks Labs" /></a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="/products/" data-i18n="nav_products">Products</a>
+        <a href="/about/" data-i18n="nav_about">About</a>
+        <a href="/blog/" data-i18n="nav_blog" aria-current="page">Blog</a>
+        <a href="/contact/" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <span class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true" aria-label="English">EN</button>
+        <button type="button" data-lang="ko" aria-pressed="false" aria-label="한국어">KO</button>
+      </span>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n-aria="menu" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="page" id="main">
+    <div class="wrap">
+      <div class="page-hero">
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">Blog</span></span>
+        <h1 data-i18n="ph1">Blog</h1>
+        <p class="lead" data-i18n="plead">Notes on building Anaks Labs — the products, the decisions, and the craft behind them.</p>
+      </div>
+
+      <div class="section">
+        <ul class="post-list">
+          <li>
+            <a href="/blog/hello/">
+              <h3 data-i18n="post1_title">We’re starting Anaks Labs</h3>
+              <p class="meta"><time datetime="2026-07-12" data-i18n="post1_date">July 12, 2026</time></p>
+            </a>
+          </li>
+        </ul>
+
+        <div class="empty-state" style="margin-top:16px">
+          <p data-i18n="more_note">More posts are on the way. This is just the beginning.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">&copy; <span id="yr">2026</span> <span data-i18n="footer_copy">Anaks Labs</span> &nbsp;·&nbsp; <a href="mailto:hello@anakslabs.com">hello@anakslabs.com</a></p>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/products/" data-i18n="nav_products">Products</a>
+        <a href="/about/" data-i18n="nav_about">About</a>
+        <a href="/blog/" data-i18n="nav_blog">Blog</a>
+        <a href="/contact/" data-i18n="nav_contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    window.ANAKS_I18N = {
+      en: {
+        title: "Blog — Anaks Labs",
+        metaDesc: "Notes on building Anaks Labs — the products, the decisions, and the craft behind a family of SaaS.",
+        eyebrow: "Blog",
+        ph1: "Blog",
+        plead: "Notes on building Anaks Labs — the products, the decisions, and the craft behind them.",
+        post1_title: "We’re starting Anaks Labs",
+        post1_date: "July 12, 2026",
+        more_note: "More posts are on the way. This is just the beginning."
+      },
+      ko: {
+        title: "블로그 — Anaks Labs",
+        metaDesc: "아낙스랩스를 만들며 남기는 기록 — 제품, 결정, 그리고 SaaS 제품군 뒤의 만드는 과정.",
+        eyebrow: "블로그",
+        ph1: "블로그",
+        plead: "아낙스랩스를 만들며 남기는 기록 — 제품, 결정, 그리고 그 뒤의 과정.",
+        post1_title: "아낙스랩스를 시작합니다",
+        post1_date: "2026년 7월 12일",
+        more_note: "더 많은 글을 준비하고 있습니다. 이제 시작입니다."
+      }
+    };
+  </script>
+  <script src="/assets/site.js"></script>
+</body>
+</html>
