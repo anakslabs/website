@@ -38,10 +38,22 @@
   <div class="layer grid" aria-hidden="true"></div>
   <div class="layer vignette" aria-hidden="true"></div>
 
-  <div class="lang lang-float" role="group" aria-label="Language">
-    <button type="button" data-lang="en" aria-pressed="true" aria-label="English">EN</button>
-    <button type="button" data-lang="ko" aria-pressed="false" aria-label="한국어">KO</button>
-  </div>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Anaks Labs — home"><img src="/assets/logo-inline.png" width="680" height="431" alt="Anaks Labs" /></a>
+      <nav class="site-nav" id="site-nav" aria-label="Primary">
+        <a href="/products/" data-i18n="nav_products">Products</a>
+        <a href="/about/" data-i18n="nav_about">About</a>
+        <a href="/blog/" data-i18n="nav_blog">Blog</a>
+        <a href="/contact/" data-i18n="nav_contact">Contact</a>
+      </nav>
+      <span class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true" aria-label="English">EN</button>
+        <button type="button" data-lang="ko" aria-pressed="false" aria-label="한국어">KO</button>
+      </span>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n-aria="menu" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
 
   <main class="stage" id="main">
     <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">SaaS Studio</span></span>
