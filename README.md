@@ -13,13 +13,14 @@ contact/index.html    Email + KakaoTalk
 blog/index.html       Post list
 blog/hello/index.html First post (stub)
 assets/site.css       Shared styles (design tokens, layers, header/footer, cards)
-assets/site.js        Shared JS (EN/KO i18n, particles, hero video, mobile nav)
+assets/site.js        Shared JS (KO/EN i18n, particles, hero video, mobile nav)
 sitemap.xml           All URLs · robots.txt
 ```
 
-Each page keeps its own `<title>`/meta/OG tags and a `window.ANAKS_I18N` block
-(page-specific EN/KO strings). The chosen language is stored in `localStorage`
-and follows the visitor across pages.
+Each page serves Korean `<title>`/meta/OG tags and Korean body content by
+default, plus a `window.ANAKS_I18N` block with page-specific KO/EN strings.
+Selecting English stores that preference in `localStorage`, so it follows the
+visitor across pages.
 
 ## Preview locally
 

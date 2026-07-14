@@ -2,7 +2,8 @@
    Anaks Labs — shared site script (dependency-free, IIFE)
    - i18n engine: a BASE dictionary (chrome: nav / footer) merged with each
      page's window.ANAKS_I18N (page-specific strings). Selected language is
-     persisted to localStorage so it carries across every page.
+     persisted to localStorage so it carries across every page. Korean is the
+     default; English is used only after the visitor selects it.
    - year stamp, node-constellation canvas, home hero <video> injection,
      mobile nav toggle.
    ========================================================================= */
@@ -49,15 +50,19 @@
   var metaDesc = document.querySelector('meta[name="description"]');
   var ogTitle = document.querySelector('meta[property="og:title"]');
   var ogDesc = document.querySelector('meta[property="og:description"]');
+  var twitterTitle = document.querySelector('meta[name="twitter:title"]');
+  var twitterDesc = document.querySelector('meta[name="twitter:description"]');
   var btns = Array.prototype.slice.call(document.querySelectorAll(".lang button"));
 
   function apply(lang) {
-    var d = DICT[lang] || DICT.en;
+    var d = DICT[lang] || DICT.ko;
     document.documentElement.lang = lang;
     if (d.title) document.title = d.title;
     if (metaDesc && d.metaDesc) metaDesc.setAttribute("content", d.metaDesc);
     if (ogTitle && d.title) ogTitle.setAttribute("content", d.title);
     if (ogDesc && d.metaDesc) ogDesc.setAttribute("content", d.metaDesc);
+    if (twitterTitle && d.title) twitterTitle.setAttribute("content", d.title);
+    if (twitterDesc && d.metaDesc) twitterDesc.setAttribute("content", d.metaDesc);
 
     document.querySelectorAll("[data-i18n]").forEach(function (el) {
       var v = d[el.getAttribute("data-i18n")];
@@ -73,12 +78,12 @@
     });
 
     btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
-    try { localStorage.setItem("anaks_lang", lang); } catch (e) {}
+    try { localStorage.setItem("anaks_lang_v2", lang); } catch (e) {}
   }
 
   var saved;
-  try { saved = localStorage.getItem("anaks_lang"); } catch (e) {}
-  var initial = saved || ((navigator.language || "en").toLowerCase().indexOf("ko") === 0 ? "ko" : "en");
+  try { saved = localStorage.getItem("anaks_lang_v2"); } catch (e) {}
+  var initial = saved === "en" ? "en" : "ko";
   apply(initial);
   btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.lang); }); });
 
