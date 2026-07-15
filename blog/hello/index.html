@@ -43,7 +43,7 @@
       <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
         <a href="/products/" data-i18n="nav_products">제품</a>
         <a href="/about/" data-i18n="nav_about">회사 소개</a>
-        <a href="/blog/" data-i18n="nav_blog" aria-current="page">블로그</a>
+        <a href="/blog/" data-i18n="nav_notices" aria-current="page">전자공고</a>
         <a href="/contact/" data-i18n="nav_contact">문의</a>
       </nav>
       <span class="lang" role="group" aria-label="언어 선택">
@@ -57,7 +57,7 @@
   <main class="page" id="main">
     <div class="wrap">
       <article class="prose">
-        <p class="meta"><a href="/blog/" data-i18n="back">← 블로그</a></p>
+        <p class="meta"><a href="/blog/" data-i18n="back">← 전자공고</a></p>
         <h1 data-i18n="ph1">아낙스랩스를 시작합니다</h1>
         <p class="meta"><time datetime="2026-07-12" data-i18n="post_date">2026년 7월 12일</time></p>
 
@@ -71,11 +71,18 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <p class="footer-brand">&copy; <span id="yr">2026</span> <span data-i18n="footer_copy">아낙스랩스</span> &nbsp;·&nbsp; <a href="mailto:contact@anakslabs.com">contact@anakslabs.com</a></p>
+      <div class="footer-company">
+        <p class="footer-brand">&copy; <span id="yr">2026</span> <span data-i18n="footer_copy">아낙스랩스</span> &nbsp;·&nbsp; <a href="mailto:contact@anakslabs.com">contact@anakslabs.com</a></p>
+        <dl class="footer-details" aria-label="법인 정보">
+          <div><dt data-i18n="footer_legal_name">법인 상호</dt><dd>주식회사 아낙스랩스</dd></div>
+          <div><dt data-i18n="footer_address">본점 주소</dt><dd>경기 화성시 동탄구 메타폴리스로 42 9층 902 S15</dd></div>
+          <div><dt data-i18n="footer_director">대표자</dt><dd>사내이사 오현숙</dd></div>
+        </dl>
+      </div>
       <nav class="footer-nav" aria-label="푸터 메뉴">
         <a href="/products/" data-i18n="nav_products">제품</a>
         <a href="/about/" data-i18n="nav_about">회사 소개</a>
-        <a href="/blog/" data-i18n="nav_blog">블로그</a>
+        <a href="/blog/" data-i18n="nav_notices">전자공고</a>
         <a href="/contact/" data-i18n="nav_contact">문의</a>
       </nav>
     </div>
@@ -86,7 +93,7 @@
       en: {
         title: "We’re starting Anaks Labs — Anaks Labs",
         metaDesc: "The first post from Anaks Labs — why it exists and what it is building toward.",
-        back: "← Blog",
+        back: "← Public Notices",
         ph1: "We’re starting Anaks Labs",
         post_date: "July 12, 2026",
         p1: "Anaks Labs starts with a simple idea: even the smallest business deserves genuinely good software — the kind usually reserved for companies big enough to build it themselves.",
@@ -96,7 +103,7 @@
       ko: {
         title: "아낙스랩스를 시작합니다 — 아낙스랩스",
         metaDesc: "아낙스랩스의 첫 글 — 왜 시작했고, 무엇을 만들어 가는지.",
-        back: "← 블로그",
+        back: "← 전자공고",
         ph1: "아낙스랩스를 시작합니다",
         post_date: "2026년 7월 12일",
         p1: "아낙스랩스는 단순한 생각에서 출발합니다 — 아무리 작은 비즈니스라도 진짜 좋은 소프트웨어를 가질 자격이 있다는 것. 보통은 그것을 직접 만들 만큼 큰 회사의 몫이던 그런 소프트웨어 말입니다.",

@@ -15,22 +15,28 @@
     en: {
       nav_products: "Products",
       nav_about: "About",
-      nav_blog: "Blog",
+      nav_notices: "Public Notices",
       nav_contact: "Contact",
       menu: "Menu",
       skip: "Skip to content",
       footer_copy: "Anaks Labs",
-      footer_home: "Home"
+      footer_home: "Home",
+      footer_legal_name: "Legal name",
+      footer_address: "Head office",
+      footer_director: "Director"
     },
     ko: {
       nav_products: "제품",
       nav_about: "회사 소개",
-      nav_blog: "블로그",
+      nav_notices: "전자공고",
       nav_contact: "문의",
       menu: "메뉴",
       skip: "본문으로 건너뛰기",
       footer_copy: "아낙스랩스",
-      footer_home: "홈"
+      footer_home: "홈",
+      footer_legal_name: "법인 상호",
+      footer_address: "본점 주소",
+      footer_director: "대표자"
     }
   };
 

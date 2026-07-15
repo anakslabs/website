@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>블로그 — 아낙스랩스</title>
-  <meta name="description" content="아낙스랩스를 만들며 남기는 기록 — 제품, 결정, 그리고 SaaS 제품군 뒤의 만드는 과정." />
+  <title>전자공고 — 아낙스랩스</title>
+  <meta name="description" content="주식회사 아낙스랩스의 법정 공고와 주요 소식을 게시합니다." />
   <meta name="theme-color" content="#F6F7F9" />
   <link rel="canonical" href="https://anakslabs.com/blog/" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="블로그 — 아낙스랩스" />
-  <meta property="og:description" content="아낙스랩스를 만들며 남기는 기록 — 제품, 결정, 그리고 그 뒤의 과정." />
+  <meta property="og:title" content="전자공고 — 아낙스랩스" />
+  <meta property="og:description" content="주식회사 아낙스랩스의 법정 공고와 주요 소식을 게시합니다." />
   <meta property="og:url" content="https://anakslabs.com/blog/" />
   <meta property="og:image" content="https://anakslabs.com/assets/icon-512.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="블로그 — 아낙스랩스" />
-  <meta name="twitter:description" content="아낙스랩스를 만들며 남기는 기록 — 제품, 결정, 그리고 그 뒤의 과정." />
+  <meta name="twitter:title" content="전자공고 — 아낙스랩스" />
+  <meta name="twitter:description" content="주식회사 아낙스랩스의 법정 공고와 주요 소식을 게시합니다." />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +26,7 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Blog","name":"아낙스랩스 블로그","url":"https://anakslabs.com/blog/","isPartOf":{"@type":"WebSite","name":"아낙스랩스","alternateName":"Anaks Labs","url":"https://anakslabs.com"},"publisher":{"@type":"Organization","name":"아낙스랩스","alternateName":"Anaks Labs"}}
+  {"@context":"https://schema.org","@type":"CollectionPage","name":"아낙스랩스 전자공고","description":"주식회사 아낙스랩스의 법정 공고와 주요 소식을 게시합니다.","url":"https://anakslabs.com/blog/","isPartOf":{"@type":"WebSite","name":"아낙스랩스","alternateName":"Anaks Labs","url":"https://anakslabs.com"},"publisher":{"@type":"Organization","name":"아낙스랩스","legalName":"주식회사 아낙스랩스","alternateName":"Anaks Labs"}}
   </script>
 </head>
 <body class="subpage">
@@ -43,7 +43,7 @@
       <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
         <a href="/products/" data-i18n="nav_products">제품</a>
         <a href="/about/" data-i18n="nav_about">회사 소개</a>
-        <a href="/blog/" data-i18n="nav_blog" aria-current="page">블로그</a>
+        <a href="/blog/" data-i18n="nav_notices" aria-current="page">전자공고</a>
         <a href="/contact/" data-i18n="nav_contact">문의</a>
       </nav>
       <span class="lang" role="group" aria-label="언어 선택">
@@ -57,9 +57,9 @@
   <main class="page" id="main">
     <div class="wrap">
       <div class="page-hero">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">블로그</span></span>
-        <h1 data-i18n="ph1">블로그</h1>
-        <p class="lead" data-i18n="plead">아낙스랩스를 만들며 남기는 기록 — 제품, 결정, 그리고 그 뒤의 과정.</p>
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">전자공고</span></span>
+        <h1 data-i18n="ph1">전자공고</h1>
+        <p class="lead" data-i18n="plead">주식회사 아낙스랩스의 법정 공고와 주요 소식을 게시합니다.</p>
       </div>
 
       <div class="section">
@@ -73,7 +73,7 @@
         </ul>
 
         <div class="empty-state" style="margin-top:16px">
-          <p data-i18n="more_note">더 많은 글을 준비하고 있습니다. 이제 시작입니다.</p>
+          <p data-i18n="more_note">새로운 공고와 주요 소식은 이 게시판을 통해 안내합니다.</p>
         </div>
       </div>
     </div>
@@ -81,11 +81,18 @@
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
-      <p class="footer-brand">&copy; <span id="yr">2026</span> <span data-i18n="footer_copy">아낙스랩스</span> &nbsp;·&nbsp; <a href="mailto:contact@anakslabs.com">contact@anakslabs.com</a></p>
+      <div class="footer-company">
+        <p class="footer-brand">&copy; <span id="yr">2026</span> <span data-i18n="footer_copy">아낙스랩스</span> &nbsp;·&nbsp; <a href="mailto:contact@anakslabs.com">contact@anakslabs.com</a></p>
+        <dl class="footer-details" aria-label="법인 정보">
+          <div><dt data-i18n="footer_legal_name">법인 상호</dt><dd>주식회사 아낙스랩스</dd></div>
+          <div><dt data-i18n="footer_address">본점 주소</dt><dd>경기 화성시 동탄구 메타폴리스로 42 9층 902 S15</dd></div>
+          <div><dt data-i18n="footer_director">대표자</dt><dd>사내이사 오현숙</dd></div>
+        </dl>
+      </div>
       <nav class="footer-nav" aria-label="푸터 메뉴">
         <a href="/products/" data-i18n="nav_products">제품</a>
         <a href="/about/" data-i18n="nav_about">회사 소개</a>
-        <a href="/blog/" data-i18n="nav_blog">블로그</a>
+        <a href="/blog/" data-i18n="nav_notices">전자공고</a>
         <a href="/contact/" data-i18n="nav_contact">문의</a>
       </nav>
     </div>
@@ -94,24 +101,24 @@
   <script>
     window.ANAKS_I18N = {
       en: {
-        title: "Blog — Anaks Labs",
-        metaDesc: "Notes on building Anaks Labs — the products, the decisions, and the craft behind a family of SaaS.",
-        eyebrow: "Blog",
-        ph1: "Blog",
-        plead: "Notes on building Anaks Labs — the products, the decisions, and the craft behind them.",
+        title: "Public Notices — Anaks Labs",
+        metaDesc: "Official public notices and company updates from Anaks Labs Co., Ltd.",
+        eyebrow: "Public Notices",
+        ph1: "Public Notices",
+        plead: "Official public notices and company updates from Anaks Labs Co., Ltd.",
         post1_title: "We’re starting Anaks Labs",
         post1_date: "July 12, 2026",
-        more_note: "More posts are on the way. This is just the beginning."
+        more_note: "New public notices and company updates will be published on this board."
       },
       ko: {
-        title: "블로그 — 아낙스랩스",
-        metaDesc: "아낙스랩스를 만들며 남기는 기록 — 제품, 결정, 그리고 SaaS 제품군 뒤의 만드는 과정.",
-        eyebrow: "블로그",
-        ph1: "블로그",
-        plead: "아낙스랩스를 만들며 남기는 기록 — 제품, 결정, 그리고 그 뒤의 과정.",
+        title: "전자공고 — 아낙스랩스",
+        metaDesc: "주식회사 아낙스랩스의 법정 공고와 주요 소식을 게시합니다.",
+        eyebrow: "전자공고",
+        ph1: "전자공고",
+        plead: "주식회사 아낙스랩스의 법정 공고와 주요 소식을 게시합니다.",
         post1_title: "아낙스랩스를 시작합니다",
         post1_date: "2026년 7월 12일",
-        more_note: "더 많은 글을 준비하고 있습니다. 이제 시작입니다."
+        more_note: "새로운 공고와 주요 소식은 이 게시판을 통해 안내합니다."
       }
     };
   </script>

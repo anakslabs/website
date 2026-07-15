@@ -330,7 +330,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .card p { font-size: 15px; line-height: 1.6; color: var(--gray); }
 .card .card-cta { margin-top: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
-/* ---- prose (blog / long text) ---- */
+/* ---- prose (notices / long text) ---- */
 .prose { max-width: 68ch; }
 .prose p { font-size: clamp(16px, 2.2vw, 18px); line-height: 1.75; color: var(--ink-2); margin: 0 0 1.1em; }
 .prose h2 { font-size: clamp(19px, 2.6vw, 24px); font-weight: 600; color: var(--ink); margin: 1.6em 0 .5em; letter-spacing: -0.01em; }
@@ -371,14 +371,30 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
   -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
   padding: clamp(28px, 5vw, 44px) 0 max(28px, calc(env(safe-area-inset-bottom) + 22px));
 }
-.footer-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 26px; justify-content: space-between; }
+.footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px 40px; justify-content: space-between; }
+.footer-company { flex: 1 1 660px; min-width: 0; }
 .footer-brand { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--gray-soft); }
 .footer-brand a { color: var(--ink-2); text-decoration: none; }
 .footer-brand a:hover { color: var(--blue); }
-.footer-nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.footer-details {
+  display: flex; flex-wrap: wrap; gap: 10px 24px;
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);
+}
+.footer-details > div { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
+.footer-details dt {
+  flex: 0 0 auto; font-family: var(--mono); font-size: 11px; font-weight: 600;
+  letter-spacing: .04em; color: var(--gray-soft);
+}
+.footer-details dd { font-size: 12.5px; line-height: 1.6; color: var(--ink-2); word-break: keep-all; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 1px; }
 .footer-nav a { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em; color: var(--gray); text-decoration: none; }
 .footer-nav a:hover { color: var(--blue); }
 .footer-nav a:focus-visible, .footer-brand a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+
+@media (max-width: 600px) {
+  .footer-details { display: grid; gap: 10px; }
+  .footer-details > div { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; }
+}
 
 /* =========================================================================
    keyframes
