@@ -6,25 +6,36 @@ The whole site inherits one design system from `assets/site.css` + `assets/site.
 ## Structure
 
 ```
-index.html            Home (coming-soon hero, video background)
-products/index.html   SaaS portfolio
-about/index.html      Company / mission
-contact/index.html    Email + KakaoTalk
-blog/index.html       Public notice board
-blog/hello/index.html First company update (stub)
-assets/site.css       Shared styles (design tokens, layers, header/footer, cards)
-assets/site.js        Shared JS (KO/EN i18n, particles, hero video, mobile nav)
+index.html            Root — English US product landing (clinic website rebuild)
+about/index.html      Company, corporate information, link to the notices board
+blog/index.html       Statutory public notice board (Korean — legal, do not move)
+blog/hello/index.html First company notice
+products/index.html   Korean corporate portfolio page (kept, unlinked from root)
+contact/index.html    Korean contact page (kept, unlinked from root)
+assets/site.css       Shared styles (design tokens, layers, header/footer, cards, landing)
+assets/site.js        Shared JS (KO/EN i18n, particles, hero video, mobile nav, reveal)
 sitemap.xml           All URLs · robots.txt
 ```
 
-Each page serves Korean `<title>`/meta/OG tags and Korean body content by
-default, plus a `window.ANAKS_I18N` block with page-specific KO/EN strings.
-Selecting English stores that preference in `localStorage`, so it follows the
-visitor across pages.
+### Languages
+
+The root is **English only** and opts out of the i18n engine entirely with
+`<html lang="en" data-no-i18n>`.
+
+`about/` is bilingual but defaults to English via `<html data-lang-default="en">`;
+a visitor's explicit choice (the 한국어 / English toggle) still wins and is
+persisted to `localStorage`. The remaining Korean corporate pages
+(`products/`, `contact/`, `blog/`) are unchanged and still default to Korean.
+
+### Public notices (legal)
+
+`blog/` is the statutory public notice board for 주식회사 아낙스랩스. Its URL is
+the company's published electronic-notice location, so **the path must not
+change**. It is linked from the root footer and from `about/`.
 
 ## Preview locally
 
-Clean URLs (`/products/`) need a real server — `file://` won't resolve them.
+Clean URLs (`/about/`) need a real server — `file://` won't resolve them.
 
 ```
 python3 -m http.server 8000   # then open http://localhost:8000

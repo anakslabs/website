@@ -4,15 +4,23 @@
      page's window.ANAKS_I18N (page-specific strings). Selected language is
      persisted to localStorage so it carries across every page. Korean is the
      default; English is used only after the visitor selects it.
+     Two per-page overrides on <html>:
+       data-no-i18n            → single-language page, skip the engine entirely
+                                 (used by the English product landing)
+       data-lang-default="en"  → still bilingual, but English until the visitor
+                                 picks otherwise (used by /about/)
    - year stamp, node-constellation canvas, home hero <video> injection,
-     mobile nav toggle.
+     mobile nav toggle, scroll reveal.
    ========================================================================= */
 (function () {
   "use strict";
 
+  var ROOT = document.documentElement;
+
   /* ---------------- i18n ---------------- */
   var BASE = {
     en: {
+      nav_product: "Product",
       nav_products: "Products",
       nav_about: "About",
       nav_notices: "Public Notices",
@@ -26,6 +34,7 @@
       footer_director: "Director"
     },
     ko: {
+      nav_product: "제품",
       nav_products: "제품",
       nav_about: "회사 소개",
       nav_notices: "전자공고",
@@ -40,58 +49,67 @@
     }
   };
 
-  function assign(a, b) {
-    var out = {}, k;
-    for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) out[k] = a[k];
-    for (k in b) if (Object.prototype.hasOwnProperty.call(b, k)) out[k] = b[k];
-    return out;
-  }
+  (function () {
+    /* English-only pages (the product landing) opt out completely — no lang
+       attribute rewrite, no localStorage read, no string substitution. */
+    if (ROOT.hasAttribute("data-no-i18n")) return;
 
-  var PAGE = window.ANAKS_I18N || { en: {}, ko: {} };
-  var DICT = {
-    en: assign(BASE.en, PAGE.en || {}),
-    ko: assign(BASE.ko, PAGE.ko || {})
-  };
+    function assign(a, b) {
+      var out = {}, k;
+      for (k in a) if (Object.prototype.hasOwnProperty.call(a, k)) out[k] = a[k];
+      for (k in b) if (Object.prototype.hasOwnProperty.call(b, k)) out[k] = b[k];
+      return out;
+    }
 
-  var metaDesc = document.querySelector('meta[name="description"]');
-  var ogTitle = document.querySelector('meta[property="og:title"]');
-  var ogDesc = document.querySelector('meta[property="og:description"]');
-  var twitterTitle = document.querySelector('meta[name="twitter:title"]');
-  var twitterDesc = document.querySelector('meta[name="twitter:description"]');
-  var btns = Array.prototype.slice.call(document.querySelectorAll(".lang button"));
+    var PAGE = window.ANAKS_I18N || { en: {}, ko: {} };
+    var DICT = {
+      en: assign(BASE.en, PAGE.en || {}),
+      ko: assign(BASE.ko, PAGE.ko || {})
+    };
 
-  function apply(lang) {
-    var d = DICT[lang] || DICT.ko;
-    document.documentElement.lang = lang;
-    if (d.title) document.title = d.title;
-    if (metaDesc && d.metaDesc) metaDesc.setAttribute("content", d.metaDesc);
-    if (ogTitle && d.title) ogTitle.setAttribute("content", d.title);
-    if (ogDesc && d.metaDesc) ogDesc.setAttribute("content", d.metaDesc);
-    if (twitterTitle && d.title) twitterTitle.setAttribute("content", d.title);
-    if (twitterDesc && d.metaDesc) twitterDesc.setAttribute("content", d.metaDesc);
+    var metaDesc = document.querySelector('meta[name="description"]');
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    var ogDesc = document.querySelector('meta[property="og:description"]');
+    var twitterTitle = document.querySelector('meta[name="twitter:title"]');
+    var twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    var btns = Array.prototype.slice.call(document.querySelectorAll(".lang button"));
 
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-      var v = d[el.getAttribute("data-i18n")];
-      if (v != null) el.textContent = v;
-    });
-    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
-      var v = d[el.getAttribute("data-i18n-html")];
-      if (v != null) el.innerHTML = v;
-    });
-    document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
-      var v = d[el.getAttribute("data-i18n-aria")];
-      if (v != null) el.setAttribute("aria-label", v);
-    });
+    function apply(lang) {
+      var d = DICT[lang] || DICT.ko;
+      ROOT.lang = lang;
+      if (d.title) document.title = d.title;
+      if (metaDesc && d.metaDesc) metaDesc.setAttribute("content", d.metaDesc);
+      if (ogTitle && d.title) ogTitle.setAttribute("content", d.title);
+      if (ogDesc && d.metaDesc) ogDesc.setAttribute("content", d.metaDesc);
+      if (twitterTitle && d.title) twitterTitle.setAttribute("content", d.title);
+      if (twitterDesc && d.metaDesc) twitterDesc.setAttribute("content", d.metaDesc);
 
-    btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
-    try { localStorage.setItem("anaks_lang_v2", lang); } catch (e) {}
-  }
+      document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        var v = d[el.getAttribute("data-i18n")];
+        if (v != null) el.textContent = v;
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+        var v = d[el.getAttribute("data-i18n-html")];
+        if (v != null) el.innerHTML = v;
+      });
+      document.querySelectorAll("[data-i18n-aria]").forEach(function (el) {
+        var v = d[el.getAttribute("data-i18n-aria")];
+        if (v != null) el.setAttribute("aria-label", v);
+      });
 
-  var saved;
-  try { saved = localStorage.getItem("anaks_lang_v2"); } catch (e) {}
-  var initial = saved === "en" ? "en" : "ko";
-  apply(initial);
-  btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.lang); }); });
+      btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
+      try { localStorage.setItem("anaks_lang_v2", lang); } catch (e) {}
+    }
+
+    /* Korean is the site default; a page may ask for English first
+       (data-lang-default="en"). An explicit visitor choice always wins. */
+    var fallback = ROOT.getAttribute("data-lang-default") === "en" ? "en" : "ko";
+    var saved;
+    try { saved = localStorage.getItem("anaks_lang_v2"); } catch (e) {}
+    var initial = saved === "en" || saved === "ko" ? saved : fallback;
+    apply(initial);
+    btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.lang); }); });
+  })();
 
   /* ---------------- current year ---------------- */
   var y = document.getElementById("yr");
@@ -218,5 +236,22 @@
         es.forEach(function (e) { if (e.isIntersecting) play(); else if (v.pause) v.pause(); });
       }, { threshold: 0.01 }).observe(el);
     }
+  })();
+
+  /* ---- scroll reveal: the hidden state is applied by JS only, so a page with
+     JS disabled (or an older browser) simply shows everything. ---- */
+  (function () {
+    var els = document.querySelectorAll("[data-reveal]");
+    if (!els.length) return;
+    if (!("IntersectionObserver" in window)) return;
+    ROOT.classList.add("reveal-on");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+    els.forEach(function (el) { io.observe(el); });
   })();
 })();

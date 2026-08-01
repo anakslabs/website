@@ -1,109 +1,304 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en" data-no-i18n>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>아낙스랩스 — 출시 예정</title>
-  <meta name="description" content="아낙스랩스는 하나로 어우러지는 SaaS 제품군을 만들고 있습니다. 출시 예정입니다." />
+  <title>Anaks Labs — clinic websites built for AI search</title>
+  <meta name="description" content="Patients ask AI first. We rebuild your clinic's website so search engines and AI assistants can read it, then run it for you every month. $990 to build, $990 a month." />
   <meta name="theme-color" content="#F6F7F9" />
   <link rel="canonical" href="https://anakslabs.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="아낙스랩스 — 출시 예정" />
-  <meta property="og:description" content="아낙스랩스는 하나로 어우러지는 SaaS 제품군을 만들고 있습니다. 출시 예정입니다." />
+  <meta property="og:title" content="Anaks Labs — clinic websites built for AI search" />
+  <meta property="og:description" content="We rebuild your clinic's website so search engines and AI assistants can read it — then run it for you every month." />
   <meta property="og:url" content="https://anakslabs.com/" />
   <meta property="og:image" content="https://anakslabs.com/assets/icon-512.png" />
+  <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="아낙스랩스 — 출시 예정" />
-  <meta name="twitter:description" content="아낙스랩스는 하나로 어우러지는 SaaS 제품군을 만들고 있습니다. 출시 예정입니다." />
+  <meta name="twitter:title" content="Anaks Labs — clinic websites built for AI search" />
+  <meta name="twitter:description" content="We rebuild your clinic's website so search engines and AI assistants can read it — then run it for you every month." />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"아낙스랩스","alternateName":"Anaks Labs","url":"https://anakslabs.com","email":"contact@anakslabs.com","description":"아낙스랩스는 하나로 어우러지는 SaaS 제품군을 만들고 있습니다.","logo":"https://anakslabs.com/assets/icon-512.png"}
+  {"@context":"https://schema.org","@graph":[
+    {"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Co., Ltd.","url":"https://anakslabs.com","email":"help@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},
+    {"@type":"Service","name":"Clinic website rebuild and monthly operation","serviceType":"Website design and management for clinics","provider":{"@id":"https://anakslabs.com/#org"},"description":"We rebuild a clinic's website so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","price":"990","priceCurrency":"USD"},{"@type":"UnitPriceSpecification","name":"Run","price":"990","priceCurrency":"USD","unitCode":"MON","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"MON"}}]}},
+    {"@type":"FAQPage","@id":"https://anakslabs.com/#faq","mainEntity":[
+      {"@type":"Question","name":"What does the $990 build cover?","acceptedAnswer":{"@type":"Answer","text":"Rebuilding your website and taking it live on your domain. It is a one-time charge, and it comes after you have seen the rebuilt site."}},
+      {"@type":"Question","name":"What do I get every month?","acceptedAnswer":{"@type":"Answer","text":"A performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the $990 a month."}},
+      {"@type":"Question","name":"Do you handle patient data?","acceptedAnswer":{"@type":"Answer","text":"The tracking is designed so that no patient data ever touches our systems. We count that an inquiry happened, not who made it."}},
+      {"@type":"Question","name":"How do we start?","acceptedAnswer":{"@type":"Answer","text":"Send us the link to your current site. We rebuild it and send it back."}}
+    ]}
+  ]}
   </script>
 </head>
-<body class="home">
-  <a class="skip-link" href="#main" data-i18n="skip">본문으로 건너뛰기</a>
+<body class="landing">
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="layer wash" aria-hidden="true"></div>
-  <div class="layer hero-video" aria-hidden="true"></div>
-  <div class="layer hero-video-overlay" aria-hidden="true"></div>
   <div class="layer aurora" aria-hidden="true">
     <b class="b1 drift1"></b><b class="b2 drift2"></b><b class="b3 drift3"></b>
   </div>
   <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer grid" aria-hidden="true"></div>
   <div class="layer vignette" aria-hidden="true"></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="/" aria-label="아낙스랩스 홈"><img src="/assets/logo-inline.png" width="680" height="431" alt="아낙스랩스 (Anaks Labs)" /></a>
-      <nav class="site-nav" id="site-nav" aria-label="주요 메뉴">
-        <a href="/products/" data-i18n="nav_products">제품</a>
-        <a href="/about/" data-i18n="nav_about">회사 소개</a>
-        <a href="/blog/" data-i18n="nav_notices">전자공고</a>
-        <a href="/contact/" data-i18n="nav_contact">문의</a>
+      <a class="brand" href="/" aria-label="Anaks Labs home"><img src="/assets/logo-inline.png" width="680" height="431" alt="Anaks Labs" /></a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="#product">Product</a>
+        <a href="/about/">About</a>
+        <a href="mailto:help@anakslabs.com">Contact</a>
       </nav>
-      <span class="lang" role="group" aria-label="언어 선택">
-        <button type="button" data-lang="ko" aria-pressed="true" aria-label="한국어">한국어</button>
-        <button type="button" data-lang="en" aria-pressed="false" aria-label="영어">영어</button>
-      </span>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n-aria="menu" aria-label="메뉴"><span></span><span></span><span></span></button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="stage" id="main">
-    <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">SaaS 스튜디오</span></span>
-    <img class="logo" src="/assets/logo-inline.png" width="680" height="431" alt="아낙스랩스 (Anaks Labs)" />
-    <h1><span class="shine" data-i18n="headline">출시 예정</span><span class="dots" aria-hidden="true">…</span></h1>
-    <p class="tagline" data-i18n-html="tagline">아낙스랩스는 <b>하나로 어우러지는 SaaS 제품군</b>을 만들고 있습니다.</p>
-    <div class="rule" aria-hidden="true"></div>
+  <main class="lp" id="main">
+
+    <!-- ============================ hero ============================ -->
+    <section class="lp-hero">
+      <div class="wrap">
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>AI-ready clinic websites</span></span>
+        <h1>Patients ask AI first. Your site should be <span class="accent">the answer</span>.</h1>
+        <p class="lp-lead">Most clinic websites are built so that search engines and AI assistants can barely read them. We rebuild yours to be read, quoted and recommended — then we run it for you, every month.</p>
+        <div class="lp-actions">
+          <a class="btn btn-primary" href="mailto:help@anakslabs.com?subject=Rebuild%20my%20clinic%20website">Send us your site</a>
+          <a class="btn btn-ghost" href="#product">See what's included</a>
+        </div>
+        <p class="lp-note">We rebuild your site first. You decide after you've seen it.</p>
+      </div>
+    </section>
+
+    <!-- ============================ the problem ============================ -->
+    <section class="lp-section" id="audit">
+      <div class="wrap">
+        <div class="lp-head wide" data-reveal>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What we found</span></span>
+          <h2 class="lp-h2">We audited 79 clinic websites.</h2>
+        </div>
+        <p class="lp-sub" data-reveal>Not a survey. We opened the pages and compared what a patient sees with what a search engine actually receives. Here is what came back.</p>
+
+        <div class="stat-grid">
+          <div class="stat" data-reveal>
+            <p class="stat-num">17 <small>of 19 clinic sites we audited</small></p>
+            <p>hid their main headline from search engines as an image.</p>
+            <p class="why">The headline is baked into a picture. A person reads it fine. A crawler gets an empty box where your most important sentence should be.</p>
+          </div>
+          <div class="stat" data-reveal>
+            <p class="stat-num">0 <small>of 42 clinic homepages we audited</small></p>
+            <p>answered patient questions on the page (no FAQ).</p>
+            <p class="why">Cost, insurance, recovery time, parking — the things patients actually type. If your page never answers them, something else answers for you.</p>
+          </div>
+        </div>
+
+        <!-- the mechanism, drawn in type — no screenshots, no stock imagery -->
+        <div class="xray" data-reveal>
+          <p class="xray-cap">The same headline, twice</p>
+          <div class="xray-grid">
+            <div class="xray-panel">
+              <p class="xray-bar"><i aria-hidden="true"></i>What a patient sees</p>
+              <div class="xray-body">
+                <p class="xray-title">Implants in a single visit.</p>
+                <p class="xray-copy">Set into the page as a picture — custom type, exact spacing, perfectly on brand.</p>
+              </div>
+            </div>
+            <div class="xray-panel muted">
+              <p class="xray-bar"><i aria-hidden="true"></i>What a crawler receives</p>
+              <div class="xray-body">
+                <p class="xray-code"><span class="tag">&lt;img</span> <span class="attr">src=</span>"hero-title.png" <span class="attr">alt=</span>""<span class="tag">&gt;</span></p>
+                <p class="xray-void">no text</p>
+              </div>
+            </div>
+          </div>
+          <p class="xray-foot">This one showed up again and again in the audit. It is also among the easiest to undo: the headline goes back into the page as real text, styled to look exactly the same.</p>
+        </div>
+
+        <ul class="mech">
+          <li data-reveal>
+            <h3>Text inside carousels</h3>
+            <p>Slides that arrive after the page does. What a visitor swipes through, a crawler often never receives at all.</p>
+          </li>
+          <li data-reveal>
+            <h3>Answers locked in a PDF</h3>
+            <p>Pricing and pre-op instructions posted as downloads. A patient can open it. An assistant is far less likely to quote it.</p>
+          </li>
+          <li data-reveal>
+            <h3>No structure a machine can read</h3>
+            <p>No question-and-answer markup, no service pages, no opening hours in any parseable form. Organised to a person, one long blob to a machine.</p>
+          </li>
+          <li data-reveal>
+            <h3>Nothing you can measure</h3>
+            <p>A phone number and a contact form, and no way to tell which visits turned into patients.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================ what you get ============================ -->
+    <section class="lp-section" id="product">
+      <div class="wrap">
+        <div class="lp-head" data-reveal>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
+          <h2 class="lp-h2">One rebuild. Then we <span class="accent">run it</span>.</h2>
+        </div>
+        <p class="lp-sub" data-reveal>Four things, every month, for every clinic. There is one plan and everything is in it.</p>
+
+        <div class="deliv">
+          <article data-reveal>
+            <span class="idx">01</span>
+            <h3>A monthly performance report</h3>
+            <p>What changed on your site, what moved, and what we are doing next month. Written to be read in five minutes, not decoded.</p>
+          </article>
+          <article data-reveal>
+            <span class="idx">02</span>
+            <h3>Eight blog posts a month</h3>
+            <p>Written for search engines and for AI assistants: the questions your patients actually ask, answered on your own site so the answer can be found and quoted there.</p>
+          </article>
+          <article data-reveal>
+            <span class="idx">03</span>
+            <h3>Inquiry and booking tracking</h3>
+            <p>You see how many people reached out and how many booked. Designed so that no patient data ever touches our systems — we count the inquiry, not the patient.</p>
+          </article>
+          <article data-reveal>
+            <span class="idx">04</span>
+            <h3>Hosting, maintenance and self-serve editing</h3>
+            <p>Your site stays up and stays current. Change your hours, your staff, your prices yourself — no ticket, no waiting on us.</p>
+          </article>
+        </div>
+
+        <div class="price-tag" data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span>Enterprise — one plan</span>
+          <div class="price">
+            <div>
+              <p class="k">Build</p>
+              <p class="v">$990 <span>one-time</span></p>
+              <p class="d">We rebuild the site and take it live on your domain.</p>
+            </div>
+            <div>
+              <p class="k">Run</p>
+              <p class="v">$990 <span>per month</span></p>
+              <p class="d">The report, the eight posts, the tracking, the hosting. Everything above.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ how it works ============================ -->
+    <section class="lp-section" id="how">
+      <div class="wrap">
+        <div class="lp-head wide" data-reveal>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>How it works</span></span>
+          <h2 class="lp-h2">We rebuild your site first. You see it before you pay.</h2>
+        </div>
+
+        <ol class="steps">
+          <li data-reveal>
+            <h3>We build it before we talk.</h3>
+            <p>You don't write a brief. We look at your clinic, rebuild your website, and send you the link to the finished thing.</p>
+          </li>
+          <li data-reveal>
+            <h3>You open it on your own phone.</h3>
+            <p>Next to the site you have now. If it isn't obviously better, that is the end of it — and you have spent nothing.</p>
+          </li>
+          <li data-reveal>
+            <h3>You approve, and we sign.</h3>
+            <p>$990 to take the rebuild live. $990 a month to run it from there.</p>
+          </li>
+          <li data-reveal>
+            <h3>We launch, and the monthly work starts.</h3>
+            <p>The new site goes live on your domain. From there: the report, the eight posts, the tracking — every month.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================ who builds it ============================ -->
+    <section class="lp-section" id="who">
+      <div class="wrap">
+        <div class="trust-grid">
+          <div data-reveal>
+            <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Who builds it</span></span>
+            <h2 class="lp-h2">A product of <span class="accent">Anaks&nbsp;Labs</span>.</h2>
+          </div>
+          <div class="prose" data-reveal>
+            <p>Anaks Labs is a software company that designs, builds and runs its own products. This is one of them: the people who design your site write the code, publish the posts and send the report. There is no account manager in between.</p>
+            <p>You won't find a wall of client logos on this page. <b>The rebuild we send you is the reference</b> — judge us on that instead.</p>
+            <p><a href="/about/">About Anaks Labs &rarr;</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ faq ============================ -->
+    <section class="lp-section" id="faq">
+      <div class="wrap">
+        <div class="lp-head wide" data-reveal>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Questions</span></span>
+          <h2 class="lp-h2">Answered on the page, where they belong.</h2>
+        </div>
+        <p class="lp-sub" data-reveal>We just told you that 0 of 42 clinic homepages we audited answered patient questions on the page. It would be strange not to answer yours here.</p>
+
+        <ul class="mech">
+          <li data-reveal>
+            <h3>What does the $990 build cover?</h3>
+            <p>Rebuilding your website and taking it live on your domain. It is a one-time charge, and it comes after you have seen the rebuilt site.</p>
+          </li>
+          <li data-reveal>
+            <h3>What do I get every month?</h3>
+            <p>A performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the $990 a month.</p>
+          </li>
+          <li data-reveal>
+            <h3>Do you handle patient data?</h3>
+            <p>The tracking is designed so that no patient data ever touches our systems. We count that an inquiry happened, not who made it.</p>
+          </li>
+          <li data-reveal>
+            <h3>How do we start?</h3>
+            <p>Send us the link to your current site. We rebuild it and send it back.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================ closing cta ============================ -->
+    <section class="lp-section cta-band" id="contact">
+      <div class="wrap">
+        <div class="lp-head" data-reveal>
+          <h2 class="lp-h2">Send us your clinic's website.</h2>
+        </div>
+        <p class="lp-sub" data-reveal>One link is enough. We rebuild it and send it back.</p>
+        <div data-reveal>
+          <a class="email-cta" href="mailto:help@anakslabs.com?subject=Rebuild%20my%20clinic%20website">help@anakslabs.com</a>
+          <p class="lp-note">For dental practices and clinics.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-company">
-        <p class="footer-brand">&copy; <span id="yr">2026</span> <span data-i18n="footer_copy">아낙스랩스</span> &nbsp;·&nbsp; <a href="mailto:contact@anakslabs.com">contact@anakslabs.com</a></p>
-        <dl class="footer-details" aria-label="법인 정보">
-          <div><dt data-i18n="footer_legal_name">법인 상호</dt><dd>주식회사 아낙스랩스</dd></div>
-          <div><dt data-i18n="footer_address">본점 주소</dt><dd>경기 화성시 동탄구 메타폴리스로 42 9층 902 S15</dd></div>
-          <div><dt data-i18n="footer_director">대표자</dt><dd>사내이사 오현숙</dd></div>
-        </dl>
+        <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs &nbsp;·&nbsp; <a href="mailto:help@anakslabs.com">help@anakslabs.com</a></p>
+        <p class="footer-legal">Anaks Labs Co., Ltd. Company information is on the <a href="/about/">About</a> page. Statutory public notices are published, in Korean, on the <a href="/blog/">public notices board</a>.</p>
       </div>
-      <nav class="footer-nav" aria-label="푸터 메뉴">
-        <a href="/products/" data-i18n="nav_products">제품</a>
-        <a href="/about/" data-i18n="nav_about">회사 소개</a>
-        <a href="/blog/" data-i18n="nav_notices">전자공고</a>
-        <a href="/contact/" data-i18n="nav_contact">문의</a>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="#product">Product</a>
+        <a href="/about/">About</a>
+        <a href="/blog/">Public notices</a>
+        <a href="mailto:help@anakslabs.com">Contact</a>
       </nav>
     </div>
   </footer>
 
-  <script>
-    window.ANAKS_I18N = {
-      en: {
-        title: "Anaks Labs — Coming Soon",
-        metaDesc: "Anaks Labs is building a family of SaaS products. Coming soon.",
-        eyebrow: "SaaS Studio",
-        headline: "Coming Soon",
-        tagline: 'Anaks Labs is building a <b>family of SaaS products</b> — crafted to feel like they belong together.'
-      },
-      ko: {
-        title: "아낙스랩스 — 출시 예정",
-        metaDesc: "아낙스랩스는 하나로 어우러지는 SaaS 제품군을 만들고 있습니다. 출시 예정입니다.",
-        eyebrow: "SaaS 스튜디오",
-        headline: "출시 예정",
-        tagline: '아낙스랩스는 <b>하나로 어우러지는 SaaS 제품군</b>을 만들고 있습니다.'
-      }
-    };
-  </script>
   <script src="/assets/site.js"></script>
 </body>
 </html>
