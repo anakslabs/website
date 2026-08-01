@@ -424,6 +424,7 @@ body.landing .grid { display: none; }
   max-width: 60ch;
 }
 .lp-sub b { color: var(--ink-2); font-weight: 500; }
+.lp-sub a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---- hero ---- */
 .lp-hero {
@@ -533,6 +534,30 @@ body.landing .grid { display: none; }
 @media (max-width: 640px) { .mech li { grid-template-columns: 1fr; } }
 /* on a subpage the list follows a normal h2, so it needs far less air above */
 .page .mech { margin-top: clamp(8px, 1.6vw, 14px); }
+
+/* ---- verticals (industries we actually serve; one card per live vertical) ---- */
+.verticals {
+  margin-top: clamp(34px, 5vw, 56px);
+  display: grid; gap: clamp(16px, 2.2vw, 22px);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.vertical {
+  display: block; text-decoration: none; color: inherit;
+  background: var(--card); border: 1px solid var(--line-2); border-radius: 18px;
+  padding: clamp(26px, 3.6vw, 40px);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  box-shadow: 0 10px 30px rgba(20,26,58,.05);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.vertical:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(20,26,58,.09); border-color: rgba(45,99,240,.28); }
+.vertical:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.vertical h3 { margin: 16px 0 10px; font-size: clamp(24px, 3.4vw, 34px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); }
+.vertical p { font-size: clamp(15px, 2vw, 17px); line-height: 1.62; color: var(--gray); max-width: 54ch; }
+.vertical .go {
+  margin-top: 22px; display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--blue);
+}
 
 /* ---- deliverables ---- */
 /* deliberately 2×2 — four cards must never leave one orphan on its own row */

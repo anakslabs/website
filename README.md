@@ -6,7 +6,8 @@ The whole site inherits one design system from `assets/site.css` + `assets/site.
 ## Structure
 
 ```
-index.html            Root — English US product landing (clinic website rebuild)
+index.html            Root — English product landing, industry-neutral
+clinics/index.html    Clinics vertical — the audit findings and the clinic offer
 about/index.html      Company, corporate information, link to the notices board
 blog/index.html       Statutory public notice board (Korean — legal, do not move)
 blog/hello/index.html First company notice
@@ -16,6 +17,14 @@ assets/site.css       Shared styles (design tokens, layers, header/footer, cards
 assets/site.js        Shared JS (KO/EN i18n, particles, hero video, mobile nav, reveal)
 sitemap.xml           All URLs · robots.txt
 ```
+
+### Verticals
+
+The root sells the product in industry-neutral terms and carries **no figures**
+— we only have measured data for clinics, so every measured claim lives on
+`clinics/`. A new vertical is a new sibling directory (`restaurants/`, …) plus
+one more card in the root's "Who we build for" section. Never list a vertical
+there that does not have a live page behind it.
 
 ### Languages
 

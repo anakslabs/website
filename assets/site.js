@@ -21,6 +21,7 @@
   var BASE = {
     en: {
       nav_product: "Product",
+      nav_clinics: "Clinics",
       nav_products: "Products",
       nav_about: "About",
       nav_notices: "Public Notices",
@@ -35,6 +36,7 @@
     },
     ko: {
       nav_product: "제품",
+      nav_clinics: "클리닉",
       nav_products: "제품",
       nav_about: "회사 소개",
       nav_notices: "전자공고",
