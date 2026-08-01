@@ -74,7 +74,7 @@
     var twitterDesc = document.querySelector('meta[name="twitter:description"]');
     var btns = Array.prototype.slice.call(document.querySelectorAll(".lang button"));
 
-    function apply(lang) {
+    function apply(lang, persist) {
       var d = DICT[lang] || DICT.ko;
       ROOT.lang = lang;
       if (d.title) document.title = d.title;
@@ -98,7 +98,11 @@
       });
 
       btns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lang === lang)); });
-      try { localStorage.setItem("anaks_lang_v2", lang); } catch (e) {}
+      /* Only an explicit click is persisted. Storing the *default* too would
+         make "visitor merely opened a Korean page" indistinguishable from
+         "visitor chose Korean" — which would then override the English
+         default on /about/ for anyone who had glanced at the notices board. */
+      if (persist) { try { localStorage.setItem("anaks_lang_v2", lang); } catch (e) {} }
     }
 
     /* Korean is the site default; a page may ask for English first
@@ -107,8 +111,8 @@
     var saved;
     try { saved = localStorage.getItem("anaks_lang_v2"); } catch (e) {}
     var initial = saved === "en" || saved === "ko" ? saved : fallback;
-    apply(initial);
-    btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.lang); }); });
+    apply(initial, false);
+    btns.forEach(function (b) { b.addEventListener("click", function () { apply(b.dataset.lang, true); }); });
   })();
 
   /* ---------------- current year ---------------- */
