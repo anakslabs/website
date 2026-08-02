@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-lang-default="en">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>About — Anaks Labs</title>
-  <meta name="description" content="Anaks Labs exists on one belief: even the smallest business deserves genuinely good software. Company information and public notices for Anaks Labs Co., Ltd." />
+  <meta name="description" content="Anaks Labs exists on one belief: even the smallest business deserves genuinely good software. Company information for Anaks Labs Co., Ltd." />
   <meta name="theme-color" content="#F6F7F9" />
   <link rel="canonical" href="https://anakslabs.com/about/" />
   <meta property="og:type" content="website" />
@@ -12,6 +12,7 @@
   <meta property="og:description" content="Even the smallest business deserves genuinely good software." />
   <meta property="og:url" content="https://anakslabs.com/about/" />
   <meta property="og:image" content="https://anakslabs.com/assets/icon-512.png" />
+  <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="About — Anaks Labs" />
   <meta name="twitter:description" content="Even the smallest business deserves genuinely good software." />
@@ -19,18 +20,18 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"AboutPage","name":"About — Anaks Labs","url":"https://anakslabs.com/about/","isPartOf":{"@type":"WebSite","name":"Anaks Labs","url":"https://anakslabs.com"},"publisher":{"@type":"Organization","name":"Anaks Labs","legalName":"Anaks Labs Co., Ltd.","alternateName":"아낙스랩스","email":"help@anakslabs.com","url":"https://anakslabs.com"}}
+  {"@context":"https://schema.org","@type":"AboutPage","name":"About — Anaks Labs","url":"https://anakslabs.com/about/","isPartOf":{"@type":"WebSite","name":"Anaks Labs","url":"https://anakslabs.com"},"publisher":{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Co., Ltd.","email":"help@anakslabs.com","url":"https://anakslabs.com"}}
   </script>
 </head>
 <body class="subpage">
-  <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="layer wash" aria-hidden="true"></div>
   <canvas class="layer" id="net" aria-hidden="true"></canvas>
@@ -41,86 +42,66 @@
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><img src="/assets/logo-inline.png" width="680" height="431" alt="Anaks Labs" /></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product" data-i18n="nav_product">Product</a>
-        <a href="/clinics/" data-i18n="nav_clinics">Clinics</a>
-        <a href="/about/" data-i18n="nav_about" aria-current="page">About</a>
-        <a href="/blog/" data-i18n="nav_notices">Public notices</a>
-        <a href="mailto:help@anakslabs.com" data-i18n="nav_contact">Contact</a>
+        <a href="/#product">Product</a>
+        <a href="/clinics/">Clinics</a>
+        <a href="/about/" aria-current="page">About</a>
+        <a href="mailto:help@anakslabs.com">Contact</a>
       </nav>
-      <span class="lang" role="group" aria-label="Language">
-        <button type="button" data-lang="ko" aria-pressed="false" aria-label="한국어">한국어</button>
-        <button type="button" data-lang="en" aria-pressed="true" aria-label="English">English</button>
-      </span>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n-aria="menu" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
   <main class="page" id="main">
     <div class="wrap">
       <div class="page-hero">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span data-i18n="eyebrow">About</span></span>
-        <h1 data-i18n-html="ph1">Software that <span class="accent">belongs to everyone</span></h1>
-        <p class="lead" data-i18n="plead">Anaks Labs exists on one belief: even the smallest business deserves genuinely good software.</p>
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>About</span></span>
+        <h1>Software that <span class="accent">belongs to everyone</span></h1>
+        <p class="lead">Anaks Labs exists on one belief: even the smallest business deserves genuinely good software.</p>
       </div>
 
       <div class="section">
         <div class="prose">
-          <h2 data-i18n="now_h2">What we are building</h2>
-          <p data-i18n="now_p1">Anaks Labs designs, builds and runs its own software products — we are not an agency taking briefs. Right now that means rebuilding websites for clinics so that search engines and AI assistants can actually read them, and then running those sites month after month.</p>
-          <p><a href="/#product" data-i18n="now_cta">See the product &rarr;</a></p>
+          <h2>What we are building</h2>
+          <p>Anaks Labs designs, builds and runs its own software products — we are not an agency taking briefs. Right now that means rebuilding websites so that search engines and AI assistants can actually read them, and then running those sites month after month.</p>
+          <p><a href="/#product">See the product &rarr;</a></p>
         </div>
 
         <div class="divider" aria-hidden="true"></div>
 
         <div class="prose">
-          <h2 data-i18n="mission_h2">Mission</h2>
-          <p data-i18n="mission_p1">Good tools have always been reserved for companies big enough to build or buy them. Anaks Labs was started to close that gap — building software so that a small business can run on something as considered and reliable as anything a large company uses.</p>
-          <p data-i18n="mission_p2">Every product is crafted to feel like it belongs with the others: one design language, one standard of quality, no rough edges left for the customer to smooth over.</p>
+          <h2>Mission</h2>
+          <p>Good tools have always been reserved for companies big enough to build or buy them. Anaks Labs was started to close that gap — building software so that a small business can run on something as considered and reliable as anything a large company uses.</p>
+          <p>Every product is crafted to feel like it belongs with the others: one design language, one standard of quality, no rough edges left for the customer to smooth over.</p>
         </div>
 
         <div class="divider" aria-hidden="true"></div>
 
         <div class="prose">
-          <h2 data-i18n="maker_h2">The maker</h2>
-          <p data-i18n="maker_p1">Anaks Labs is built by one founder who writes the code, designs the screens and ships the products — with a bias for craft over shortcuts.</p>
+          <h2>The maker</h2>
+          <p>Anaks Labs is built by one founder who writes the code, designs the screens and ships the products — with a bias for craft over shortcuts.</p>
         </div>
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2 data-i18n="corp_h2">Corporate information</h2>
+        <h2>Corporate information</h2>
         <ul class="mech">
           <li>
-            <h3 data-i18n="footer_legal_name">Legal name</h3>
-            <p>주식회사 아낙스랩스 &nbsp;·&nbsp; Anaks Labs Co., Ltd.</p>
+            <h3>Legal name</h3>
+            <p>Anaks Labs Co., Ltd.</p>
           </li>
           <li>
-            <h3 data-i18n="footer_address">Head office</h3>
-            <p>경기 화성시 동탄구 메타폴리스로 42 9층 902 S15<br />9F 902 S15, 42 Metapolis-ro, Dongtan-gu, Hwaseong-si, Gyeonggi-do, Republic of Korea</p>
+            <h3>Head office</h3>
+            <p>9F 902 S15, 42 Metapolis-ro, Dongtan-gu, Hwaseong-si, Gyeonggi-do, Republic of Korea</p>
           </li>
           <li>
-            <h3 data-i18n="footer_director">Director</h3>
-            <p>오현숙</p>
+            <h3>Email</h3>
+            <p><a href="mailto:help@anakslabs.com">help@anakslabs.com</a></p>
           </li>
           <li>
-            <h3 data-i18n="corp_email">Email</h3>
-            <p><a href="mailto:help@anakslabs.com">help@anakslabs.com</a> <span data-i18n="corp_email_note">(product)</span><br /><a href="mailto:contact@anakslabs.com">contact@anakslabs.com</a> <span data-i18n="corp_email_note2">(company)</span></p>
-          </li>
-          <li>
-            <h3 data-i18n="corp_notices">Public notices</h3>
-            <p><a href="/blog/" data-i18n="corp_notices_link">Statutory public notices board</a> <span data-i18n="corp_notices_note">(published in Korean)</span></p>
+            <h3>Public notices</h3>
+            <p><a href="/blog/">Public notices (Korean)</a> — the statutory notice board of Anaks Labs Co., Ltd.</p>
           </li>
         </ul>
-
-        <div class="divider" aria-hidden="true"></div>
-
-        <article class="card">
-          <span class="badge muted"><span class="dot" aria-hidden="true"></span><span data-i18n="notices_badge">Statutory</span></span>
-          <h3 data-i18n="notices_h2">Public notices</h3>
-          <p data-i18n="notices_p">Anaks Labs Co., Ltd. publishes its statutory public notices on this website. The notices board is written in Korean.</p>
-          <div class="card-cta">
-            <a class="btn btn-ghost" href="/blog/" data-i18n="notices_cta">Go to the public notices board</a>
-          </div>
-        </article>
       </div>
     </div>
   </main>
@@ -128,79 +109,18 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-company">
-        <p class="footer-brand">&copy; <span id="yr">2026</span> <span data-i18n="footer_copy">Anaks Labs</span> &nbsp;·&nbsp; <a href="mailto:help@anakslabs.com">help@anakslabs.com</a></p>
-        <dl class="footer-details" aria-label="Corporate information">
-          <div><dt data-i18n="footer_legal_name">Legal name</dt><dd>주식회사 아낙스랩스</dd></div>
-          <div><dt data-i18n="footer_address">Head office</dt><dd>경기 화성시 동탄구 메타폴리스로 42 9층 902 S15</dd></div>
-          <div><dt data-i18n="footer_director">Director</dt><dd>사내이사 오현숙</dd></div>
-        </dl>
+        <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs &nbsp;·&nbsp; <a href="mailto:help@anakslabs.com">help@anakslabs.com</a></p>
+        <p class="footer-legal">Anaks Labs Co., Ltd. &nbsp;·&nbsp; 9F 902 S15, 42 Metapolis-ro, Dongtan-gu, Hwaseong-si, Gyeonggi-do, Republic of Korea &nbsp;·&nbsp; <a href="/blog/">Public notices (Korean)</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product" data-i18n="nav_product">Product</a>
-        <a href="/clinics/" data-i18n="nav_clinics">Clinics</a>
-        <a href="/about/" data-i18n="nav_about">About</a>
-        <a href="/blog/" data-i18n="nav_notices">Public notices</a>
-        <a href="mailto:help@anakslabs.com" data-i18n="nav_contact">Contact</a>
+        <a href="/#product">Product</a>
+        <a href="/clinics/">Clinics</a>
+        <a href="/about/">About</a>
+        <a href="mailto:help@anakslabs.com">Contact</a>
       </nav>
     </div>
   </footer>
 
-  <script>
-    window.ANAKS_I18N = {
-      en: {
-        title: "About — Anaks Labs",
-        metaDesc: "Anaks Labs exists on one belief: even the smallest business deserves genuinely good software. Company information and public notices for Anaks Labs Co., Ltd.",
-        eyebrow: "About",
-        ph1: 'Software that <span class="accent">belongs to everyone</span>',
-        plead: "Anaks Labs exists on one belief: even the smallest business deserves genuinely good software.",
-        now_h2: "What we are building",
-        now_p1: "Anaks Labs designs, builds and runs its own software products — we are not an agency taking briefs. Right now that means rebuilding websites for clinics so that search engines and AI assistants can actually read them, and then running those sites month after month.",
-        now_cta: "See the product →",
-        mission_h2: "Mission",
-        mission_p1: "Good tools have always been reserved for companies big enough to build or buy them. Anaks Labs was started to close that gap — building software so that a small business can run on something as considered and reliable as anything a large company uses.",
-        mission_p2: "Every product is crafted to feel like it belongs with the others: one design language, one standard of quality, no rough edges left for the customer to smooth over.",
-        maker_h2: "The maker",
-        maker_p1: "Anaks Labs is built by one founder who writes the code, designs the screens and ships the products — with a bias for craft over shortcuts.",
-        corp_h2: "Corporate information",
-        corp_email: "Email",
-        corp_email_note: "(product)",
-        corp_email_note2: "(company)",
-        corp_notices: "Public notices",
-        corp_notices_link: "Statutory public notices board",
-        corp_notices_note: "(published in Korean)",
-        notices_badge: "Statutory",
-        notices_h2: "Public notices",
-        notices_p: "Anaks Labs Co., Ltd. publishes its statutory public notices on this website. The notices board is written in Korean.",
-        notices_cta: "Go to the public notices board"
-      },
-      ko: {
-        title: "회사 소개 — 아낙스랩스",
-        metaDesc: "아낙스랩스는 하나의 믿음에서 시작합니다 — 아무리 작은 비즈니스라도 진짜 좋은 소프트웨어를 가질 자격이 있다는 것. 주식회사 아낙스랩스의 법인 정보와 전자공고 안내.",
-        eyebrow: "회사 소개",
-        ph1: '모두를 위한 <span class="accent">소프트웨어</span>',
-        plead: "아낙스랩스는 하나의 믿음에서 시작합니다 — 아무리 작은 비즈니스라도, 진짜 좋은 소프트웨어를 가질 자격이 있다는 것.",
-        now_h2: "지금 만들고 있는 것",
-        now_p1: "아낙스랩스는 브리프를 받아 대행하는 회사가 아니라, 자체 소프트웨어 제품을 직접 설계하고 만들고 운영합니다. 지금은 검색엔진과 AI 어시스턴트가 제대로 읽을 수 있도록 병원 웹사이트를 다시 만들고, 그 사이트를 매달 운영하는 일을 하고 있습니다.",
-        now_cta: "제품 보기 →",
-        mission_h2: "미션",
-        mission_p1: "좋은 도구는 늘 그것을 만들거나 살 수 있을 만큼 큰 회사의 몫이었습니다. 아낙스랩스는 그 격차를 좁히기 위해 시작했습니다 — 작은 비즈니스도 큰 회사가 쓰는 것 못지않게 잘 다듬어지고 믿을 수 있는 소프트웨어 위에서 굴러가도록.",
-        mission_p2: "모든 제품은 서로 어우러지도록 다듬어집니다. 하나의 디자인 언어, 하나의 품질 기준, 그리고 고객이 대신 감당해야 할 거친 마감은 남기지 않습니다.",
-        maker_h2: "만든 사람",
-        maker_p1: "아낙스랩스는 코드를 짜고, 화면을 디자인하고, 제품을 출시하는 한 명의 창업자가 만듭니다 — 지름길보다 완성도를 택하는 손끝으로.",
-        corp_h2: "법인 정보",
-        corp_email: "이메일",
-        corp_email_note: "(제품)",
-        corp_email_note2: "(회사)",
-        corp_notices: "전자공고",
-        corp_notices_link: "법정 전자공고 게시판",
-        corp_notices_note: "(한국어로 게재)",
-        notices_badge: "법정",
-        notices_h2: "전자공고",
-        notices_p: "주식회사 아낙스랩스는 법정 공고를 이 웹사이트에 게재합니다. 공고 게시판은 한국어로 작성됩니다.",
-        notices_cta: "전자공고 게시판으로"
-      }
-    };
-  </script>
   <script src="/assets/site.js"></script>
 </body>
 </html>
