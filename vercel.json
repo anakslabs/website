@@ -2,11 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": true,
   "redirects": [
-    { "source": "/products", "destination": "/", "permanent": true },
-    { "source": "/products/:path*", "destination": "/", "permanent": true },
-    { "source": "/contact", "destination": "/", "permanent": true },
-    { "source": "/contact/:path*", "destination": "/", "permanent": true },
-    { "source": "/blog/hello", "destination": "/blog/", "permanent": true },
-    { "source": "/blog/hello/:path*", "destination": "/blog/", "permanent": true }
+    { "source": "/products/", "destination": "/", "permanent": true },
+    { "source": "/products/:path+/", "destination": "/", "permanent": true },
+    { "source": "/contact/", "destination": "/", "permanent": true },
+    { "source": "/contact/:path+/", "destination": "/", "permanent": true },
+    { "source": "/blog/hello/", "destination": "/blog/", "permanent": true },
+    { "source": "/blog/hello/:path+/", "destination": "/blog/", "permanent": true }
   ]
 }
