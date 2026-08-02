@@ -49,7 +49,7 @@ body {
 .aurora b {
   position: absolute; display: block; border-radius: 50%;
   filter: blur(72px); mix-blend-mode: multiply; opacity: 0;
-  animation: aurora-in 1600ms ease-out forwards; /* 영상과 색 중첩 완화: 최종 opacity 0.5 */
+  animation: aurora-in 1600ms ease-out forwards; /* settles at opacity .5 */
 }
 .aurora .b1 { width: 62vmax; height: 62vmax; left: 4%; top: -6%;
   background: radial-gradient(circle, rgba(45,99,240,.14), rgba(45,99,240,0) 68%);
@@ -69,7 +69,7 @@ body {
     rgba(0,0,0,.35) 0%, rgba(0,0,0,.85) 34%, #000 60%, transparent 92%);
   mask-image: radial-gradient(120% 100% at 50% 44%,
     rgba(0,0,0,.35) 0%, rgba(0,0,0,.85) 34%, #000 60%, transparent 92%);
-  opacity: 0; animation: net-in 1600ms ease-out 300ms forwards; /* 영상 위 회로 모티프 유지, 최종 opacity 0.3 */
+  opacity: 0; animation: net-in 1600ms ease-out 300ms forwards; /* circuit motif from the logo; settles at opacity .3 */
 }
 .grid {
   background-image:
@@ -90,29 +90,6 @@ body {
 body.home .grid { display: none; }
 body.subpage #net { animation: net-sub-in 1600ms ease-out 300ms forwards; } /* → .2 */
 body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /* → .5 */
-
-/* ---------------- hero background video (home only; JS injects <video>) ---------------- */
-.hero-video { overflow: hidden; background: center / cover no-repeat url("/assets/hero-poster.webp"); }
-.hero-video video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero-video-overlay { background: rgba(253, 253, 254, 0.55); } /* 사이트 wash 최상단색(#FDFDFE) 55% — 페이지 색감 유지, --ink 대비 5.8:1 */
-
-/* ---------------- language toggle ---------------- */
-.lang {
-  display: inline-flex; gap: 2px; padding: 3px;
-  border: 1px solid var(--line-2); border-radius: 100px;
-  background: rgba(255,255,255,.66);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  box-shadow: 0 6px 18px rgba(20,26,58,.06);
-}
-.lang button {
-  font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
-  color: var(--gray); background: transparent; border: 0; border-radius: 100px;
-  padding: 9px 14px; min-height: 40px; cursor: pointer;
-  transition: color .2s ease, background .2s ease;
-}
-.lang button[aria-pressed="true"] { background: var(--blue); color: #fff; }
-.lang button:hover[aria-pressed="false"] { color: var(--ink); }
-.lang button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 /* ---------------- home hero content (scoped to .stage — pixel-identical to original) ---------------- */
 .stage {
@@ -254,7 +231,6 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
   .site-nav a { padding: 14px clamp(16px, 4vw, 32px); font-size: 15px; }
   .site-nav a[aria-current="page"]::after { display: none; }
   .site-nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--blue); }
-  .site-nav .lang { margin: 10px clamp(16px, 4vw, 32px) 2px; align-self: flex-start; }
 }
 
 /* ---- page (subpage content) ---- */
@@ -656,7 +632,7 @@ body.landing .grid { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .lang, .eyebrow, .stage .logo, .stage h1, .page h1, .tagline, .rule,
+  .eyebrow, .stage .logo, .stage h1, .page h1, .tagline, .rule,
   .site-header, .site-nav, .site-footer, .card, .btn, .badge,
   .lp-hero h1, .lp-hero .lp-lead, .lp-hero .lp-actions, .lp-hero .lp-note { opacity: 1 !important; transform: none !important; }
   #net { opacity: .3 !important; }
@@ -664,5 +640,4 @@ body.landing .grid { display: none; }
   body.subpage .grid { opacity: .5 !important; }
   .aurora b { opacity: .5 !important; transform: none !important; }
   .reveal-on [data-reveal] { opacity: 1 !important; transform: none !important; }
-  /* reduced-motion에서는 영상 미주입(JS 차단) — .hero-video는 poster 배경만 표시 */
 }
