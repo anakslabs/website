@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-no-i18n>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -29,7 +29,13 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
     {"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Co., Ltd.","url":"https://anakslabs.com","email":"help@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},
-    {"@type":"Service","@id":"https://anakslabs.com/#service","name":"Website rebuild and monthly operation","serviceType":"Website design and management","provider":{"@id":"https://anakslabs.com/#org"},"description":"We rebuild a website so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","price":"990","priceCurrency":"USD"},{"@type":"UnitPriceSpecification","name":"Run","price":"990","priceCurrency":"USD","unitCode":"MON","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"MON"}}]}}
+    {"@type":"Service","@id":"https://anakslabs.com/#service","name":"Website rebuild and monthly operation","serviceType":"Website design and management","provider":{"@id":"https://anakslabs.com/#org"},"description":"We rebuild a website so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","price":"990","priceCurrency":"USD"},{"@type":"UnitPriceSpecification","name":"Run","price":"990","priceCurrency":"USD","unitCode":"MON","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"MON"}}]}},
+    {"@type":"FAQPage","@id":"https://anakslabs.com/#faq","mainEntity":[
+      {"@type":"Question","name":"What does the $990 build cover?","acceptedAnswer":{"@type":"Answer","text":"Rebuilding your website and taking it live on your domain. It is a one-time charge, and it comes after you have seen the rebuilt site."}},
+      {"@type":"Question","name":"What do I get every month?","acceptedAnswer":{"@type":"Answer","text":"A performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the $990 a month."}},
+      {"@type":"Question","name":"What do you do with visitor data?","acceptedAnswer":{"@type":"Answer","text":"The tracking is designed so we count the inquiry, not the person. We record that someone reached out, not who they were."}},
+      {"@type":"Question","name":"How do we start?","acceptedAnswer":{"@type":"Answer","text":"Send us the link to your current site. We rebuild it and send it back."}}
+    ]}
   ]}
   </script>
 </head>
@@ -273,13 +279,12 @@
     <div class="wrap footer-inner">
       <div class="footer-company">
         <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs &nbsp;·&nbsp; <a href="mailto:help@anakslabs.com">help@anakslabs.com</a></p>
-        <p class="footer-legal">Anaks Labs Co., Ltd. Company information is on the <a href="/about/">About</a> page. Statutory public notices are published, in Korean, on the <a href="/blog/">public notices board</a>.</p>
+        <p class="footer-legal">Anaks Labs Co., Ltd. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/blog/">Public notices (Korean)</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
         <a href="#product">Product</a>
         <a href="/clinics/">Clinics</a>
         <a href="/about/">About</a>
-        <a href="/blog/">Public notices</a>
         <a href="mailto:help@anakslabs.com">Contact</a>
       </nav>
     </div>
