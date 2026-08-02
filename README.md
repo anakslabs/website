@@ -30,6 +30,28 @@ check must print `blog/index.html` and nothing else:
 grep -rlP '[\x{AC00}-\x{D7A3}]' . --exclude-dir=.git --exclude-dir=.claude
 ```
 
+### Corporate identity on the English pages — on hold
+
+The English pages name the company and nothing more:
+
+| shown            | `Anaks Labs Co., Ltd.`, the English head-office address, `help@anakslabs.com` |
+| ---------------- | ---------------------------------------------------------------------------- |
+| **not shown**    | the director's name, any business registration number                        |
+
+That omission is a decision, not an oversight: a US entity may be formed, so
+which company the US-facing site belongs to is not settled. **Do not add a
+director or a registration number to `index.html`, `clinics/` or `about/`** —
+lifting this is a call for the project lead, not a tidy-up. The check:
+
+```
+grep -nE 'Director|director|registration number|business number|[0-9]{3}-[0-9]{2}-[0-9]{5}' \
+  index.html clinics/index.html about/index.html
+# must print nothing
+```
+
+The Korean legal footer on `blog/` is unaffected — it is the statutory
+disclosure of the Korean company and stands whatever happens in the US.
+
 ### Verticals
 
 The root sells the product in industry-neutral terms and carries **no figures**
