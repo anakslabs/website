@@ -88,7 +88,7 @@
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>The two builds</span></span>
           <h2 class="lp-h2">Open them both. They say the same thing.</h2>
         </div>
-        <p class="lp-sub" data-reveal>Same practice, same six services, same hours, same headline. One of them hands all of that to a machine. The other hands over an empty box and a container that is filled in later.</p>
+        <p class="lp-sub" data-reveal>Same practice, same six services, same hours, same headline. One of them hands all of that to a machine. The other hands over an empty box and a container that is filled in later. Both are a single page on purpose — a real build follows the structure of the site it came from, and each says so at the top.</p>
 
         <div class="compare" id="compare-viewer" data-reveal>
           <div class="compare-tabs" role="tablist" aria-label="Which build to show" hidden>
@@ -132,25 +132,25 @@
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>The difference, measured</span></span>
           <h2 class="lp-h2">What each build hands to a machine.</h2>
         </div>
-        <p class="lp-sub" data-reveal>Five counts, taken from the HTML each of those two URLs serves — the bytes, before any JavaScript runs. That is where a crawler starts, and on the before build it is also where it stops.</p>
+        <p class="lp-sub" data-reveal>Five counts, taken from the HTML each of those two URLs serves — the bytes, before any JavaScript runs. That is where a crawler starts, and on the before build it is also where it stops. Three of them are given against the total on the page, so you can see how much is being lost and not only which way it goes.</p>
 
         <div class="diff" data-reveal>
           <div class="diff-row diff-head">
-            <span class="m">Measured on the HTML as served</span>
+            <span class="m">Counted on each build</span>
             <span class="a">Before</span>
             <span class="b">After</span>
           </div>
 
           <div class="diff-row">
-            <p class="diff-metric">Headings a machine can read<small>Every h1–h6 element whose text is not empty.</small></p>
-            <p class="diff-val a">3</p>
-            <p class="diff-val b">17</p>
+            <p class="diff-metric">Headings a machine can read<small>Every h1–h6 element whose text is not empty, against every heading on the page.</small></p>
+            <p class="diff-val a">3 <small>of 5 headings</small></p>
+            <p class="diff-val b">17 <small>of 17 headings</small></p>
           </div>
 
           <div class="diff-row">
             <p class="diff-metric">Headings shipped as a picture<small>Every h1–h6 element with no text in it, holding an image instead.</small></p>
-            <p class="diff-val a">2</p>
-            <p class="diff-val b">0</p>
+            <p class="diff-val a">2 <small>of 5 headings</small></p>
+            <p class="diff-val b">0 <small>of 17 headings</small></p>
           </div>
 
           <div class="diff-row">
@@ -166,9 +166,9 @@
           </div>
 
           <div class="diff-row">
-            <p class="diff-metric">Body text a crawler receives<small>Every text node outside script and style, whitespace collapsed.</small></p>
-            <p class="diff-val a">456 <small>characters</small></p>
-            <p class="diff-val b">2,369 <small>characters</small></p>
+            <p class="diff-metric">Body text a crawler receives<small>Characters in the HTML body, against every character a visitor can read once the page has loaded.</small></p>
+            <p class="diff-val a">716 <small>of 1,506 characters</small></p>
+            <p class="diff-val b">2,629 <small>of 2,629 characters</small></p>
           </div>
         </div>
 
@@ -178,11 +178,11 @@
           <dl>
             <div>
               <dt>Headings a machine can read</dt>
-              <dd>Every <code>h1</code>–<code>h6</code> element whose text content is not empty after collapsing whitespace.</dd>
+              <dd>Every <code>h1</code>–<code>h6</code> element whose text content is not empty after collapsing whitespace. The denominator is every <code>h1</code>–<code>h6</code> element in the document, readable or not.</dd>
             </div>
             <div>
               <dt>Headings shipped as a picture</dt>
-              <dd>Every <code>h1</code>–<code>h6</code> element whose text content is empty and which contains at least one <code>img</code>. Two of them in the before build: the hero headline and the services title.</dd>
+              <dd>Every <code>h1</code>–<code>h6</code> element whose text content is empty and which contains at least one <code>img</code>, against the same denominator. Two of them in the before build: the hero headline and the services title.</dd>
             </div>
             <div>
               <dt>FAQ schema</dt>
@@ -194,10 +194,14 @@
             </div>
             <div>
               <dt>Body text a crawler receives</dt>
-              <dd>Every text node outside <code>script</code> and <code>style</code>, joined, whitespace collapsed to single spaces, then counted in characters.</dd>
+              <dd>Every text node inside <code>body</code> and outside <code>script</code> and <code>style</code>, joined, whitespace collapsed to single spaces, then counted in characters. The <code>title</code> is head, not body, and is not counted.</dd>
+            </div>
+            <div>
+              <dt>&hellip; against what a visitor can read</dt>
+              <dd>The same body text, plus whatever the page's own script writes into it after loading. In the before build that is the six services, held in a JavaScript array in <code>before.js</code> and injected into the carousel: 790 characters that a visitor swipes through and a crawler is never handed. The after build has no such script, which is why its two figures are the same number.</dd>
             </div>
           </dl>
-          <p class="subtract"><b>One thing to subtract yourself.</b> 878 of the after build's 2,369 characters are the four patient questions and their answers — content the before build never carried in any form, because it answered nothing. Take those out and it is 1,491 characters against 456: the same services, the same hours, the same headline, and more than three times as much of it reaching a machine. The first four rows are unaffected by that subtraction. <br /><br />And the before build's six services are not missing from the internet — they sit in a JavaScript array and are written into the carousel after the page loads. None of that appears in the count, because none of it is in the page.</p>
+          <p class="subtract"><b>One thing to subtract yourself.</b> 878 of the after build's 2,629 characters are the four patient questions and their answers — content the before build never carried in any form, because it answered nothing. Take those out and it is 1,751 characters against 716: the same services, the same hours, the same headline, and nearly two and a half times as much of it reaching a machine. The first four rows are unaffected by that subtraction. <br /><br /><b>And two notes on the last row.</b> Both builds carry the same two specimen banners at the top of the page, which is why both totals include them. Open the before build with JavaScript turned off and a browser reports 716 characters, exactly the figure above; turn JavaScript on and it reports 1,507 rather than our 1,506, because inserting the six slides splits one run of whitespace into two. We count the strings, not the gap between them.</p>
         </div>
       </div>
     </section>

@@ -44,9 +44,18 @@ Three rules hold this page up, and none of them is cosmetic:
      clinics/example/before/index.html clinics/example/after/index.html
    ```
 
-   Then update the five `.diff-val` figures and the `878` / `2,369` / `1,491`
-   / `456` subtraction note in `clinics/example/index.html` to match. A number
-   on that page that the script does not reproduce is a defect.
+   Then update the five `.diff-val` figures — three of which carry a
+   denominator (`3 of 5`, `2 of 5`, `716 of 1,506`) — and the subtraction note
+   in `clinics/example/index.html` to match. A number on that page that the
+   script does not reproduce is a defect.
+
+   The last row's denominator is what a **visitor** can read: the HTML body
+   text plus the strings the page's own script injects, read out of the
+   `SLIDES` array in `before.js`. That is why the before build's two figures
+   differ and the after build's do not. Cross-check in a browser by loading
+   the before build with JavaScript disabled (it reports the numerator) and
+   enabled (one more than the denominator — inserting the slides splits a run
+   of whitespace in two).
 3. **Both builds are `noindex, nofollow`.** A fictional dental practice must
    never turn up in a search result. Only `clinics/example/` itself is
    indexable and in the sitemap.

@@ -32,6 +32,15 @@ img { max-width: 100%; height: auto; display: block; }
   text-align: center; padding: 7px 14px;
 }
 
+/* runs the full width of the page, like the flag above it — a centred box
+   with a background of its own reads as a rendering fault, not a notice */
+.specimen-note {
+  background: #F2F3F5; color: #4A4F57; border-bottom: 1px solid #E1E3E7;
+  font-size: 12.5px; line-height: 1.6;
+  text-align: center; padding: 11px 14px;
+}
+.specimen-note span { display: block; max-width: 78ch; margin-inline: auto; }
+
 .wrap { width: min(1000px, 90vw); margin-inline: auto; }
 
 /* ---- header ---- */

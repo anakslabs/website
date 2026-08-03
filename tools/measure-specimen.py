@@ -11,9 +11,27 @@ JavaScript runs — and counts five things:
   3. FAQ schema                    an application/ld+json block declaring
                                    "@type": "FAQPage"
   4. structured data blocks        <script type="application/ld+json"> elements
-  5. body text characters          every text node outside <script> and
-                                   <style>, whitespace collapsed to single
-                                   spaces, then measured in characters
+  5. body text characters          every text node inside <body> and outside
+                                   <script> and <style>, whitespace collapsed
+                                   to single spaces, then measured in
+                                   characters. The <title> is head, not body,
+                                   and is not counted here.
+
+Three of those five have a denominator, and it reports those too:
+
+  headings          the total number of <h1>-<h6> elements in the document, so
+                    "3 of 5" reads as three of the five headings on the page
+  body text         the total a visitor can read, which is the body text above
+                    plus whatever the page's own script writes into it after
+                    it loads. For the before build that is the six services,
+                    held in a JavaScript array and injected into the carousel;
+                    they never appear in the HTML, so they count towards what
+                    a visitor sees and not towards what a crawler receives.
+
+The script text is read out of the array named by --script-array (default
+SLIDES) in every <script src> the document links, and each string is collapsed
+and counted the same way the HTML text is — no separator is invented between
+them, exactly as the HTML parser invents none between adjacent text nodes.
 
 Run it against the files on disk:
 
@@ -53,6 +71,7 @@ class Measure(HTMLParser):
         self.body_text = []       # text nodes outside <script> / <style>
         self.headings = []        # one {"text", "imgs"} record per h1-h6
         self.ldjson = []          # raw contents of each ld+json block
+        self.scripts = []         # src of every external <script>
         self.section_id = section_id
         self.section_text = []
         self._heading = None      # the heading currently being read, if any
@@ -68,6 +87,9 @@ class Measure(HTMLParser):
         if tag == "script" and (attrs.get("type") or "").strip() == "application/ld+json":
             self._ldjson = True
             self.ldjson.append("")
+
+        if tag == "script" and attrs.get("src"):
+            self.scripts.append(attrs["src"])
 
         if tag == "img" and self._heading is not None:
             self._heading["imgs"] += 1
@@ -104,6 +126,8 @@ class Measure(HTMLParser):
             return
         if self._in_skip():
             return
+        if "body" not in self.stack:
+            return          # <title> and friends are head text, not body text
         self.body_text.append(data)
         if self._heading is not None:
             self._heading["text"] += data
@@ -137,7 +161,48 @@ def ldjson_types(blocks):
     return types
 
 
-def measure(html, section_id=None):
+def script_text(base, srcs, array_name="SLIDES"):
+    """Characters a visitor reads that the page's own script writes in.
+
+    Only the strings inside the named array are counted — not every string
+    literal in the file, which would sweep up selectors and class names that
+    no visitor ever sees. Each string is collapsed and counted on its own, so
+    no separator is invented between them.
+    """
+    total, found = 0, []
+    for src in srcs:
+        raw = load(join(base, src))
+        m = re.search(re.escape(array_name) + r"\s*=\s*\[", raw)
+        if not m:
+            continue
+        # walk to the bracket that closes the array
+        depth, i = 0, m.end() - 1
+        while i < len(raw):
+            if raw[i] == "[":
+                depth += 1
+            elif raw[i] == "]":
+                depth -= 1
+                if depth == 0:
+                    break
+            i += 1
+        body = raw[m.end():i]
+        for lit in re.findall(r'"((?:[^"\\]|\\.)*)"', body):
+            lit = lit.encode().decode("unicode_escape")
+            total += len(collapse([lit]))
+            found.append(lit)
+    return total, found
+
+
+def join(base, src):
+    """Resolve a script src against the document it was linked from."""
+    if base.startswith(("http://", "https://")):
+        from urllib.parse import urljoin
+        return urljoin(base, src)
+    import os
+    return os.path.normpath(os.path.join(os.path.dirname(base), src))
+
+
+def measure(html, section_id=None, base=None, array_name="SLIDES"):
     p = Measure(section_id=section_id)
     p.feed(html)
 
@@ -146,13 +211,22 @@ def measure(html, section_id=None):
                    if not collapse([h["text"]]) and h["imgs"] > 0)
     types = ldjson_types(p.ldjson)
 
+    body_chars = len(collapse(p.body_text))
+    js_chars, js_strings = (0, [])
+    if base is not None:
+        js_chars, js_strings = script_text(base, p.scripts, array_name)
+
     return {
         "headings_readable": readable,
         "headings_as_image": as_image,
+        "headings_total": len(p.headings),
         "faq_schema": "FAQPage" in types,
         "ldjson_blocks": len(p.ldjson),
         "ldjson_types": types,
-        "body_text_chars": len(collapse(p.body_text)),
+        "body_text_chars": body_chars,
+        "script_text_chars": js_chars,
+        "script_strings": js_strings,
+        "visible_text_chars": body_chars + js_chars,
         "section_text_chars": len(collapse(p.section_text)) if section_id else None,
     }
 
@@ -168,10 +242,13 @@ def load(target):
 
 def main(argv):
     section_id = None
+    array_name = "SLIDES"
     targets = []
     for arg in argv[1:]:
         if arg.startswith("--section="):
             section_id = arg.split("=", 1)[1]
+        elif arg.startswith("--script-array="):
+            array_name = arg.split("=", 1)[1]
         else:
             targets.append(arg)
 
@@ -180,16 +257,23 @@ def main(argv):
         return 1
 
     for target in targets:
-        r = measure(load(target), section_id=section_id)
+        r = measure(load(target), section_id=section_id,
+                    base=target, array_name=array_name)
         print("=" * 72)
         print(target)
-        print("  headings a machine can read      %d" % r["headings_readable"])
-        print("  headings shipped as a picture    %d" % r["headings_as_image"])
+        print("  headings a machine can read      %d of %d" % (
+            r["headings_readable"], r["headings_total"]))
+        print("  headings shipped as a picture    %d of %d" % (
+            r["headings_as_image"], r["headings_total"]))
         print("  FAQ schema                       %s" % ("yes" if r["faq_schema"] else "no"))
         print("  structured data blocks           %d%s" % (
             r["ldjson_blocks"],
             "  [" + ", ".join(r["ldjson_types"]) + "]" if r["ldjson_types"] else ""))
-        print("  body text characters             %d" % r["body_text_chars"])
+        print("  body text a crawler receives     %d of %d" % (
+            r["body_text_chars"], r["visible_text_chars"]))
+        print("    of which in the HTML           %d" % r["body_text_chars"])
+        print("    of which written in by script  %d  (%d strings)" % (
+            r["script_text_chars"], len(r["script_strings"])))
         if section_id and r["section_text_chars"] is not None:
             print("  text characters inside #%s%s%d" % (
                 section_id, " " * max(1, 25 - len(section_id)), r["section_text_chars"]))

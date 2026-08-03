@@ -11,15 +11,16 @@
 <body>
 
   <p class="specimen-flag">Specimen &middot; built by Anaks Labs &middot; a fictional practice, not a real clinic</p>
+  <p class="specimen-note"><span>One page, on purpose. A real build follows the structure of the site it came from &mdash; if that site has forty pages, so does the build. This specimen is a single page because one page is enough to show the difference, so its navigation moves you around this page instead of across a site.</span></p>
 
   <header class="top">
     <div class="wrap">
       <a class="wordmark" href="./">Specimen Dental<span>Anytown</span></a>
       <nav>
         <a href="./">Home</a>
-        <a href="./">Services</a>
-        <a href="./">The practice</a>
-        <a href="./">Contact</a>
+        <a href="#services">Services</a>
+        <a href="#practice">The practice</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -29,11 +30,11 @@
     <section class="hero">
       <div class="wrap">
         <h1><img src="../assets/before-hero-title.png" width="1440" height="384" alt="" /></h1>
-        <a class="cta" href="./">Book an appointment</a>
+        <a class="cta" href="mailto:hello@specimen-dental.example">Book an appointment</a>
       </div>
     </section>
 
-    <section>
+    <section id="services">
       <div class="wrap">
         <h2 class="section-title"><img src="../assets/before-services-title.png" width="920" height="184" alt="" /></h2>
 
@@ -48,7 +49,7 @@
       </div>
     </section>
 
-    <section class="info">
+    <section class="info" id="practice">
       <div class="wrap">
         <div>
           <h3>Opening hours</h3>
@@ -58,7 +59,7 @@
           <h3>Where we are</h3>
           <p>Anytown. Parking behind the building.</p>
         </div>
-        <div>
+        <div id="contact">
           <h3>Get in touch</h3>
           <p><a href="mailto:hello@specimen-dental.example">hello@specimen-dental.example</a></p>
         </div>
