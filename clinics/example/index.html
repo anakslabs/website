@@ -88,7 +88,7 @@
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>The two builds</span></span>
           <h2 class="lp-h2">Open them both. They say the same thing.</h2>
         </div>
-        <p class="lp-sub" data-reveal>Same practice, same six services, same hours, same headline. One of them hands all of that to a machine. The other hands over an empty box and a container that is filled in later. Both are a single page on purpose — a real build follows the structure of the site it came from, and each says so at the top.</p>
+        <p class="lp-sub" data-reveal>Same practice, same six services, same hours, same headline. One of them hands all of that to a machine. The other hands over an empty box and a slider that is still empty when it arrives. Both are a single page on purpose — a real build follows the structure of the site it came from, and each says so at the top.</p>
 
         <div class="compare" id="compare-viewer" data-reveal>
           <div class="compare-tabs" role="tablist" aria-label="Which build to show" hidden>
@@ -106,7 +106,7 @@
               </p>
               <iframe src="/clinics/example/before/" title="Specimen Dental — the before build" loading="lazy"></iframe>
             </div>
-            <p class="compare-cap"><b>Before.</b> The headline is a picture. The six services are written into the carousel by a script after the page arrives. There are no questions answered anywhere on it.</p>
+            <p class="compare-cap"><b>Before.</b> The headline is a picture. The six services are not in the page when it arrives — a script drops them into the slider a moment later. And nothing on the page answers a patient question.</p>
           </div>
 
           <div class="compare-panel" id="panel-after" role="tabpanel" aria-labelledby="tab-after">
@@ -119,7 +119,7 @@
               </p>
               <iframe src="/clinics/example/after/" title="Specimen Dental — the after build" loading="lazy"></iframe>
             </div>
-            <p class="compare-cap"><b>After.</b> The headline is text, set to look like a headline. Every service is its own heading. The four questions patients actually ask are answered on the page, and marked up so they can be quoted.</p>
+            <p class="compare-cap"><b>After.</b> The headline is real text, styled to look exactly like a headline. Every service has its own section title. The four questions patients actually ask are answered on the page, in the format Google recognises, so they can be quoted.</p>
           </div>
         </div>
       </div>
@@ -132,7 +132,7 @@
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>The difference, measured</span></span>
           <h2 class="lp-h2">What each build hands to a machine.</h2>
         </div>
-        <p class="lp-sub" data-reveal>Five counts, taken from the HTML each of those two URLs serves — the bytes, before any JavaScript runs. That is where a crawler starts, and on the before build it is also where it stops. Three of them are given against the total on the page, so you can see how much is being lost and not only which way it goes.</p>
+        <p class="lp-sub" data-reveal>Five counts, taken from each of those two pages exactly as it arrives — before anything on the page has had a chance to run. That is where a search engine starts, and on the before build it is also where it stops. Three of the five are given against the total on the page, so you can see how much is being lost and not only which way it goes. The exact definitions are underneath the table.</p>
 
         <div class="diff" data-reveal>
           <div class="diff-row diff-head">
@@ -142,31 +142,31 @@
           </div>
 
           <div class="diff-row">
-            <p class="diff-metric">Headings a machine can read<small>Every h1–h6 element whose text is not empty, against every heading on the page.</small></p>
-            <p class="diff-val a">3 <small>of 5 headings</small></p>
-            <p class="diff-val b">17 <small>of 17 headings</small></p>
+            <p class="diff-metric">Section titles Google can actually read<small>Titles that are real text rather than a picture, counted against every title on the page.</small></p>
+            <p class="diff-val a">3 <small>of 5 titles</small></p>
+            <p class="diff-val b">17 <small>of 17 titles</small></p>
           </div>
 
           <div class="diff-row">
-            <p class="diff-metric">Headings shipped as a picture<small>Every h1–h6 element with no text in it, holding an image instead.</small></p>
-            <p class="diff-val a">2 <small>of 5 headings</small></p>
-            <p class="diff-val b">0 <small>of 17 headings</small></p>
+            <p class="diff-metric">Section titles that are pictures<small>A title set into the page as an image. A patient reads it; nothing else can.</small></p>
+            <p class="diff-val a">2 <small>of 5 titles</small></p>
+            <p class="diff-val b">0 <small>of 17 titles</small></p>
           </div>
 
           <div class="diff-row">
-            <p class="diff-metric">FAQ schema<small>A JSON-LD block declaring itself an FAQPage.</small></p>
+            <p class="diff-metric">Patient questions, in the question-and-answer format Google recognises<small>Whether the page carries its questions and answers in the standard form search engines and assistants look for.</small></p>
             <p class="diff-val a">None</p>
             <p class="diff-val b">Present</p>
           </div>
 
           <div class="diff-row">
-            <p class="diff-metric">Structured data blocks<small>JSON-LD scripts. In the after build: a practice record and the questions.</small></p>
+            <p class="diff-metric">Summaries of the practice written for machines<small>Short records that sit inside the page and are never shown to a visitor. In the after build: the hours, address and services, and the four questions.</small></p>
             <p class="diff-val a">0</p>
             <p class="diff-val b">2</p>
           </div>
 
           <div class="diff-row">
-            <p class="diff-metric">Body text a crawler receives<small>Characters in the HTML body, against every character a visitor can read once the page has loaded.</small></p>
+            <p class="diff-metric">How much of the page a search engine actually receives<small>Characters in the page as it arrives, against every character a patient can read once it has finished loading.</small></p>
             <p class="diff-val a">716 <small>of 1,506 characters</small></p>
             <p class="diff-val b">2,629 <small>of 2,629 characters</small></p>
           </div>
@@ -174,31 +174,31 @@
 
         <div class="method" data-reveal>
           <h3>How these five numbers were counted</h3>
-          <p>Each URL was fetched and parsed as text with Python's standard-library HTML parser — no browser, no JavaScript, nothing rendered. Every row is a count over that document, so you can reproduce all five from the same two pages. The script that produced them is at <a href="/tools/measure-specimen.py"><code>/tools/measure-specimen.py</code></a>, and it needs nothing installed.</p>
+          <p>This is the precise version of the five rows above, in the words your web developer would use. Each URL was fetched and parsed as text with Python's standard-library HTML parser — no browser, no JavaScript, nothing rendered. Every row is a count over that document, so you can reproduce all five from the same two pages. The script that produced them is at <a href="/tools/measure-specimen.py"><code>/tools/measure-specimen.py</code></a>, and it needs nothing installed.</p>
           <dl>
             <div>
-              <dt>Headings a machine can read</dt>
+              <dt>Section titles Google can actually read</dt>
               <dd>Every <code>h1</code>–<code>h6</code> element whose text content is not empty after collapsing whitespace. The denominator is every <code>h1</code>–<code>h6</code> element in the document, readable or not.</dd>
             </div>
             <div>
-              <dt>Headings shipped as a picture</dt>
+              <dt>Section titles that are pictures</dt>
               <dd>Every <code>h1</code>–<code>h6</code> element whose text content is empty and which contains at least one <code>img</code>, against the same denominator. Two of them in the before build: the hero headline and the services title.</dd>
             </div>
             <div>
-              <dt>FAQ schema</dt>
-              <dd>Whether any <code>application/ld+json</code> block declares <code>"@type": "FAQPage"</code>.</dd>
+              <dt>The question-and-answer format</dt>
+              <dd>Whether any <code>application/ld+json</code> block declares <code>"@type": "FAQPage"</code> — the schema.org type search engines and assistants look for when they want a page's questions and answers.</dd>
             </div>
             <div>
-              <dt>Structured data blocks</dt>
-              <dd>Every <code>script type="application/ld+json"</code> element. The after build has two: a <code>Dentist</code> record carrying the hours and services, and the <code>FAQPage</code> record carrying the four answers.</dd>
+              <dt>Summaries written for machines</dt>
+              <dd>Every <code>script type="application/ld+json"</code> element — structured data, or schema markup. The after build has two: a <code>Dentist</code> record carrying the hours and services, and the <code>FAQPage</code> record carrying the four answers.</dd>
             </div>
             <div>
-              <dt>Body text a crawler receives</dt>
+              <dt>How much the search engine receives</dt>
               <dd>Every text node inside <code>body</code> and outside <code>script</code> and <code>style</code>, joined, whitespace collapsed to single spaces, then counted in characters. The <code>title</code> is head, not body, and is not counted.</dd>
             </div>
             <div>
-              <dt>&hellip; against what a visitor can read</dt>
-              <dd>The same body text, plus whatever the page's own script writes into it after loading. In the before build that is the six services, held in a JavaScript array in <code>before.js</code> and injected into the carousel: 790 characters that a visitor swipes through and a crawler is never handed. The after build has no such script, which is why its two figures are the same number.</dd>
+              <dt>&hellip; against what a patient can read</dt>
+              <dd>The same body text, plus whatever the page's own script writes into it after loading. In the before build that is the six services, held in a JavaScript array in <code>before.js</code> and injected into the carousel: 790 characters that a patient swipes through and a crawler is never handed. The after build has no such script, which is why its two figures are the same number.</dd>
             </div>
           </dl>
           <p class="subtract"><b>One thing to subtract yourself.</b> 878 of the after build's 2,629 characters are the four patient questions and their answers — content the before build never carried in any form, because it answered nothing. Take those out and it is 1,751 characters against 716: the same services, the same hours, the same headline, and nearly two and a half times as much of it reaching a machine. The first four rows are unaffected by that subtraction. <br /><br /><b>And two notes on the last row.</b> Both builds carry the same two specimen banners at the top of the page, which is why both totals include them. Open the before build with JavaScript turned off and a browser reports 716 characters, exactly the figure above; turn JavaScript on and it reports 1,507 rather than our 1,506, because inserting the six slides splits one run of whitespace into two. We count the strings, not the gap between them.</p>
@@ -213,28 +213,28 @@
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Why it happens</span></span>
           <h2 class="lp-h2">Nothing in the before build is broken. That is the problem.</h2>
         </div>
-        <p class="lp-sub" data-reveal>It loads fast, it reads well, it works on a phone. Every one of its problems is invisible to the person who owns it, because every one of them is in the markup — and the markup is the only part a machine ever sees.</p>
+        <p class="lp-sub" data-reveal>It loads fast, it reads well, it works on a phone. Every one of its problems is invisible to the person who owns it, because every one of them is in the code underneath — and that code is the only part a machine ever sees.</p>
 
         <ul class="mech">
           <li data-reveal>
             <h3>The headline is a picture</h3>
-            <p>Custom type, exact spacing, perfectly on brand — and set into the page as an image with no text alternative. A patient reads it. A crawler receives a heading with nothing in it. It is not the most common fault we measured in the US, but where it happens it removes the single most important sentence on the page.</p>
+            <p>Custom type, exact spacing, perfectly on brand — and set into the page as an image with nothing written behind it. A patient reads it. A search engine receives a title with nothing in it. This is not the most common fault we measured in the US, but where it happens it removes the single most important sentence on the page.<small>An <code>h1</code> containing only an <code>img</code>, with an empty <code>alt</code>.</small></p>
           </li>
           <li data-reveal>
             <h3>The services arrive after the page does</h3>
-            <p>Six services, one at a time, in a carousel a visitor swipes through. The copy lives in a script and is written into the page once it has loaded. What the visitor swipes through, the crawler was never handed.</p>
+            <p>Six services, one at a time, in a slider a patient swipes through. The words live in a script and are put into the page only once it has loaded. What the patient swipes through, the search engine was never handed.<small>A carousel populated by JavaScript from an array in <code>before.js</code>.</small></p>
           </li>
           <li data-reveal>
             <h3>Nothing answers a question</h3>
             <p>Cost, how long it takes, whether you can be seen today, where to park. The before build never answers any of them, so nothing can quote it on any of them. 72% of the US clinic sites we audited never answer a patient question on the page.</p>
           </li>
           <li data-reveal>
-            <h3>No structure a machine can read</h3>
-            <p>No question-and-answer markup, no practice record, no opening hours in any parseable form. Organised to a patient, one undifferentiated blob to a machine.</p>
+            <h3>Nothing tells a machine what the practice does</h3>
+            <p>No questions answered in the format search engines recognise, no summary of the practice, no opening hours anywhere a machine can pick them up. Organised to a patient, one undifferentiated block of text to a machine.<small>No structured data of any kind — no <code>Dentist</code> record, no <code>FAQPage</code>.</small></p>
           </li>
         </ul>
 
-        <p class="lp-sub" data-reveal>Two of the five patterns we describe on <a href="/#why">the product page</a> are not reproduced here — answers locked inside a PDF, and having no way to measure what visitors do. Those need a file and an audience, not markup, so a specimen cannot honestly show them.</p>
+        <p class="lp-sub" data-reveal>Two of the five patterns we describe on <a href="/#why">the product page</a> are not reproduced here — answers locked inside a PDF, and having no way to measure what visitors do. Those need a file and an audience, not a change to the code, so a specimen cannot honestly show them.</p>
       </div>
     </section>
 
@@ -258,7 +258,7 @@
     <div class="wrap footer-inner">
       <div class="footer-company">
         <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs &nbsp;·&nbsp; <a href="mailto:help@anakslabs.com">help@anakslabs.com</a></p>
-        <p class="footer-legal">Anaks Labs Co., Ltd. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/blog/">Public notices (Korean)</a></p>
+        <p class="footer-legal">Anaks Labs Co., Ltd. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a> &nbsp;·&nbsp; <a href="/blog/">Public notices (Korean)</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
         <a href="/#product">Product</a>
