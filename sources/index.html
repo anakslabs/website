@@ -192,16 +192,20 @@
         <div class="srcs">
 
           <div class="src-item ours" id="audit-sample">
-            <p class="src-claim">The sample: 141 US clinic websites.</p>
-            <p class="src-where">The base for both figures below, and referred to on the clinics page and the specimen page.</p>
+            <p class="src-claim">The sample: 182 US clinic websites, in two separate groups.</p>
+            <p class="src-where">The base for the figures below, and referred to on the clinics page and the specimen page. The two groups were drawn in completely different ways, so we keep them apart and never add them into one percentage.</p>
             <dl>
               <div>
-                <dt>Drawn from</dt>
-                <dd>A random sample from the federal provider registry (NPPES, the National Plan and Provider Enumeration System &mdash; the public directory every US healthcare provider is listed in).</dd>
+                <dt>Group one &mdash; the registry draw</dt>
+                <dd>122 sites. Drawn at random from the federal provider registry (NPPES, the National Plan and Provider Enumeration System &mdash; the public directory every US healthcare provider is listed in), then narrowed to the practices that had a website of their own and were not part of a chain. This is the only group we can call a random sample of anything.</dd>
               </div>
               <div>
-                <dt>Size</dt>
-                <dd>141 US clinics. Where a clinic had a website, we opened it and read what the page hands to a search engine before anything on it runs.</dd>
+                <dt>Group two &mdash; the comparison set</dt>
+                <dd>60 sites. A comparison set of US clinic sites that had already been singled out as well made &mdash; pulled from published design round-ups and web-agency portfolios, not from the registry. They are not award winners, not randomly sampled and not representative of anything. We use them for one purpose: to see which problems survive being built well.</dd>
+              </div>
+              <div>
+                <dt>What we did to each</dt>
+                <dd>Opened the site and read what the page hands to a search engine before anything on it runs, then compared that with what a patient sees.</dd>
               </div>
               <div>
                 <dt>Who ran it</dt>
@@ -209,26 +213,34 @@
               </div>
               <div>
                 <dt>Limits</dt>
-                <dd>141 sites is enough to see a pattern and not enough to publish a national estimate. Treat these as what we found, not as what is true of every clinic in the United States.</dd>
+                <dd>182 sites is enough to see a pattern and not enough to publish a national estimate. Treat these as what we found, not as what is true of every clinic in the United States. Where a figure comes from only one of the two groups, we say which.</dd>
               </div>
             </dl>
           </div>
 
           <div class="src-item ours" id="no-answers">
-            <p class="src-claim">72% of the US clinic sites we audited never answer a patient question on the page.</p>
-            <p class="src-where">Appears on the clinics page and the specimen page.</p>
+            <p class="src-claim">At the very lowest, two in three never answer a patient question on the page.</p>
+            <p class="src-where">Appears on the clinics page and the specimen page. We state this as a floor rather than as one number, and the reason is in the Scope row below.</p>
             <dl>
               <div>
                 <dt>Base</dt>
-                <dd>The clinic websites in the 141-clinic sample that had a site to read.</dd>
+                <dd>All 182 sites, split into the three groups we could tell apart: the comparison set (60), the registry sites we reached automatically (71), and the registry sites we had to search for by hand (51).</dd>
+              </div>
+              <div>
+                <dt>What we measured</dt>
+                <dd>Comparison set 71.7%. Registry sites reached automatically 81.7%. Registry sites found by search 66.7%. Across the registry group as a whole, 75.4%.</dd>
               </div>
               <div>
                 <dt>What counted</dt>
                 <dd>A page fails this if nowhere on it does it answer a question a patient would type &mdash; what it costs, whether an insurer is taken, how long recovery takes, whether you can be seen today, where to park. A phone number is not an answer.</dd>
               </div>
               <div>
+                <dt>Scope</dt>
+                <dd>Of everything we measured, this is the figure that moves most with how we found the site &mdash; 15 points between the two halves of the registry group alone. A single headline number would therefore be the number our method produced, not the number that is true. So we publish the floor: every group we measured came in at 66.7% or worse. That statement survives the variation; &ldquo;72%&rdquo; does not, and we have taken it off the site.</dd>
+              </div>
+              <div>
                 <dt>Note</dt>
-                <dd>This one held at roughly the same level whether the site was well built or badly built. Good design does not protect against it.</dd>
+                <dd>The sites that had already been picked out as good examples came in at 71.7%, inside the same band as the rest. Good design does not protect against it.</dd>
               </div>
             </dl>
           </div>
@@ -239,11 +251,42 @@
             <dl>
               <div>
                 <dt>Base</dt>
-                <dd>The 200 practices drawn from the registry, not the 141 sites we measured. Every practice we drew counts here, including the ones with nothing to measure.</dd>
+                <dd>The 200 practices drawn from the registry, not the sites we went on to measure. Every practice we drew counts here, including the ones with nothing to measure.</dd>
+              </div>
+              <div>
+                <dt>What we measured</dt>
+                <dd>69 of 200, or 34.5%. Of the rest, 85 had a website we verified, and 46 we could not settle either way &mdash; blocked, unreachable, or a candidate we could not confirm was theirs. So the share of these practices with a site of their own is somewhere between 42.5% and 65.5%, and we do not report a single number for it.</dd>
               </div>
               <div>
                 <dt>What counted</dt>
-                <dd>No site of the practice&rsquo;s own that we could find. We searched each practice by name, city and phone number, and cross-checked public map data. A directory listing, a social page or a page on a hospital group&rsquo;s site is not a website the practice controls, and we counted those as none. This is a &ldquo;could not find&rdquo; result rather than a proof of absence &mdash; though a patient searching the same way would not find one either.</dd>
+                <dd>No site of the practice&rsquo;s own that we could find. We searched each practice by name, city and phone number. A directory listing, a social page or a page on a hospital group&rsquo;s site is not a website the practice controls, and we counted those as none. This is a &ldquo;could not find&rdquo; result rather than a proof of absence &mdash; though a patient searching the same way would not find one either.</dd>
+              </div>
+              <div>
+                <dt>Checked a second way</dt>
+                <dd>We went back over all 71 we had failed to find, using a different method entirely &mdash; a public map index, matched on phone number rather than on name. It recovered two. Three more looked recovered and were not: the phone number matched but the site would not open for us, and we opened each one by hand before rejecting it. Had we accepted those on the match alone, this figure would read 33.0%.</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div class="src-item ours" id="headline-and-schema">
+            <p class="src-claim">4% set the headline as a picture. 57% never say what the business is.</p>
+            <p class="src-where">Both appear under the headline diagram on the clinics page.</p>
+            <dl>
+              <div>
+                <dt>Base</dt>
+                <dd>The 122 registry sites only. Not the comparison set, and not the two pooled.</dd>
+              </div>
+              <div>
+                <dt>What we measured</dt>
+                <dd>Headline set as a picture: 4.1%. No statement of business type or location in a form a machine can carry away: 57.4%.</dd>
+              </div>
+              <div>
+                <dt>What counted</dt>
+                <dd>For the first: the main heading of the page exists only inside an image, so the sentence a visitor reads is not a sentence anything else can quote. For the second: the page carries no machine-readable statement of what kind of business it is or where it is &mdash; the address may well be printed on the page for a person to read, but nothing declares it.</dd>
+              </div>
+              <div>
+                <dt>Scope</dt>
+                <dd>The headline figure is the one we show, and it is small. We show it because it is the clearest illustration of the mechanism, not because it is common, and we say so on the page rather than letting the diagram imply frequency. In the comparison set it was 1.7%.</dd>
               </div>
             </dl>
           </div>
