@@ -148,7 +148,7 @@
           </div>
 
           <div class="diff-row">
-            <p class="diff-metric">Section titles that are pictures<small>A title set into the page as an image. A patient reads it; nothing else can.</small></p>
+            <p class="diff-metric">Section titles that are pictures<small>Titles holding an image where the text should be, against the same total.</small></p>
             <p class="diff-val a">2 <small>of 5 titles</small></p>
             <p class="diff-val b">0 <small>of 17 titles</small></p>
           </div>
@@ -174,7 +174,7 @@
 
         <div class="method" data-reveal>
           <h3>How these five numbers were counted</h3>
-          <p>This is the precise version of the five rows above, in the words your web developer would use. Each URL was fetched and parsed as text with Python's standard-library HTML parser — no browser, no JavaScript, nothing rendered. Every row is a count over that document, so you can reproduce all five from the same two pages. The script that produced them is at <a href="/tools/measure-specimen.py"><code>/tools/measure-specimen.py</code></a>, and it needs nothing installed.</p>
+          <p>This is the precise version of the five rows above — what was counted, and on what. Each URL was fetched and parsed as text with Python's standard-library HTML parser — no browser, no JavaScript, nothing rendered. Every row is a count over that document, so you can reproduce all five from the same two pages. The script that produced them is at <a href="/tools/measure-specimen.py"><code>/tools/measure-specimen.py</code></a>, and it needs nothing installed.</p>
           <dl>
             <div>
               <dt>Section titles Google can actually read</dt>
@@ -186,11 +186,11 @@
             </div>
             <div>
               <dt>The question-and-answer format</dt>
-              <dd>Whether any <code>application/ld+json</code> block declares <code>"@type": "FAQPage"</code> — the schema.org type search engines and assistants look for when they want a page's questions and answers.</dd>
+              <dd>Whether any <code>application/ld+json</code> block declares <code>"@type": "FAQPage"</code>.</dd>
             </div>
             <div>
               <dt>Summaries written for machines</dt>
-              <dd>Every <code>script type="application/ld+json"</code> element — structured data, or schema markup. The after build has two: a <code>Dentist</code> record carrying the hours and services, and the <code>FAQPage</code> record carrying the four answers.</dd>
+              <dd>Every <code>script type="application/ld+json"</code> element. The after build has two: a <code>Dentist</code> record carrying the hours and services, and the <code>FAQPage</code> record carrying the four answers.</dd>
             </div>
             <div>
               <dt>How much the search engine receives</dt>
@@ -218,11 +218,11 @@
         <ul class="mech">
           <li data-reveal>
             <h3>The headline is a picture</h3>
-            <p>Custom type, exact spacing, perfectly on brand — and set into the page as an image with nothing written behind it. A patient reads it. A search engine receives a title with nothing in it. This is not the most common fault we measured in the US, but where it happens it removes the single most important sentence on the page.<small>An <code>h1</code> containing only an <code>img</code>, with an empty <code>alt</code>.</small></p>
+            <p>Custom type, exact spacing, perfectly on brand — and set into the page as an image with nothing written behind it. A patient reads it. A search engine receives a title with nothing in it. This is not the most common fault we measured in the US, but where it happens it removes the single most important sentence on the page.</p>
           </li>
           <li data-reveal>
             <h3>The services arrive after the page does</h3>
-            <p>Six services, one at a time, in a slider a patient swipes through. The words live in a script and are put into the page only once it has loaded. What the patient swipes through, the search engine was never handed.<small>A carousel populated by JavaScript from an array in <code>before.js</code>.</small></p>
+            <p>Six services, one at a time, in a slider a patient swipes through. The words live in a script and are put into the page only once it has loaded. What the patient swipes through, the search engine was never handed.</p>
           </li>
           <li data-reveal>
             <h3>Nothing answers a question</h3>
@@ -230,7 +230,7 @@
           </li>
           <li data-reveal>
             <h3>Nothing tells a machine what the practice does</h3>
-            <p>No questions answered in the format search engines recognise, no summary of the practice, no opening hours anywhere a machine can pick them up. Organised to a patient, one undifferentiated block of text to a machine.<small>No structured data of any kind — no <code>Dentist</code> record, no <code>FAQPage</code>.</small></p>
+            <p>No questions answered in the format search engines recognise, no summary of the practice, no opening hours anywhere a machine can pick them up. Organised to a patient, one undifferentiated block of text to a machine.</p>
           </li>
         </ul>
 
