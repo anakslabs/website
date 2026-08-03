@@ -88,6 +88,30 @@ grep -nE 'Director|director|registration number|business number|[0-9]{3}-[0-9]{2
 The Korean legal footer on `blog/` is unaffected — it is the statutory
 disclosure of the Korean company and stands whatever happens in the US.
 
+### "Build", not "rebuild" — on hold for nobody, this one is decided
+
+Two segments buy this: clinics with a site worth rebuilding, and clinics with
+no usable site at all — not open yet, dead domain, or nothing a crawler can
+reach. **No page may state generically that what we do is a rebuild.** A
+sentence that tells the reader what we will do *for them* must not presuppose
+they already have a site; the thing we deliver is "the build".
+
+Where a rebuild is a fact about one case — `clinics/example/` is a rebuild,
+because there was a site to start from — the word is correct and stays. The
+check, which must print nothing:
+
+```
+grep -nE 'We rebuild|the rebuild we|One rebuild' index.html clinics/index.html about/index.html
+```
+
+Two traps when editing this copy:
+
+- **The FAQ answers exist twice** on both landing pages: as visible copy and
+  inside the `FAQPage` JSON-LD. They must stay word-for-word identical —
+  changing one alone publishes structured data that contradicts the page.
+- **The root stays industry-neutral.** Its "How do we start?" answer says
+  *your business*; the clinics page says *your practice*. Do not unify them.
+
 ### Verticals
 
 The root sells the product in industry-neutral terms and carries **no figures**
