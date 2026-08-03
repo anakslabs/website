@@ -106,6 +106,43 @@
     if (!reduce) step(false);
   })();
 
+  /* ---- before/after viewer (/clinics/example/ only).
+     Same progressive-enhancement rule as the reveal below: the markup ships
+     both builds stacked and visible, and the tab strip ships hidden. Only
+     when this runs does the pair collapse into a toggle. ---- */
+  (function () {
+    var viewer = document.getElementById("compare-viewer");
+    if (!viewer) return;
+    var tabs = viewer.querySelector(".compare-tabs");
+    var buttons = viewer.querySelectorAll('[role="tab"]');
+    if (!tabs || buttons.length < 2) return;
+
+    function select(tab) {
+      Array.prototype.forEach.call(buttons, function (b) {
+        var on = b === tab;
+        b.setAttribute("aria-selected", String(on));
+        b.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(b.getAttribute("aria-controls"));
+        if (panel) panel.hidden = !on;
+      });
+    }
+
+    Array.prototype.forEach.call(buttons, function (b, i) {
+      b.addEventListener("click", function () { select(b); });
+      b.addEventListener("keydown", function (e) {
+        var step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        var next = buttons[(i + step + buttons.length) % buttons.length];
+        select(next);
+        next.focus();
+      });
+    });
+
+    tabs.hidden = false;
+    select(buttons[0]);
+  })();
+
   /* ---- scroll reveal: the hidden state is applied by JS only, so a page with
      JS disabled (or an older browser) simply shows everything. ---- */
   (function () {

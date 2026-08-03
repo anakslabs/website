@@ -1,0 +1,122 @@
+/* =========================================================================
+   Specimen Dental — "before" build.
+   A fictional clinic homepage written by Anaks Labs to reproduce the markup
+   patterns our clinic audit kept finding. It is meant to look finished: the
+   problems it demonstrates are all in the markup, not in the appearance.
+   ========================================================================= */
+
+:root {
+  --teal: #0E7C86;
+  --teal-dark: #0A5A61;
+  --sand: #F4F1EA;
+  --ink: #2A2E33;
+  --muted: #6B7178;
+  --line: #E2DED4;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: #fff;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+.specimen-flag {
+  background: #2A2E33; color: #fff;
+  font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  text-align: center; padding: 7px 14px;
+}
+
+.wrap { width: min(1000px, 90vw); margin-inline: auto; }
+
+/* ---- header ---- */
+.top {
+  border-bottom: 1px solid var(--line);
+  padding: 18px 0;
+}
+.top .wrap { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.wordmark {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 21px; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--teal-dark); margin-right: auto; text-decoration: none;
+}
+.wordmark span { display: block; font-size: 9.5px; letter-spacing: .3em; color: var(--muted); }
+.top nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.top nav a { font-size: 13px; color: var(--muted); text-decoration: none; letter-spacing: .04em; }
+.top nav a:hover { color: var(--teal); }
+
+/* ---- hero: the headline is a picture ---- */
+.hero {
+  background: linear-gradient(180deg, var(--sand), #fff);
+  border-bottom: 1px solid var(--line);
+  padding: clamp(44px, 8vw, 92px) 0;
+  text-align: center;
+}
+.hero h1 { margin: 0 auto; max-width: 720px; }
+.hero h1 img { width: 100%; }
+.hero .cta {
+  display: inline-block; margin-top: 30px;
+  background: var(--teal); color: #fff; text-decoration: none;
+  padding: 14px 30px; border-radius: 3px;
+  font-size: 14px; letter-spacing: .1em; text-transform: uppercase;
+}
+.hero .cta:hover { background: var(--teal-dark); }
+
+/* ---- sections ---- */
+section { padding: clamp(40px, 7vw, 76px) 0; }
+section + section { border-top: 1px solid var(--line); }
+.section-title { text-align: center; margin: 0 auto clamp(26px, 4vw, 40px); max-width: 460px; }
+.section-title img { width: 100%; }
+
+/* ---- the carousel: its slides are written by JavaScript ---- */
+.carousel { position: relative; overflow: hidden; }
+.carousel .track {
+  display: flex; transition: transform .45s ease;
+  min-height: 210px;
+}
+.carousel .slide {
+  flex: 0 0 100%; padding: 0 clamp(10px, 4vw, 60px); text-align: center;
+}
+.carousel .slide h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(20px, 3vw, 26px); font-weight: normal; color: var(--teal-dark);
+  margin-bottom: 12px;
+}
+.carousel .slide p { color: var(--muted); max-width: 52ch; margin-inline: auto; }
+.carousel .dots { display: flex; justify-content: center; gap: 9px; margin-top: 22px; }
+.carousel .dots button {
+  width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%;
+  background: var(--line); cursor: pointer;
+}
+.carousel .dots button[aria-current="true"] { background: var(--teal); }
+.carousel .arrows { display: flex; justify-content: center; gap: 14px; margin-top: 16px; }
+.carousel .arrows button {
+  border: 1px solid var(--line); background: #fff; color: var(--muted);
+  width: 34px; height: 34px; border-radius: 50%; cursor: pointer; font-size: 15px; line-height: 1;
+}
+.carousel .arrows button:hover { border-color: var(--teal); color: var(--teal); }
+
+/* ---- practice info ---- */
+.info { background: var(--sand); }
+.info .wrap { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.info h3 {
+  font-family: Georgia, "Times New Roman", serif; font-weight: normal;
+  font-size: 17px; color: var(--teal-dark); margin-bottom: 8px;
+}
+.info p { font-size: 15px; color: var(--muted); }
+.info a { color: var(--teal-dark); }
+
+/* ---- footer ---- */
+.foot { padding: 26px 0; border-top: 1px solid var(--line); }
+.foot p { font-size: 12.5px; color: var(--muted); text-align: center; }
+
+@media (max-width: 620px) {
+  .top .wrap { justify-content: center; }
+  .wordmark { margin-right: 0; text-align: center; width: 100%; }
+  .top nav { justify-content: center; width: 100%; }
+}
