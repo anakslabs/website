@@ -72,8 +72,20 @@ a hard rule when reviewing changes. The syllable block is U+AC00–U+D7A3; this
 check must print `blog/index.html` and nothing else:
 
 ```
-grep -rlP '[\x{AC00}-\x{D7A3}]' . --exclude-dir=.git --exclude-dir=.claude
+python3 - <<'EOF'
+import pathlib, re
+han = re.compile('[\\uac00-\\ud7a3]')   # escaped, so this file stays clean itself
+for p in sorted(pathlib.Path('.').rglob('*')):
+    if p.is_file() and not {'.git', '.claude'} & set(p.parts) \
+       and p.suffix in {'.html', '.css', '.js', '.xml', '.txt', '.json', '.md', '.py'} \
+       and han.search(p.read_text(encoding='utf-8', errors='replace')):
+        print(p)
+EOF
 ```
+
+**Do not use `grep -rlP` for this.** BSD grep, which is what macOS ships, has no
+`-P`; it exits with a usage error that an eye skimming for output reads as a
+clean pass. This check has to be able to fail.
 
 ### Corporate identity on the English pages — on hold
 
@@ -123,11 +135,56 @@ Two traps when editing this copy:
 
 ### Verticals
 
-The root sells the product in industry-neutral terms and carries **no figures**
-— we only have measured data for clinics, so every measured claim lives on
-`clinics/`. A new vertical is a new sibling directory (`restaurants/`, …) plus
-one more card in the root's "Who we build for" section. Never list a vertical
-there that does not have a live page behind it.
+The root sells the product in industry-neutral terms and carries **none of our
+own measured figures** — we only have measured data for clinics, so every claim
+we produced (`141`, `72%`, `1 in 3`) lives on `clinics/`. It may carry external
+market figures, but only industry-neutral ones: the health figure is a vertical
+claim and belongs on `clinics/` even though it is somebody else's research.
+Sorting rule when a figure is added: *would this sentence still make sense to a
+restaurant?* If not, it is not a root figure.
+
+A new vertical is a new sibling directory (`restaurants/`, …) plus one more card
+in the root's "Who we build for" section. Never list a vertical there that does
+not have a live page behind it.
+
+### Figures, sources and the small-print layer
+
+Every figure anywhere on the site is listed on `sources/index.html` with its
+sample, its field dates and the date its link was last checked. Three rules,
+and the first is the one that keeps the page honest:
+
+1. **No primary link, no figure.** If the original publication cannot be linked,
+   the number comes off the page — it does not get softened, hedged or
+   attributed to "studies". Aggregator blogs and second-hand citations are not
+   sources. Our own three measurements are the only figures without an external
+   link, and they carry their sample definition instead.
+2. **Each `/sources/` entry states which pages it appears on.** That claim is
+   checkable and goes stale the moment a figure moves between pages, so re-check
+   it whenever one does:
+
+   ```
+   grep -c '/sources/#ai-health' index.html clinics/index.html
+   ```
+
+3. **The small print is evidence, not a second reader.** There is one reader:
+   the practice owner. A page with a web person on staff has already fixed this,
+   and if there is one, they work for a competing agency — so nothing on the site
+   is written to them. Small print exists so the large type is believed, and it
+   must survive being skipped. In practice:
+   - it carries a source, a sample, or what was counted — never an explanation
+     of a term, and never how to fix the problem, which is what we sell;
+   - the mechanism copy names the **symptom** and stops there. "Text in a slider
+     never reaches Google" is a symptom. "Put it back as real text" is a recipe
+     for a competitor. Describing what **our** build does is neither — the
+     specimen's after-caption is correct as written;
+   - **the skip test, which every copy change must pass:** strip every `.src`,
+     every `<small>` and the whole `.method` block, then read the page back. If
+     the argument no longer closes on the large type alone, the large type is
+     leaning on the small print and has to be rewritten.
+
+   ```
+   python3 tools/skip-test.py            # prints large type only, per page
+   ```
 
 ### Public notices (legal)
 

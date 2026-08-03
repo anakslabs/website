@@ -499,6 +499,9 @@ body.landing .grid { display: none; }
 }
 .fig > p { margin-top: 13px; font-size: clamp(14.5px, 1.9vw, 16px); line-height: 1.6; color: var(--gray); max-width: 46ch; }
 .fig .src { margin-top: 14px; padding-top: 12px; }
+/* one card in the grid: auto-fit would stretch it the full width of the page
+   and run its prose to ~120 characters a line. Hold it to a readable column. */
+.stat-grid.solo, .figs.solo { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
 
 /* ---- "what the crawler receives" diagram (pure type + CSS, no imagery) ---- */
 .xray { margin-top: clamp(34px, 5vw, 56px); }
