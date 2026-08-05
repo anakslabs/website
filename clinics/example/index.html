@@ -174,34 +174,30 @@
 
         <div class="method" data-reveal>
           <h3>How these five numbers were counted</h3>
-          <p>This is the precise version of the five rows above — what was counted, and on what. Each URL was fetched and parsed as text with Python's standard-library HTML parser — no browser, no JavaScript, nothing rendered. Every row is a count over that document, so you can reproduce all five from the same two pages. The script that produced them is at <a href="/tools/measure-specimen.py"><code>/tools/measure-specimen.py</code></a>, and it needs nothing installed.</p>
+          <p>Every row was measured the same way on both pages: we look at each page exactly as it first arrives to a search engine &mdash; before anything loads or runs &mdash; and count what is actually there. In plain terms:</p>
           <dl>
             <div>
               <dt>Section titles Google can actually read</dt>
-              <dd>Every <code>h1</code>–<code>h6</code> element whose text content is not empty after collapsing whitespace. The denominator is every <code>h1</code>–<code>h6</code> element in the document, readable or not.</dd>
+              <dd>Of all the section titles on the page, how many arrive as real written text.</dd>
             </div>
             <div>
               <dt>Section titles that are pictures</dt>
-              <dd>Every <code>h1</code>–<code>h6</code> element whose text content is empty and which contains at least one <code>img</code>, against the same denominator. Two of them in the before build: the hero headline and the services title.</dd>
+              <dd>Titles a visitor sees perfectly but which arrive as an image with no text behind it &mdash; in the before build, that includes the headline itself.</dd>
             </div>
             <div>
               <dt>The question-and-answer format</dt>
-              <dd>Whether any <code>application/ld+json</code> block declares <code>"@type": "FAQPage"</code>.</dd>
+              <dd>Whether the page answers patient questions in the structured form search engines recognise and can quote.</dd>
             </div>
             <div>
               <dt>Summaries written for machines</dt>
-              <dd>Every <code>script type="application/ld+json"</code> element. The after build has two: a <code>Dentist</code> record carrying the hours and services, and the <code>FAQPage</code> record carrying the four answers.</dd>
+              <dd>Whether the page carries a machine-readable summary of the practice &mdash; hours, services, answers &mdash; that a search engine can pick up directly.</dd>
             </div>
             <div>
               <dt>How much the search engine receives</dt>
-              <dd>Every text node inside <code>body</code> and outside <code>script</code> and <code>style</code>, joined, whitespace collapsed to single spaces, then counted in characters. The <code>title</code> is head, not body, and is not counted.</dd>
-            </div>
-            <div>
-              <dt>&hellip; against what a patient can read</dt>
-              <dd>The same body text, plus whatever the page's own script writes into it after loading. In the before build that is the six services, held in a JavaScript array in <code>before.js</code> and injected into the carousel: 790 characters that a patient swipes through and a crawler is never handed. The after build has no such script, which is why its two figures are the same number.</dd>
+              <dd>The words that arrive with the page itself, compared with everything a patient can eventually read. In the before build, the six services are only added after the page loads &mdash; a patient swipes through them, but they were never handed to the machine.</dd>
             </div>
           </dl>
-          <p class="subtract"><b>One thing to subtract yourself.</b> 878 of the after build's 2,629 characters are the four patient questions and their answers — content the before build never carried in any form, because it answered nothing. Take those out and it is 1,751 characters against 716: the same services, the same hours, the same headline, and nearly two and a half times as much of it reaching a machine. The first four rows are unaffected by that subtraction. <br /><br /><b>And two notes on the last row.</b> Both builds carry the same two specimen banners at the top of the page, which is why both totals include them. Open the before build with JavaScript turned off and a browser reports 716 characters, exactly the figure above; turn JavaScript on and it reports 1,507 rather than our 1,506, because inserting the six slides splits one run of whitespace into two. We count the strings, not the gap between them.</p>
+          <p class="subtract"><b>One thing to be fair about.</b> 878 of the after build's 2,629 characters are the four patient questions and their answers &mdash; content the before build never carried in any form. Set those aside and it is still 1,751 characters against 716: the same services, the same hours, the same headline, and nearly two and a half times as much of it reaching the machine.</p>
         </div>
       </div>
     </section>
