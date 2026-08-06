@@ -2,9 +2,9 @@
    Anaks Labs — shared site script (dependency-free, IIFE)
    Year stamp, mobile nav toggle, node-constellation canvas, scroll reveal.
 
-   The KO/EN i18n engine was removed when the site became English-only. The
-   one page that is still Korean — the statutory public notice board at
-   /blog/ — is served as static Korean markup and needs no runtime switching.
+   The KO/EN i18n engine was removed when the site became English-only.
+   Every page ships the language it is written in; there is no runtime
+   switching and no language toggle.
    ========================================================================= */
 (function () {
   "use strict";

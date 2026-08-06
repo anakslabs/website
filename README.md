@@ -10,7 +10,6 @@ index.html            Root — English product landing, industry-neutral
 clinics/index.html    Clinics vertical — the audit findings and the clinic offer
 clinics/example/      Specimen rebuild — two builds of one fictional clinic, and the diff
 about/index.html      Company and corporate information
-blog/index.html       Statutory public notice board (Korean — legal, do not move)
 assets/site.css       Shared styles (design tokens, layers, header/footer, cards, landing)
 assets/site.js        Shared JS (year stamp, particles, mobile nav, tabs, scroll reveal)
 tools/                Repo scripts, not part of the site
@@ -65,11 +64,9 @@ Three rules hold this page up, and none of them is cosmetic:
 The site is **English only**. There is no runtime i18n and no language toggle:
 every page ships the language it is written in.
 
-The single exception is `blog/`, the statutory public notice board, which is
-Korean because the notices themselves are a legal filing of a Korean company.
-It is the only file in the repository that may contain Hangul — treat that as
-a hard rule when reviewing changes. The syllable block is U+AC00–U+D7A3; this
-check must print `blog/index.html` and nothing else:
+There are no longer any exceptions: **no file in the repository may contain
+Hangul.** Treat that as a hard rule when reviewing changes. The syllable block
+is U+AC00–U+D7A3; this check must print nothing at all:
 
 ```
 python3 - <<'EOF'
@@ -87,27 +84,27 @@ EOF
 `-P`; it exits with a usage error that an eye skimming for output reads as a
 clean pass. This check has to be able to fail.
 
-### Corporate identity on the English pages — on hold
+### Corporate identity — settled
 
-The English pages name the company and nothing more:
+The site belongs to **Anaks Labs Inc.**, a US corporation. That name is the
+`legalName` in the `Organization` JSON-LD on every page, the © line and the
+legal line in every footer, and the "Legal name" row on `about/`. The brand
+name shown to readers stays `Anaks Labs`; `legalName` carries the `Inc.`
 
-| shown            | `Anaks Labs Co., Ltd.`, the English head-office address, `help@anakslabs.com` |
-| ---------------- | ---------------------------------------------------------------------------- |
-| **not shown**    | the director's name, any business registration number                        |
+| shown         | `Anaks Labs Inc.`, `contact@anakslabs.com`             |
+| ------------- | ------------------------------------------------------ |
+| **not shown** | any address, the director's name, a registration number |
 
-That omission is a decision, not an oversight: a US entity may be formed, so
-which company the US-facing site belongs to is not settled. **Do not add a
-director or a registration number to `index.html`, `clinics/` or `about/`** —
-lifting this is a call for the project lead, not a tidy-up. The check:
+The address is omitted because the US one has not been supplied yet, not
+because it is secret. **Do not invent a placeholder address** — when the real
+one arrives it lands in the `footer-legal` line and a "Head office" row on
+`about/`, in its own commit. The checks:
 
 ```
-grep -nE 'Director|director|registration number|business number|[0-9]{3}-[0-9]{2}-[0-9]{5}' \
-  index.html clinics/index.html about/index.html
-# must print nothing
+grep -rn 'legalName' --include='*.html' .   # every Organization node carries it
+grep -rnE 'Co\., Ltd|Republic of Korea|Director|registration number' \
+  --include='*.html' .                      # must print nothing
 ```
-
-The Korean legal footer on `blog/` is unaffected — it is the statutory
-disclosure of the Korean company and stands whatever happens in the US.
 
 ### "Build", not "rebuild" — on hold for nobody, this one is decided
 
@@ -186,22 +183,16 @@ and the first is the one that keeps the page honest:
    python3 tools/skip-test.py            # prints large type only, per page
    ```
 
-### Public notices (legal)
-
-`blog/` is the statutory public notice board for Anaks Labs Co., Ltd. Its URL is
-the company's published electronic-notice location, so **the path must not
-change**. It is reachable from the footer of every English page and from the
-corporate information list on `about/`.
-
-To publish a notice: add a `post-list` entry in `blog/index.html` linking to a
-new `blog/<slug>/` page, and add a `<url>` to `sitemap.xml`. Notices are written
-in Korean; nothing else on the site is.
-
 ### Removed pages
 
 `products/`, `contact/` and `blog/hello/` were Korean pages retired when the
 site became English-only. `vercel.json` 301s those paths so old links and any
 remaining search-engine records land somewhere sensible.
+
+`blog/` was the statutory Korean electronic-notice board of the former Korean
+entity. It was deleted when the site became the site of Anaks Labs Inc., and it
+is **not** redirected: the US company publishes no statutory notices, so the
+path 404s deliberately. Do not resurrect `/blog/` as a redirect target.
 
 ## Preview locally
 
