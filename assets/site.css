@@ -313,6 +313,10 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .prose a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 .prose .meta { font-family: var(--mono); font-size: 13px; color: var(--gray-soft); letter-spacing: .02em; }
 
+/* publication line under an article lead. Same mono/grey register as .meta —
+   it is a fact about the page, not part of the argument, so it stays quiet. */
+.page-hero .pub { font-family: var(--mono); font-size: 13px; color: var(--gray-soft); letter-spacing: .02em; margin-top: 18px; }
+
 /* post list */
 .post-list { list-style: none; display: grid; gap: 14px; }
 .post-list a {
@@ -323,11 +327,11 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .post-list a:hover { transform: translateY(-2px); border-color: rgba(45,99,240,.28); }
 .post-list h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
 .post-list .meta { font-family: var(--mono); font-size: 12.5px; color: var(--gray-soft); }
-/* one-line summary under a post-list title (the guides index, "read next") */
+/* one-line summary under a post-list title (the articles index, "read next") */
 .post-list p { font-size: 14.5px; line-height: 1.6; color: var(--gray); margin-top: 5px; }
 .post-list p + .meta { margin-top: 10px; }
 
-/* breadcrumb above a guide's title — a <nav>, never a <p>, so the skip test
+/* breadcrumb above an article's title — a <nav>, never a <p>, so the skip test
    reads the page's argument and not its wayfinding */
 .crumb { font-family: var(--mono); font-size: 12.5px; letter-spacing: .02em; color: var(--gray-soft); margin-bottom: 14px; }
 .crumb a { color: var(--gray); text-decoration: none; border-bottom: 1px solid var(--line-2); }

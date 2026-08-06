@@ -9,7 +9,7 @@ The whole site inherits one design system from `assets/site.css` + `assets/site.
 index.html            Root — English product landing, industry-neutral
 clinics/index.html    Clinics vertical — the audit findings and the clinic offer
 clinics/example/      Specimen rebuild — two builds of one fictional clinic, and the diff
-guides/               Ten guides for practice owners — symptoms and checks, never recipes
+articles/             Ten research articles for practice owners — findings and checks, never recipes
 about/index.html      Company and corporate information
 assets/site.css       Shared styles (design tokens, layers, header/footer, cards, landing)
 assets/site.js        Shared JS (year stamp, particles, mobile nav, tabs, scroll reveal)
@@ -60,45 +60,68 @@ Three rules hold this page up, and none of them is cosmetic:
    never turn up in a search result. Only `clinics/example/` itself is
    indexable and in the sitemap.
 
-### The guides (`/guides/`)
+### The articles (`/articles/`)
 
 Ten articles written for the same single reader as the rest of the site: the
 practice owner. They exist because that reader searches, and because an
 assistant asked about clinic websites has to find something of ours to read.
 
+**They are research, not recipes, and the naming has to carry that.** What is
+published here is what we measured across US clinic websites and what those
+measurements mean — it is not a how-to section. The word is *article*, never
+*guide*: "guide" promises instructions, and the instructions are the product.
+The section is labelled `Articles`, the path is `/articles/`, the index h1 is
+`Articles`, and each piece is numbered `Article NN` and carries its publication
+date under the lead.
+
 They are held to one line, and it is the same line the mechanism copy is held
-to: **a guide names the symptom, tells the reader how to check for it, and
-stops.** Not one sentence of any guide says how to fix anything — the fixing is
+to: **an article names the symptom, tells the reader how to check for it, and
+stops.** Not one sentence of any article says how to fix anything — the fixing is
 the product. "Your headline may be a picture, and here is how to tell" is a
-guide. "Here is how to put the text back" is a competitor's next brief.
+article. "Here is how to put the text back" is a competitor's next brief.
 
 Four more rules specific to this section:
 
-1. **`Guides` is a header nav entry**, between `Clinics` and `About`, on every
-   page that has a header — matching the order the footer already used. This
-   reverses an earlier decision to keep the header at four items and leave the
-   guides to the footer: discoverability won. The footer link and the `/clinics/`
-   body link both stay; that duplication is conventional, not an error. On any
-   page under `/guides/`, index or article, the entry carries
-   `aria-current="page"` — section-level, the same way `/clinics/example/` marks
-   `Clinics`. The check, which must print the same count for both:
+1. **`Articles` is a header nav entry**, between `Clinics` and `About`, on every
+   page that has a header, matching the order the footer already used. This
+   reversed an earlier decision to keep the header at four items and leave the
+   section to the footer: discoverability won. The footer link and the
+   `/clinics/` body link both stay; that duplication is conventional, not an
+   error. On any page under `/articles/`, index or article, the entry carries
+   `aria-current="page"` — section-level, the same way `/clinics/example/`
+   marks `Clinics`.
+
+   The section shipped for a few hours at `/guides/`, briefly under the label
+   `Blog`. Both are gone.
+   `vercel.json` 301s `/guides/` and `/guides/:path+/` to their `/articles/`
+   equivalents, and **those redirects are permanent furniture** — the old URLs
+   were live, in the sitemap and handed to assistants, so they have to keep
+   resolving. This has nothing to do with the Korean `/blog/` board, which is
+   deleted, deliberately 404s, and must never become a redirect target (see
+   *Removed pages*).
+
+   One name per destination. `Articles` is the label everywhere it is a name —
+   nav, footer, breadcrumb, the `BreadcrumbList` item, the index eyebrow, h1
+   and `<title>`. The checks, both of which must print nothing:
 
    ```
-   grep -c 'href="/guides/"' $(git ls-files '*.html' | xargs grep -l 'site-nav')
+   grep -rniE '\bguides?\b' --include='*.html' --include='*.txt' .
+   grep -rn 'href="/blog/"' --include='*.html' .
    ```
-2. **Every guide links to at least two other guides and at least one product
-   page** (`/clinics/` or the specimen). No guide is an orphan; the index lists
+
+2. **Every article links to at least two other articles and at least one product
+   page** (`/clinics/` or the specimen). No article is an orphan; the index lists
    all ten.
 3. **`FAQPage` only where the page really is questions and answers**, and the
    visible copy and the JSON-LD must be word-for-word identical — the same trap
    as the landing pages. This is for the assistants that read the markup to
    find an answer, not for a rich result.
 4. **A specimen figure never appears without its sample on the same screen.**
-   A guide quoting `716 of 1,506 characters` has to say, in the large type and
+   An article quoting `716 of 1,506 characters` has to say, in the large type and
    not in a footnote, that the specimen is a clinic we invented and two pages we
    built. Otherwise the number reads as an industry statistic, which it is not.
    The specimen's *method* — how each row was counted — is not restated in a
-   guide; the guide links to the specimen page, where it is published.
+   article; the article links to the specimen page, where it is published.
 
 ### Language
 
@@ -174,7 +197,7 @@ check, which must print nothing:
 ```
 grep -nE 'We rebuild|the rebuild we|One rebuild' \
   index.html clinics/index.html about/index.html \
-  guides/index.html guides/*/index.html
+  articles/index.html articles/*/index.html
 ```
 
 Two traps when editing this copy:
@@ -210,7 +233,7 @@ practices-per-city figure, no deadline, no countdown, no "this month only", no
 The rule reaches past the cap: **nothing anywhere on the site may manufacture
 urgency, and the price is stated one way only** — one build charge, one flat
 monthly rate. Never as a discount, an introductory rate, a founding-client rate,
-or a price that is about to rise. This applies to `/guides/` exactly as it
+or a price that is about to rise. This applies to `/articles/` exactly as it
 applies to the landing pages.
 
 Two checks. The first must print nothing:
@@ -266,10 +289,10 @@ and the first is the one that keeps the page honest:
    it whenever one does:
 
    ```
-   grep -rc '/sources/#ai-health' index.html clinics/index.html guides/*/index.html
+   grep -rc '/sources/#ai-health' index.html clinics/index.html articles/*/index.html
    ```
 
-   Run it the other way too, once a figure is cited from `/guides/`: for each
+   Run it the other way too, once a figure is cited from `/articles/`: for each
    anchor, the set of files that link it has to match the "Appears on" sentence
    in that anchor's entry. This prints every anchor with the pages that cite it,
    so the two can be read side by side:

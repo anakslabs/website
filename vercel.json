@@ -6,6 +6,8 @@
     { "source": "/products/:path+/", "destination": "/", "permanent": true },
     { "source": "/contact/", "destination": "/", "permanent": true },
     { "source": "/contact/:path+/", "destination": "/", "permanent": true },
+    { "source": "/guides/", "destination": "/articles/", "permanent": true },
+    { "source": "/guides/:path+/", "destination": "/articles/:path+/", "permanent": true },
     { "source": "/blog/hello/", "destination": "/", "permanent": true },
     { "source": "/blog/hello/:path+/", "destination": "/", "permanent": true }
   ]
