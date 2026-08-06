@@ -10,6 +10,22 @@
 - [Specimen rebuild](https://anakslabs.com/clinics/example/): One clinic homepage built twice, before and after, with the structural difference between the two measured on the page.
 - [Sources](https://anakslabs.com/sources/): Every figure that appears anywhere on this site, with its original source, its sample size, and the date we last checked the link.
 
+## Guides
+
+Ten guides written for one reader: the owner of a dental practice or clinic. Each one describes a symptom, says how to check for it without any tooling, and stops at the diagnosis — none of them contains repair instructions, because the repair is the service we sell. Every figure quoted in a guide is listed on the sources page above, and figures taken from our specimen say in the same paragraph that the specimen is a clinic we invented and two pages we wrote.
+
+- [Guides index](https://anakslabs.com/guides/): All ten, grouped into what changed, what machines receive, and the decisions a practice owner is being asked to make.
+- [01 — Your patients now ask AI first](https://anakslabs.com/guides/patients-ask-ai-first/): What two published surveys of US adults counted, what they did not count, and the three changes that reach a practice.
+- [02 — Ask an AI assistant about your practice](https://anakslabs.com/guides/ask-an-assistant-about-your-practice/): A ten-minute diagnostic, six kinds of answer, and the symptom each one points at.
+- [03 — Why the AI quotes your competitor, and not you](https://anakslabs.com/guides/why-the-ai-quotes-your-competitor/): Six things being left out of an answer is not, including a penalty and anything a competitor could buy.
+- [04 — Why a beautiful clinic website can be invisible to machines](https://anakslabs.com/guides/beautiful-but-invisible/): Design quality and machine readability are separate properties; the sixty sites already published as good examples were not spared.
+- [05 — The gap between what patients see and what machines receive](https://anakslabs.com/guides/what-patients-see-what-machines-receive/): The difference measured on a specimen clinic homepage we built both halves of, including the part of it we argue against ourselves.
+- [06 — What a machine can tell about your practice right now](https://anakslabs.com/guides/what-a-machine-can-tell-checklist/): Twelve checks a clinic owner can run from a phone, and what a no indicates in each case.
+- [07 — What monthly content actually does](https://anakslabs.com/guides/what-monthly-content-actually-does/): Three things publishing every month genuinely does, four it cannot, and the attribution problem stated plainly.
+- [08 — Redesign vs rebuild: what to check before you decide](https://anakslabs.com/guides/redesign-or-rebuild/): Six questions that separate two purchases sold under one word.
+- [09 — Counting inquiries, not people](https://anakslabs.com/guides/counting-inquiries-not-people/): What a clinic can measure without holding anything about who its visitors were, and six questions for whoever runs the site.
+- [10 — How to evaluate an agency's SEO claims](https://anakslabs.com/guides/evaluating-an-agency-seo-claims/): Nine questions with correct answers, and a worked example of a health statistic the industry quotes at roughly twice its real value.
+
 ## Contact
 
 - Email: contact@anakslabs.com

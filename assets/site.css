@@ -323,6 +323,17 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .post-list a:hover { transform: translateY(-2px); border-color: rgba(45,99,240,.28); }
 .post-list h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
 .post-list .meta { font-family: var(--mono); font-size: 12.5px; color: var(--gray-soft); }
+/* one-line summary under a post-list title (the guides index, "read next") */
+.post-list p { font-size: 14.5px; line-height: 1.6; color: var(--gray); margin-top: 5px; }
+.post-list p + .meta { margin-top: 10px; }
+
+/* breadcrumb above a guide's title — a <nav>, never a <p>, so the skip test
+   reads the page's argument and not its wayfinding */
+.crumb { font-family: var(--mono); font-size: 12.5px; letter-spacing: .02em; color: var(--gray-soft); margin-bottom: 14px; }
+.crumb a { color: var(--gray); text-decoration: none; border-bottom: 1px solid var(--line-2); }
+.crumb a:hover { color: var(--blue); border-color: rgba(45,99,240,.4); }
+.crumb span { padding: 0 6px; }
+
 .empty-state {
   border: 1px dashed var(--line-2); border-radius: 16px; padding: clamp(28px, 5vw, 48px);
   text-align: center; color: var(--gray); background: rgba(255,255,255,.3);
