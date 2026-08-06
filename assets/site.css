@@ -28,7 +28,12 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { color-scheme: light; }
-html, body { width: 100%; overflow-x: hidden; background: var(--bg); }
+/* No global overflow-x clip. It silently truncated anything wider than the
+   viewport instead of letting it scroll, which is fatal for charts and wide
+   tables at 375. The decorative .layer elements are position:fixed and cannot
+   overflow; .aurora clips its own blobs. Anything wide in the content column
+   scrolls inside its own wrapper (.scrollx) rather than being cut off here. */
+html, body { width: 100%; background: var(--bg); }
 
 body {
   min-height: 100dvh;
@@ -253,7 +258,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
   max-width: 58ch;
 }
 .lead b { color: var(--ink-2); font-weight: 500; }
-.section { padding: clamp(30px, 5.5vw, 60px) 0; }
+.section { padding: clamp(44px, 7.5vw, 84px) 0; }
 .section > h2 {
   font-size: clamp(20px, 3vw, 26px); font-weight: 600; letter-spacing: -0.01em;
   color: var(--ink-2); margin-bottom: clamp(16px, 2.4vw, 24px);
@@ -307,7 +312,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .card .card-cta { margin-top: 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
 /* ---- prose (notices / long text) ---- */
-.prose { max-width: 68ch; }
+.prose { max-width: 62ch; }
 .prose p { font-size: clamp(16px, 2.2vw, 18px); line-height: 1.75; color: var(--ink-2); margin: 0 0 1.1em; }
 .prose h2 { font-size: clamp(19px, 2.6vw, 24px); font-weight: 600; color: var(--ink); margin: 1.6em 0 .5em; letter-spacing: -0.01em; }
 .prose a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }

@@ -67,6 +67,7 @@ DEFAULT_PAGES = [
 STRIP = [
     (r"<head>.*?</head>", "head"),
     (r"<script.*?</script>", "scripts"),
+    (r"<svg.*?</svg>", "charts"),
     (r"<header.*?</header>", "site header"),
     (r"<footer.*?</footer>", "site footer"),
     (r'<p class="src">.*?</p>', ".src source lines"),
