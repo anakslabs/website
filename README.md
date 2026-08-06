@@ -95,6 +95,18 @@ name shown to readers stays `Anaks Labs`; `legalName` carries the `Inc.`
 | ------------- | ------------------------------------------------------ |
 | **not shown** | any address, the director's name, a registration number |
 
+The `Organization` node (`@id` `https://anakslabs.com/#org`) is **duplicated
+word-for-word in `index.html` and `about/index.html`** — same `@id`, same
+`description`. Changing the company description means editing both files in the
+same commit; one alone publishes two different answers to "what is Anaks Labs?".
+That description names **no vertical**: clinics is who we sell to today, not what
+the company is, so `for businesses` stays and the vertical framing lives only on
+`clinics/` and the specimen. The check, which must print two identical lines:
+
+```
+grep -ho '"description":"Anaks Labs Inc\.[^"]*"' index.html about/index.html
+```
+
 The address is omitted because the US one has not been supplied yet, not
 because it is secret. **Do not invent a placeholder address** — when the real
 one arrives it lands in the `footer-legal` line and a "Head office" row on
