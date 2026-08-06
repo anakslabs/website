@@ -1,6 +1,6 @@
 # Anaks Labs
 
-> Anaks Labs Inc. is an American software company. We build and operate an AI-powered website platform: sites are compiled, tested and monitored like software, and every page is engineered so that search engines and AI assistants can read, verify and quote it. Search engine optimization is the baseline; answer engine optimization (AEO) and generative engine optimization (GEO) are the product. One build charge, one flat monthly rate, and the finished site is sent before anything is signed.
+> Anaks Labs Inc. is an American software company. We build and operate an AI-powered website platform: sites are compiled, tested and monitored like software, and every page is engineered so that search engines and AI assistants can read, verify and quote it. Search engine optimization is the baseline; answer engine optimization (AEO) and generative engine optimization (GEO) are the product. We work by invitation and take a limited number of clients in each area: search results and AI answers are ranked lists, so optimizing competing businesses in the same neighborhood would mean competing against our own clients. One build charge, one flat monthly rate, and the finished site is sent before anything is signed.
 
 ## Pages
 
