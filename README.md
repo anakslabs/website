@@ -74,8 +74,18 @@ guide. "Here is how to put the text back" is a competitor's next brief.
 
 Four more rules specific to this section:
 
-1. **No root navigation entry.** The guides are reachable from the footer of
-   every page and from a link on `/clinics/`. The header nav stays at four items.
+1. **`Guides` is a header nav entry**, between `Clinics` and `About`, on every
+   page that has a header — matching the order the footer already used. This
+   reverses an earlier decision to keep the header at four items and leave the
+   guides to the footer: discoverability won. The footer link and the `/clinics/`
+   body link both stay; that duplication is conventional, not an error. On any
+   page under `/guides/`, index or article, the entry carries
+   `aria-current="page"` — section-level, the same way `/clinics/example/` marks
+   `Clinics`. The check, which must print the same count for both:
+
+   ```
+   grep -c 'href="/guides/"' $(git ls-files '*.html' | xargs grep -l 'site-nav')
+   ```
 2. **Every guide links to at least two other guides and at least one product
    page** (`/clinics/` or the specimen). No guide is an orphan; the index lists
    all ten.
