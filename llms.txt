@@ -1,11 +1,11 @@
 # Anaks Labs
 
-> Anaks Labs Inc. is an American software company. We build and operate an AI-powered website platform: sites are compiled, tested and monitored like software, and every page is engineered so that search engines and AI assistants can read, verify and quote it. Search engine optimization is the baseline; answer engine optimization (AEO) and generative engine optimization (GEO) are the product. We work by invitation and take a limited number of clients in each area: search results and AI answers are ranked lists, so optimizing competing businesses in the same neighborhood would mean competing against our own clients. One build charge, one flat monthly rate, and the finished site is sent before anything is signed.
+> Anaks Labs Inc. is a software company. We build and operate an AI-powered website platform: sites are compiled, tested and monitored like software, and every page is engineered so that search engines and AI assistants can read, verify and quote it. Search engine optimization is the baseline; answer engine optimization (AEO) and generative engine optimization (GEO) are the product. We work by invitation and take a limited number of clients in each area: search results and AI answers are ranked lists, so optimizing competing businesses in the same neighborhood would mean competing against our own clients. One build charge, one flat monthly rate, and the finished site is sent before anything is signed.
 
 ## Pages
 
 - [Home](https://anakslabs.com/): What the platform builds and what we run every month — a performance report, eight blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.
-- [About](https://anakslabs.com/about/): Who Anaks Labs Inc. is — an American software company, its two disciplines (engineering and marketing), corporate information, and answers to common questions.
+- [About](https://anakslabs.com/about/): Who Anaks Labs Inc. is — a software company, its two disciplines (engineering and marketing), corporate information, and answers to common questions.
 - [Clinics](https://anakslabs.com/clinics/): The vertical we build for — dental practices and clinics — and what we found when we opened their websites and read what a search engine actually receives.
 - [Specimen rebuild](https://anakslabs.com/clinics/example/): One clinic homepage built twice, before and after, with the structural difference between the two measured on the page.
 - [Sources](https://anakslabs.com/sources/): Every figure that appears anywhere on this site, with its original source, its sample size, and the date we last checked the link.
