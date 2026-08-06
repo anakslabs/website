@@ -31,12 +31,29 @@ from pathlib import Path
 
 # Pages that carry an argument. The specimen builds are excluded on purpose:
 # they are artefacts being measured, not pages making a case.
+#
+# Every guide is listed here by hand rather than globbed. A glob would quietly
+# start passing the day a guide is added, and this list is the record of which
+# pages are meant to survive being skimmed — a new guide has to be put on it
+# deliberately, and running this script with no arguments has to cover all of
+# them. Do not replace the guide entries with a directory scan.
 DEFAULT_PAGES = [
     "index.html",
     "clinics/index.html",
     "clinics/example/index.html",
     "sources/index.html",
     "about/index.html",
+    "guides/index.html",
+    "guides/patients-ask-ai-first/index.html",
+    "guides/ask-an-assistant-about-your-practice/index.html",
+    "guides/why-the-ai-quotes-your-competitor/index.html",
+    "guides/beautiful-but-invisible/index.html",
+    "guides/what-patients-see-what-machines-receive/index.html",
+    "guides/what-a-machine-can-tell-checklist/index.html",
+    "guides/what-monthly-content-actually-does/index.html",
+    "guides/redesign-or-rebuild/index.html",
+    "guides/counting-inquiries-not-people/index.html",
+    "guides/evaluating-an-agency-seo-claims/index.html",
 ]
 
 # The small-print layer, in the order it has to come out.

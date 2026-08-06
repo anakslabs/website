@@ -9,6 +9,7 @@ The whole site inherits one design system from `assets/site.css` + `assets/site.
 index.html            Root — English product landing, industry-neutral
 clinics/index.html    Clinics vertical — the audit findings and the clinic offer
 clinics/example/      Specimen rebuild — two builds of one fictional clinic, and the diff
+guides/               Ten guides for practice owners — symptoms and checks, never recipes
 about/index.html      Company and corporate information
 assets/site.css       Shared styles (design tokens, layers, header/footer, cards, landing)
 assets/site.js        Shared JS (year stamp, particles, mobile nav, tabs, scroll reveal)
@@ -58,6 +59,36 @@ Three rules hold this page up, and none of them is cosmetic:
 3. **Both builds are `noindex, nofollow`.** A fictional dental practice must
    never turn up in a search result. Only `clinics/example/` itself is
    indexable and in the sitemap.
+
+### The guides (`/guides/`)
+
+Ten articles written for the same single reader as the rest of the site: the
+practice owner. They exist because that reader searches, and because an
+assistant asked about clinic websites has to find something of ours to read.
+
+They are held to one line, and it is the same line the mechanism copy is held
+to: **a guide names the symptom, tells the reader how to check for it, and
+stops.** Not one sentence of any guide says how to fix anything — the fixing is
+the product. "Your headline may be a picture, and here is how to tell" is a
+guide. "Here is how to put the text back" is a competitor's next brief.
+
+Four more rules specific to this section:
+
+1. **No root navigation entry.** The guides are reachable from the footer of
+   every page and from a link on `/clinics/`. The header nav stays at four items.
+2. **Every guide links to at least two other guides and at least one product
+   page** (`/clinics/` or the specimen). No guide is an orphan; the index lists
+   all ten.
+3. **`FAQPage` only where the page really is questions and answers**, and the
+   visible copy and the JSON-LD must be word-for-word identical — the same trap
+   as the landing pages. This is for the assistants that read the markup to
+   find an answer, not for a rich result.
+4. **A specimen figure never appears without its sample on the same screen.**
+   A guide quoting `716 of 1,506 characters` has to say, in the large type and
+   not in a footnote, that the specimen is a clinic we invented and two pages we
+   built. Otherwise the number reads as an industry statistic, which it is not.
+   The specimen's *method* — how each row was counted — is not restated in a
+   guide; the guide links to the specimen page, where it is published.
 
 ### Language
 
@@ -131,7 +162,9 @@ because there was a site to start from — the word is correct and stays. The
 check, which must print nothing:
 
 ```
-grep -nE 'We rebuild|the rebuild we|One rebuild' index.html clinics/index.html about/index.html
+grep -nE 'We rebuild|the rebuild we|One rebuild' \
+  index.html clinics/index.html about/index.html \
+  guides/index.html guides/*/index.html
 ```
 
 Two traps when editing this copy:
@@ -141,6 +174,57 @@ Two traps when editing this copy:
   changing one alone publishes structured data that contradicts the page.
 - **The root stays industry-neutral.** Its "How do we start?" answer says
   *your business*; the clinics page says *your practice*. Do not unify them.
+
+### No numbers in the cap
+
+We take clients by invitation and we cap how many we take in each area. Both
+landing pages carry that as a section, and each one is preceded by a comment
+saying what it is: **the cap is a condition of the work, not an offer that
+expires.** Search results and AI answers are ranked lists, so two competing
+practices in one neighbourhood cannot both be optimized by us. That is a fact
+about the job. It is not a lever.
+
+So **no page may put a number on it.** No seat count, no places remaining, no
+practices-per-city figure, no deadline, no countdown, no "this month only", no
+"applications close". The reason is not taste:
+
+- A number turns a real constraint into manufactured scarcity, and a reader who
+  catches one manufactured claim is right to discount the rest of the page.
+- It would be the only claim on this site with nothing behind it. Every survey
+  figure links to its publication and every figure of ours carries its sample —
+  see *Figures, sources and the small-print layer* below. "Four spots left" has
+  no sample and no link, because there is nothing to link to.
+- It goes stale the day after it is written, and a stale scarcity line is worse
+  than no line at all.
+
+The rule reaches past the cap: **nothing anywhere on the site may manufacture
+urgency, and the price is stated one way only** — one build charge, one flat
+monthly rate. Never as a discount, an introductory rate, a founding-client rate,
+or a price that is about to rise. This applies to `/guides/` exactly as it
+applies to the landing pages.
+
+Two checks. The first must print nothing:
+
+```
+grep -rniE 'limited time|spots? (left|remaining|available)|seats? (left|remaining|available)|only [0-9]+ (left|remaining|spots|seats|places|clients|practices)|[0-9]+ (spots|seats|slots|places) (left|remaining|available)|act (now|fast)|hurry|while supplies last|offer (ends|expires)|applications close|price (goes|is going) up|introductory (rate|price)|founding (client|member)' \
+  --include='*.html' .
+```
+
+The second reads the cap sections back and must also print nothing — the
+sections that describe the cap are the ones a number would be smuggled into, so
+they are held to containing no digit at all:
+
+```
+python3 - <<'EOF'
+import pathlib, re
+for p in ['index.html', 'clinics/index.html']:
+    body = pathlib.Path(p).read_text(encoding='utf-8')
+    m = re.search(r'id="invitation".*?</section>', body, re.S)
+    text = re.sub(r'<[^>]+>', ' ', m.group(0)) if m else ''
+    if re.search(r'[0-9]', text):
+        print(p, '— a digit appeared in the cap section:', ' '.join(text.split()))
+EOF
+```
 
 ### Verticals
 
@@ -172,7 +256,25 @@ and the first is the one that keeps the page honest:
    it whenever one does:
 
    ```
-   grep -c '/sources/#ai-health' index.html clinics/index.html
+   grep -rc '/sources/#ai-health' index.html clinics/index.html guides/*/index.html
+   ```
+
+   Run it the other way too, once a figure is cited from `/guides/`: for each
+   anchor, the set of files that link it has to match the "Appears on" sentence
+   in that anchor's entry. This prints every anchor with the pages that cite it,
+   so the two can be read side by side:
+
+   ```
+   python3 - <<'EOF'
+   import pathlib, re, collections
+   hits = collections.defaultdict(list)
+   for p in sorted(pathlib.Path('.').glob('**/index.html')):
+       if '.claude' in p.parts: continue
+       for a in set(re.findall(r'/sources/#([a-z-]+)', p.read_text(encoding='utf-8'))):
+           hits[a].append(str(p))
+   for a in sorted(hits):
+       print(f'{a:22} {", ".join(sorted(hits[a]))}')
+   EOF
    ```
 
 3. **The small print is evidence, not a second reader.** There is one reader:
