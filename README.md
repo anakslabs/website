@@ -344,6 +344,10 @@ the published figures: `3 of 5`, `17 of 17`, `2 of 5`, `0 of 17`,
 `716 of 1,506`, `2,629 of 2,629`, all reproduced exactly. It also produces the
 `878` that `/sources/` records as a derived value.
 
+`tools/` is internal enforcement tooling and is excluded from the deployment by
+`.vercelignore` — restoring the script put it back on a public URL, because this
+repo is served as-is, and the measurement method is not published.
+
 Two invariants hold across all sixteen pages and are the point of measuring:
 **no page injects body text by script** (delivered characters equal rendered
 characters everywhere), and **no heading is shipped as a picture**. Those are

@@ -1,0 +1,8 @@
+# Files kept in the repo but never uploaded to the deployment.
+#
+# tools/ is internal enforcement tooling. The measurement method is not
+# published. Restoring measure-specimen.py so the README's rule stayed
+# enforceable also put it back on a public URL — /tools/measure-specimen.py
+# and /tools/baseline.json both answered 200 — because this repo is served
+# as-is. The repo keeps the scripts; the deployment does not get them.
+tools/
