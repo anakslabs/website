@@ -337,6 +337,59 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .post-list p + .meta { margin-top: 10px; }
 
 /* =========================================================================
+   Article tables. Four articles were already tables pretending to be prose:
+   a heading plus a 40-80 word paragraph, repeated six or twelve times, where
+   the paragraph was really one cell. These are real <table> elements — the
+   first on the site — because skip-test now extracts th and td, so the
+   content stays inside the editorial check rather than disappearing from it.
+
+   The right-hand column states a symptom and stops. It never states a repair;
+   that is the same line the mechanism copy is held to, and a table makes it
+   easier than usual to cross.
+   ========================================================================= */
+.tbl {
+  width: 100%; border-collapse: collapse; text-align: left;
+  margin: clamp(18px, 2.6vw, 26px) 0 0;
+}
+.tbl th {
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--gray-soft);
+  padding: 0 22px 10px 0; vertical-align: bottom; border-bottom: 1px solid var(--line-2);
+}
+.tbl th:last-child, .tbl td:last-child { padding-right: 0; }
+.tbl td {
+  padding: 16px 22px 16px 0; vertical-align: top;
+  font-size: clamp(15px, 2vw, 16.5px); line-height: 1.6; color: var(--gray);
+  border-top: 1px solid var(--line);
+}
+.tbl tbody tr:first-child td { border-top: none; }
+.tbl td:first-child { color: var(--ink); font-weight: 500; }
+.tbl td a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.tbl .src { margin-top: 10px; padding-top: 9px; }
+/* two-column tables give the prose column the room */
+.tbl.two col.k { width: 38%; }
+.tbl.three col.k { width: 30%; }
+
+/* At 375 a multi-column table of sentences is unreadable, and side-scrolling
+   prose is worse than stacking it. Rows become blocks and each cell announces
+   its own column; th/td stay in the DOM, so the checker still reads a table. */
+@media (max-width: 700px) {
+  .tbl, .tbl tbody, .tbl tr, .tbl td { display: block; width: 100%; }
+  .tbl thead { display: none; }
+  .tbl colgroup { display: none; }
+  .tbl tr { padding: 18px 0; border-top: 1px solid var(--line); }
+  .tbl tbody tr:first-child { border-top: none; padding-top: 4px; }
+  .tbl td { border: none; padding: 0 0 10px; }
+  .tbl td:last-child { padding-bottom: 0; }
+  .tbl td[data-th]::before {
+    content: attr(data-th) ""; display: block; margin-bottom: 5px;
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--gray-soft);
+  }
+  .tbl td:first-child[data-th]::before { color: var(--blue); }
+}
+
+/* =========================================================================
    Charts. Inline SVG, no library and no script: the numbers are real <text>
    nodes, so they are selectable, searchable and readable to anything that
    parses the page. Every figure restates a number the sentence already made —
