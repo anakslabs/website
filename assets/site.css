@@ -336,6 +336,55 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .post-list p { font-size: 14.5px; line-height: 1.6; color: var(--gray); margin-top: 5px; }
 .post-list p + .meta { margin-top: 10px; }
 
+/* =========================================================================
+   Charts. Inline SVG, no library and no script: the numbers are real <text>
+   nodes, so they are selectable, searchable and readable to anything that
+   parses the page. Every figure restates a number the sentence already made —
+   skip-test strips <svg> for exactly that reason, and the large-type readback
+   has to come out byte-identical with the charts in.
+
+   Rules the markup enforces: the scale starts at zero and its maximum is
+   printed in the figure; every bar carries the population it describes; and
+   no chart mixes two questions. A figure that needs two populations (two
+   sample groups, two years) says so on each bar.
+   ========================================================================= */
+/* One measure for charts and prose. Without the cap a figure in a full-width
+   container stretches past the text column it belongs to. */
+.chart { margin: clamp(26px, 3.6vw, 38px) 0; max-width: 62ch; }
+/* .mech li is a 22ch/1fr grid — a figure dropped in as a third child lands in
+   the 22ch label column, which is narrower than any chart. Span both. */
+.mech li .chart { grid-column: 1 / -1; }
+.chart-head { display: block; margin-bottom: 14px; }
+.chart-title {
+  display: block; font-size: clamp(15px, 2vw, 16.5px); font-weight: 600;
+  letter-spacing: -0.01em; line-height: 1.4; color: var(--ink); max-width: 46ch;
+}
+.chart-unit {
+  display: block; margin-top: 4px; font-family: var(--mono); font-size: 11px;
+  font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--gray-soft);
+}
+/* wide content scrolls in its own wrapper — this is what replaced the global
+   overflow-x: hidden, so a figure narrower than its content is never cut off */
+.scrollx { overflow-x: auto; overscroll-behavior-x: contain; }
+.chart svg { display: block; width: 100%; max-width: 100%; height: auto; min-width: 300px; }
+.chart .src { margin-top: 14px; }
+
+.c-track { fill: rgba(20, 26, 58, .07); }
+.c-fill  { fill: var(--blue); }
+/* how much that build had to give, when it differs from the axis maximum */
+.c-cap   { fill: rgba(20, 26, 58, .14); }
+.c-fill.alt { fill: var(--gray-soft); }
+.c-axis  { stroke: var(--line-2); stroke-width: 1; }
+.chart svg text { font-family: var(--sans); }
+.c-lab {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: .09em; text-transform: uppercase; fill: var(--gray-soft);
+}
+.c-val { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; fill: var(--ink); }
+.c-val.on { fill: #fff; }
+.c-tick { font-family: var(--mono); font-size: 10.5px; letter-spacing: .08em; fill: var(--gray-soft); }
+.c-note { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; fill: var(--gray-soft); }
+
 /* breadcrumb above an article's title — a <nav>, never a <p>, so the skip test
    reads the page's argument and not its wayfinding */
 .crumb { font-family: var(--mono); font-size: 12.5px; letter-spacing: .02em; color: var(--gray-soft); margin-bottom: 14px; }

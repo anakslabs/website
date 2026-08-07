@@ -67,6 +67,7 @@ DEFAULT_PAGES = [
 STRIP = [
     (r"<head>.*?</head>", "head"),
     (r"<script.*?</script>", "scripts"),
+    (r'<figure class="chart".*?</figure>', "chart figures"),
     (r"<svg.*?</svg>", "charts"),
     (r"<header.*?</header>", "site header"),
     (r"<footer.*?</footer>", "site footer"),
