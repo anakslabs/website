@@ -369,6 +369,20 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .chart svg { display: block; width: 100%; max-width: 100%; height: auto; min-width: 300px; }
 .chart .src { margin-top: 14px; }
 
+/* Compact bar. For a figure already carried by large type on a landing page
+   or a diff row, where a whole <figure> would be louder than the number. It is
+   a <span>, so it is valid inside a <p>; it holds no text, so the skip test
+   never sees it. Scale is always 0-100% of the stated base — same rule as the
+   SVG charts, just without the axis furniture. */
+.cbar {
+  display: block; margin-top: 12px; height: 7px; max-width: 30ch;
+  border-radius: 4px; background: rgba(20, 26, 58, .07); overflow: hidden;
+}
+.cbar > i { display: block; height: 100%; border-radius: 4px; background: var(--blue); }
+.cbar.alt > i { background: var(--gray-soft); }
+.diff-val .cbar { margin-top: 9px; max-width: 100%; }
+.fig .cbar, .stat .cbar { max-width: 26ch; }
+
 .c-track { fill: rgba(20, 26, 58, .07); }
 .c-fill  { fill: var(--blue); }
 /* how much that build had to give, when it differs from the axis maximum */
