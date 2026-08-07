@@ -330,6 +330,50 @@ and the first is the one that keeps the page honest:
    python3 tools/skip-test.py            # prints large type only, per page
    ```
 
+### Measuring ourselves
+
+`tools/measure-specimen.py` counts what a page hands a crawler before anything
+runs. It produced the five numbers in the specimen diff panel, and it is also
+pointed at this site. `tools/baseline.json` holds the result, page by page.
+
+The tool was deleted from the repo in `3fc2b8b`, a copy commit, while three
+places in this file still cited it as the authority for the specimen's
+published figures — which made the rule "a number on that page that the script
+does not reproduce is a defect" unenforceable. Restored, and re-checked against
+the published figures: `3 of 5`, `17 of 17`, `2 of 5`, `0 of 17`,
+`716 of 1,506`, `2,629 of 2,629`, all reproduced exactly. It also produces the
+`878` that `/sources/` records as a derived value.
+
+Two invariants hold across all sixteen pages and are the point of measuring:
+**no page injects body text by script** (delivered characters equal rendered
+characters everywhere), and **no heading is shipped as a picture**. Those are
+the two defects the clinics page and the specimen exist to expose. We check
+that we do not have them.
+
+The gate has a direction, and getting it backwards makes it useless:
+
+```
+gated      adding film, stills or motion markup must not reduce any page's
+           delivered characters by one. Compare inside the commit that adds
+           the asset.
+
+not gated  copy edits that shorten text. P0 turned four articles from prose
+           into tables on purpose, and the count fell because the writing got
+           tighter. Reset the baseline and record why.
+```
+
+That separation only survives if **a commit never mixes a copy change with an
+asset change**. Regenerate after any copy commit:
+
+```
+python3 - <<'EOF'
+import importlib.util, json
+spec = importlib.util.spec_from_file_location("ms", "tools/measure-specimen.py")
+ms = importlib.util.module_from_spec(spec); spec.loader.exec_module(ms)
+print(ms.measure(ms.load("index.html"))["body_text_chars"])
+EOF
+```
+
 ### Visual assets — the honesty test, written before we have any
 
 This section exists before a single frame does, on purpose. A rule written

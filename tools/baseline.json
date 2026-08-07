@@ -1,0 +1,218 @@
+{
+  "generated": "2026-08-07",
+  "commit": "83673d9",
+  "tool": "tools/measure-specimen.py",
+  "measures": "Characters of body text each page hands a crawler before anything runs, plus how many of its headings are readable rather than pictures.",
+  "why_this_is_a_reset": "P0 rewrote four articles from prose into tables, which compresses sentences deliberately. A copy edit that shortens text is not a regression, so the baseline restarts here instead of being gated against the pre-P0 numbers.",
+  "the_gate": "Adding film, stills or motion markup must not reduce any delivered_chars by a single character. Compare inside the commit that adds the asset. Copy commits and asset commits are never mixed, which is what keeps this separable.",
+  "site_total_delivered_chars": 111175,
+  "pages": {
+    "index.html": {
+      "delivered_chars": 7517,
+      "visible_chars": 7517,
+      "script_injected_chars": 0,
+      "headings_readable": 29,
+      "headings_total": 29,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Service",
+        "FAQPage"
+      ]
+    },
+    "clinics/index.html": {
+      "delivered_chars": 8233,
+      "visible_chars": 8233,
+      "script_injected_chars": 0,
+      "headings_readable": 21,
+      "headings_total": 21,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Service",
+        "FAQPage"
+      ]
+    },
+    "clinics/example/index.html": {
+      "delivered_chars": 7238,
+      "visible_chars": 7238,
+      "script_injected_chars": 0,
+      "headings_readable": 10,
+      "headings_total": 10,
+      "headings_as_image": 0,
+      "structured_data": [
+        "WebPage"
+      ]
+    },
+    "sources/index.html": {
+      "delivered_chars": 13367,
+      "visible_chars": 13367,
+      "script_injected_chars": 0,
+      "headings_readable": 7,
+      "headings_total": 7,
+      "headings_as_image": 0,
+      "structured_data": [
+        "WebPage"
+      ]
+    },
+    "about/index.html": {
+      "delivered_chars": 2663,
+      "visible_chars": 2663,
+      "script_injected_chars": 0,
+      "headings_readable": 13,
+      "headings_total": 13,
+      "headings_as_image": 0,
+      "structured_data": [
+        "AboutPage",
+        "Organization",
+        "FAQPage"
+      ]
+    },
+    "articles/index.html": {
+      "delivered_chars": 3957,
+      "visible_chars": 3957,
+      "script_injected_chars": 0,
+      "headings_readable": 16,
+      "headings_total": 16,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "CollectionPage",
+        "ItemList",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/ask-an-assistant-about-your-practice/index.html": {
+      "delivered_chars": 7271,
+      "visible_chars": 7271,
+      "script_injected_chars": 0,
+      "headings_readable": 19,
+      "headings_total": 19,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "FAQPage",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/beautiful-but-invisible/index.html": {
+      "delivered_chars": 7091,
+      "visible_chars": 7091,
+      "script_injected_chars": 0,
+      "headings_readable": 14,
+      "headings_total": 14,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/counting-inquiries-not-people/index.html": {
+      "delivered_chars": 6030,
+      "visible_chars": 6030,
+      "script_injected_chars": 0,
+      "headings_readable": 21,
+      "headings_total": 21,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/evaluating-an-agency-seo-claims/index.html": {
+      "delivered_chars": 7329,
+      "visible_chars": 7329,
+      "script_injected_chars": 0,
+      "headings_readable": 23,
+      "headings_total": 23,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "FAQPage",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/patients-ask-ai-first/index.html": {
+      "delivered_chars": 8155,
+      "visible_chars": 8155,
+      "script_injected_chars": 0,
+      "headings_readable": 19,
+      "headings_total": 19,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/redesign-or-rebuild/index.html": {
+      "delivered_chars": 6732,
+      "visible_chars": 6732,
+      "script_injected_chars": 0,
+      "headings_readable": 10,
+      "headings_total": 10,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/what-a-machine-can-tell-checklist/index.html": {
+      "delivered_chars": 6419,
+      "visible_chars": 6419,
+      "script_injected_chars": 0,
+      "headings_readable": 10,
+      "headings_total": 10,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/what-monthly-content-actually-does/index.html": {
+      "delivered_chars": 6136,
+      "visible_chars": 6136,
+      "script_injected_chars": 0,
+      "headings_readable": 19,
+      "headings_total": 19,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "FAQPage",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/what-patients-see-what-machines-receive/index.html": {
+      "delivered_chars": 6338,
+      "visible_chars": 6338,
+      "script_injected_chars": 0,
+      "headings_readable": 14,
+      "headings_total": 14,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "BreadcrumbList"
+      ]
+    },
+    "articles/why-the-ai-quotes-your-competitor/index.html": {
+      "delivered_chars": 6699,
+      "visible_chars": 6699,
+      "script_injected_chars": 0,
+      "headings_readable": 19,
+      "headings_total": 19,
+      "headings_as_image": 0,
+      "structured_data": [
+        "Organization",
+        "Article",
+        "BreadcrumbList"
+      ]
+    }
+  }
+}
