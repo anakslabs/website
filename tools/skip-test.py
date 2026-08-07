@@ -64,11 +64,17 @@ DEFAULT_PAGES = [
 # figure, they are part of the claim, and stripping them would fake a failure by
 # leaving a percentage with nothing to be a percentage of. Only the <small>
 # inside a .diff-metric is evidence: it says what was counted.
+# Everything that moves and everything that is drawn comes off before the
+# argument is read back. A chart, a film, the node canvas and a background
+# still are all restatements of a sentence that has to stand without them.
 STRIP = [
     (r"<head>.*?</head>", "head"),
     (r"<script.*?</script>", "scripts"),
     (r'<figure class="chart".*?</figure>', "chart figures"),
     (r"<svg.*?</svg>", "charts"),
+    (r"<video.*?</video>", "walkthrough film"),
+    (r"<canvas.*?</canvas>", "node constellation"),
+    (r'<img[^>]*class="[^"]*\bstill\b[^"]*"[^>]*>', "background stills"),
     (r"<header.*?</header>", "site header"),
     (r"<footer.*?</footer>", "site footer"),
     (r'<p class="src">.*?</p>', ".src source lines"),
@@ -76,7 +82,8 @@ STRIP = [
     (r'(<p class="diff-metric">[^<]*)<small>.*?</small>', ".diff-metric definitions"),
 ]
 
-INDENT = {"h1": "H1   ", "h2": "H2   ", "h3": "  h3 ", "p": "     ", "li": "   · "}
+INDENT = {"h1": "H1   ", "h2": "H2   ", "h3": "  h3 ", "p": "     ", "li": "   · ",
+          "th": "  |= ", "td": "   | "}
 
 
 def large_type(markup: str) -> list[tuple[str, str]]:
@@ -93,7 +100,7 @@ def large_type(markup: str) -> list[tuple[str, str]]:
             "Fix the pattern in STRIP before trusting this output."
         )
     out: list[tuple[str, str]] = []
-    for m in re.finditer(r"<(h1|h2|h3|p|li)\b[^>]*>(.*?)</\1>", markup, re.S):
+    for m in re.finditer(r"<(h1|h2|h3|p|li|th|td)\b[^>]*>(.*?)</\1>", markup, re.S):
         tag = m.group(1)
         text = html.unescape(re.sub(r"<[^>]+>", "", m.group(2)))
         text = re.sub(r"\s+", " ", text).strip()
