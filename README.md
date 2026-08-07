@@ -330,6 +330,58 @@ and the first is the one that keeps the page honest:
    python3 tools/skip-test.py            # prints large type only, per page
    ```
 
+### Visual assets — the honesty test, written before we have any
+
+This section exists before a single frame does, on purpose. A rule written
+after the asset is finished is not a rule, it is a justification.
+
+We sell machine-readable websites to clinics and we tell those clinics not to
+dress a page in imagery that implies something the practice does not have. The
+same standard binds us, and it needs a decidable test rather than good
+intentions:
+
+> **Would this asset lead a viewer to believe that some specific real place,
+> object, person or event exists?** If yes, it does not ship. No exceptions for
+> "it is obviously stylised" or "nobody would think that".
+
+That test is deliberately about *belief*, not about technique. It permits
+diagram and metaphor, which cannot be mistaken for a record of something, and
+it forbids the photoreal — an interior that reads as a real clinic, a face that
+reads as a real patient, a screenshot that reads as a real site. A rendered
+corridor standing for "a page a machine can walk through" is a figure of
+speech. A rendered waiting room is a claim about a room.
+
+Five rules follow from it, and they apply to film, stills, and anything else
+generated:
+
+1. **No real place, object, person or event may be implied.** Including our own
+   offices, our own team, and any clinic. If we ever show a client's work it is
+   their real site, with their permission, and it is labelled as theirs.
+2. **No text and no numerals inside a visual asset.** Every character on this
+   site is in the HTML, where a machine can read it. A number burned into a
+   frame is the exact defect the specimen page exists to expose.
+3. **Nothing generated may be presented as a record.** No fabricated
+   screenshots, dashboards, testimonials, logos, certificates or awards, and no
+   invented statistic on a chart. Figures come from `/sources/` or they do not
+   appear.
+4. **No visual dramatisation of scarcity or urgency.** The cap on clients per
+   area is a condition of the work and carries no number anywhere (see *No
+   numbers in the cap*). It does not acquire a countdown, a filling meter or a
+   thinning crowd because it moved from prose into a picture. What is forbidden
+   in words is forbidden in pixels.
+5. **Strip everything that moves and everything that is drawn, and the argument
+   still closes.** Charts, films, canvases and background stills are all
+   restatements of a sentence that must stand alone. This is the same rule as
+   the skip test and it exists for the same reason; `tools/skip-test.py`
+   enforces it by removing all of them before reading the page back.
+
+The palette constraint is not decoration either: assets use the eight `:root`
+values in `assets/site.css` and introduce no new colour. A house style that
+cannot be produced from the stylesheet is a second brand.
+
+If an asset fails any of the five, it is not fixed by adding a disclaimer. It
+is not made.
+
 ### Removed pages
 
 `products/`, `contact/` and `blog/hello/` were Korean pages retired when the
