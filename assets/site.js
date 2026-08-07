@@ -98,12 +98,39 @@
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
-      if (!still && !reduce) requestAnimationFrame(function () { step(false); });
+      if (!still && !reduce && running) requestAnimationFrame(function () { step(false); });
     }
+
+    /* Visibility guard. The loop computes every node pair every frame — 88
+       nodes at 1920x1080 is 3,828 distance checks per frame — and it used to
+       recurse forever, including in a background tab, on every page.
+
+       The guard is document.hidden and nothing else, deliberately. The obvious
+       addition would be an IntersectionObserver, and it would be dead code:
+       #net is a .layer, position:fixed inset:0, so it intersects the viewport
+       at every scroll position by construction. Measured before writing this —
+       an observer on it reports intersecting after scrolling 12,000px. A guard
+       that can never fire is worse than no guard, because it reads like
+       protection.
+
+       Nothing about the animation changes. It stops when the tab is not being
+       looked at and resumes from the same node positions.
+
+       Deliberately narrow: this canvas is the circuit motif from the logo, so
+       whether it stays at all is a design decision, not a performance one. */
+    var running = false;
+    function pump() {
+      var want = !document.hidden && !reduce;
+      if (want === running) return;
+      running = want;
+      if (running) step(false);          /* resumes from the current node state */
+    }
+    document.addEventListener("visibilitychange", pump);
+
     var rt;
     window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(resize, 180); });
     resize();
-    if (!reduce) step(false);
+    pump();
   })();
 
   /* ---- before/after viewer (/clinics/example/ only).
