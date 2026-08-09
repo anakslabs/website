@@ -26,10 +26,26 @@ check () {  # label expected actual
   else printf "  FAIL  %-42s got %s, wanted %s\n" "$1" "$3" "$2"; fails=$((fails+1)); fi
 }
 
+# Deliberately no -L. Following the redirect on a protected preview lands on
+# an SSO login page that answers 200, and reporting that as "the page is up"
+# is exactly the mistake this script exists to prevent: it once passed six
+# paths green while none of them were reachable.
 echo "== pages reachable ($SITE)"
-for p in / /clinics/ /contact/ /about/ /sources/ /articles/; do
+for p in / /clinics/ /contact/ /about/ /sources/ /articles/ /check/; do
   check "$p" 200 "$(curl -s -o /dev/null -w '%{http_code}' "$SITE$p")"
 done
+
+# A status code says a response arrived, not that it is the page we shipped.
+echo "== the page that arrived is ours"
+expect_text () {  # path needle label
+  if curl -s "$SITE$1" | grep -qF "$2"; then printf "  ok    %-42s %s\n" "$3" "found"
+  else printf "  FAIL  %-42s %s\n" "$3" "missing: $2"; fails=$((fails+1)); fi
+}
+expect_text /          'Build from $990. Then $1,490 a month.' "home carries both figures"
+expect_text /          'See your site first'                   "home CTA"
+expect_text /check/    'id="check-form"'                       "check page has the form"
+expect_text /clinics/  'One practice per area'                 "clinics states the cap"
+expect_text /contact/  'id="contact-form"'                     "contact page has the form"
 
 echo "== no mailto left in the shipped HTML"
 # Only our own address matters; the specimen clinic keeps its own on purpose.
