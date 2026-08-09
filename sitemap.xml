@@ -16,6 +16,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://anakslabs.com/check/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://anakslabs.com/clinics/example/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
