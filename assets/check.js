@@ -21,10 +21,12 @@
   var status = document.getElementById('check-status');
   var button = document.getElementById('check-submit');
   var panel = document.getElementById('result');
+  var after = document.getElementById('after');
   var lead = document.getElementById('result-lead');
   var list = document.getElementById('result-findings');
   var score = document.getElementById('result-score');
   var running = false;
+  var lastUrl = '';
 
   function say(message, kind) {
     status.textContent = message;
@@ -72,6 +74,12 @@
       '. The numbers are a summary of the lines above, not a verdict on your practice.';
 
     panel.hidden = false;
+    // The offer only appears once there is evidence above it to justify it.
+    if (after) {
+      after.hidden = false;
+      var site = document.getElementById('r-site');
+      if (site && !site.value) site.value = lastUrl;   // they typed it once already
+    }
     panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -80,6 +88,7 @@
     if (running) return;
 
     var url = normalise(form.elements.url.value);
+    lastUrl = url;
     if (!url) return say('Put your address in first.', 'error');
 
     running = true;
@@ -116,4 +125,54 @@
         button.disabled = false;
       });
   });
+
+  /* The rebuild request. Same endpoint as /contact/ — one inbox, whichever
+     door they came through — but posted from under the result so the address
+     is already known and the ask follows the evidence. */
+  var rform = document.getElementById('rebuild-form');
+  if (rform) {
+    var rstatus = document.getElementById('rebuild-status');
+    var rbutton = document.getElementById('rebuild-submit');
+    var rsending = false;
+    rform.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (rsending) return;
+      var site = rform.elements.site.value.trim();
+      var email = rform.elements.email.value.trim();
+      if (!site) { rstatus.textContent = 'Tell us your website first.'; rstatus.className = 'form-status is-error'; return; }
+      if (!email || email.indexOf('@') < 1) { rstatus.textContent = 'We need an address to send the site to.'; rstatus.className = 'form-status is-error'; return; }
+      rsending = true; rbutton.disabled = true;
+      rstatus.textContent = 'Sending…'; rstatus.className = 'form-status';
+      fetch('https://preview.anakslabs.com/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          site: site, email: email,
+          note: rform.elements.note.value.trim(),
+          company: rform.elements.company.value,
+          source: 'check'
+        })
+      })
+        .then(function (r) {
+          if (r.ok) {
+            rform.reset();
+            rstatus.textContent = 'We reply with the finished site, not a sales call.';
+            rstatus.className = 'form-status is-ok';
+            if (window.va) window.va('event', { name: 'rebuild_request' });
+            return;
+          }
+          if (r.status === 429) {
+            rstatus.textContent = 'That is a lot of requests from here. Try again in a few minutes.';
+            rstatus.className = 'form-status is-error';
+            return;
+          }
+          throw new Error('HTTP ' + r.status);
+        })
+        .catch(function () {
+          rstatus.textContent = 'That did not go through. Write to contact@anakslabs.com and we will pick it up there.';
+          rstatus.className = 'form-status is-error';
+        })
+        .then(function () { rsending = false; rbutton.disabled = false; });
+    });
+  }
 })();

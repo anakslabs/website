@@ -84,16 +84,41 @@
       </div>
     </section>
 
-    <section class="lp-section cta-band" id="after">
+    <!-- The offer lives under the result, where the evidence already is.
+         Sending someone to another page to ask for the rebuild would lose the
+         one thing that makes the ask land: they have just seen what is
+         missing. The site field is prefilled with the address they scanned. -->
+    <section class="lp-section cta-band" id="after" hidden>
       <div class="wrap">
         <div class="lp-head">
           <h2 class="lp-h2">See your site first.</h2>
         </div>
-        <p class="lp-sub">A list of what is missing is not the same as a site that is not missing it. Send us the address and we build the replacement — you decide after you have seen it.</p>
-        <div>
-          <a class="btn btn-primary" href="/contact/">See your site first</a>
-          <p class="lp-note">No brief, no meeting to book.</p>
-        </div>
+        <p class="lp-sub">We rebuild it and send it back &mdash; free. You decide after you&rsquo;ve seen it.</p>
+
+        <form class="contact-form" id="rebuild-form" novalidate>
+          <div class="field">
+            <label for="r-site">Your website</label>
+            <input type="text" id="r-site" name="site" required autocomplete="url" />
+          </div>
+          <div class="field">
+            <label for="r-email">Where we send the finished site</label>
+            <input type="email" id="r-email" name="email" required autocomplete="email"
+                   placeholder="you@yourclinic.com" />
+          </div>
+          <div class="field">
+            <label for="r-note">Anything we should know <span class="opt">(optional)</span></label>
+            <textarea id="r-note" name="note" rows="3"
+                      placeholder="Only if there's something specific. Otherwise leave it — we'll work it out from your site."></textarea>
+          </div>
+          <div class="hp" aria-hidden="true">
+            <label for="r-company">Company</label>
+            <input type="text" id="r-company" name="company" tabindex="-1" autocomplete="off" />
+          </div>
+          <button class="btn btn-primary" type="submit" id="rebuild-submit">See your site first</button>
+          <p class="form-status" id="rebuild-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="lp-note">We reply with the finished site, not a sales call.</p>
       </div>
     </section>
 
