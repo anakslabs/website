@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>See your site first — Anaks Labs</title>
+  <meta name="description" content="Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back." />
+  <meta name="theme-color" content="#F6F7F9" />
+  <link rel="canonical" href="https://anakslabs.com/contact/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="See your site first — Anaks Labs" />
+  <meta property="og:description" content="Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back." />
+  <meta property="og:url" content="https://anakslabs.com/contact/" />
+  <meta property="og:image" content="https://anakslabs.com/assets/icon-512.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="See your site first — Anaks Labs" />
+  <meta name="twitter:description" content="Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body class="landing">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="layer wash" aria-hidden="true"></div>
+  <div class="layer vignette" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Anaks Labs home"><img src="/assets/logo-inline.png" width="680" height="431" alt="Anaks Labs" /></a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="/#product">Product</a>
+        <a href="/clinics/">Clinics</a>
+        <a href="/articles/">Articles</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="lp" id="main">
+
+    <section class="lp-hero">
+      <div class="wrap">
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Start here</span></span>
+        <h1>See your site <span class="accent">first</span>.</h1>
+        <p class="lp-lead">Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back. There is no brief to write and no meeting to book, and you decide after you have seen it.</p>
+      </div>
+    </section>
+
+    <section class="lp-section" id="contact">
+      <div class="wrap">
+
+        <!-- The form posts to the app; the address below is the fallback for
+             anyone whose JavaScript never runs. Both routes reach the same
+             inbox, so neither is a second-class way in. -->
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="field">
+            <label for="site">Your website, or your business name</label>
+            <input type="text" id="site" name="site" required autocomplete="url"
+                   placeholder="yourclinic.com — or the name, if there isn't a site yet" />
+          </div>
+          <div class="field">
+            <label for="email">Where we send the finished site</label>
+            <input type="email" id="email" name="email" required autocomplete="email"
+                   placeholder="you@yourclinic.com" />
+          </div>
+          <div class="field">
+            <label for="note">Anything we should know <span class="opt">(optional)</span></label>
+            <textarea id="note" name="note" rows="3"
+                      placeholder="Only if there's something specific. Otherwise leave it — we'll work it out from your site."></textarea>
+          </div>
+
+          <!-- Not display:none: some fillers skip hidden inputs. Off-screen and
+               removed from the tab order, so nobody typing or tabbing meets it. -->
+          <div class="hp" aria-hidden="true">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <button class="btn btn-primary" type="submit" id="contact-submit">See your site first</button>
+          <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <noscript>
+          <p class="lp-sub">The form needs JavaScript. Write to <b>contact@anakslabs.com</b> with the link to your site, or the name of your business, and we will build it and send it back.</p>
+        </noscript>
+
+        <p class="lp-note">We reply with the finished site, not a sales call.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-company">
+        <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs Inc. &nbsp;·&nbsp; <a href="/contact/">Contact us</a></p>
+        <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/#product">Product</a>
+        <a href="/clinics/">Clinics</a>
+        <a href="/articles/">Articles</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+  <script src="/assets/contact.js"></script>
+</body>
+</html>

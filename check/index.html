@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>What a machine gets from your page — Anaks Labs</title>
+  <meta name="description" content="Paste your address. We fetch the page the way a search engine does and show you what it actually receives — not what your browser draws." />
+  <meta name="theme-color" content="#F6F7F9" />
+  <link rel="canonical" href="https://anakslabs.com/check/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="What a machine gets from your page — Anaks Labs" />
+  <meta property="og:description" content="We fetch your page the way a search engine does and show you what it actually receives." />
+  <meta property="og:url" content="https://anakslabs.com/check/" />
+  <meta property="og:image" content="https://anakslabs.com/assets/icon-512.png" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="What a machine gets from your page — Anaks Labs" />
+  <meta name="twitter:description" content="We fetch your page the way a search engine does and show you what it actually receives." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
+  <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body class="landing">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="layer wash" aria-hidden="true"></div>
+  <div class="layer vignette" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Anaks Labs home"><img src="/assets/logo-inline.png" width="680" height="431" alt="Anaks Labs" /></a>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="/check/">Check your site</a>
+        <a href="/clinics/">Clinics</a>
+        <a href="/articles/">Articles</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main class="lp" id="main">
+
+    <section class="lp-hero">
+      <div class="wrap">
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Free, no signup</span></span>
+        <h1>See what a machine <span class="accent">actually gets</span> from your page.</h1>
+        <p class="lp-lead">Your browser runs your scripts, loads your fonts and draws your layout. A search engine reads the file that arrives before any of that happens. Paste your address and we will fetch it the same way, then show you what came back.</p>
+
+        <form class="contact-form check-form" id="check-form" novalidate>
+          <div class="field">
+            <label for="url">Your website</label>
+            <input type="url" id="url" name="url" required autocomplete="url" placeholder="yourclinic.com" />
+          </div>
+          <button class="btn btn-primary" type="submit" id="check-submit">Check my page</button>
+          <p class="form-status" id="check-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <noscript>
+          <p class="lp-note">This check needs JavaScript. <a href="/contact/">Send us the address instead</a> and we will run it and reply.</p>
+        </noscript>
+      </div>
+    </section>
+
+    <!-- Filled in by check.js. Evidence first: what the page handed over, and
+         what it did not. The grade is deliberately small and last — a letter
+         printed large is a thing to react to instead of read, and the whole
+         point of this page is the reading. -->
+    <section class="lp-section" id="result" hidden>
+      <div class="wrap">
+        <div class="lp-head wide">
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What came back</span></span>
+          <h2 class="lp-h2" id="result-title">Here is what your page handed over.</h2>
+        </div>
+        <p class="lp-sub" id="result-lead"></p>
+        <ul class="mech" id="result-findings"></ul>
+        <p class="lp-note" id="result-score"></p>
+      </div>
+    </section>
+
+    <section class="lp-section cta-band" id="after">
+      <div class="wrap">
+        <div class="lp-head">
+          <h2 class="lp-h2">See your site first.</h2>
+        </div>
+        <p class="lp-sub">A list of what is missing is not the same as a site that is not missing it. Send us the address and we build the replacement — you decide after you have seen it.</p>
+        <div>
+          <a class="btn btn-primary" href="/contact/">See your site first</a>
+          <p class="lp-note">No brief, no meeting to book.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-company">
+        <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs Inc. &nbsp;·&nbsp; <a href="/contact/">Contact us</a></p>
+        <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/check/">Check your site</a>
+        <a href="/clinics/">Clinics</a>
+        <a href="/articles/">Articles</a>
+        <a href="/about/">About</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="/assets/site.js"></script>
+  <script src="/assets/check.js"></script>
+</body>
+</html>

@@ -972,3 +972,30 @@ body.landing .grid { display: none; }
   .aurora b { opacity: .5 !important; transform: none !important; }
   .reveal-on [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
+
+/* ---------------------------------------------------------------- contact form
+   Replaces the mailto links. The honeypot is positioned off-screen rather than
+   hidden, because a filler that skips display:none inputs would sail past it. */
+.contact-form { max-width: 34rem; margin-top: 2rem; }
+.contact-form .field { margin-bottom: 1.25rem; }
+.contact-form label {
+  display: block; margin-bottom: .4rem;
+  font-size: .95rem; font-weight: 500; color: var(--ink);
+}
+.contact-form .opt { font-weight: 400; opacity: .6; }
+.contact-form input,
+.contact-form textarea {
+  width: 100%; padding: .7rem .85rem;
+  font: inherit; font-size: 1rem; color: var(--ink);
+  background: #fff; border: 1px solid rgba(20, 26, 58, .18); border-radius: 10px;
+}
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--blue); outline-offset: 1px; border-color: transparent;
+}
+.contact-form textarea { resize: vertical; min-height: 5.5rem; }
+.contact-form button[disabled] { opacity: .55; cursor: default; }
+.contact-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-status { margin-top: .9rem; min-height: 1.4em; font-size: .95rem; }
+.form-status.is-ok { color: var(--blue); font-weight: 500; }
+.form-status.is-error { color: #B3261E; }

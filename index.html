@@ -25,17 +25,7 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@graph":[
-    {"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","description":"Anaks Labs Inc. is a software company. It builds, hosts and operates websites for businesses on its own platform, engineered so that search engines and AI assistants can read, verify and quote them.","url":"https://anakslabs.com","email":"contact@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},
-    {"@type":"Service","@id":"https://anakslabs.com/#service","name":"Website build and monthly operation","serviceType":"Website design and management","provider":{"@id":"https://anakslabs.com/#org"},"description":"We build a website — from the site you already have, or from scratch — so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing."},
-    {"@type":"FAQPage","@id":"https://anakslabs.com/#faq","mainEntity":[
-      {"@type":"Question","name":"What does the build cover?","acceptedAnswer":{"@type":"Answer","text":"Building your website and taking it live on your domain. It is a one-time charge, and it comes after you have seen the finished site."}},
-      {"@type":"Question","name":"What do I get every month?","acceptedAnswer":{"@type":"Answer","text":"A performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the monthly rate — one flat number, everything included."}},
-      {"@type":"Question","name":"What do you do with visitor data?","acceptedAnswer":{"@type":"Answer","text":"The tracking is designed so we count the inquiry, not the person. We record that someone reached out, not who they were."}},
-      {"@type":"Question","name":"Can any business sign up?","acceptedAnswer":{"@type":"Answer","text":"We work by invitation. We build the site first and send it to the business, and we take a limited number of clients in each area — optimizing competing businesses in the same neighborhood would mean competing against our own clients."}},
-      {"@type":"Question","name":"How do we start?","acceptedAnswer":{"@type":"Answer","text":"Request an invitation — send us the link to your current site, or the name of your business if there isn't one. We build it and send it back."}}
-    ]}
-  ]}
+  {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","description":"Anaks Labs Inc. is a software company. It builds, hosts and operates websites for businesses on its own platform, engineered so that search engines and AI assistants can read, verify and quote them.","url":"https://anakslabs.com","email":"contact@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},{"@type":"Service","@id":"https://anakslabs.com/#service","name":"Website build and monthly operation","serviceType":"Website design and management","provider":{"@id":"https://anakslabs.com/#org"},"description":"We build a website — from the site you already have, or from scratch — so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","priceCurrency":"USD","minPrice":990,"valueAddedTaxIncluded":false},{"@type":"UnitPriceSpecification","name":"Monthly operation","priceCurrency":"USD","minPrice":1490,"billingDuration":1,"billingIncrement":1,"unitCode":"MON","valueAddedTaxIncluded":false}]}}]}
   </script>
 </head>
 <body class="landing">
@@ -52,11 +42,11 @@
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><img src="/assets/logo-inline.png" width="680" height="431" alt="Anaks Labs" /></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="#product">Product</a>
+        <a href="/check/">Check your site</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
-        <a href="mailto:contact@anakslabs.com">Contact</a>
+        <a href="/contact/">Contact</a>
       </nav>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -71,8 +61,8 @@
         <h1>Your customers ask AI first. Your site should be <span class="accent">the answer</span>.</h1>
         <p class="lp-lead">Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it — and a great deal of what is on your screen never reaches them. We build yours so that it does, then we run it for you, every month.</p>
         <div class="lp-actions">
-          <a class="btn btn-primary" href="mailto:contact@anakslabs.com?subject=Request%20an%20invitation">Request an invitation</a>
-          <a class="btn btn-ghost" href="#product">See what's included</a>
+          <a class="btn btn-primary" href="/check/">See your site first</a>
+          <a class="btn btn-ghost" href="/clinics/">What's included</a>
         </div>
         <p class="lp-note">We build your site first. You decide after you've seen it.</p>
       </div>
@@ -93,7 +83,7 @@
           <div class="stat" data-reveal>
             <p class="stat-num">45% <small>of US consumers, up from 6% a year earlier</small></p>
             <p>asked AI to recommend a local business.</p>
-            <p class="why">Seven times as many people in twelve months. Someone describes what they need, an assistant goes off and reads websites, and it comes back with a shortlist. Being on that shortlist is a different job from ranking on a page of blue links.</p>
+            <p class="why">Seven times as many people in twelve months. What comes back is a shortlist, not a page of blue links, and being on it is a different job from ranking. How any given assistant assembles that shortlist is not published by the companies that build them, and we do not claim to know. What is not in dispute is the floor: a page that never hands over a sentence cannot have that sentence quoted from it.</p>
             <p class="src">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. <a href="/sources/#ai-local">Source and sample &rarr;</a></p>
           </div>
         </div>
@@ -149,6 +139,25 @@
         </ul>
       </div>
     </section>
+    <!-- ============================ the offer, in one line =================
+         The four deliverables, the process and the FAQ now live on /clinics/,
+         where someone who is actually buying reads them. Home keeps only the
+         shape of the offer and the two numbers, because a price the visitor
+         has to click through to find reads as a price being withheld. ==== -->
+    <section class="lp-section" id="product">
+      <div class="wrap">
+        <div class="lp-head" data-reveal>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
+          <h2 class="lp-h2">One build. Then we <span class="accent">run it</span>.</h2>
+        </div>
+        <p class="lp-sub" data-reveal>We build the site, take it live on your domain, and then run it every month: a performance report, eight posts written to be found and quoted, inquiry and booking tracking, and hosting, maintenance and self-serve editing. One plan, everything in it.</p>
+        <div class="price-tag" data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span>One plan</span>
+          <p class="d"><b>Build from $990. Then $1,490 a month.</b> There is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
+        </div>
+        <p class="lp-sub" data-reveal><a href="/clinics/#included">What that covers, month by month &rarr;</a></p>
+      </div>
+    </section>
 
     <!-- ============================ verticals ============================ -->
     <section class="lp-section" id="verticals">
@@ -170,84 +179,18 @@
       </div>
     </section>
 
-    <!-- ============================ what you get ============================ -->
-    <section class="lp-section" id="product">
-      <div class="wrap">
-        <div class="lp-head" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
-          <h2 class="lp-h2">One build. Then we <span class="accent">run it</span>.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>Four things, every month, whatever you do. There is one plan and everything is in it.</p>
 
-        <div class="deliv">
-          <article data-reveal>
-            <span class="idx">01</span>
-            <h3>A monthly performance report</h3>
-            <p>What changed on your site, what moved, and what we are doing next month. Written to be read in five minutes, not decoded.</p>
-          </article>
-          <article data-reveal>
-            <span class="idx">02</span>
-            <h3>Eight blog posts a month</h3>
-            <p>Written for search engines and for AI assistants: the questions your customers actually ask, answered on your own site so the answer can be found and quoted there.</p>
-          </article>
-          <article data-reveal>
-            <span class="idx">03</span>
-            <h3>Inquiry and booking tracking</h3>
-            <p>You see how many people reached out and how many booked. Designed so we count the inquiry, not the person.</p>
-          </article>
-          <article data-reveal>
-            <span class="idx">04</span>
-            <h3>Hosting, maintenance and self-serve editing</h3>
-            <p>Your site stays up and stays current. Change your hours, your staff, your prices yourself — no ticket, no waiting on us.</p>
-          </article>
-        </div>
-
-        <div class="price-tag" data-reveal>
-          <span class="badge"><span class="dot" aria-hidden="true"></span>Enterprise — one plan</span>
-          <p class="d">One build charge, one flat monthly rate, everything above included. We put both numbers in front of you with the finished site — before you sign anything.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================ how it works ============================ -->
-    <section class="lp-section" id="how">
-      <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>How it works</span></span>
-          <h2 class="lp-h2">We build your site first. You see it before you pay.</h2>
-        </div>
-
-        <ol class="steps">
-          <li data-reveal>
-            <h3>We build it before we talk.</h3>
-            <p>You don't write a brief. We look at your business, build your website, and send you the link to the finished thing.</p>
-          </li>
-          <li data-reveal>
-            <h3>You open it on your own phone.</h3>
-            <p>Next to the site you have now. If it isn't obviously better, that is the end of it — and you have spent nothing.</p>
-          </li>
-          <li data-reveal>
-            <h3>You approve, and we sign.</h3>
-            <p>One build charge to take the site live, one flat monthly rate to run it. We put both numbers in front of you before you sign anything.</p>
-          </li>
-          <li data-reveal>
-            <h3>We launch, and the monthly work starts.</h3>
-            <p>The new site goes live on your domain. From there: the report, the eight posts, the tracking — every month.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
 
     <!-- ============================ how we take clients ==================
          The cap is a condition of the work, not a scarcity device. No seat
          count, no deadline, no number that could go stale. ================ -->
-    <section class="lp-section" id="invitation">
+    <section class="lp-section" id="cap">
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>How we take clients</span></span>
-          <h2 class="lp-h2">By invitation, and <span class="accent">capped by area</span>.</h2>
+          <h2 class="lp-h2">One business per area, <span class="accent">and that is the cap</span>.</h2>
         </div>
-        <p class="lp-sub" data-reveal>We work by invitation, and we cap how many clients we take in each area. Search results and AI answers are ranked lists &mdash; if we optimized two competing businesses in the same neighborhood, we would be competing against our own clients. One business wins, or nobody does.</p>
+        <p class="lp-sub" data-reveal>We cap how many clients we take in each area. Search results and AI answers are ranked lists &mdash; if we optimized two competing businesses in the same neighborhood, we would be competing against our own clients. One business wins, or nobody does.</p>
         <p class="lp-note" data-reveal>There is no countdown here, and no number of seats: the cap is a condition of the work, not an offer that expires.</p>
       </div>
     </section>
@@ -270,50 +213,17 @@
       </div>
     </section>
 
-    <!-- ============================ faq ============================ -->
-    <section class="lp-section" id="faq">
-      <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Questions</span></span>
-          <h2 class="lp-h2">Answered on the page, where they belong.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>If a page cannot answer a question, nothing can quote it. So here are ours, on the page.</p>
-
-        <ul class="mech">
-          <li data-reveal>
-            <h3>What does the build cover?</h3>
-            <p>Building your website and taking it live on your domain. It is a one-time charge, and it comes after you have seen the finished site.</p>
-          </li>
-          <li data-reveal>
-            <h3>What do I get every month?</h3>
-            <p>A performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the monthly rate — one flat number, everything included.</p>
-          </li>
-          <li data-reveal>
-            <h3>What do you do with visitor data?</h3>
-            <p>The tracking is designed so we count the inquiry, not the person. We record that someone reached out, not who they were.</p>
-          </li>
-          <li data-reveal>
-            <h3>Can any business sign up?</h3>
-            <p>We work by invitation. We build the site first and send it to the business, and we take a limited number of clients in each area — optimizing competing businesses in the same neighborhood would mean competing against our own clients.</p>
-          </li>
-          <li data-reveal>
-            <h3>How do we start?</h3>
-            <p>Request an invitation — send us the link to your current site, or the name of your business if there isn't one. We build it and send it back.</p>
-          </li>
-        </ul>
-      </div>
-    </section>
 
     <!-- ============================ closing cta ============================ -->
     <section class="lp-section cta-band" id="contact">
       <div class="wrap">
         <div class="lp-head" data-reveal>
-          <h2 class="lp-h2">Request an invitation.</h2>
+          <h2 class="lp-h2">See your site first.</h2>
         </div>
-        <p class="lp-sub" data-reveal>Request an invitation &mdash; send us the link to your current site, or the name of your business if there isn't one. We build it and send it back.</p>
+        <p class="lp-sub" data-reveal>Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back.</p>
         <div data-reveal>
-          <a class="email-cta" href="mailto:contact@anakslabs.com?subject=Request%20an%20invitation">contact@anakslabs.com</a>
-          <p class="lp-note">No brief, no meeting to book.</p>
+          <a class="btn btn-primary" href="/check/">See your site first</a>
+          <p class="lp-note">Paste your address. No brief, no meeting to book.</p>
         </div>
       </div>
     </section>
@@ -323,15 +233,15 @@
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-company">
-        <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs Inc. &nbsp;·&nbsp; <a href="mailto:contact@anakslabs.com">contact@anakslabs.com</a></p>
+        <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs Inc. &nbsp;·&nbsp; <a href="/contact/">Contact us</a></p>
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="#product">Product</a>
+        <a href="/check/">Check your site</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
-        <a href="mailto:contact@anakslabs.com">Contact</a>
+        <a href="/contact/">Contact</a>
       </nav>
     </div>
   </footer>
