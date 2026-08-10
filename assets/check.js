@@ -33,6 +33,18 @@
     status.className = 'form-status' + (kind ? ' is-' + kind : '');
   }
 
+
+  /* Did the scan run and find the target closed, as opposed to our own request
+     failing? Only the scanner can answer that, so it is read off the result. */
+  var CLOSED = ['seo_http_status', 'seo_html_response', 'geo_empty_page', 'seo_soft_404'];
+  function targetUnreachable(scan) {
+    var issues = (scan && scan.issues) || [];
+    for (var i = 0; i < issues.length; i++) {
+      if (CLOSED.indexOf(issues[i].code) >= 0) return true;
+    }
+    return false;
+  }
+
   function normalise(value) {
     var v = value.trim();
     if (!v) return '';
@@ -114,11 +126,19 @@
       .then(function (data) {
         if (!data) return;
         say('');
-        render(data.scan || data);
+        var scan = data.scan || data;
+        if (targetUnreachable(scan)) {
+          say('We reached our check, but not your page. If it sits behind a login, a firewall or a redirect loop, a search engine gets the same answer we did.', 'error');
+        }
+        render(scan);
         if (window.va) window.va('event', { name: 'check_run' });
       })
       .catch(function () {
-        say('We could not reach that page. If it is behind a login or a firewall, this check cannot see it either — and neither can a search engine.', 'error');
+        // Ours, not theirs. A fetch that never completed — CORS, offline, 5xx —
+        // says nothing about the visitor's website, and blaming their firewall
+        // for our outage is the worst thing this page could do: it is a
+        // diagnostic, and its first output would be a false diagnosis.
+        say('Our check could not run just now. That is on us — try again in a moment.', 'error');
       })
       .then(function () {
         running = false;
