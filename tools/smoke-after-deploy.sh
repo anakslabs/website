@@ -42,7 +42,10 @@ expect_text () {  # path needle label
   else printf "  FAIL  %-42s %s\n" "$3" "missing: $2"; fails=$((fails+1)); fi
 }
 expect_text /          'Build from $990. Then $1,490 a month.' "home carries both figures"
-expect_text /          'See your site first'                   "home CTA"
+expect_text /          'Check your page free'                  "home CTA opens the check"
+expect_text /check/    'See your site first'                   "check page carries the offer"
+expect_text /          'film-still'                            "home ships the film stills"
+expect_text /          'data-next='                            "home names its transitions"
 expect_text /check/    'id="check-form"'                       "check page has the form"
 expect_text /clinics/  'One practice per area'                 "clinics states the cap"
 expect_text /contact/  'id="contact-form"'                     "contact page has the form"
