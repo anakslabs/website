@@ -999,3 +999,45 @@ body.landing .grid { display: none; }
 .form-status { margin-top: .9rem; min-height: 1.4em; font-size: .95rem; }
 .form-status.is-ok { color: var(--blue); font-weight: 500; }
 .form-status.is-error { color: #B3261E; }
+
+/* ------------------------------------------------------------------ the film
+   Ten held keyframes with nine transitions between them. Everything here is
+   decoration over a page that already reads without it: the stills sit behind
+   the copy, the clips sit over the stills, and both are removed from the
+   accessibility tree. Below 1280px no <video> is ever created, so the bytes
+   are not merely hidden — they are never requested. */
+.film-stage {
+  position: fixed; inset: 0; z-index: -1;
+  background: var(--bg, #F6F7F9);
+  pointer-events: none;
+}
+.film-still, .film-clip {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+.film-still.is-on { opacity: 1; }
+.film-clip.is-on  { opacity: 1; transition: none; }
+.film-clip { z-index: 1; }
+
+/* One screen per keyframe. Native scroll-snap only — nothing here listens to
+   wheel or touch, so the browser's own scrolling is never taken over. */
+body.film { scroll-snap-type: y proximity; }
+.film-screen {
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  display: flex; align-items: center;
+}
+/* The tail of the page is ordinary reading, not a slideshow. */
+.film-tail { scroll-snap-align: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .film-still { transition: none; }
+}
+@media (max-width: 1279px) {
+  .film-screen { min-height: auto; }
+  body.film { scroll-snap-type: none; }
+}

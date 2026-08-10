@@ -28,9 +28,22 @@
   {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","description":"Anaks Labs Inc. is a software company. It builds, hosts and operates websites for businesses on its own platform, engineered so that search engines and AI assistants can read, verify and quote them.","url":"https://anakslabs.com","email":"contact@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},{"@type":"Service","@id":"https://anakslabs.com/#service","name":"Website build and monthly operation","serviceType":"Website design and management","provider":{"@id":"https://anakslabs.com/#org"},"description":"We build a website — from the site you already have, or from scratch — so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","priceCurrency":"USD","minPrice":990,"valueAddedTaxIncluded":false},{"@type":"UnitPriceSpecification","name":"Monthly operation","priceCurrency":"USD","minPrice":1490,"billingDuration":1,"billingIncrement":1,"unitCode":"MON","valueAddedTaxIncluded":false}]}}]}
   </script>
 </head>
-<body class="landing">
+<body class="landing film">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- The film. Presentational only: every still is aria-hidden and the copy
+       above never refers to it. Video elements are created by film.js and only
+       above 1280px, so a phone requests none of these bytes. -->
+  <div class="layer film-stage" data-film aria-hidden="true">
+    <img class="film-still" data-still src="/assets/film/k01.webp" alt="" width="1600" height="914" decoding="async" />
+    <img class="film-still" data-still src="/assets/film/k02.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still src="/assets/film/k03.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still src="/assets/film/k04.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still src="/assets/film/k05.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still src="/assets/film/k06.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still src="/assets/film/k07.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still src="/assets/film/k08.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+  </div>
   <div class="layer wash" aria-hidden="true"></div>
   <div class="layer aurora" aria-hidden="true">
     <b class="b1 drift1"></b><b class="b2 drift2"></b><b class="b3 drift3"></b>
@@ -55,7 +68,7 @@
   <main class="lp" id="main">
 
     <!-- ============================ hero ============================ -->
-    <section class="lp-hero">
+    <section class="lp-hero film-screen" data-film-section>
       <div class="wrap">
         <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>AI-ready websites</span></span>
         <h1>Your customers ask AI first. Your site should be <span class="accent">the answer</span>.</h1>
@@ -71,7 +84,7 @@
     <!-- ============================ the demand (this comes first: the world,
          then them, then us. Every figure here is external, primary-sourced and
          listed with its sample on /sources/) ================================ -->
-    <section class="lp-section" id="demand">
+    <section class="lp-section film-screen" id="demand" data-film-section>
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What changed</span></span>
@@ -107,7 +120,7 @@
 
     <!-- ============================ the mechanism (no figures — the measured
          findings live on the clinics page, where the audit was done) ======== -->
-    <section class="lp-section" id="why">
+    <section class="lp-section film-screen" id="why" data-film-section>
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Where it goes wrong</span></span>
@@ -144,7 +157,7 @@
          where someone who is actually buying reads them. Home keeps only the
          shape of the offer and the two numbers, because a price the visitor
          has to click through to find reads as a price being withheld. ==== -->
-    <section class="lp-section" id="product">
+    <section class="lp-section film-screen" id="product" data-film-section>
       <div class="wrap">
         <div class="lp-head" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
@@ -160,7 +173,7 @@
     </section>
 
     <!-- ============================ verticals ============================ -->
-    <section class="lp-section" id="verticals">
+    <section class="lp-section film-screen" id="verticals" data-film-section>
       <div class="wrap">
         <div class="lp-head" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Who we build for</span></span>
@@ -184,7 +197,7 @@
     <!-- ============================ how we take clients ==================
          The cap is a condition of the work, not a scarcity device. No seat
          count, no deadline, no number that could go stale. ================ -->
-    <section class="lp-section" id="cap">
+    <section class="lp-section film-screen" id="cap" data-film-section>
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>How we take clients</span></span>
@@ -196,7 +209,7 @@
     </section>
 
     <!-- ============================ who builds it ============================ -->
-    <section class="lp-section" id="who">
+    <section class="lp-section film-screen" id="who" data-film-section>
       <div class="wrap">
         <div class="trust-grid">
           <div data-reveal>
@@ -215,7 +228,7 @@
 
 
     <!-- ============================ closing cta ============================ -->
-    <section class="lp-section cta-band" id="contact">
+    <section class="lp-section film-screen cta-band" id="contact" data-film-section>
       <div class="wrap">
         <div class="lp-head" data-reveal>
           <h2 class="lp-h2">See your site first.</h2>
@@ -247,5 +260,6 @@
   </footer>
 
   <script src="/assets/site.js"></script>
+  <script src="/assets/film.js"></script>
 </body>
 </html>
