@@ -41,12 +41,16 @@
   /** Video is built only when it will actually be used — never fetched otherwise. */
   function buildClips() {
     if (clips.length || !wide.matches || reduced.matches) return;
-    for (var i = 1; i < SECTIONS; i++) {
-      var a = ('0' + i).slice(-2);
-      var b = ('0' + (i + 1)).slice(-2);
+    for (var i = 0; i < SECTIONS - 1; i++) {
+      // The clip for this step is named on the still, because the screens do
+      // not map onto consecutive keyframes: two of the ten states belong to
+      // sections that now live on /clinics/, and the jumps across them have no
+      // clip. A missing name means crossfade, not a 404.
+      var name = stills[i].getAttribute('data-next');
+      if (!name) { clips.push(null); continue; }
       var v = document.createElement('video');
       v.className = 'film-clip';
-      v.src = '/assets/film/t' + a + b + '.mp4';
+      v.src = '/assets/film/' + name + '.mp4';
       v.muted = true;
       v.playsInline = true;
       v.preload = 'none';          // the browser fetches on the first play(), not on load

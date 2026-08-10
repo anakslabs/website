@@ -33,16 +33,19 @@
 
   <!-- The film. Presentational only: every still is aria-hidden and the copy
        above never refers to it. Video elements are created by film.js and only
-       above 1280px, so a phone requests none of these bytes. -->
+       above 1280px, so a phone requests none of these bytes.
+       Each still names the clip into the next screen. Two pairs have no clip —
+       06 how and 09 faq are states whose sections moved to /clinics/, and the
+       jumps across them (05->07, 08->10) crossfade rather than invent motion. -->
   <div class="layer film-stage" data-film aria-hidden="true">
-    <img class="film-still" data-still src="/assets/film/k01.webp" alt="" width="1600" height="914" decoding="async" />
-    <img class="film-still" data-still src="/assets/film/k02.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
-    <img class="film-still" data-still src="/assets/film/k03.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
-    <img class="film-still" data-still src="/assets/film/k04.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
-    <img class="film-still" data-still src="/assets/film/k05.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
-    <img class="film-still" data-still src="/assets/film/k06.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
-    <img class="film-still" data-still src="/assets/film/k07.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
-    <img class="film-still" data-still src="/assets/film/k08.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still data-section="hero" data-key="01" data-next="t0102" src="/assets/film/k01.webp" alt="" width="1600" height="914" decoding="async" />
+    <img class="film-still" data-still data-section="demand" data-key="02" data-next="t0203" src="/assets/film/k02.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still data-section="why" data-key="03" data-next="t0304" src="/assets/film/k03.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still data-section="verticals" data-key="04" data-next="t0405" src="/assets/film/k04.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still data-section="product" data-key="05" src="/assets/film/k05.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still data-section="cap" data-key="07" data-next="t0708" src="/assets/film/k07.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still data-section="who" data-key="08" src="/assets/film/k08.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
+    <img class="film-still" data-still data-section="contact" data-key="10" src="/assets/film/k10.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
   </div>
   <div class="layer wash" aria-hidden="true"></div>
   <div class="layer aurora" aria-hidden="true">
@@ -157,20 +160,6 @@
          where someone who is actually buying reads them. Home keeps only the
          shape of the offer and the two numbers, because a price the visitor
          has to click through to find reads as a price being withheld. ==== -->
-    <section class="lp-section film-screen" id="product" data-film-section>
-      <div class="wrap">
-        <div class="lp-head" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
-          <h2 class="lp-h2">One build. Then we <span class="accent">run it</span>.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>We build the site, take it live on your domain, and then run it every month: a performance report, eight posts written to be found and quoted, inquiry and booking tracking, and hosting, maintenance and self-serve editing. One plan, everything in it.</p>
-        <div class="price-tag" data-reveal>
-          <span class="badge"><span class="dot" aria-hidden="true"></span>One plan</span>
-          <p class="d"><b>Build from $990. Then $1,490 a month.</b> There is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
-        </div>
-        <p class="lp-sub" data-reveal><a href="/clinics/#included">What that covers, month by month &rarr;</a></p>
-      </div>
-    </section>
 
     <!-- ============================ verticals ============================ -->
     <section class="lp-section film-screen" id="verticals" data-film-section>
@@ -189,6 +178,20 @@
             <span class="go">See the clinics page &rarr;</span>
           </a>
         </div>
+      </div>
+    </section>
+    <section class="lp-section film-screen" id="product" data-film-section>
+      <div class="wrap">
+        <div class="lp-head" data-reveal>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
+          <h2 class="lp-h2">One build. Then we <span class="accent">run it</span>.</h2>
+        </div>
+        <p class="lp-sub" data-reveal>We build the site, take it live on your domain, and then run it every month: a performance report, eight posts written to be found and quoted, inquiry and booking tracking, and hosting, maintenance and self-serve editing. One plan, everything in it.</p>
+        <div class="price-tag" data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span>One plan</span>
+          <p class="d"><b>Build from $990. Then $1,490 a month.</b> There is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
+        </div>
+        <p class="lp-sub" data-reveal><a href="/clinics/#included">What that covers, month by month &rarr;</a></p>
       </div>
     </section>
 
