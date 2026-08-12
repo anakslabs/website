@@ -1001,49 +1001,51 @@ body.landing .grid { display: none; }
 .form-status.is-error { color: #B3261E; }
 
 /* ------------------------------------------------------------------ the film
-   One keyframe per section, drawn as the section's own background so it
-   scrolls with the section and is already still when it arrives — nothing
-   moves after the scroll stops, because nothing here is scripted at all.
-   Decoration over a page that already reads without it: the frames live in a
-   min-width media query, so below 1280px the files are never even requested. */
-.film-screen { position: relative; }
-.film-screen > .wrap { position: relative; z-index: 1; }
-.film-bg { display: none; }
+   One object on a fixed stage at the right; the copy scrolls past in its own
+   column at the left, so text and object never share pixels. The stage holds
+   stills in plain markup (works with no JS at all) and film.js lays scrubbed
+   transition clips over them. Below 1280px the stage is display:none and its
+   stills are lazy, so a phone paints and requests none of this. */
+.film-stage { display: none; }
 @media (min-width: 1280px) {
-  .film-bg {
+  .film-stage {
     display: block;
-    position: absolute; inset: 0;
-    z-index: 0; pointer-events: none;
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* The object lives in the right two thirds of every frame. When the
-       viewport is squarer than 16:9, cover has to crop the sides — this pulls
-       the crop from the empty left margin, so the object stays whole and the
-       copy keeps its quiet ground. */
-    background-position: 78% 50%;
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 56vw;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    /* Fade the stage's left edge into the page wash instead of cutting it. */
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 14%);
+    mask-image: linear-gradient(to right, transparent 0, #000 14%);
   }
-  /* The scrub video film.js lays over the still. Same crop, so the frame it
-     freezes on and the still beneath it are the same picture; until the clip
-     has data (or if it never arrives) the still simply shows through. */
-  .film-scrub {
+  .film-stage .film-still,
+  .film-stage .film-scrub {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: 78% 50%;
+    /* The object sits in the right two thirds of every 16:9 frame; the stage
+       is the right 56vw of the screen, so the crop discards the frame's empty
+       left margin and keeps the object centred on its own ground. */
+    object-position: 72% 50%;
     opacity: 0;
   }
-  .film-scrub.is-ready { opacity: 1; }
-  .film-bg[data-bg="k01"] { background-image: url("/assets/film/k01.webp"); }
-  .film-bg[data-bg="k02"] { background-image: url("/assets/film/k02.webp"); }
-  .film-bg[data-bg="k03"] { background-image: url("/assets/film/k03.webp"); }
-  .film-bg[data-bg="k04"] { background-image: url("/assets/film/k04.webp"); }
-  .film-bg[data-bg="k05"] { background-image: url("/assets/film/k05.webp"); }
-  .film-bg[data-bg="k07"] { background-image: url("/assets/film/k07.webp"); }
-  .film-bg[data-bg="k08"] { background-image: url("/assets/film/k08.webp"); }
-  .film-bg[data-bg="k10"] { background-image: url("/assets/film/k10.webp"); }
+  .film-stage .film-still { transition: opacity .3s ease; }
+  .film-stage .film-still.is-on { opacity: 1; }
+  .film-stage .film-scrub { z-index: 1; }
+  .film-stage .film-scrub.is-on { opacity: 1; }
+
+  /* The copy keeps to the left column, clear of the stage. */
+  .film-screen > .wrap {
+    position: relative; z-index: 1;
+    width: auto; max-width: none;
+    margin-left: max(28px, 7vw);
+    margin-right: 58vw;
+  }
 }
 
-/* One screen per keyframe. Native scroll-snap only — nothing here listens to
+/* One screen per beat. Native scroll-snap only — nothing here listens to
    wheel or touch, so the browser's own scrolling is never taken over. */
 body.film { scroll-snap-type: y proximity; }
 .film-screen {
