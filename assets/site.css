@@ -1001,33 +1001,36 @@ body.landing .grid { display: none; }
 .form-status.is-error { color: #B3261E; }
 
 /* ------------------------------------------------------------------ the film
-   Ten held keyframes with nine transitions between them. Everything here is
-   decoration over a page that already reads without it: the stills sit behind
-   the copy, the clips sit over the stills, and both are removed from the
-   accessibility tree. Below 1280px no <video> is ever created, so the bytes
-   are not merely hidden — they are never requested. */
-.film-stage {
-  /* z-index 0, like every other .layer. -1 put it behind html/body's own
-     opaque background, where nothing could ever see it. It also has to sit
-     after .wash in the markup: that layer is a solid radial gradient, so
-     whichever of the two comes last wins, and the film is the one meant to
-     be seen. */
-  position: fixed; inset: 0; z-index: 0;
-  background: var(--bg, #F6F7F9);
-  pointer-events: none;
+   One keyframe per section, drawn as the section's own background so it
+   scrolls with the section and is already still when it arrives — nothing
+   moves after the scroll stops, because nothing here is scripted at all.
+   Decoration over a page that already reads without it: the frames live in a
+   min-width media query, so below 1280px the files are never even requested. */
+.film-screen { position: relative; }
+.film-screen > .wrap { position: relative; z-index: 1; }
+.film-bg { display: none; }
+@media (min-width: 1280px) {
+  .film-bg {
+    display: block;
+    position: absolute; inset: 0;
+    z-index: 0; pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* The object lives in the right two thirds of every frame. When the
+       viewport is squarer than 16:9, cover has to crop the sides — this pulls
+       the crop from the empty left margin, so the object stays whole and the
+       copy keeps its quiet ground. */
+    background-position: 78% 50%;
+  }
+  .film-bg[data-bg="k01"] { background-image: url("/assets/film/k01.webp"); }
+  .film-bg[data-bg="k02"] { background-image: url("/assets/film/k02.webp"); }
+  .film-bg[data-bg="k03"] { background-image: url("/assets/film/k03.webp"); }
+  .film-bg[data-bg="k04"] { background-image: url("/assets/film/k04.webp"); }
+  .film-bg[data-bg="k05"] { background-image: url("/assets/film/k05.webp"); }
+  .film-bg[data-bg="k07"] { background-image: url("/assets/film/k07.webp"); }
+  .film-bg[data-bg="k08"] { background-image: url("/assets/film/k08.webp"); }
+  .film-bg[data-bg="k10"] { background-image: url("/assets/film/k10.webp"); }
 }
-.film-still, .film-clip {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity .45s ease;
-}
-.film-still.is-on { opacity: 1; }
-/* The first still is marked in the markup, not by script, so the film is
-   visible before any JS runs and stays visible if none ever does. */
-.film-clip.is-on  { opacity: 1; transition: none; }
-.film-clip { z-index: 1; }
 
 /* One screen per keyframe. Native scroll-snap only — nothing here listens to
    wheel or touch, so the browser's own scrolling is never taken over. */
@@ -1041,9 +1044,6 @@ body.film { scroll-snap-type: y proximity; }
 /* The tail of the page is ordinary reading, not a slideshow. */
 .film-tail { scroll-snap-align: none; }
 
-@media (prefers-reduced-motion: reduce) {
-  .film-still { transition: none; }
-}
 @media (max-width: 1279px) {
   .film-screen { min-height: auto; }
   body.film { scroll-snap-type: none; }
