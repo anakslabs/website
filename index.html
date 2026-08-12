@@ -34,9 +34,11 @@
   <div class="layer wash" aria-hidden="true"></div>
   <!-- The film, one keyframe per section. Presentational only: every frame is
        an aria-hidden CSS background inside its own section, so it scrolls with
-       the section and is already still when it arrives — no script moves it.
-       The images are only referenced inside a min-width:1280px media query in
-       site.css, so a phone never requests these bytes. -->
+       the section. Sections with a data-clip also get a scroll-scrubbed video
+       (film.js): the object transforms exactly as far as the visitor scrolls
+       and freezes with them, landing on the still's own frame at rest. Images
+       live in a min-width:1280px media query and clips are only fetched by
+       film.js above 1280px, so a phone requests none of these bytes. -->
   <div class="layer aurora" aria-hidden="true">
     <b class="b1 drift1"></b><b class="b2 drift2"></b><b class="b3 drift3"></b>
   </div>
@@ -77,7 +79,7 @@
     <!-- ============================ the demand (this comes first: the world,
          then them, then us. Every figure here is external, primary-sourced and
          listed with its sample on /sources/) ================================ -->
-    <section class="lp-section film-screen" id="demand">
+    <section class="lp-section film-screen" id="demand" data-clip="/assets/film/s0102.mp4">
       <div class="film-bg" data-bg="k02" aria-hidden="true"></div>
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
@@ -114,7 +116,7 @@
 
     <!-- ============================ the mechanism (no figures — the measured
          findings live on the clinics page, where the audit was done) ======== -->
-    <section class="lp-section film-screen" id="why">
+    <section class="lp-section film-screen" id="why" data-clip="/assets/film/s0203.mp4">
       <div class="film-bg" data-bg="k03" aria-hidden="true"></div>
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
@@ -154,7 +156,7 @@
          has to click through to find reads as a price being withheld. ==== -->
 
     <!-- ============================ verticals ============================ -->
-    <section class="lp-section film-screen" id="verticals">
+    <section class="lp-section film-screen" id="verticals" data-clip="/assets/film/s0304.mp4">
       <div class="film-bg" data-bg="k04" aria-hidden="true"></div>
       <div class="wrap">
         <div class="lp-head" data-reveal>
@@ -173,7 +175,7 @@
         </div>
       </div>
     </section>
-    <section class="lp-section film-screen" id="product">
+    <section class="lp-section film-screen" id="product" data-clip="/assets/film/s0405.mp4">
       <div class="film-bg" data-bg="k05" aria-hidden="true"></div>
       <div class="wrap">
         <div class="lp-head" data-reveal>
@@ -207,7 +209,7 @@
     </section>
 
     <!-- ============================ who builds it ============================ -->
-    <section class="lp-section film-screen" id="who">
+    <section class="lp-section film-screen" id="who" data-clip="/assets/film/s0708.mp4">
       <div class="film-bg" data-bg="k08" aria-hidden="true"></div>
       <div class="wrap">
         <div class="trust-grid">
@@ -260,5 +262,6 @@
   </footer>
 
   <script src="/assets/site.js"></script>
+  <script src="/assets/film.js" defer></script>
 </body>
 </html>

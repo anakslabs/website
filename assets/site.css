@@ -1022,6 +1022,17 @@ body.landing .grid { display: none; }
        copy keeps its quiet ground. */
     background-position: 78% 50%;
   }
+  /* The scrub video film.js lays over the still. Same crop, so the frame it
+     freezes on and the still beneath it are the same picture; until the clip
+     has data (or if it never arrives) the still simply shows through. */
+  .film-scrub {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: 78% 50%;
+    opacity: 0;
+  }
+  .film-scrub.is-ready { opacity: 1; }
   .film-bg[data-bg="k01"] { background-image: url("/assets/film/k01.webp"); }
   .film-bg[data-bg="k02"] { background-image: url("/assets/film/k02.webp"); }
   .film-bg[data-bg="k03"] { background-image: url("/assets/film/k03.webp"); }
