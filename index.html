@@ -31,6 +31,7 @@
 <body class="landing film">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <div class="layer wash" aria-hidden="true"></div>
   <!-- The film. Presentational only: every still is aria-hidden and the copy
        above never refers to it. Video elements are created by film.js and only
        above 1280px, so a phone requests none of these bytes.
@@ -38,7 +39,7 @@
        06 how and 09 faq are states whose sections moved to /clinics/, and the
        jumps across them (05->07, 08->10) crossfade rather than invent motion. -->
   <div class="layer film-stage" data-film aria-hidden="true">
-    <img class="film-still" data-still data-section="hero" data-key="01" data-next="t0102" src="/assets/film/k01.webp" alt="" width="1600" height="914" decoding="async" />
+    <img class="film-still is-on" data-still data-section="hero" data-key="01" data-next="t0102" src="/assets/film/k01.webp" alt="" width="1600" height="914" decoding="async" />
     <img class="film-still" data-still data-section="demand" data-key="02" data-next="t0203" src="/assets/film/k02.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
     <img class="film-still" data-still data-section="why" data-key="03" data-next="t0304" src="/assets/film/k03.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
     <img class="film-still" data-still data-section="verticals" data-key="04" data-next="t0405" src="/assets/film/k04.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
@@ -47,7 +48,6 @@
     <img class="film-still" data-still data-section="who" data-key="08" src="/assets/film/k08.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
     <img class="film-still" data-still data-section="contact" data-key="10" src="/assets/film/k10.webp" alt="" width="1600" height="914" decoding="async" loading="lazy" />
   </div>
-  <div class="layer wash" aria-hidden="true"></div>
   <div class="layer aurora" aria-hidden="true">
     <b class="b1 drift1"></b><b class="b2 drift2"></b><b class="b3 drift3"></b>
   </div>

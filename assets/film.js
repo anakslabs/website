@@ -145,6 +145,8 @@
   (reduced.addEventListener ? reduced.addEventListener.bind(reduced, 'change')
     : reduced.addListener.bind(reduced))(apply);
 
-  showStill(0);
+  // current is already 0 and the markup already marks it, so this only
+  // re-asserts what CSS is showing — it never blanks the page on the way in.
+  showStill(current);
   apply();
 })();
