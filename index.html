@@ -28,28 +28,10 @@
   {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","description":"Anaks Labs Inc. is a software company. It builds, hosts and operates websites for businesses on its own platform, engineered so that search engines and AI assistants can read, verify and quote them.","url":"https://anakslabs.com","email":"contact@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},{"@type":"Service","@id":"https://anakslabs.com/#service","name":"Website build and monthly operation","serviceType":"Website design and management","provider":{"@id":"https://anakslabs.com/#org"},"description":"We build a website — from the site you already have, or from scratch — so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","priceCurrency":"USD","minPrice":990,"valueAddedTaxIncluded":false},{"@type":"UnitPriceSpecification","name":"Monthly operation","priceCurrency":"USD","minPrice":1490,"billingDuration":1,"billingIncrement":1,"unitCode":"MON","valueAddedTaxIncluded":false}]}}]}
   </script>
 </head>
-<body class="landing film">
+<body class="landing">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <div class="layer wash" aria-hidden="true"></div>
-  <!-- The film. One object lives on a fixed stage at the right and transforms
-       as the visitor scrolls; the copy scrolls past in its own column at the
-       left, so the two never overlap. film.js pins each transition clip's
-       currentTime to how far its section has entered the viewport - the
-       object moves exactly as much as the visitor scrolls, freezes with
-       them, and lands on the still it started from. Stills below are plain
-       markup so the stage holds even if no script ever runs; clips are only
-       fetched by film.js above 1280px, so a phone requests none of this. -->
-  <div class="film-stage" data-film-stage aria-hidden="true">
-    <img class="film-still is-on" data-key="01" src="/assets/film/k01.webp" alt="" width="1920" height="1080" decoding="async" />
-    <img class="film-still" data-key="02" src="/assets/film/k02.webp" alt="" width="1920" height="1080" decoding="async" loading="lazy" />
-    <img class="film-still" data-key="03" src="/assets/film/k03.webp" alt="" width="1920" height="1080" decoding="async" loading="lazy" />
-    <img class="film-still" data-key="04" src="/assets/film/k04.webp" alt="" width="1920" height="1080" decoding="async" loading="lazy" />
-    <img class="film-still" data-key="05" src="/assets/film/k05.webp" alt="" width="1920" height="1080" decoding="async" loading="lazy" />
-    <img class="film-still" data-key="07" src="/assets/film/k07.webp" alt="" width="1920" height="1080" decoding="async" loading="lazy" />
-    <img class="film-still" data-key="08" src="/assets/film/k08.webp" alt="" width="1920" height="1080" decoding="async" loading="lazy" />
-    <img class="film-still" data-key="10" src="/assets/film/k10.webp" alt="" width="1920" height="1080" decoding="async" loading="lazy" />
-  </div>
   <div class="layer aurora" aria-hidden="true">
     <b class="b1 drift1"></b><b class="b2 drift2"></b><b class="b3 drift3"></b>
   </div>
@@ -73,7 +55,7 @@
   <main class="lp" id="main">
 
     <!-- ============================ hero ============================ -->
-    <section class="lp-hero film-screen" data-film-key="01">
+    <section class="lp-hero">
       <div class="wrap">
         <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>AI-ready websites</span></span>
         <h1>Your customers ask AI first. Your site should be <span class="accent">the answer</span>.</h1>
@@ -89,7 +71,7 @@
     <!-- ============================ the demand (this comes first: the world,
          then them, then us. Every figure here is external, primary-sourced and
          listed with its sample on /sources/) ================================ -->
-    <section class="lp-section film-screen" id="demand" data-film-key="02" data-clip="/assets/film/s0102.mp4">
+    <section class="lp-section" id="demand">
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What changed</span></span>
@@ -125,7 +107,7 @@
 
     <!-- ============================ the mechanism (no figures — the measured
          findings live on the clinics page, where the audit was done) ======== -->
-    <section class="lp-section film-screen" id="why" data-film-key="03" data-clip="/assets/film/s0203.mp4">
+    <section class="lp-section" id="why">
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Where it goes wrong</span></span>
@@ -164,7 +146,7 @@
          has to click through to find reads as a price being withheld. ==== -->
 
     <!-- ============================ verticals ============================ -->
-    <section class="lp-section film-screen" id="verticals" data-film-key="04" data-clip="/assets/film/s0304.mp4">
+    <section class="lp-section" id="verticals">
       <div class="wrap">
         <div class="lp-head" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Who we build for</span></span>
@@ -182,7 +164,7 @@
         </div>
       </div>
     </section>
-    <section class="lp-section film-screen" id="product" data-film-key="05" data-clip="/assets/film/s0405.mp4">
+    <section class="lp-section" id="product">
       <div class="wrap">
         <div class="lp-head" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
@@ -202,7 +184,7 @@
     <!-- ============================ how we take clients ==================
          The cap is a condition of the work, not a scarcity device. No seat
          count, no deadline, no number that could go stale. ================ -->
-    <section class="lp-section film-screen" id="cap" data-film-key="07">
+    <section class="lp-section" id="cap">
       <div class="wrap">
         <div class="lp-head wide" data-reveal>
           <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>How we take clients</span></span>
@@ -214,7 +196,7 @@
     </section>
 
     <!-- ============================ who builds it ============================ -->
-    <section class="lp-section film-screen" id="who" data-film-key="08" data-clip="/assets/film/s0708.mp4">
+    <section class="lp-section" id="who">
       <div class="wrap">
         <div class="trust-grid">
           <div data-reveal>
@@ -233,7 +215,7 @@
 
 
     <!-- ============================ closing cta ============================ -->
-    <section class="lp-section film-screen cta-band" id="contact" data-film-key="10">
+    <section class="lp-section cta-band" id="contact">
       <div class="wrap">
         <div class="lp-head" data-reveal>
           <h2 class="lp-h2">Start with your own page.</h2>
@@ -265,6 +247,5 @@
   </footer>
 
   <script src="/assets/site.js"></script>
-  <script src="/assets/film.js" defer></script>
 </body>
 </html>
