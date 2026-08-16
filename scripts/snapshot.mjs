@@ -207,28 +207,63 @@ for (const [name, width, height, isMobile] of VIEWPORTS) {
 
   /* Now that everything has loaded, is each image's source bigger than the box
      it is painted into? The gate is "sized to their actual render size", so
-     the number that matters is intrinsic width over CSS width times DPR. */
-  const images = await page.evaluate(() => {
+     the number that matters is real resource width over CSS width times DPR.
+
+     NOT naturalWidth. For an image chosen from a srcset with `w` descriptors
+     the browser density-corrects that property — it divides the resource width
+     by (chosen candidate / resolved `sizes` width) — so naturalWidth comes back
+     equal to the CSS layout width by construction, for every image, however
+     badly sized. This check ran green against a deliberately mis-sized ladder
+     and only ever caught the one image on the page that had no srcset at all.
+     A gate that can only fail for images not using the feature it is policing
+     is not a gate. The bytes are re-fetched and decoded instead, which is the
+     only way to see what was actually delivered. */
+  const images = await page.evaluate(async () => {
     const dpr = window.devicePixelRatio;
-    return [...document.querySelectorAll("img")].map((el) => {
+    const out = [];
+    for (const el of document.querySelectorAll("img")) {
       const r = el.getBoundingClientRect();
-      return {
-        src: (el.currentSrc || el.src).split("/").pop(),
-        natural: el.naturalWidth,
+      const url = el.currentSrc || el.src;
+      let resourceWidth = null;
+      try {
+        const bmp = await createImageBitmap(await (await fetch(url)).blob());
+        resourceWidth = bmp.width;
+        bmp.close();
+      } catch {
+        /* recorded as null and reported, never silently treated as passing */
+      }
+      out.push({
+        src: url.split("/").pop(),
+        resourceWidth,
+        densityCorrectedNaturalWidth: el.naturalWidth,
         cssWidth: Math.round(r.width),
         needed: Math.round(r.width * dpr),
         loading: el.getAttribute("loading") ?? "eager",
         decoding: el.getAttribute("decoding") ?? null,
         hasDims: el.hasAttribute("width") && el.hasAttribute("height"),
         alt: el.getAttribute("alt"),
-      };
-    });
+      });
+    }
+    return out;
   });
-  const oversized = images.filter((i) => i.needed > 0 && i.natural > i.needed * 1.35);
+  const unmeasured = images.filter((i) => i.resourceWidth === null);
+  if (unmeasured.length) fail(`${name}: could not decode ${unmeasured.length} image(s) to measure size — ${unmeasured.map((i) => i.src).join(", ")}`);
+  const oversized = images.filter((i) => i.needed > 0 && i.resourceWidth > i.needed * 1.35);
   if (oversized.length) {
     fail(
       `${name}: ${oversized.length} image(s) served larger than their render box — ` +
-        oversized.map((i) => `${i.src} ${i.natural}px for ${i.needed}px`).join(", "),
+        oversized.map((i) => `${i.src} ${i.resourceWidth}px for ${i.needed}px`).join(", "),
+    );
+  }
+  /* Undersupply is the other half and it is what the density correction was
+     hiding: an image delivered below its box is blurry, and the old check
+     could not see it in either direction. 0.9 rather than 1.0 because the
+     ladder is allowed to land a rung slightly under a fractional box. */
+  const undersized = images.filter((i) => i.needed > 0 && i.resourceWidth !== null && i.resourceWidth < i.needed * 0.9);
+  if (undersized.length) {
+    fail(
+      `${name}: ${undersized.length} image(s) served smaller than their render box — ` +
+        undersized.map((i) => `${i.src} ${i.resourceWidth}px for ${i.needed}px`).join(", "),
     );
   }
   const noDims = images.filter((i) => !i.hasDims);
