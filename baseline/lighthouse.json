@@ -1,0 +1,152 @@
+{
+  "rows": [
+    {
+      "page": "/",
+      "run": 1,
+      "performance": 99,
+      "accessibility": 91,
+      "best-practices": 100,
+      "seo": 100,
+      "FCP": "1.1 s",
+      "LCP": "2.1 s",
+      "CLS": "0",
+      "TBT": "0 ms",
+      "SI": "1.1 s"
+    },
+    {
+      "page": "/",
+      "run": 2,
+      "performance": 98,
+      "accessibility": 91,
+      "best-practices": 100,
+      "seo": 100,
+      "FCP": "1.2 s",
+      "LCP": "2.3 s",
+      "CLS": "0",
+      "TBT": "0 ms",
+      "SI": "1.2 s"
+    }
+  ],
+  "detail": [
+    {
+      "page": "/",
+      "run": 1,
+      "scores": {
+        "performance": 99,
+        "accessibility": 91,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metricsMs": {
+        "firstContentfulPaint": 1055.003,
+        "largestContentfulPaint": 2105.0029999999997,
+        "speedIndex": 1055.003,
+        "totalBlockingTime": 0,
+        "cumulativeLayoutShift": 0
+      },
+      "lcpElement": null,
+      "lcpElementAuditScore": null,
+      "failedBinaryAudits": [
+        {
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "evidence": [
+            {
+              "selector": "footer.site-footer > div.wrap > div.footer-company > p.footer-brand",
+              "snippet": "<p class=\"footer-brand\">",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "source": null
+            },
+            {
+              "selector": "div.wrap > div.footer-company > p.footer-brand > span#yr",
+              "snippet": "<span id=\"yr\">",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "source": null
+            },
+            {
+              "selector": "footer.site-footer > div.wrap > div.footer-company > p.footer-legal",
+              "snippet": "<p class=\"footer-legal\">",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "source": null
+            }
+          ]
+        },
+        {
+          "id": "link-in-text-block",
+          "title": "Links rely on color to be distinguishable.",
+          "evidence": [
+            {
+              "selector": "div.wrap > div.footer-company > p.footer-brand > a",
+              "snippet": "<a href=\"/contact/\">",
+              "explanation": "Fix any of the following:\n  The link has insufficient color contrast of 2.8:1 with the surrounding text. (Minimum contrast is 3:1, link text: #232c52, surrounding text: #6a7286)\n  The link has no styling (such as underline) to distinguish it from the surrounding text",
+              "source": null
+            }
+          ]
+        }
+      ],
+      "lighthouseVersion": "13.4.1",
+      "formFactor": "mobile",
+      "throttling": "simulate"
+    },
+    {
+      "page": "/",
+      "run": 2,
+      "scores": {
+        "performance": 98,
+        "accessibility": 91,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metricsMs": {
+        "firstContentfulPaint": 1202.0165,
+        "largestContentfulPaint": 2252.0164999999997,
+        "speedIndex": 1202.0165,
+        "totalBlockingTime": 0,
+        "cumulativeLayoutShift": 0
+      },
+      "lcpElement": null,
+      "lcpElementAuditScore": null,
+      "failedBinaryAudits": [
+        {
+          "id": "color-contrast",
+          "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+          "evidence": [
+            {
+              "selector": "footer.site-footer > div.wrap > div.footer-company > p.footer-brand",
+              "snippet": "<p class=\"footer-brand\">",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "source": null
+            },
+            {
+              "selector": "div.wrap > div.footer-company > p.footer-brand > span#yr",
+              "snippet": "<span id=\"yr\">",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "source": null
+            },
+            {
+              "selector": "footer.site-footer > div.wrap > div.footer-company > p.footer-legal",
+              "snippet": "<p class=\"footer-legal\">",
+              "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+              "source": null
+            }
+          ]
+        },
+        {
+          "id": "link-in-text-block",
+          "title": "Links rely on color to be distinguishable.",
+          "evidence": [
+            {
+              "selector": "div.wrap > div.footer-company > p.footer-brand > a",
+              "snippet": "<a href=\"/contact/\">",
+              "explanation": "Fix any of the following:\n  The link has insufficient color contrast of 2.8:1 with the surrounding text. (Minimum contrast is 3:1, link text: #232c52, surrounding text: #6a7286)\n  The link has no styling (such as underline) to distinguish it from the surrounding text",
+              "source": null
+            }
+          ]
+        }
+      ],
+      "lighthouseVersion": "13.4.1",
+      "formFactor": "mobile",
+      "throttling": "simulate"
+    }
+  ]
+}

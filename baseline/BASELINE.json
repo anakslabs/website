@@ -1,0 +1,478 @@
+{
+  "what": "The control the motion-layer homepage replacement is measured against. Recorded from the live static site as it stands on this commit, before any motion work. Numbers here are targets not to regress, not aspirations.",
+  "recordedAt": "2026-08-14T02:01:46.849Z",
+  "commit": "a471c75f02e3388e2ee638bec099b4de3827e4e3",
+  "measuredAgainst": "http://localhost:4311 via scripts/serve.mjs (production-matching cache headers, no compression)",
+  "lighthouse": {
+    "preset": "mobile",
+    "tool": "13.4.1",
+    "throttling": "simulate",
+    "runs": [
+      {
+        "run": 1,
+        "performance": 99,
+        "accessibility": 91,
+        "best-practices": 100,
+        "seo": 100,
+        "metricsMs": {
+          "firstContentfulPaint": 1055.003,
+          "largestContentfulPaint": 2105.0029999999997,
+          "speedIndex": 1055.003,
+          "totalBlockingTime": 0,
+          "cumulativeLayoutShift": 0
+        }
+      },
+      {
+        "run": 2,
+        "performance": 98,
+        "accessibility": 91,
+        "best-practices": 100,
+        "seo": 100,
+        "metricsMs": {
+          "firstContentfulPaint": 1202.0165,
+          "largestContentfulPaint": 2252.0164999999997,
+          "speedIndex": 1202.0165,
+          "totalBlockingTime": 0,
+          "cumulativeLayoutShift": 0
+        }
+      }
+    ],
+    "ranges": {
+      "performance": "98–99",
+      "accessibility": 91,
+      "best-practices": 100,
+      "seo": 100
+    },
+    "failingBinaryAudits": [
+      {
+        "id": "color-contrast",
+        "title": "Background and foreground colors do not have a sufficient contrast ratio.",
+        "evidence": [
+          {
+            "selector": "footer.site-footer > div.wrap > div.footer-company > p.footer-brand",
+            "snippet": "<p class=\"footer-brand\">",
+            "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "source": null
+          },
+          {
+            "selector": "div.wrap > div.footer-company > p.footer-brand > span#yr",
+            "snippet": "<span id=\"yr\">",
+            "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "source": null
+          },
+          {
+            "selector": "footer.site-footer > div.wrap > div.footer-company > p.footer-legal",
+            "snippet": "<p class=\"footer-legal\">",
+            "explanation": "Fix any of the following:\n  Element has insufficient color contrast of 4.48 (foreground color: #6a7286, background color: #f6f7f9, font size: 9.4pt (12.5px), font weight: normal). Expected contrast ratio of 4.5:1",
+            "source": null
+          }
+        ]
+      },
+      {
+        "id": "link-in-text-block",
+        "title": "Links rely on color to be distinguishable.",
+        "evidence": [
+          {
+            "selector": "div.wrap > div.footer-company > p.footer-brand > a",
+            "snippet": "<a href=\"/contact/\">",
+            "explanation": "Fix any of the following:\n  The link has insufficient color contrast of 2.8:1 with the surrounding text. (Minimum contrast is 3:1, link text: #232c52, surrounding text: #6a7286)\n  The link has no styling (such as underline) to distinguish it from the surrounding text",
+            "source": null
+          }
+        ]
+      }
+    ],
+    "lcpElementIdentified": null
+  },
+  "copy": {
+    "count": 82,
+    "file": "baseline/copy-strings.json",
+    "flattenedTextChars": 5436,
+    "note": "The site is static, so 100% of this reaches a crawler with JavaScript disabled today. That 100% is the number the motion layer must match."
+  },
+  "structure": {
+    "h1Count": 1,
+    "h1Text": "Your customers ask AI first. Your site should be the answer .",
+    "h2Count": 7,
+    "h3Count": 6,
+    "headingOrder": "h1 h2 h2 h3 h3 h3 h3 h3 h2 h3 h2 h2 h2 h2",
+    "skippedLevels": [],
+    "sectionElements": 8,
+    "sectionIds": [
+      "demand",
+      "why",
+      "verticals",
+      "product",
+      "cap",
+      "who",
+      "contact"
+    ],
+    "sectionsWithoutId": 1,
+    "jsonLd": {
+      "blocks": 1,
+      "allParse": true,
+      "types": [
+        "Organization",
+        "Service"
+      ]
+    },
+    "canonical": "https://anakslabs.com/",
+    "htmlLang": "en",
+    "metaDescriptionChars": 163,
+    "openGraphTags": [
+      "og:type",
+      "og:title",
+      "og:description",
+      "og:image",
+      "og:url"
+    ],
+    "twitterTags": [
+      "twitter:card",
+      "twitter:title",
+      "twitter:description"
+    ]
+  },
+  "crawlers": {
+    "robotsNamesAndAllows": [
+      "GPTBot",
+      "OAI-SearchBot",
+      "ChatGPT-User",
+      "ClaudeBot",
+      "Claude-User",
+      "PerplexityBot",
+      "Google-Extended",
+      "Applebot-Extended"
+    ],
+    "robotsNotNamed": [],
+    "sitemapLinkedFromRobots": true,
+    "sitemapEntries": 18,
+    "sitemapUrls": [
+      "https://anakslabs.com/",
+      "https://anakslabs.com/clinics/",
+      "https://anakslabs.com/contact/",
+      "https://anakslabs.com/check/",
+      "https://anakslabs.com/clinics/example/",
+      "https://anakslabs.com/about/",
+      "https://anakslabs.com/sources/",
+      "https://anakslabs.com/articles/",
+      "https://anakslabs.com/articles/patients-ask-ai-first/",
+      "https://anakslabs.com/articles/ask-an-assistant-about-your-practice/",
+      "https://anakslabs.com/articles/why-the-ai-quotes-your-competitor/",
+      "https://anakslabs.com/articles/beautiful-but-invisible/",
+      "https://anakslabs.com/articles/what-patients-see-what-machines-receive/",
+      "https://anakslabs.com/articles/what-a-machine-can-tell-checklist/",
+      "https://anakslabs.com/articles/what-monthly-content-actually-does/",
+      "https://anakslabs.com/articles/redesign-or-rebuild/",
+      "https://anakslabs.com/articles/counting-inquiries-not-people/",
+      "https://anakslabs.com/articles/evaluating-an-agency-seo-claims/"
+    ],
+    "homepageInSitemap": true
+  },
+  "weight": {
+    "note": "Measured against a local server that does not compress. Vercel serves HTML, CSS and JS brotli-compressed, so those three are smaller in production; the font and image bytes are already compressed and are identical either way.",
+    "firstView": {
+      "htmlKB": 16.2,
+      "cssKB": 51.5,
+      "jsKB": 7.3,
+      "fontKB": 21.8,
+      "imageKB": 93,
+      "totalKB": 189.8,
+      "fontFilesRequested": "/assets/fonts/space-grotesk-latin.woff2"
+    },
+    "fontFilesOnDisk": [
+      {
+        "file": "/assets/fonts/FONT-LICENSES.md",
+        "bytes": 1348
+      },
+      {
+        "file": "/assets/fonts/schibsted-site.woff2",
+        "bytes": 19340
+      },
+      {
+        "file": "/assets/fonts/space-grotesk-latin-ext.woff2",
+        "bytes": 18924
+      },
+      {
+        "file": "/assets/fonts/space-grotesk-latin.woff2",
+        "bytes": 22320
+      }
+    ]
+  },
+  "rendering": {
+    "paintMetricsNote": "firstContentfulPaintMs and lcpMs are null at most widths because the browser never emitted those entries, not because they were not collected. The homepage animates its eyebrow, h1, lead, buttons and note in from opacity: 0 in CSS (site.css lines 566-569 and 150), and Chromium excludes anything painted while fully transparent from both First Contentful Paint and Largest Contentful Paint candidacy. The result is a page with a first paint and no contentful paint: Lighthouse's own trace engine throws LanternError: NO_LCP, and its largest-contentful-paint-element audit identifies no element, while still reporting an LCP time. Real-user monitoring (CrUX, or any RUM using the web vitals API) would report no LCP for this page at all. This is the condition on the live site today and the motion layer inherits it; it is not caused by the motion layer, and equally, replacing the hero is the opportunity to fix it.",
+    "paintMetrics": [
+      {
+        "view": "1440px",
+        "firstPaintMs": 88,
+        "firstContentfulPaintMs": null,
+        "lcpMs": null,
+        "lcpElement": null,
+        "cls": 0
+      },
+      {
+        "view": "768px",
+        "firstPaintMs": 48,
+        "firstContentfulPaintMs": 56,
+        "lcpMs": null,
+        "lcpElement": null,
+        "cls": 0
+      },
+      {
+        "view": "390px",
+        "firstPaintMs": 36,
+        "firstContentfulPaintMs": null,
+        "lcpMs": null,
+        "lcpElement": null,
+        "cls": 0
+      }
+    ],
+    "heroOpacityTimeline": {
+      "view": "hero opacity timeline 390 (JS on)",
+      "h1FullyOpaqueAtMs": 1200,
+      "ctaRowFullyOpaqueAtMs": 1200,
+      "consoleErrors": 0,
+      "detail": "none",
+      "timeline": [
+        {
+          "tMs": 150,
+          "h1": 0,
+          "lead": 0,
+          "ctaRow": 0,
+          "eyebrow": 0,
+          "brand": 1
+        },
+        {
+          "tMs": 400,
+          "h1": 0.55,
+          "lead": 0.13,
+          "ctaRow": 0,
+          "eyebrow": 0.46,
+          "brand": 1
+        },
+        {
+          "tMs": 800,
+          "h1": 0.98,
+          "lead": 0.93,
+          "ctaRow": 0.83,
+          "eyebrow": 0.99,
+          "brand": 1
+        },
+        {
+          "tMs": 1200,
+          "h1": 1,
+          "lead": 1,
+          "ctaRow": 1,
+          "eyebrow": 1,
+          "brand": 1
+        },
+        {
+          "tMs": 2000,
+          "h1": 1,
+          "lead": 1,
+          "ctaRow": 1,
+          "eyebrow": 1,
+          "brand": 1
+        },
+        {
+          "tMs": 3000,
+          "h1": 1,
+          "lead": 1,
+          "ctaRow": 1,
+          "eyebrow": 1,
+          "brand": 1
+        }
+      ]
+    },
+    "noJs": {
+      "view": "no-JS 1440",
+      "revealItems": 28,
+      "hiddenItems": 0,
+      "headingsInDom": 14,
+      "verdict": "all visible"
+    },
+    "reducedMotion": {
+      "view": "reduced-motion 1440",
+      "revealItems": 28,
+      "hiddenItems": 0,
+      "transitionDuration": "0s",
+      "verdict": "all visible"
+    },
+    "firstPaintWithoutBundle": [
+      {
+        "view": "no-bundle 390 (first paint)",
+        "heroItemsVisible": "6/6",
+        "luminanceRange": "24–255",
+        "inkPixelsPct": 6.27,
+        "verdict": "readable"
+      },
+      {
+        "view": "no-bundle 1440 (first paint)",
+        "heroItemsVisible": "5/5",
+        "luminanceRange": "24–255",
+        "inkPixelsPct": 3.94,
+        "verdict": "readable"
+      }
+    ],
+    "revealSweep": {
+      "view": "reveal sweep (JS on, scrolled)",
+      "sectionsChecked": 7,
+      "stillHidden": 0,
+      "detail": "none"
+    }
+  },
+  "overflow": {
+    "criterion": "document.scrollWidth <= window.innerWidth",
+    "widthsTested": [
+      320,
+      360,
+      375,
+      390,
+      412,
+      430,
+      480,
+      481,
+      600,
+      768,
+      769,
+      900,
+      1024,
+      1280,
+      1440,
+      1600
+    ],
+    "widthsThatScroll": [
+      320
+    ],
+    "detail": [
+      {
+        "width": 320,
+        "scrollWidth": 333,
+        "innerWidth": 320,
+        "scrolls": true,
+        "offenders": [
+          "a.vertical [13..333]"
+        ]
+      },
+      {
+        "width": 360,
+        "scrollWidth": 360,
+        "innerWidth": 360,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "innerWidth": 375,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 390,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 412,
+        "scrollWidth": 412,
+        "innerWidth": 412,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430,
+        "innerWidth": 430,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 480,
+        "scrollWidth": 480,
+        "innerWidth": 480,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 481,
+        "scrollWidth": 481,
+        "innerWidth": 481,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 600,
+        "scrollWidth": 600,
+        "innerWidth": 600,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 769,
+        "scrollWidth": 769,
+        "innerWidth": 769,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 900,
+        "scrollWidth": 900,
+        "innerWidth": 900,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "innerWidth": 1024,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 1280,
+        "scrollWidth": 1280,
+        "innerWidth": 1280,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 1600,
+        "scrollWidth": 1600,
+        "innerWidth": 1600,
+        "scrolls": false,
+        "offenders": []
+      }
+    ]
+  },
+  "screenshots": [
+    "1440-entrance.png",
+    "1440-full.png",
+    "1440-top.png",
+    "390-entrance.png",
+    "390-full.png",
+    "390-top.png",
+    "768-entrance.png",
+    "768-full.png",
+    "768-top.png",
+    "nobundle-1440.png",
+    "nobundle-390.png",
+    "nojs-1440-full.png",
+    "nojs-1440-top.png",
+    "reducedmotion-1440-top.png"
+  ]
+}

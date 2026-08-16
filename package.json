@@ -1,0 +1,22 @@
+{
+  "name": "anakslabs-website-static",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Verification harness for the static anakslabs.com site. The site itself is plain HTML and CSS and has no build step; this package.json exists only to hold the dev-time checkers under scripts/. It is listed in .vercelignore and is never uploaded.",
+  "type": "module",
+  "scripts": {
+    "serve": "node scripts/serve.mjs 4311",
+    "verify": "node scripts/verify-acceptance.mjs http://localhost:4311",
+    "assets": "node scripts/verify-assets.mjs http://localhost:4311",
+    "snapshot": "node scripts/snapshot.mjs http://localhost:4311 --out verification",
+    "lighthouse": "node scripts/lighthouse.mjs http://localhost:4311 --runs 2 --json verification/lighthouse.json",
+    "paint": "node scripts/verify-paint.mjs http://localhost:4311",
+    "images": "node scripts/build-images.mjs"
+  },
+  "devDependencies": {
+    "chrome-launcher": "^1.2.1",
+    "lighthouse": "^13.4.1",
+    "playwright": "^1.62.1",
+    "sharp": "^0.35.3"
+  }
+}

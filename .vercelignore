@@ -6,3 +6,15 @@
 # and /tools/baseline.json both answered 200 — because this repo is served
 # as-is. The repo keeps the scripts; the deployment does not get them.
 tools/
+
+# Same reasoning as tools/. The verification harness and the recorded baseline
+# are internal: this repo is uploaded as-is, so anything left here answers 200
+# on the public site. scripts/ would publish the checks, baseline/ and
+# verification/ would publish the screenshots and the Lighthouse traces, and
+# package.json would advertise a build step the deployment does not have.
+scripts/
+baseline/
+verification/
+package.json
+package-lock.json
+node_modules/

@@ -1,0 +1,263 @@
+[
+  {
+    "view": "1440px",
+    "firstPaintMs": 88,
+    "firstContentfulPaintMs": null,
+    "lcpMs": null,
+    "lcpElement": null,
+    "cls": 0,
+    "heroH1Opacity": 1,
+    "htmlKB": 16.2,
+    "cssKB": 51.5,
+    "jsKB": 7.3,
+    "fontKB": 21.8,
+    "imageKB": 93,
+    "totalKB": 189.8,
+    "fontFiles": "/assets/fonts/space-grotesk-latin.woff2"
+  },
+  {
+    "view": "768px",
+    "firstPaintMs": 48,
+    "firstContentfulPaintMs": 56,
+    "lcpMs": null,
+    "lcpElement": null,
+    "cls": 0,
+    "heroH1Opacity": 1,
+    "htmlKB": 16.2,
+    "cssKB": 51.5,
+    "jsKB": 7.3,
+    "fontKB": 21.8,
+    "imageKB": 93,
+    "totalKB": 189.8,
+    "fontFiles": "/assets/fonts/space-grotesk-latin.woff2"
+  },
+  {
+    "view": "390px",
+    "firstPaintMs": 36,
+    "firstContentfulPaintMs": null,
+    "lcpMs": null,
+    "lcpElement": null,
+    "cls": 0,
+    "heroH1Opacity": 1,
+    "htmlKB": 16.2,
+    "cssKB": 51.5,
+    "jsKB": 7.3,
+    "fontKB": 21.8,
+    "imageKB": 93,
+    "totalKB": 189.8,
+    "fontFiles": "/assets/fonts/space-grotesk-latin.woff2"
+  },
+  {
+    "view": "no-JS 1440",
+    "revealItems": 28,
+    "hiddenItems": 0,
+    "headingsInDom": 14,
+    "verdict": "all visible"
+  },
+  {
+    "view": "reduced-motion 1440",
+    "revealItems": 28,
+    "hiddenItems": 0,
+    "transitionDuration": "0s",
+    "verdict": "all visible"
+  },
+  {
+    "view": "overflow sweep 320–1600",
+    "widthsTested": 16,
+    "overflowing": 1,
+    "detail": "320px doc=333 win=320 — a.vertical [13..333]",
+    "perWidth": [
+      {
+        "width": 320,
+        "scrollWidth": 333,
+        "innerWidth": 320,
+        "scrolls": true,
+        "offenders": [
+          "a.vertical [13..333]"
+        ]
+      },
+      {
+        "width": 360,
+        "scrollWidth": 360,
+        "innerWidth": 360,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 375,
+        "scrollWidth": 375,
+        "innerWidth": 375,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 390,
+        "scrollWidth": 390,
+        "innerWidth": 390,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 412,
+        "scrollWidth": 412,
+        "innerWidth": 412,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 430,
+        "scrollWidth": 430,
+        "innerWidth": 430,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 480,
+        "scrollWidth": 480,
+        "innerWidth": 480,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 481,
+        "scrollWidth": 481,
+        "innerWidth": 481,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 600,
+        "scrollWidth": 600,
+        "innerWidth": 600,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 768,
+        "scrollWidth": 768,
+        "innerWidth": 768,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 769,
+        "scrollWidth": 769,
+        "innerWidth": 769,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 900,
+        "scrollWidth": 900,
+        "innerWidth": 900,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 1024,
+        "scrollWidth": 1024,
+        "innerWidth": 1024,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 1280,
+        "scrollWidth": 1280,
+        "innerWidth": 1280,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "innerWidth": 1440,
+        "scrolls": false,
+        "offenders": []
+      },
+      {
+        "width": 1600,
+        "scrollWidth": 1600,
+        "innerWidth": 1600,
+        "scrolls": false,
+        "offenders": []
+      }
+    ]
+  },
+  {
+    "view": "no-bundle 390 (first paint)",
+    "heroItemsVisible": "6/6",
+    "luminanceRange": "24–255",
+    "inkPixelsPct": 6.27,
+    "verdict": "readable"
+  },
+  {
+    "view": "no-bundle 1440 (first paint)",
+    "heroItemsVisible": "5/5",
+    "luminanceRange": "24–255",
+    "inkPixelsPct": 3.94,
+    "verdict": "readable"
+  },
+  {
+    "view": "hero opacity timeline 390 (JS on)",
+    "h1FullyOpaqueAtMs": 1200,
+    "ctaRowFullyOpaqueAtMs": 1200,
+    "consoleErrors": 0,
+    "detail": "none",
+    "timeline": [
+      {
+        "tMs": 150,
+        "h1": 0,
+        "lead": 0,
+        "ctaRow": 0,
+        "eyebrow": 0,
+        "brand": 1
+      },
+      {
+        "tMs": 400,
+        "h1": 0.55,
+        "lead": 0.13,
+        "ctaRow": 0,
+        "eyebrow": 0.46,
+        "brand": 1
+      },
+      {
+        "tMs": 800,
+        "h1": 0.98,
+        "lead": 0.93,
+        "ctaRow": 0.83,
+        "eyebrow": 0.99,
+        "brand": 1
+      },
+      {
+        "tMs": 1200,
+        "h1": 1,
+        "lead": 1,
+        "ctaRow": 1,
+        "eyebrow": 1,
+        "brand": 1
+      },
+      {
+        "tMs": 2000,
+        "h1": 1,
+        "lead": 1,
+        "ctaRow": 1,
+        "eyebrow": 1,
+        "brand": 1
+      },
+      {
+        "tMs": 3000,
+        "h1": 1,
+        "lead": 1,
+        "ctaRow": 1,
+        "eyebrow": 1,
+        "brand": 1
+      }
+    ]
+  },
+  {
+    "view": "reveal sweep (JS on, scrolled)",
+    "sectionsChecked": 7,
+    "stillHidden": 0,
+    "detail": "none"
+  }
+]
