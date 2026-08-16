@@ -19,23 +19,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <!-- The first hero frame is the largest contentful paint under Lighthouse's
-       mobile emulation — measured, not assumed. Without this the browser only
-       discovers it after the stylesheet has arrived and the body has been
-       parsed, which put LCP at 1.88s; declaring it here moves the fetch into
-       the head alongside the font. Same srcset and sizes as the <img>, so the
-       preload and the element resolve to the same rung and nothing is fetched
-       twice. AVIF only: a browser without it ignores this line and falls
-       through to the WebP in the picture, which is the correct outcome. -->
-  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
-        imagesizes="(min-width: 1174px) 1080px, 92vw"
-        imagesrcset="/assets/sections/01-asking-480.avif 480w,
-                     /assets/sections/01-asking-640.avif 640w,
-                     /assets/sections/01-asking-840.avif 840w,
-                     /assets/sections/01-asking-1080.avif 1080w,
-                     /assets/sections/01-asking-1360.avif 1360w,
-                     /assets/sections/01-asking-1720.avif 1720w,
-                     /assets/sections/01-asking-2160.avif 2160w" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
