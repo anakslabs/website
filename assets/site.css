@@ -224,6 +224,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 }
 .header-inner { display: flex; align-items: center; gap: 18px; }
 .brand { display: inline-flex; align-items: center; margin-right: auto; text-decoration: none; }
+.brand picture { display: block; line-height: 0; }
 .brand img { height: 28px; width: auto; display: block; }
 .brand:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-radius: 6px; }
 
