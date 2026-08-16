@@ -586,8 +586,34 @@ for (const [label, width, height, isMobile] of [["390", 390, 844, true], ["1440"
     });
 
   const atRest = await read();
-  await page.evaluate(() => document.querySelector("#demand").scrollIntoView({ block: "center", behavior: "instant" }));
-  await page.waitForTimeout(1600);
+
+  /* Scrolled the way a person scrolls — 40px a frame — and NOT with
+     scrollIntoView({block:"center"}), which was the original check and was
+     close to worthless. That jump lands #demand in the middle of the screen in
+     one step, which throws the figure clear off the top; it confirmed the class
+     was added while reporting 0% of the picture on screen, so it could not have
+     distinguished this effect from one that fires where nobody can see it.
+     What matters is not that the class lands, it is that the answer arrives
+     while the reader is still looking at the photograph. */
+  const onScreenAtResolve = await page.evaluate(async () => {
+    const pair = document.getElementById("answer-pair");
+    if (!pair) return null;
+    let fired = null;
+    new MutationObserver(() => {
+      if (pair.classList.contains("resolved") && !fired) {
+        const r = pair.getBoundingClientRect();
+        const visible = Math.max(0, Math.min(innerHeight, r.bottom) - Math.max(0, r.top));
+        fired = { scrollY: Math.round(scrollY), pct: Math.round((visible / r.height) * 100) };
+      }
+    }).observe(pair, { attributes: true, attributeFilter: ["class"] });
+    for (let y = 0; y < 3000 && !fired; y += 40) {
+      scrollTo(0, y);
+      await new Promise((r) => requestAnimationFrame(r));
+    }
+    await new Promise((r) => setTimeout(r, 200));
+    return fired;
+  });
+  await page.waitForTimeout(1500);
   const afterScroll = await read();
 
   if (!atRest) fail("signature transition: .pair / .frame-answered not found in the page");
@@ -595,8 +621,12 @@ for (const [label, width, height, isMobile] of [["390", 390, 844, true], ["1440"
     if (atRest.answeredOpacity > 0.01) fail(`signature transition: the answered frame is already visible at rest (opacity ${atRest.answeredOpacity})`);
     if (!afterScroll.resolved || afterScroll.answeredOpacity < 0.99) fail(`signature transition: the answer did not resolve on entering #demand (opacity ${afterScroll?.answeredOpacity})`);
     if (!atRest.aligned) fail("signature transition: the two frames are not pixel-aligned — the swap will read as a slide");
+    if (!onScreenAtResolve) fail("signature transition: it never resolved during a natural scroll of the page");
+    else if (onScreenAtResolve.pct < 60) {
+      fail(`signature transition: only ${onScreenAtResolve.pct}% of the figure was on screen when the answer arrived — the moment happens where nobody is looking`);
+    }
   }
-  report.signature = { atRest, afterScroll };
+  report.signature = { atRest, afterScroll, onScreenAtResolve };
   await ctx.close();
 }
 
@@ -629,7 +659,12 @@ console.log(`  ${report.overflow.widthsTested} widths tested, ${report.overflow.
 console.log("\n=== keyboard ===");
 console.log(`  ${report.keyboard.stops} focus stops, ${report.keyboard.invisible} invisible or off-screen`);
 console.log("\n=== signature transition ===");
-console.log(`  at rest: answered frame opacity ${report.signature.atRest?.answeredOpacity}; after entering #demand: ${report.signature.afterScroll?.answeredOpacity} (aligned: ${report.signature.atRest?.aligned})`);
+console.log(
+  `  at rest: answered frame opacity ${report.signature.atRest?.answeredOpacity}; after entering #demand: ${report.signature.afterScroll?.answeredOpacity} (aligned: ${report.signature.atRest?.aligned})`,
+);
+console.log(
+  `  under a natural scroll it resolves at scrollY=${report.signature.onScreenAtResolve?.scrollY} with ${report.signature.onScreenAtResolve?.pct}% of the figure on screen`,
+);
 
 console.log(`\nWrote ${outDir}`);
 if (failures.length) {
