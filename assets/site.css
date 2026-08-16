@@ -573,11 +573,24 @@ body.landing .grid { display: none; }
 }
 .lp-lead b { color: var(--ink-2); font-weight: 500; }
 .lp-actions { margin-top: clamp(28px, 4vw, 40px); display: flex; flex-wrap: wrap; gap: 12px 14px; align-items: center; }
-/* hero entrance — matches the timing curve used by the original hero */
-.lp-hero h1        { opacity: 0; transform: translateY(14px); animation: rise 780ms cubic-bezier(.22,.61,.36,1) 200ms forwards; }
-.lp-hero .lp-lead  { opacity: 0; transform: translateY(12px); animation: rise 740ms cubic-bezier(.22,.61,.36,1) 340ms forwards; }
-.lp-hero .lp-actions { opacity: 0; transform: translateY(12px); animation: rise 700ms cubic-bezier(.22,.61,.36,1) 470ms forwards; }
-.lp-hero .lp-note  { opacity: 0; transform: translateY(10px); animation: rise 700ms cubic-bezier(.22,.61,.36,1) 600ms forwards; }
+/* hero entrance — TRANSFORM ONLY, and that is not a stylistic preference.
+   Chromium excludes anything it first paints fully transparent from
+   contentful-paint candidacy, permanently, and an entrance that starts at
+   opacity 0 under a keyframe with animation-delay holds it there long enough
+   to be excluded. These four rules used to declare `opacity: 0`, which put the
+   whole hero — the h1 included — out of the running for LCP on the one page
+   whose h1 is by far its largest element. On a sibling page the same pattern
+   suppressed first contentful paint outright and Lighthouse could not score it
+   at all; nothing looked wrong on screen in either case.
+
+   The keyframe is unchanged and still lists `opacity: 1`. With no opacity
+   declared on the element, the implicit `from` is the computed value, which is
+   1, so opacity is constant across the animation and only the offset moves. */
+.lp-hero .eyebrow  { opacity: 1; }
+.lp-hero h1        { transform: translateY(14px); animation: rise 780ms cubic-bezier(.22,1,.36,1) 200ms forwards; }
+.lp-hero .lp-lead  { transform: translateY(12px); animation: rise 740ms cubic-bezier(.22,1,.36,1) 340ms forwards; }
+.lp-hero .lp-actions { transform: translateY(12px); animation: rise 700ms cubic-bezier(.22,1,.36,1) 470ms forwards; }
+.lp-hero .lp-note  { transform: translateY(10px); animation: rise 700ms cubic-bezier(.22,1,.36,1) 600ms forwards; }
 .lp-note {
   margin-top: 18px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; letter-spacing: .02em;
   color: var(--gray-soft); display: flex; align-items: flex-start; gap: 9px;
@@ -944,12 +957,77 @@ body.landing .grid { display: none; }
 .section > .src-where a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 600px) { .src-item dl > div { grid-template-columns: 1fr; } }
 
+/* =========================================================================
+   Section photographs (home). Six studio photographs of machined models of
+   interfaces, at their native 16:9, never cropped.
+
+   The frames carry a hairline and a radius and nothing else. No shadow: these
+   objects already cast their own on the studio sweep, and a CSS shadow under a
+   photographed shadow reads as two light sources and flattens the picture.
+   ========================================================================= */
+.shot {
+  margin-top: clamp(36px, 5vw, 60px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  /* Declared here as well as on the <img>, so the box is reserved from the
+     first layout pass whether or not the image ever arrives. This is the whole
+     reason CLS is 0 with five lazy images on the page. */
+  aspect-ratio: 2752 / 1536;
+  background: #FBFCFD;
+}
+.shot picture, .shot img { display: block; width: 100%; height: 100%; }
+.shot img { object-fit: cover; }
+
+/* ---- the answer arriving: the page's one piece of real choreography --------
+   01-asking and 02-competitor are the same objects, camera and lighting; only
+   the interior of the near bubble differs. Both frames are stacked in one box
+   and the top one is swapped by OPACITY ALONE.
+
+   Nothing here may animate transform, ever. The two photographs agree pixel
+   for pixel outside the answer well, so any movement slides that shared
+   aluminium against itself and the effect collapses into an ordinary
+   cross-fade — which is the one thing this transition is not.               */
+.pair {
+  position: relative;
+  margin-top: clamp(40px, 6vw, 76px);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 2752 / 1536;
+  background: #FBFCFD;
+}
+.pair .frame { position: absolute; inset: 0; display: block; }
+.pair .frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+/* The withheld state is the enhancement. By default the answered frame is
+   opaque, so a browser with no JavaScript — or one whose owner asked for
+   reduced motion — is served the resolved photograph rather than a picture
+   that never finishes. Only .reveal-on, which site.js adds, holds it back.
+
+   The transition lives on .resolved and NOT on the hidden state, deliberately.
+   Put it on the hidden state and the moment site.js adds .reveal-on the
+   answered frame animates 1 → 0 in front of the visitor: the answer visibly
+   un-arrives on page load, which is the exact opposite of the intended read. */
+.reveal-on .pair .frame-answered { opacity: 0; }
+.reveal-on .pair.resolved .frame-answered {
+  opacity: 1;
+  transition: opacity 900ms cubic-bezier(.22,1,.36,1);
+}
+
 /* ---- scroll reveal (class added by site.js; no JS ⇒ everything visible) ---- */
 .reveal-on [data-reveal] { opacity: 0; transform: translateY(18px); }
 .reveal-on [data-reveal].in {
   opacity: 1; transform: none;
-  transition: opacity 700ms cubic-bezier(.22,.61,.36,1), transform 700ms cubic-bezier(.22,.61,.36,1);
+  transition: opacity 500ms cubic-bezier(.22,1,.36,1), transform 500ms cubic-bezier(.22,1,.36,1);
 }
+/* A photograph enters on transform only. Fading a picture in from nothing is
+   the generic move and it also costs a compositing pass on the largest element
+   in the section; a short rise says the same thing and never touches opacity.
+   translateY specifically — a scale would crop the studio ground against the
+   figure's own overflow for the length of the animation. */
+.reveal-on .shot[data-reveal] { opacity: 1; transform: translateY(22px); }
+.reveal-on .shot[data-reveal].in { transform: none; transition: transform 600ms cubic-bezier(.22,1,.36,1); }
 
 /* =========================================================================
    keyframes
@@ -982,6 +1060,12 @@ body.landing .grid { display: none; }
   body.subpage .grid { opacity: .5 !important; }
   .aurora b { opacity: .5 !important; transform: none !important; }
   .reveal-on [data-reveal] { opacity: 1 !important; transform: none !important; }
+  /* The answer is shown already arrived rather than withheld. Holding the top
+     frame back and then snapping it in on scroll — which is what would happen
+     if only the transition were suppressed — is a jump cut, and a jump cut is
+     the one thing a reader who asked for less motion should not be handed.
+     Resolved is also the state the copy beside it describes. */
+  .reveal-on .pair .frame-answered { opacity: 1 !important; }
 }
 
 /* ---------------------------------------------------------------- contact form

@@ -184,6 +184,70 @@
         io.unobserve(e.target);
       });
     }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
-    els.forEach(function (el) { io.observe(el); });
+
+    /* One reveal per section, in reading order: heading, then body, then
+       whatever list or figure follows. The delay is computed per section
+       rather than per page, so a section entering halfway down does not
+       inherit a two-second offset from everything above it, and it is capped
+       at three steps because a fourth is no longer read as sequence — it is
+       read as the page being slow. */
+    els.forEach(function (el) {
+      var section = el.closest("section");
+      if (section) {
+        var i = Array.prototype.indexOf.call(section.querySelectorAll("[data-reveal]"), el);
+        if (i > 0) el.style.transitionDelay = Math.min(i, 3) * 60 + "ms";
+      }
+      io.observe(el);
+    });
+
+    /* A reveal that has not fired yet is at opacity 0, and the links inside it
+       are still in the tab order. Tabbing therefore walked the keyboard onto
+       ten invisible controls on this page: focus was really on "Check your page
+       free", the browser had scrolled it into view, and there was nothing on
+       screen to see. Measured, not guessed — snapshot.mjs tabs the page and
+       reads the computed opacity at every stop.
+
+       So focus reveals its own block, immediately and without the delay, which
+       is the one case where the entrance is not something anybody asked to
+       watch. focusin rather than focus because it has to catch the descendant
+       that actually took focus, not the wrapper carrying the attribute. */
+    document.addEventListener("focusin", function (e) {
+      var block = e.target.closest ? e.target.closest("[data-reveal]") : null;
+      if (!block || block.classList.contains("in")) return;
+      block.style.transitionDelay = "0ms";
+      block.classList.add("in");
+      io.unobserve(block);
+    });
+  })();
+
+  /* ---- the answer arriving (home) -----------------------------------------
+     The hero holds a question with an empty answer bubble; the demand section
+     below it says the answer has already resolved and named somebody. Those
+     two photographs are the same objects shot twice, so the second is stacked
+     on the first and swapped in place when the section that makes the claim
+     comes into view. The copy and the picture change at the same moment.
+
+     Triggered off #demand rather than off the figure itself: the figure is on
+     screen for most of the hero, and resolving it there would answer the
+     question before the page has finished asking it. The bottom margin holds
+     the swap until the demand heading is a quarter of the way up the viewport,
+     which is where a reader is looking when they read it — the figure is still
+     fully visible at that scroll position at every width measured.
+
+     Reduced motion is handled in CSS, which shows the resolved frame from the
+     start; this observer may still run and add the class, and doing so is a
+     no-op because the frame is already opaque. ---- */
+  (function () {
+    var pair = document.getElementById("answer-pair");
+    var demand = document.getElementById("demand");
+    if (!pair || !demand || !("IntersectionObserver" in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        pair.classList.add("resolved");
+        io.disconnect();
+      });
+    }, { rootMargin: "0px 0px -25% 0px", threshold: 0 });
+    io.observe(demand);
   })();
 })();

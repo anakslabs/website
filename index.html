@@ -19,6 +19,23 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- The first hero frame is the largest contentful paint under Lighthouse's
+       mobile emulation — measured, not assumed. Without this the browser only
+       discovers it after the stylesheet has arrived and the body has been
+       parsed, which put LCP at 1.88s; declaring it here moves the fetch into
+       the head alongside the font. Same srcset and sizes as the <img>, so the
+       preload and the element resolve to the same rung and nothing is fetched
+       twice. AVIF only: a browser without it ignores this line and falls
+       through to the WebP in the picture, which is the correct outcome. -->
+  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+        imagesizes="(min-width: 1174px) 1080px, 92vw"
+        imagesrcset="/assets/sections/01-asking-480.avif 480w,
+                     /assets/sections/01-asking-640.avif 640w,
+                     /assets/sections/01-asking-840.avif 840w,
+                     /assets/sections/01-asking-1080.avif 1080w,
+                     /assets/sections/01-asking-1360.avif 1360w,
+                     /assets/sections/01-asking-1720.avif 1720w,
+                     /assets/sections/01-asking-2160.avif 2160w" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -65,6 +82,69 @@
           <a class="btn btn-ghost" href="/clinics/">What's included</a>
         </div>
         <p class="lp-note">We build your site first. You decide after you've seen it.</p>
+
+        <!-- The signature transition, and the only place on this page where two
+             images share one box. 01-asking and 02-competitor are the same
+             objects photographed twice, from the same camera, with the same
+             lighting: measured over the encoded 1080px pair, 93.7% of the frame
+             is bit-identical and every pixel that differs falls inside the near
+             bubble's answer well. So the top frame is swapped by opacity alone
+             and nothing else moves — which is why it reads as the answer
+             arriving rather than as one picture dissolving into another. A
+             transform of any kind here would slide the shared aluminium against
+             itself and give the whole trick away as a cross-fade.
+
+             The withheld state is the enhancement, not the content: the
+             answered frame is opaque by default, and only a browser that runs
+             site.js (and has not asked for reduced motion) gets to see it held
+             back and then resolve. With scripting off the page simply shows the
+             resolved photograph. -->
+        <figure class="pair" id="answer-pair">
+          <picture class="frame frame-asked">
+            <source type="image/avif" sizes="(min-width: 1174px) 1080px, 92vw"
+                    srcset="/assets/sections/01-asking-480.avif 480w,
+                            /assets/sections/01-asking-640.avif 640w,
+                            /assets/sections/01-asking-840.avif 840w,
+                            /assets/sections/01-asking-1080.avif 1080w,
+                            /assets/sections/01-asking-1360.avif 1360w,
+                            /assets/sections/01-asking-1720.avif 1720w,
+                            /assets/sections/01-asking-2160.avif 2160w" />
+            <img src="/assets/sections/01-asking-1080.webp" sizes="(min-width: 1174px) 1080px, 92vw"
+                 srcset="/assets/sections/01-asking-480.webp 480w,
+                         /assets/sections/01-asking-640.webp 640w,
+                         /assets/sections/01-asking-840.webp 840w,
+                         /assets/sections/01-asking-1080.webp 1080w,
+                         /assets/sections/01-asking-1360.webp 1360w,
+                         /assets/sections/01-asking-1720.webp 1720w,
+                         /assets/sections/01-asking-2160.webp 2160w"
+                 width="2752" height="1536" loading="eager" decoding="async"
+                 alt="Two machined speech bubbles on a studio table: the question is set in glass, and the aluminium answer bubble beside it is lit from within but empty." />
+          </picture>
+          <!-- alt="" deliberately: this is the same scene as the frame beneath
+               it, and a screen reader announcing the table twice describes the
+               swap as duplication rather than as change. What changes is stated
+               in the copy, which is where this site argues meaning belongs. -->
+          <picture class="frame frame-answered">
+            <source type="image/avif" sizes="(min-width: 1174px) 1080px, 92vw"
+                    srcset="/assets/sections/02-competitor-480.avif 480w,
+                            /assets/sections/02-competitor-640.avif 640w,
+                            /assets/sections/02-competitor-840.avif 840w,
+                            /assets/sections/02-competitor-1080.avif 1080w,
+                            /assets/sections/02-competitor-1360.avif 1360w,
+                            /assets/sections/02-competitor-1720.avif 1720w,
+                            /assets/sections/02-competitor-2160.avif 2160w" />
+            <img src="/assets/sections/02-competitor-1080.webp" sizes="(min-width: 1174px) 1080px, 92vw"
+                 srcset="/assets/sections/02-competitor-480.webp 480w,
+                         /assets/sections/02-competitor-640.webp 640w,
+                         /assets/sections/02-competitor-840.webp 840w,
+                         /assets/sections/02-competitor-1080.webp 1080w,
+                         /assets/sections/02-competitor-1360.webp 1360w,
+                         /assets/sections/02-competitor-1720.webp 1720w,
+                         /assets/sections/02-competitor-2160.webp 2160w"
+                 width="2752" height="1536" loading="eager" decoding="async" fetchpriority="low"
+                 alt="" />
+          </picture>
+        </figure>
       </div>
     </section>
 
@@ -115,6 +195,29 @@
         </div>
         <p class="lp-sub" data-reveal>None of this shows up when you look at your own website. It shows up when something has to read that page and answer a question with it.</p>
 
+        <figure class="shot" data-reveal>
+          <picture>
+            <source type="image/avif" sizes="(min-width: 1174px) 1080px, 92vw"
+                    srcset="/assets/sections/03-unreadable-480.avif 480w,
+                            /assets/sections/03-unreadable-640.avif 640w,
+                            /assets/sections/03-unreadable-840.avif 840w,
+                            /assets/sections/03-unreadable-1080.avif 1080w,
+                            /assets/sections/03-unreadable-1360.avif 1360w,
+                            /assets/sections/03-unreadable-1720.avif 1720w,
+                            /assets/sections/03-unreadable-2160.avif 2160w" />
+            <img src="/assets/sections/03-unreadable-1080.webp" sizes="(min-width: 1174px) 1080px, 92vw"
+                 srcset="/assets/sections/03-unreadable-480.webp 480w,
+                         /assets/sections/03-unreadable-640.webp 640w,
+                         /assets/sections/03-unreadable-840.webp 840w,
+                         /assets/sections/03-unreadable-1080.webp 1080w,
+                         /assets/sections/03-unreadable-1360.webp 1360w,
+                         /assets/sections/03-unreadable-1720.webp 1720w,
+                         /assets/sections/03-unreadable-2160.webp 2160w"
+                 width="2752" height="1536" loading="lazy" decoding="async"
+                 alt="Two machined browser windows side by side: the left one fully furnished with panels, bars and lines of type, the right one blank metal but for a single small lit block." />
+          </picture>
+        </figure>
+
         <ul class="mech">
           <li data-reveal>
             <h3>Your most important sentence is a picture</h3>
@@ -154,6 +257,29 @@
         </div>
         <p class="lp-sub" data-reveal>We pick an industry, go and audit it properly, and build the offer around what we actually find there. Clinics is where we have done that work.</p>
 
+        <figure class="shot" data-reveal>
+          <picture>
+            <source type="image/avif" sizes="(min-width: 1174px) 1080px, 92vw"
+                    srcset="/assets/sections/04-verticals-480.avif 480w,
+                            /assets/sections/04-verticals-640.avif 640w,
+                            /assets/sections/04-verticals-840.avif 840w,
+                            /assets/sections/04-verticals-1080.avif 1080w,
+                            /assets/sections/04-verticals-1360.avif 1360w,
+                            /assets/sections/04-verticals-1720.avif 1720w,
+                            /assets/sections/04-verticals-2160.avif 2160w" />
+            <img src="/assets/sections/04-verticals-1080.webp" sizes="(min-width: 1174px) 1080px, 92vw"
+                 srcset="/assets/sections/04-verticals-480.webp 480w,
+                         /assets/sections/04-verticals-640.webp 640w,
+                         /assets/sections/04-verticals-840.webp 840w,
+                         /assets/sections/04-verticals-1080.webp 1080w,
+                         /assets/sections/04-verticals-1360.webp 1360w,
+                         /assets/sections/04-verticals-1720.webp 1720w,
+                         /assets/sections/04-verticals-2160.webp 2160w"
+                 width="2752" height="1536" loading="lazy" decoding="async"
+                 alt="A machined junction box on a studio table: one blue ribbon runs into it and three separate lit cables leave it, each ending at its own small site panel." />
+          </picture>
+        </figure>
+
         <div class="verticals">
           <a class="vertical" href="/clinics/" data-reveal>
             <span class="badge"><span class="dot" aria-hidden="true"></span>Available now</span>
@@ -176,6 +302,20 @@
           <p class="d"><b>Build from $990. Then $1,490 a month.</b> There is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
         </div>
         <p class="lp-sub" data-reveal><a href="/clinics/#included">What that covers, month by month &rarr;</a></p>
+
+        <!-- RESERVED: the product shot goes here, and it is deliberately not a
+             photograph of a machined model. Every other picture on this page is
+             an argument rendered as an object; this section is the one place
+             that describes a thing we actually ship, and a sculpture standing in
+             for a real screen would be the only dishonest image on the site.
+             When the product is ready to be shown, drop a <figure class="shot">
+             in exactly here — the class, the aspect ratio and the reveal all
+             already work — and no other change is needed.
+
+             Nothing occupies the space in the meantime. A dashed empty box on a
+             production page is not a placeholder, it is a defect with a comment
+             attached, and it would also be the only element on this page that
+             reserves height for content that does not exist. -->
       </div>
     </section>
 
@@ -192,6 +332,29 @@
         </div>
         <p class="lp-sub" data-reveal>We cap how many clients we take in each area. Search results and AI answers are ranked lists &mdash; if we optimized two competing businesses in the same neighborhood, we would be competing against our own clients. One business wins, or nobody does.</p>
         <p class="lp-note" data-reveal>There is no countdown here, and no number of seats: the cap is a condition of the work, not an offer that expires.</p>
+
+        <figure class="shot" data-reveal>
+          <picture>
+            <source type="image/avif" sizes="(min-width: 1174px) 1080px, 92vw"
+                    srcset="/assets/sections/06-exclusivity-480.avif 480w,
+                            /assets/sections/06-exclusivity-640.avif 640w,
+                            /assets/sections/06-exclusivity-840.avif 840w,
+                            /assets/sections/06-exclusivity-1080.avif 1080w,
+                            /assets/sections/06-exclusivity-1360.avif 1360w,
+                            /assets/sections/06-exclusivity-1720.avif 1720w,
+                            /assets/sections/06-exclusivity-2160.avif 2160w" />
+            <img src="/assets/sections/06-exclusivity-1080.webp" sizes="(min-width: 1174px) 1080px, 92vw"
+                 srcset="/assets/sections/06-exclusivity-480.webp 480w,
+                         /assets/sections/06-exclusivity-640.webp 640w,
+                         /assets/sections/06-exclusivity-840.webp 840w,
+                         /assets/sections/06-exclusivity-1080.webp 1080w,
+                         /assets/sections/06-exclusivity-1360.webp 1360w,
+                         /assets/sections/06-exclusivity-1720.webp 1720w,
+                         /assets/sections/06-exclusivity-2160.webp 2160w"
+                 width="2752" height="1536" loading="lazy" decoding="async"
+                 alt="A machined street map with one lit pin standing in a district; the other mounting sockets across the map are empty." />
+          </picture>
+        </figure>
       </div>
     </section>
 
@@ -221,6 +384,30 @@
           <h2 class="lp-h2">Start with your own page.</h2>
         </div>
         <p class="lp-sub" data-reveal>Paste your address and see what a search engine actually receives from your site. The rebuild offer is at the end of the result.</p>
+
+        <figure class="shot" data-reveal>
+          <picture>
+            <source type="image/avif" sizes="(min-width: 1174px) 1080px, 92vw"
+                    srcset="/assets/sections/05-winning-480.avif 480w,
+                            /assets/sections/05-winning-640.avif 640w,
+                            /assets/sections/05-winning-840.avif 840w,
+                            /assets/sections/05-winning-1080.avif 1080w,
+                            /assets/sections/05-winning-1360.avif 1360w,
+                            /assets/sections/05-winning-1720.avif 1720w,
+                            /assets/sections/05-winning-2160.avif 2160w" />
+            <img src="/assets/sections/05-winning-1080.webp" sizes="(min-width: 1174px) 1080px, 92vw"
+                 srcset="/assets/sections/05-winning-480.webp 480w,
+                         /assets/sections/05-winning-640.webp 640w,
+                         /assets/sections/05-winning-840.webp 840w,
+                         /assets/sections/05-winning-1080.webp 1080w,
+                         /assets/sections/05-winning-1360.webp 1360w,
+                         /assets/sections/05-winning-1720.webp 1720w,
+                         /assets/sections/05-winning-2160.webp 2160w"
+                 width="2752" height="1536" loading="lazy" decoding="async"
+                 alt="Five machined result cards stacked in a ranked column, the top one lifted clear of the rest and lit from beneath." />
+          </picture>
+        </figure>
+
         <div data-reveal>
           <a class="btn btn-primary" href="/check/">Check your page free</a>
           <p class="lp-note">Free, no signup, a few seconds.</p>
