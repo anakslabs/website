@@ -401,6 +401,14 @@ for (const [k, v] of Object.entries(report.lcp)) {
   const seen = new Set();
   for (let i = 0; i < 60; i++) {
     await page.keyboard.press("Tab");
+    /* Read after the focus styles have settled, not on the same tick. The skip
+       link is parked off-screen and slides in over 180ms when focused, so
+       sampling immediately caught it mid-transition and reported the one
+       control on the page that is *designed* to appear on focus as a control
+       the keyboard can reach and the eye cannot. That is a measurement
+       artifact, and reporting it as a defect would have buried the ten real
+       ones underneath it. */
+    await page.waitForTimeout(260);
     const stop = await page.evaluate(() => {
       const el = document.activeElement;
       if (!el || el === document.body) return null;
