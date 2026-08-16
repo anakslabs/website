@@ -44,7 +44,13 @@
   --blue-bright: #2F6BFF;
   --blue-soft: #4D7CFF;
   --gray: #545C70;          /* AA on light bg */
-  --gray-soft: #6A7286;
+  /* 4.81:1 on --bg. It was #6A7286, which is 4.489:1 — an accessibility
+     failure by eleven thousandths, which is exactly the kind that survives
+     forever because nobody looking at the page can see it. Lighthouse scored
+     the homepage 91 on accessibility and named three footer paragraphs. This
+     token is the small-print colour used site-wide, so the fix lands on every
+     page that sets a source line, a timestamp or a chart label. */
+  --gray-soft: #666D82;
   --bg: #F6F7F9;
   --line: rgba(20, 26, 58, 0.06);
   --line-2: rgba(20, 26, 58, 0.10);
@@ -504,7 +510,11 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .footer-inner { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px 40px; justify-content: space-between; }
 .footer-company { flex: 1 1 660px; min-width: 0; }
 .footer-brand { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.04em; color: var(--gray-soft); }
-.footer-brand a { color: var(--ink-2); text-decoration: none; }
+/* Underlined, and not for decoration. This link sits inside a paragraph of
+   grey small print, and colour was the only thing telling a reader it was a
+   link — 2.8:1 against the surrounding text, where 3:1 is the floor. Anyone
+   who cannot separate #232c52 from the grey around it had no way to find it. */
+.footer-brand a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
 .footer-brand a:hover { color: var(--blue); }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 1px; }
 .footer-nav a { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em; color: var(--gray); text-decoration: none; }
