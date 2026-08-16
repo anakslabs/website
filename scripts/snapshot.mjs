@@ -205,6 +205,18 @@ for (const [name, width, height, isMobile] of VIEWPORTS) {
   await page.waitForTimeout(900);
   await page.screenshot({ path: resolve(outDir, `${name}-full.png`), fullPage: true });
 
+  /* Freeze the transfer totals HERE, before the sizing check runs. That check
+     re-fetches every image inside the page to decode it, and those fetches go
+     through the same network meter — reported weight doubled the moment it was
+     added, from 105.8KB of images to 211.6KB, describing the harness rather
+     than the page. Everything the visitor actually downloads has arrived by
+     this line: the page has been scrolled end to end, so the lazy images are
+     in. */
+  const bytes = { ...net.bytes };
+  const imageFiles = net.files
+    .filter((f) => f.bucket === "image")
+    .map((f) => `${f.url.split("/").pop()} ${(f.bytes / 1024).toFixed(1)}KB`);
+
   /* Now that everything has loaded, is each image's source bigger than the box
      it is painted into? The gate is "sized to their actual render size", so
      the number that matters is real resource width over CSS width times DPR.
@@ -278,12 +290,8 @@ for (const [name, width, height, isMobile] of VIEWPORTS) {
     ...vitals,
     consoleErrors,
     origins: [...net.origins],
-    weightKB: Object.fromEntries(
-      Object.entries(net.bytes).map(([k, v]) => [k, +(v / 1024).toFixed(1)]),
-    ),
-    imageFiles: net.files
-      .filter((f) => f.bucket === "image")
-      .map((f) => `${f.url.split("/").pop()} ${(f.bytes / 1024).toFixed(1)}KB`),
+    weightKB: Object.fromEntries(Object.entries(bytes).map(([k, v]) => [k, +(v / 1024).toFixed(1)])),
+    imageFiles,
     fontFiles: net.files.filter((f) => f.bucket === "font").map((f) => f.url),
     images,
   });
