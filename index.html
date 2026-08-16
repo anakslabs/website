@@ -56,15 +56,18 @@
 
     <!-- ============================ hero ============================ -->
     <section class="lp-hero">
-      <div class="wrap">
+      <!-- Flat, with no copy wrapper, and that is load-bearing rather than
+           tidy. In source order the figure sits between the headline and the
+           lead, which is what a phone gets: headline, photograph, then the
+           argument — so the picture is high on the screen without the h1 ever
+           losing first position. On a desktop the same six elements are placed
+           by grid, the five text ones stacked in column 1 and the figure
+           spanning every row of column 2. One DOM, no duplicated markup, and
+           nothing reordered away from the reading order a screen reader or a
+           crawler receives. -->
+      <div class="wrap hero-grid">
         <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>AI-ready websites</span></span>
         <h1>Your customers ask AI first. Your site should be <span class="accent">the answer</span>.</h1>
-        <p class="lp-lead">Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it — and a great deal of what is on your screen never reaches them. We build yours so that it does, then we run it for you, every month.</p>
-        <div class="lp-actions">
-          <a class="btn btn-primary" href="/check/">Check your page free</a>
-          <a class="btn btn-ghost" href="/clinics/">What's included</a>
-        </div>
-        <p class="lp-note">We build your site first. You decide after you've seen it.</p>
 
         <!-- The signature transition, and the only place on this page where two
              images share one box. 01-asking and 02-competitor are the same
@@ -84,7 +87,7 @@
              resolved photograph. -->
         <figure class="pair" id="answer-pair">
           <picture class="frame frame-asked">
-            <source type="image/avif" sizes="(min-width: 1174px) 1080px, 92vw"
+            <source type="image/avif" sizes="(min-width: 1391px) 740px, (min-width: 1200px) 53vw, (min-width: 960px) 48vw, 92vw"
                     srcset="/assets/sections/01-asking-480.avif 480w,
                             /assets/sections/01-asking-640.avif 640w,
                             /assets/sections/01-asking-840.avif 840w,
@@ -92,7 +95,7 @@
                             /assets/sections/01-asking-1360.avif 1360w,
                             /assets/sections/01-asking-1720.avif 1720w,
                             /assets/sections/01-asking-2160.avif 2160w" />
-            <img src="/assets/sections/01-asking-1080.webp" sizes="(min-width: 1174px) 1080px, 92vw"
+            <img src="/assets/sections/01-asking-1080.webp" sizes="(min-width: 1391px) 740px, (min-width: 1200px) 53vw, (min-width: 960px) 48vw, 92vw"
                  srcset="/assets/sections/01-asking-480.webp 480w,
                          /assets/sections/01-asking-640.webp 640w,
                          /assets/sections/01-asking-840.webp 840w,
@@ -100,7 +103,7 @@
                          /assets/sections/01-asking-1360.webp 1360w,
                          /assets/sections/01-asking-1720.webp 1720w,
                          /assets/sections/01-asking-2160.webp 2160w"
-                 width="2752" height="1536" loading="eager" decoding="async"
+                 width="2752" height="1536" loading="eager" decoding="async" fetchpriority="high"
                  alt="Two machined speech bubbles on a studio table: the question is set in glass, and the aluminium answer bubble beside it is lit from within but empty." />
           </picture>
           <!-- alt="" deliberately: this is the same scene as the frame beneath
@@ -108,7 +111,7 @@
                swap as duplication rather than as change. What changes is stated
                in the copy, which is where this site argues meaning belongs. -->
           <picture class="frame frame-answered">
-            <source type="image/avif" sizes="(min-width: 1174px) 1080px, 92vw"
+            <source type="image/avif" sizes="(min-width: 1391px) 740px, (min-width: 1200px) 53vw, (min-width: 960px) 48vw, 92vw"
                     srcset="/assets/sections/02-competitor-480.avif 480w,
                             /assets/sections/02-competitor-640.avif 640w,
                             /assets/sections/02-competitor-840.avif 840w,
@@ -116,7 +119,7 @@
                             /assets/sections/02-competitor-1360.avif 1360w,
                             /assets/sections/02-competitor-1720.avif 1720w,
                             /assets/sections/02-competitor-2160.avif 2160w" />
-            <img src="/assets/sections/02-competitor-1080.webp" sizes="(min-width: 1174px) 1080px, 92vw"
+            <img src="/assets/sections/02-competitor-1080.webp" sizes="(min-width: 1391px) 740px, (min-width: 1200px) 53vw, (min-width: 960px) 48vw, 92vw"
                  srcset="/assets/sections/02-competitor-480.webp 480w,
                          /assets/sections/02-competitor-640.webp 640w,
                          /assets/sections/02-competitor-840.webp 840w,
@@ -128,6 +131,13 @@
                  alt="" />
           </picture>
         </figure>
+
+        <p class="lp-lead">Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it — and a great deal of what is on your screen never reaches them. We build yours so that it does, then we run it for you, every month.</p>
+        <div class="lp-actions">
+          <a class="btn btn-primary" href="/check/">Check your page free</a>
+          <a class="btn btn-ghost" href="/clinics/">What's included</a>
+        </div>
+        <p class="lp-note">We build your site first. You decide after you've seen it.</p>
       </div>
     </section>
 

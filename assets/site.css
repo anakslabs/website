@@ -550,15 +550,76 @@ body.landing .grid { display: none; }
 .lp-sub b { color: var(--ink-2); font-weight: 500; }
 .lp-sub a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
 
-/* ---- hero ---- */
+/* ---- hero ----------------------------------------------------------------
+   Two columns from 960 up: copy left, the photograph right, both centred on
+   the same axis. The single-column version put the first frame at y=929 on a
+   1440x900 screen — measured, and identical at 1280x800 — so the entire first
+   screen was type on an empty page and the photograph only existed for
+   somebody who scrolled. The pictures are the argument here; one of them has
+   to be in the room when the argument is made.
+
+   The hero breaks wider than the 1080 text column the rest of the page uses.
+   That is what buys the photograph its size: at 1440 it is 742px wide instead
+   of the 583px a half of 1080 would have allowed, and the difference between
+   those two is the difference between a picture and an illustration of one.
+   min() against 92vw and never 100vw arithmetic, because vw includes the
+   scrollbar and innerWidth does not, and that gap is a horizontal scrollbar
+   on any desktop that has one. ------------------------------------------- */
 .lp-hero {
-  padding-top: calc(58px + env(safe-area-inset-top) + clamp(56px, 11vw, 132px));
-  padding-bottom: clamp(56px, 9vw, 112px);
+  padding-top: calc(58px + env(safe-area-inset-top) + clamp(40px, 7vw, 88px));
+  padding-bottom: clamp(48px, 8vw, 104px);
+}
+.lp-hero .wrap { width: min(1280px, 92vw); }
+.hero-grid { display: grid; }
+.hero-grid > .eyebrow { justify-self: start; }
+
+/* Below 960 this is one column and the source order is the layout: headline,
+   photograph, lead, buttons, note. Putting the picture directly under the h1
+   is what gets it onto a phone screen at all — appended after the note it
+   began at y=741 on a 390x844 handset, 52% of it below the fold, and at
+   360x780 only a fifth of it was visible. */
+.hero-grid > .pair { margin-top: clamp(22px, 5vw, 34px); }
+.hero-grid > .lp-lead { margin-top: clamp(22px, 5vw, 34px); }
+
+/* From 960 up the same six elements become two columns: the five text ones
+   stacked in column 1, the figure spanning every row of column 2 and centred
+   against them. Explicit placement rather than source order, so the DOM can
+   keep serving the phone. */
+@media (min-width: 960px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+    column-gap: clamp(32px, 3.6vw, 56px);
+    align-content: center;
+  }
+  .hero-grid > .eyebrow    { grid-column: 1; grid-row: 1; }
+  .hero-grid > h1          { grid-column: 1; grid-row: 2; }
+  .hero-grid > .lp-lead    { grid-column: 1; grid-row: 3; margin-top: clamp(20px, 3vw, 28px); }
+  .hero-grid > .lp-actions { grid-column: 1; grid-row: 4; }
+  .hero-grid > .lp-note    { grid-column: 1; grid-row: 5; }
+  /* `1 / span 5`, not `1 / -1`. With no grid-template-rows declared every row
+     here is implicit, and -1 resolves against the EXPLICIT grid — which is
+     empty — so `1 / -1` collapsed to a single line and the figure was auto
+     placed in a new implicit row underneath the copy instead of beside it.
+     It renders as a plausible stacked hero, which is why it is worth a note:
+     the layout looked deliberate and the h1 had quietly moved 440px down. */
+  .hero-grid > .pair       { grid-column: 2; grid-row: 1 / span 5; align-self: center; margin-top: 0; }
+}
+/* Two ratios, because one does not survive the range. At 1440 the copy wants
+   40% and the photograph takes the rest. Hold that ratio down to 960 and the
+   copy column falls to 362px, which wraps the lead to eight lines and pushes
+   the buttons off a 768-tall screen — measured at 1024x768, where a small
+   laptop actually lives. The copy takes the larger share until there is room
+   to give it away. */
+@media (min-width: 1200px) {
+  .hero-grid { grid-template-columns: minmax(0, 40fr) minmax(0, 60fr); }
 }
 .lp-hero h1 {
   margin-top: clamp(20px, 3vw, 30px);
-  font-size: clamp(38px, 6.6vw, 78px); font-weight: 600;
-  line-height: 1.02; letter-spacing: -0.035em; color: var(--ink);
+  /* Down from a 78px cap. In a 40% column that setting wrapped the line to
+     six rows and made the copy tower over the photograph beside it; the point
+     of the two-column hero is that neither one wins. */
+  font-size: clamp(38px, 4.6vw, 62px); font-weight: 600;
+  line-height: 1.04; letter-spacing: -0.035em; color: var(--ink);
   max-width: 15ch;
 }
 .lp-hero h1 .accent {
@@ -990,13 +1051,17 @@ body.landing .grid { display: none; }
    cross-fade — which is the one thing this transition is not.               */
 .pair {
   position: relative;
-  margin-top: clamp(40px, 6vw, 76px);
   border: 1px solid var(--line);
   border-radius: 20px;
   overflow: hidden;
+  /* The box is reserved from the first layout pass, before a single byte of
+     image has arrived. This, and not luck, is why CLS is exactly 0 with the
+     largest element on the page sitting above the fold. */
   aspect-ratio: 2752 / 1536;
   background: #FBFCFD;
 }
+/* Stacked below 960 the grid gap is not enough separation from the note. */
+/* margin handled by .hero-grid > .pair; section figures use .shot */
 .pair .frame { position: absolute; inset: 0; display: block; }
 .pair .frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
