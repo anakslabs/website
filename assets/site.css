@@ -43,14 +43,36 @@
   --blue: #2D63F0;
   --blue-bright: #2F6BFF;
   --blue-soft: #4D7CFF;
+  /* Blue as INK, distinct from blue as a fill. --blue #2D63F0 is luminance
+     0.1597, which is 5.99:1 on a clean --bg and passes everywhere on paper. It
+     does not pass on this page: sampling the rendered pixels under every link
+     showed the ground beneath them is 0.83 or darker, because .aurora is
+     mix-blend-mode multiply at opacity .5 and .vignette adds up to 5% more,
+     both position:fixed. Nine links measured 4.19-4.39:1 against a 4.5 floor —
+     every one of them on the live site today, none of them visible as a defect
+     to anybody reading it.
+
+     Buttons keep --blue: white on that fill measures 5.05:1. This token is only
+     for glyphs, where the background is the page and not the button. */
+  --blue-ink: #2856D6;
   --gray: #545C70;          /* AA on light bg */
-  /* 4.81:1 on --bg. It was #6A7286, which is 4.489:1 — an accessibility
-     failure by eleven thousandths, which is exactly the kind that survives
-     forever because nobody looking at the page can see it. Lighthouse scored
-     the homepage 91 on accessibility and named three footer paragraphs. This
-     token is the small-print colour used site-wide, so the fix lands on every
-     page that sets a source line, a timestamp or a chart label. */
-  --gray-soft: #666D82;
+  /* Third revision of this token, and each one was found by measurement rather
+     than by looking. #6A7286 was 4.489:1 on --bg — failing by eleven
+     thousandths. #666D82 fixed that at 4.81:1 and Lighthouse went to 100.
+     Then sampling the rendered pixels under the actual text showed the ground
+     is not --bg at all: the decorative .aurora blobs are mix-blend-mode
+     multiply at opacity .5, and where they are densest they take the page from
+     luminance 0.9295 to 0.8376. #666D82 over that is 4.36:1, so the small
+     print was failing again, on every page, for a reason no colour-picker on
+     the stylesheet could ever reveal. #5F657A still measured 4.43:1 under the
+     cap note, where .vignette stacks on the aurora and takes the ground to
+     roughly 0.75. #5A6074 clears 4.8:1 there and 5.66:1 over clean --bg.
+
+     Four revisions, each one found by sampling rendered pixels and none of them
+     visible to anybody reading the page. The lesson is not about this colour: a
+     token checked against the colour the stylesheet says is behind it has not
+     been checked at all when two fixed decorative layers sit in between. */
+  --gray-soft: #5A6074;
   --bg: #F6F7F9;
   --line: rgba(20, 26, 58, 0.06);
   --line-2: rgba(20, 26, 58, 0.10);
@@ -289,7 +311,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
   line-height: 1.08; letter-spacing: -0.02em; color: var(--ink);
   max-width: 18ch;
 }
-.page h1 .accent { color: var(--blue); }
+.page h1 .accent { color: var(--blue-ink); }
 .lead {
   margin-top: clamp(14px, 2.2vw, 20px);
   font-size: clamp(16px, 2.3vw, 19px); line-height: 1.65; color: var(--gray);
@@ -321,7 +343,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .badge {
   display: inline-flex; align-items: center; gap: 7px;
   font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--blue); background: rgba(45,99,240,.08);
+  color: var(--blue-ink); background: rgba(45,99,240,.08);
   border: 1px solid rgba(45,99,240,.18); border-radius: 100px; padding: 5px 12px;
 }
 .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-bright); }
@@ -353,7 +375,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .prose { max-width: 62ch; }
 .prose p { font-size: clamp(16px, 2.2vw, 18px); line-height: 1.75; color: var(--ink-2); margin: 0 0 1.1em; }
 .prose h2 { font-size: clamp(19px, 2.6vw, 24px); font-weight: 600; color: var(--ink); margin: 1.6em 0 .5em; letter-spacing: -0.01em; }
-.prose a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.prose a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 .prose .meta { font-family: var(--mono); font-size: 13px; color: var(--gray-soft); letter-spacing: .02em; }
 
 /* publication line under an article lead. Same mono/grey register as .meta —
@@ -402,7 +424,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 }
 .tbl tbody tr:first-child td { border-top: none; }
 .tbl td:first-child { color: var(--ink); font-weight: 500; }
-.tbl td a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.tbl td a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 .tbl .src { margin-top: 10px; padding-top: 9px; }
 /* two-column tables give the prose column the room */
 .tbl.two col.k { width: 38%; }
@@ -424,7 +446,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
     font-family: var(--mono); font-size: 10.5px; font-weight: 600;
     letter-spacing: .12em; text-transform: uppercase; color: var(--gray-soft);
   }
-  .tbl td:first-child[data-th]::before { color: var(--blue); }
+  .tbl td:first-child[data-th]::before { color: var(--blue-ink); }
 }
 
 /* =========================================================================
@@ -480,7 +502,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
    reads the page's argument and not its wayfinding */
 .crumb { font-family: var(--mono); font-size: 12.5px; letter-spacing: .02em; color: var(--gray-soft); margin-bottom: 14px; }
 .crumb a { color: var(--gray); text-decoration: none; border-bottom: 1px solid var(--line-2); }
-.crumb a:hover { color: var(--blue); border-color: rgba(45,99,240,.4); }
+.crumb a:hover { color: var(--blue-ink); border-color: rgba(45,99,240,.4); }
 .crumb span { padding: 0 6px; }
 
 .empty-state {
@@ -497,7 +519,7 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
   border-bottom: 2px solid rgba(45,99,240,.3); padding-bottom: 4px;
   transition: color .2s ease, border-color .2s ease;
 }
-.email-cta:hover { color: var(--blue); border-color: var(--blue); }
+.email-cta:hover { color: var(--blue-ink); border-color: var(--blue); }
 
 /* ---- footer (shared, in normal flow) ---- */
 .site-footer {
@@ -515,10 +537,10 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
    link — 2.8:1 against the surrounding text, where 3:1 is the floor. Anyone
    who cannot separate #232c52 from the grey around it had no way to find it. */
 .footer-brand a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
-.footer-brand a:hover { color: var(--blue); }
+.footer-brand a:hover { color: var(--blue-ink); }
 .footer-nav { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 1px; }
 .footer-nav a { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.02em; color: var(--gray); text-decoration: none; }
-.footer-nav a:hover { color: var(--blue); }
+.footer-nav a:hover { color: var(--blue-ink); }
 .footer-nav a:focus-visible, .footer-brand a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
 
 /* =========================================================================
@@ -541,94 +563,57 @@ body.landing .grid { display: none; }
   max-width: 15ch;
 }
 .lp-head.wide .lp-h2 { max-width: 22ch; }
-.lp-h2 .accent { color: var(--blue); }
+.lp-h2 .accent { color: var(--blue-ink); }
 .lp-sub {
   margin-top: clamp(14px, 2vw, 20px);
   font-size: clamp(16px, 2.1vw, 19px); line-height: 1.68; color: var(--gray);
   max-width: 60ch;
 }
 .lp-sub b { color: var(--ink-2); font-weight: 500; }
-.lp-sub a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.lp-sub a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---- hero ----------------------------------------------------------------
-   Two columns from 960 up: copy left, the photograph right, both centred on
-   the same axis. The single-column version put the first frame at y=929 on a
-   1440x900 screen — measured, and identical at 1280x800 — so the entire first
-   screen was type on an empty page and the photograph only existed for
-   somebody who scrolled. The pictures are the argument here; one of them has
-   to be in the room when the argument is made.
+   The hero is a .bleed section like the others: the photograph fills it edge to
+   edge and the copy sits on the plate. Its plate is on the RIGHT, and that is
+   not an alternation choice — the blue answer well sits left of centre in both
+   01-asking and 02-competitor, and it is the one thing on this page that must
+   never be covered, because the signature transition happens inside it.
 
-   The hero breaks wider than the 1080 text column the rest of the page uses.
-   That is what buys the photograph its size: at 1440 it is 742px wide instead
-   of the 583px a half of 1080 would have allowed, and the difference between
-   those two is the difference between a picture and an illustration of one.
-   min() against 92vw and never 100vw arithmetic, because vw includes the
-   scrollbar and innerWidth does not, and that gap is a horizontal scrollbar
-   on any desktop that has one. ------------------------------------------- */
+   The hero's copy is split across two .wrap blocks with the figure between them,
+   so that below 960 the reading order is headline, photograph, then argument.
+   That ordering is load-bearing twice over: it keeps the h1 first, and it keeps
+   the photograph high enough that the answer still arrives on screen. With the
+   figure at the end of the hero instead, it had scrolled out of view by the time
+   the demand section triggered the swap, and the whole effect fired where nobody
+   could see it. ------------------------------------------------------------- */
 .lp-hero {
   padding-top: calc(58px + env(safe-area-inset-top) + clamp(40px, 7vw, 88px));
   padding-bottom: clamp(48px, 8vw, 104px);
 }
-.lp-hero .wrap { width: min(1280px, 92vw); }
-.hero-grid { display: grid; }
-.hero-grid > .eyebrow { justify-self: start; }
-
-/* Below 960 this is one column and the source order is the layout: headline,
-   photograph, lead, buttons, note. Putting the picture directly under the h1
-   is what gets it onto a phone screen at all — appended after the note it
-   began at y=741 on a 390x844 handset, 52% of it below the fold, and at
-   360x780 only a fifth of it was visible. */
-.hero-grid > .pair { margin-top: clamp(22px, 5vw, 34px); }
-.hero-grid > .lp-lead { margin-top: clamp(22px, 5vw, 34px); }
-
-/* From 960 up the same six elements become two columns: the five text ones
-   stacked in column 1, the figure spanning every row of column 2 and centred
-   against them. Explicit placement rather than source order, so the DOM can
-   keep serving the phone. */
-@media (min-width: 960px) {
-  .hero-grid {
-    grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
-    column-gap: clamp(32px, 3.6vw, 56px);
-    align-content: center;
-  }
-  .hero-grid > .eyebrow    { grid-column: 1; grid-row: 1; }
-  .hero-grid > h1          { grid-column: 1; grid-row: 2; }
-  .hero-grid > .lp-lead    { grid-column: 1; grid-row: 3; margin-top: clamp(20px, 3vw, 28px); }
-  .hero-grid > .lp-actions { grid-column: 1; grid-row: 4; }
-  .hero-grid > .lp-note    { grid-column: 1; grid-row: 5; }
-  /* `1 / span 5`, not `1 / -1`. With no grid-template-rows declared every row
-     here is implicit, and -1 resolves against the EXPLICIT grid — which is
-     empty — so `1 / -1` collapsed to a single line and the figure was auto
-     placed in a new implicit row underneath the copy instead of beside it.
-     It renders as a plausible stacked hero, which is why it is worth a note:
-     the layout looked deliberate and the h1 had quietly moved 440px down. */
-  .hero-grid > .pair       { grid-column: 2; grid-row: 1 / span 5; align-self: center; margin-top: 0; }
-}
-/* Two ratios, because one does not survive the range. At 1440 the copy wants
-   40% and the photograph takes the rest. Hold that ratio down to 960 and the
-   copy column falls to 362px, which wraps the lead to eight lines and pushes
-   the buttons off a 768-tall screen — measured at 1024x768, where a small
-   laptop actually lives. The copy takes the larger share until there is room
-   to give it away. */
-@media (min-width: 1200px) {
-  .hero-grid { grid-template-columns: minmax(0, 40fr) minmax(0, 60fr); }
-}
 .lp-hero h1 {
   margin-top: clamp(20px, 3vw, 30px);
-  /* Down from a 78px cap. In a 40% column that setting wrapped the line to
-     six rows and made the copy tower over the photograph beside it; the point
-     of the two-column hero is that neither one wins. */
+  /* Down from a 78px cap: in a 46% column the old setting wrapped to six rows. */
   font-size: clamp(38px, 4.6vw, 62px); font-weight: 600;
   line-height: 1.04; letter-spacing: -0.035em; color: var(--ink);
   max-width: 15ch;
 }
+/* Restored. This was lost when the hero CSS block was rewritten for the
+   full-bleed layout, and the h1 quietly went from a blue gradient on "the
+   answer" to flat ink — approved design, deleted by accident, and invisible in
+   a diff that moved forty lines. Found by the contrast checker, which reported
+   the span at 1.00:1 because a background-clip:text span has color:transparent
+   and there was nothing to be transparent over.
+
+   The lightest stop is --blue-soft #4D7CFF at luminance 0.2354, which over the
+   aurora-darkened ground gives 3.11:1. The floor for 62px type is 3:1, so this
+   passes with little to spare; it is measured on every run rather than assumed. */
 .lp-hero h1 .accent {
-  background: linear-gradient(96deg, var(--blue) 0%, var(--blue-soft) 100%);
+  background: linear-gradient(96deg, var(--blue-ink) 0%, var(--blue) 100%);
   -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
 }
 .lp-lead {
-  margin-top: clamp(20px, 3vw, 28px);
+  margin-top: clamp(22px, 5vw, 34px);
   font-size: clamp(17px, 2.3vw, 21px); line-height: 1.62; color: var(--gray);
   max-width: 52ch;
 }
@@ -656,7 +641,7 @@ body.landing .grid { display: none; }
   margin-top: 18px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; letter-spacing: .02em;
   color: var(--gray-soft); display: flex; align-items: flex-start; gap: 9px;
 }
-.lp-note a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.lp-note a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 .lp-note::before {
   content: ""; width: 18px; height: 1px; margin-top: 10px;
   background: rgba(45,99,240,.5); flex: 0 0 auto;
@@ -681,7 +666,7 @@ body.landing .grid { display: none; }
   margin-top: 0;
   display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
   font-size: clamp(52px, 8vw, 92px); font-weight: 600;
-  line-height: .95; letter-spacing: -0.045em; color: var(--blue);
+  line-height: .95; letter-spacing: -0.045em; color: var(--blue-ink);
   font-variant-numeric: tabular-nums;
 }
 .stat .stat-num small {
@@ -706,7 +691,7 @@ body.landing .grid { display: none; }
   font-family: var(--mono); font-size: 11.5px; line-height: 1.7; letter-spacing: .015em;
   color: var(--gray-soft); max-width: 62ch;
 }
-.src a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.src a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 .stat .why + .src { margin-top: 14px; }
 
 /* ---- supporting figures: smaller than a .stat, same evidence discipline ---- */
@@ -750,7 +735,7 @@ body.landing .grid { display: none; }
 .xray-title { font-size: clamp(21px, 3vw, 30px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; color: var(--ink); }
 .xray-copy { margin-top: 10px; font-size: 14.5px; line-height: 1.6; color: var(--gray); }
 .xray-code { font-family: var(--mono); font-size: 13px; line-height: 1.7; color: var(--ink-2); word-break: break-word; }
-.xray-code .tag { color: var(--blue); }
+.xray-code .tag { color: var(--blue-ink); }
 .xray-code .attr { color: var(--gray); }
 .xray-void {
   margin-top: 14px; border: 1px dashed var(--line-2); border-radius: 10px;
@@ -758,7 +743,7 @@ body.landing .grid { display: none; }
   font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-soft);
 }
 .xray-foot { margin-top: 16px; font-size: 14.5px; line-height: 1.65; color: var(--gray); max-width: 66ch; }
-.xray-foot a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.xray-foot a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* mechanism list */
 .mech { margin-top: clamp(34px, 5vw, 52px); display: grid; gap: 0; }
@@ -766,7 +751,7 @@ body.landing .grid { display: none; }
 .mech li:last-child { border-bottom: 1px solid var(--line); }
 .mech h3 { font-size: clamp(16px, 2.1vw, 18.5px); font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
 .mech p { font-size: clamp(15px, 2vw, 16.5px); line-height: 1.62; color: var(--gray); }
-.mech p a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.mech p a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 640px) { .mech li { grid-template-columns: 1fr; } }
 /* on a subpage the list follows a normal h2, so it needs far less air above */
 .page .mech { margin-top: clamp(8px, 1.6vw, 14px); }
@@ -792,7 +777,7 @@ body.landing .grid { display: none; }
 .vertical .go {
   margin-top: 22px; display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--blue);
+  color: var(--blue-ink);
 }
 
 /* ---- deliverables ---- */
@@ -808,7 +793,7 @@ body.landing .grid { display: none; }
 }
 .deliv .idx {
   font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .14em;
-  color: var(--blue); display: block;
+  color: var(--blue-ink); display: block;
 }
 .deliv h3 { margin: 16px 0 10px; font-size: clamp(19px, 2.5vw, 23px); font-weight: 600; letter-spacing: -0.015em; color: var(--ink); line-height: 1.25; }
 .deliv p { font-size: clamp(15px, 2vw, 16.5px); line-height: 1.65; color: var(--gray); }
@@ -839,7 +824,7 @@ body.landing .grid { display: none; }
 .steps li::before {
   content: counter(s, decimal-leading-zero);
   position: absolute; left: 0; top: clamp(22px, 3vw, 30px);
-  font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .1em; color: var(--blue);
+  font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .1em; color: var(--blue-ink);
   border: 1px solid rgba(45,99,240,.28); border-radius: 100px;
   padding: 6px 11px; background: rgba(45,99,240,.06);
 }
@@ -859,7 +844,7 @@ body.landing .grid { display: none; }
 /* ---- footer variant used by the English pages ---- */
 .footer-legal { margin-top: 14px; font-size: 12.5px; line-height: 1.7; color: var(--gray-soft); max-width: 70ch; }
 .footer-legal a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
-.footer-legal a:hover { color: var(--blue); }
+.footer-legal a:hover { color: var(--blue-ink); }
 .footer-legal a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
 
 /* =========================================================================
@@ -924,7 +909,7 @@ body.landing .grid { display: none; }
 .compare-bar .live i { background: var(--blue-soft); }
 .compare-bar .url { text-transform: none; letter-spacing: .02em; color: var(--ink-2); word-break: break-all; }
 .compare-bar .hint { text-transform: none; letter-spacing: .02em; }
-.compare-bar .open { margin-left: auto; color: var(--blue); text-decoration: none; text-transform: none; letter-spacing: .02em; }
+.compare-bar .open { margin-left: auto; color: var(--blue-ink); text-decoration: none; text-transform: none; letter-spacing: .02em; }
 .compare-bar .open:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* The frames hold the live pages, not pictures of them — so they scroll.
    On a narrow screen the frame must never outgrow the phone, or a finger
@@ -953,13 +938,13 @@ body.landing .grid { display: none; }
 .diff-head { background: rgba(20,26,58,.02); padding-top: 13px; padding-bottom: 13px; }
 .diff-head span { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gray-soft); }
 .diff-head .a { color: var(--gray); }
-.diff-head .b { color: var(--blue); }
+.diff-head .b { color: var(--blue-ink); }
 .diff-metric { font-size: clamp(15px, 2vw, 16.5px); line-height: 1.5; color: var(--ink); font-weight: 500; }
 .diff-metric small { display: block; margin-top: 5px; font-size: 13px; font-weight: 400; line-height: 1.5; color: var(--gray-soft); }
 .diff-val { font-size: clamp(22px, 3.2vw, 30px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .diff-val small { display: block; margin-top: 4px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; }
 .diff-val.a { color: var(--gray-soft); }
-.diff-val.b { color: var(--blue); }
+.diff-val.b { color: var(--blue-ink); }
 @media (max-width: 700px) {
   .diff-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .diff-metric { grid-column: 1 / -1; }
@@ -971,12 +956,12 @@ body.landing .grid { display: none; }
 .method { margin-top: clamp(20px, 3vw, 28px); border: 1px dashed var(--line-2); border-radius: 16px; padding: clamp(22px, 3vw, 32px); background: rgba(255,255,255,.32); }
 .method h3 { font-size: clamp(16px, 2.1vw, 18.5px); font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
 .method > p { margin-top: 10px; font-size: 14.5px; line-height: 1.68; color: var(--gray); max-width: 74ch; }
-.method > p a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.method > p a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 .method > p a code { color: inherit; }
 .method dl { margin-top: 18px; display: grid; gap: 12px; }
 .method dt { font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .04em; color: var(--ink-2); }
 .method dd { margin-top: 3px; font-size: 14.5px; line-height: 1.62; color: var(--gray); max-width: 74ch; }
-.method code { font-family: var(--mono); font-size: 12.5px; color: var(--blue); background: rgba(45,99,240,.07); border-radius: 5px; padding: 1px 5px; }
+.method code { font-family: var(--mono); font-size: 12.5px; color: var(--blue-ink); background: rgba(45,99,240,.07); border-radius: 5px; padding: 1px 5px; }
 .method .subtract { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 14.5px; line-height: 1.68; color: var(--gray); max-width: 74ch; }
 .method .subtract b { color: var(--ink-2); font-weight: 500; }
 
@@ -1011,26 +996,51 @@ body.landing .grid { display: none; }
   padding-top: 3px;
 }
 .src-item dd { font-size: 14px; line-height: 1.62; color: var(--gray); max-width: 60ch; word-break: break-word; }
-.src-item dd a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.src-item dd a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 .src-item dd .ok { color: var(--ink-2); }
 /* the same paragraph used as a section intro rather than inside a card */
 .section > .src-where { margin-top: 0; font-size: clamp(15px, 2vw, 16.5px); line-height: 1.68; max-width: 72ch; }
-.section > .src-where a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.section > .src-where a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 600px) { .src-item dl > div { grid-template-columns: 1fr; } }
 
 /* =========================================================================
-   Section photographs (home). Six studio photographs of machined models of
-   interfaces, at their native 16:9, never cropped.
+   Section photographs (home) — FULL BLEED.
 
-   The frames carry a hairline and a radius and nothing else. No shadow: these
-   objects already cast their own on the studio sweep, and a CSS shadow under a
-   photographed shadow reads as two light sources and flattens the picture.
+   No frame, no radius, no shadow, no column. Each photograph spans its whole
+   section, edge to edge. The framed-card treatment these replace was rejected:
+   an inset picture beside a paragraph reads as an illustration of the argument
+   rather than the argument itself.
+
+   WHY THE COPY SITS ON A PLATE AND NOT DIRECTLY ON THE PICTURE. Measured, per
+   image, as the worst-case contrast for --ink against the darkest pixel in each
+   region of a 4x3 grid:
+
+     01/02-asking     safe top-left, top-right, bottom-right; mid-band 1.1:1
+     03-unreadable    safe right column and bottom-left; the rest 1.1-1.7:1
+     04-verticals     safe top-left and bottom-right; the rest 1.0-1.9:1
+     05-winning       safe right column only (15.7-16.1:1); left 1.0-1.9:1
+     06-exclusivity   safe top-left only (13.0:1); everything else 1.2-3.1:1
+
+   There is no region that is safe in all six, and 06 has almost none at all —
+   the map's engraved grid puts dark lines through the entire frame. The subject
+   bounding boxes then say why: five of the six span 76-100% of the frame width.
+   These were composed as full-frame objects, not as backgrounds with a quiet
+   corner for type. So text laid straight onto them cannot clear 4.5:1 anywhere
+   consistent, and no amount of choosing a side fixes it.
+
+   The answer is a LOCAL ground, never a wash: a band of page colour across
+   part of the width, full section height, feathering out over a region that
+   holds no glyphs. Contrast then stops depending on the photograph at all —
+   ink on --bg is 15.8:1 — and the remaining 30-45% of the picture is at full
+   fidelity with nothing over it. A full-frame scrim was rejected before on this
+   site for making the image disappear; this deliberately is not one.
    ========================================================================= */
-.shot {
-  margin-top: clamp(36px, 5vw, 60px);
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  overflow: hidden;
+.bleed { position: relative; isolation: isolate; }
+.bleed > .wrap { position: relative; z-index: 2; }
+.bleed > .shot, .bleed > .pair {
+  position: relative; z-index: 0;
+  /* No border, no radius: the photograph is the section, not an object on it. */
+  border: 0; border-radius: 0; overflow: hidden;
   /* Declared here as well as on the <img>, so the box is reserved from the
      first layout pass whether or not the image ever arrives. This is the whole
      reason CLS is 0 with five lazy images on the page. */
@@ -1039,6 +1049,128 @@ body.landing .grid { display: none; }
 }
 .shot picture, .shot img { display: block; width: 100%; height: 100%; }
 .shot img { object-fit: cover; }
+
+/* Below 960 the photograph is an edge-to-edge band at its native 16:9 and the
+   copy sits on the page ground above and below it, with no plate and nothing
+   over the picture.
+
+   Not a cover-crop of the whole section, which is what full-bleed usually means
+   and what would wreck these images: a phone section is about 0.46 aspect, so
+   covering it from 16:9 discards roughly three quarters of the width, and the
+   subjects here run 76-100% of it. There is no object-position that saves that,
+   and an art-directed portrait crop is barely better — 16:9 to 4:5 keeps only
+   45% of the width. Full width at the frame's own aspect keeps every
+   composition whole, which is the point of using photographs at all. */
+.bleed > .shot, .bleed > .pair { width: 100%; margin: clamp(26px, 6vw, 40px) 0; }
+
+@media (min-width: 1100px) {
+  /* THE SECTION IS HELD AT THE FRAME'S OWN ASPECT, and this is the load-bearing
+     rule of the whole layout. A .bleed section grows to fit its copy; cover then
+     scales the photograph to whichever axis is short, and a section taller than
+     16:9 is a horizontal crop. Measured before this rule existed, at 1440:
+
+       hero        1440x927   aspect 1.55   87% of the frame width survived
+       verticals   1440x864   aspect 1.67   93%
+       why         1440x1419  aspect 1.01   57%
+
+     At 57% the two browser windows in 03-unreadable read as one window. The
+     image whose entire argument is "here is a full page, here is an empty one"
+     had been cropped down to a single object, and it still looked like a
+     deliberate photograph, which is what makes this worth writing down.
+
+     min-height at the frame's aspect fixes the floor; the copy has to fit
+     inside it, which is why the padding is tighter here than on a plain section
+     and why #why is not a plate section at all. */
+  .bleed {
+    overflow: hidden;
+    min-height: min(calc(100vw * 1536 / 2752), 92vh);
+    padding-top: clamp(40px, 5vw, 72px);
+    padding-bottom: clamp(40px, 5vw, 72px);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .bleed > .shot, .bleed > .pair {
+    position: absolute; inset: 0; margin: 0;
+    aspect-ratio: auto; width: auto;
+  }
+  /* Only bites where a section runs taller than 16:9 and there is horizontal
+     slack to spend — at 1440 there is none, by design. Both overlay sections
+     have their plate on the right, so any crop is spent moving the subject
+     left, away from it. */
+  .bleed[data-plate="right"] > .shot img,
+  .bleed[data-plate="right"] > .pair .frame img { object-position: 34% 50%; }
+  .bleed > .shot img, .bleed > .pair .frame img { object-fit: cover; }
+  .bleed > .shot picture, .bleed > .shot img { height: 100%; }
+
+  /* The plate. On the section itself rather than on a copy wrapper, so it
+     covers the full section height even where the copy is split into two
+     wraps around the figure — otherwise the ground would stop at the last
+     paragraph and the picture would reappear underneath it. */
+  .bleed::before {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  }
+  .bleed[data-plate="left"]::before {
+    background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 54%, rgba(246,247,249,0) 68%);
+  }
+  .bleed[data-plate="right"]::before {
+    background: linear-gradient(270deg, var(--bg) 0%, var(--bg) 54%, rgba(246,247,249,0) 68%);
+  }
+  /* The copy column, sized so that it lands inside the SOLID part of the plate
+     at every width from 960 up, never in the feather. Worst case is the narrow
+     end: at 960 the solid region reaches 518px and the copy starts at 38px
+     (left) or ends at 921px having started at 515px (right) — 74px of margin.
+     At 1440 that margin is 101px. Verified by sampling rendered pixels under
+     every text node, not by this arithmetic; see scripts/verify-contrast.mjs. */
+  .bleed > .wrap > * { max-width: 46%; }
+  .bleed[data-plate="right"] > .wrap > * { margin-left: auto; }
+
+  /* data-plate="band": the photograph spans the whole section width at its own
+     aspect and the copy sits above it on the page ground, with nothing over the
+     picture and no plate at all.
+
+     WHICH SECTIONS CARRY COPY AND WHICH DO NOT is decided by the photographs,
+     from their measured subject positions, and not by rhythm. A plate covers
+     54% of the width; the question per image is whether either side can be
+     covered without losing the thing the picture is of:
+
+       01/02 hero      answer well x 8-52%, question bubble x 50-88%.
+                       A right plate hides the question and keeps the answer
+                       well, which is the one region that must survive because
+                       the signature transition happens inside it.   OVERLAY
+       05 contact      ranked cards x 6-55%. A right plate keeps them.  OVERLAY
+       03 why          two windows spanning x 7-93%, and the argument IS the
+                       pair. Either plate deletes half of it.             BAND
+       04 verticals    ribbon x 0-35%, junction x 30-50%, three panels
+                       x 55-90%. A right plate hides the three specialties,
+                       a left one hides the stream feeding them.          BAND
+       06 cap          the lit pin sits at x=50%, dead centre, so a plate on
+                       either side covers it. Shipped once with a left plate
+                       and the pin was simply gone — a map of empty sockets
+                       illustrating a section about one client per area.   BAND
+
+     #why additionally could not fit: a five-item list in a 46% column made the
+     section 1419px tall at 1440, which cover answers by discarding 43% of the
+     frame width. Widening the plate to fit it leaves 18% of the photograph
+     showing, which is a worse picture than no overlay at all.
+
+     Every one of these is still full-bleed, edge to edge, unframed. What a band
+     gives up is the overlay, not the bleed — and the framed card in a column is
+     what was actually rejected. */
+  .bleed[data-plate="band"] {
+    display: block; min-height: 0; overflow: visible;
+    padding-top: clamp(64px, 9vw, 116px); padding-bottom: 0;
+  }
+  .bleed[data-plate="band"] > .shot {
+    position: relative; inset: auto; width: 100%;
+    aspect-ratio: 2752 / 1536; margin: clamp(40px, 5vw, 72px) 0 0;
+  }
+  .bleed[data-plate="band"] > .wrap > * { max-width: none; }
+  .bleed[data-plate="band"]::before { display: none; }
+  .bleed[data-plate="band"] .mech li { grid-template-columns: minmax(0, 22ch) minmax(0, 1fr); }
+
+  /* A five-item two-column list does not fit a 46% column, and the stacked
+     variant already exists for narrow screens. Reuse it here. */
+  .bleed .mech li { grid-template-columns: 1fr; }
+}
 
 /* ---- the answer arriving: the page's one piece of real choreography --------
    01-asking and 02-competitor are the same objects, camera and lighting; only
@@ -1049,19 +1181,6 @@ body.landing .grid { display: none; }
    for pixel outside the answer well, so any movement slides that shared
    aluminium against itself and the effect collapses into an ordinary
    cross-fade — which is the one thing this transition is not.               */
-.pair {
-  position: relative;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  overflow: hidden;
-  /* The box is reserved from the first layout pass, before a single byte of
-     image has arrived. This, and not luck, is why CLS is exactly 0 with the
-     largest element on the page sitting above the fold. */
-  aspect-ratio: 2752 / 1536;
-  background: #FBFCFD;
-}
-/* Stacked below 960 the grid gap is not enough separation from the note. */
-/* margin handled by .hero-grid > .pair; section figures use .shot */
 .pair .frame { position: absolute; inset: 0; display: block; }
 .pair .frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
@@ -1157,6 +1276,6 @@ body.landing .grid { display: none; }
 .contact-form button[disabled] { opacity: .55; cursor: default; }
 .contact-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-status { margin-top: .9rem; min-height: 1.4em; font-size: .95rem; }
-.form-status.is-ok { color: var(--blue); font-weight: 500; }
+.form-status.is-ok { color: var(--blue-ink); font-weight: 500; }
 .form-status.is-error { color: #B3261E; }
 

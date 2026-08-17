@@ -39,7 +39,13 @@ const SRC = resolve(ROOT, "../section-images");
 const OUT = resolve(ROOT, "assets/sections");
 
 const NATIVE = { width: 2752, height: 1536 };
-const WIDTHS = [480, 640, 840, 1080, 1360, 1720, 2160];
+/* Extended for the full-bleed layout. The image now spans the whole
+   section rather than a 1080px column, so at 1440 CSS pixels it paints
+   into 1440 and a retina desktop asks for 2880 — past the master's own
+   2752, which is therefore the top rung. Undersupply of 4.4% at that one
+   combination is reported by the checker rather than hidden; upscaling a
+   photograph to invent the difference would be worse. */
+const WIDTHS = [480, 640, 840, 1080, 1360, 1720, 2160, 2560, 2752];
 const NAMES = [
   "01-asking",
   "02-competitor",
