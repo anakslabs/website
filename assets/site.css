@@ -242,11 +242,18 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .wrap { width: min(var(--wrap), 92vw); margin-inline: auto; }
 
 /* ---- header ---- */
+/* OPAQUE, AND NOT A BLUR. It was rgba(246,247,249,.72) over a 12px
+   backdrop-filter, which is the standard move and was fine while every section
+   under it was page colour. Once the photographs went full bleed it stopped
+   being fine: a translucent bar smears a 54px light stripe across the top of
+   every picture it passes, and at 2700, 4500 and 6750 that stripe lands on the
+   windows, the panels and the map. A blur cannot be "over" a photograph without
+   damaging it. Solid page colour damages nothing — the header simply is not the
+   photograph, and the picture starts below it. */
 .site-header {
   position: fixed; z-index: 6; top: 0; left: 0; right: 0;
   padding: max(10px, env(safe-area-inset-top)) 0 10px;
-  background: rgba(246, 247, 249, 0.72);
-  -webkit-backdrop-filter: saturate(140%) blur(12px); backdrop-filter: saturate(140%) blur(12px);
+  background: var(--bg);
   border-bottom: 1px solid var(--line);
   opacity: 0; animation: fade-in 700ms ease-out 120ms forwards;
 }
@@ -552,7 +559,42 @@ body.landing .grid { display: none; }
 
 .lp { position: relative; z-index: 1; }
 .lp-section { padding: clamp(64px, 11vw, 132px) 0; }
-.lp-section + .lp-section { border-top: 1px solid var(--line); }
+
+/* ---- the seam between sections ---------------------------------------------
+   Every boundary used to be `border-top: 1px solid var(--line)`, edge to edge,
+   including across the top of every photograph — five of the eight boundaries
+   on this page put a hairline over a picture. Edge-to-edge rules are also what
+   make a column of sections read as a stack of slides: the eye reads a
+   full-width line as a wall.
+
+   THE DEVICE IS A TONAL STEP, AND IT ONLY EXISTS ON ONE SIDE. Worth writing
+   down, because the obvious fix does not apply here: a faded hairline between
+   sections was written first and rendered nowhere, since this page has no
+   boundary at all between two page-ground sections. Every one of them is
+   ground-to-photograph or photograph-to-ground. A photograph's own edge is
+   already the strongest boundary on the page and does not need a line drawn on
+   it; what it needs is for the page not to stop dead underneath it. So the
+   ground section that FOLLOWS a picture opens with a short fade of the studio
+   sweep's own white, carrying the light out of the frame and into the page over
+   140px. Nothing is painted on the photograph, and no rule is drawn anywhere.
+
+   The hairline survives for two adjacent page-ground sections, which the home
+   page does not currently have and other pages in this stylesheet do. */
+.lp-section + .lp-section { position: relative; }
+.lp-section + .lp-section:not(.bleed)::before {
+  content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(var(--wrap), 92vw); height: 1px; pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(20, 26, 58, 0) 0%,
+    var(--line-2) 22%,
+    var(--line-2) 78%,
+    rgba(20, 26, 58, 0) 100%);
+}
+.bleed + .lp-section:not(.bleed)::before {
+  left: 0; transform: none; width: 100%;
+  height: clamp(80px, 10vw, 140px);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, .62), rgba(255, 255, 255, 0));
+}
 
 /* Section heading block. The measure lives on the heading itself — `ch` there
    resolves against the display size, not the 16px the wrapper would inherit. */
@@ -638,6 +680,11 @@ body.landing .grid { display: none; }
 .lp-hero .lp-lead  { transform: translateY(12px); animation: rise 740ms cubic-bezier(.22,1,.36,1) 340ms forwards; }
 .lp-hero .lp-actions { transform: translateY(12px); animation: rise 700ms cubic-bezier(.22,1,.36,1) 470ms forwards; }
 .lp-hero .lp-note  { transform: translateY(10px); animation: rise 700ms cubic-bezier(.22,1,.36,1) 600ms forwards; }
+/* Demoted from a tier to a caption: no rule of its own, tucked under the
+   buttons it qualifies. The dash is the device that made one sentence read as a
+   fourth level of hierarchy in a hero that only has three things to say. */
+.lp-hero .lp-note { margin-top: 14px; }
+.lp-hero .lp-note::before { display: none; }
 .lp-note {
   margin-top: 18px; font-family: var(--mono); font-size: 12.5px; line-height: 1.6; letter-spacing: .02em;
   color: var(--gray-soft); display: flex; align-items: flex-start; gap: 9px;
@@ -654,26 +701,53 @@ body.landing .grid { display: none; }
   display: grid; gap: clamp(14px, 2vw, 20px);
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
+/* TWO COLUMNS ABOVE 900: the figure and its own sentence on the left, what the
+   figure means on the right. As one column the card was 48% empty white to the
+   right of a 54ch measure at every width the section is ever seen at, and the
+   emptiness was the loudest thing in the section. */
 .stat {
   background: var(--card); border: 1px solid var(--line-2); border-radius: 18px;
   padding: clamp(24px, 3.4vw, 36px);
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   box-shadow: 0 10px 30px rgba(20,26,58,.05);
 }
+@media (min-width: 900px) {
+  .stat {
+    display: grid; column-gap: clamp(28px, 4vw, 56px); align-items: start;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  }
+  .stat .stat-num { grid-column: 1; grid-row: 1; }
+  .stat .stat-claim { grid-column: 1; grid-row: 2; }
+  /* Spanning both rows and carrying its rule on the LEFT rather than the top:
+     the divider's job here is to separate two columns, and a horizontal rule
+     under a number it does not belong to reads as the end of the card. */
+  .stat .why {
+    grid-column: 2; grid-row: 1 / 3; align-self: stretch;
+    display: flex; align-items: center;
+    margin-top: 0; padding-top: 0;
+    border-top: 0; border-left: 1px solid var(--line); padding-left: clamp(24px, 3vw, 40px);
+  }
+}
 /* the measure holds wherever the card lands: auto-fit gives a lone card the
    full width of the page, and this copy must not run to 120 characters a line */
 .stat p { margin-top: clamp(16px, 2.2vw, 20px); font-size: clamp(15.5px, 2vw, 17.5px); line-height: 1.6; color: var(--ink-2); max-width: 54ch; }
+/* THE SENTENCE READS DOWN THE COLUMN, and that is the whole reason this is not
+   a flex row any more. Baseline-aligned beside a 92px number, the caption made
+   the reading order "45%" then sideways then down, so the sentence it is part
+   of — "45% of US consumers, up from 6% a year earlier, asked AI to recommend a
+   local business" — arrived in three unrelated pieces. */
 .stat .stat-num {
   margin-top: 0;
-  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
   font-size: clamp(52px, 8vw, 92px); font-weight: 600;
   line-height: .95; letter-spacing: -0.045em; color: var(--blue-ink);
   font-variant-numeric: tabular-nums;
 }
 .stat .stat-num small {
+  display: block; margin-top: 14px;
   font-size: clamp(14.5px, 1.8vw, 17px); font-weight: 500; letter-spacing: 0;
-  line-height: 1.5; color: var(--gray-soft); max-width: 22ch;
+  line-height: 1.5; color: var(--gray-soft); max-width: 26ch;
 }
+.stat .stat-claim { margin-top: 10px; }
 .stat .why {
   margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line);
   font-size: clamp(14px, 1.8vw, 15px); line-height: 1.62; color: var(--gray);
@@ -694,6 +768,14 @@ body.landing .grid { display: none; }
 }
 .src a { color: var(--blue-ink); text-decoration: underline; text-underline-offset: 3px; }
 .stat .why + .src { margin-top: 14px; }
+/* One credit for a section whose three figures share one survey, in place of
+   three cards each repeating the survey name and the words "Source and sample".
+   It sits on the page ground rather than inside a card, so it reads as a
+   footnote to the section and not as part of the last figure. */
+.section-src {
+  margin-top: clamp(20px, 2.6vw, 28px); padding-top: 0; border-top: 0;
+  max-width: 88ch;
+}
 
 /* ---- supporting figures: smaller than a .stat, same evidence discipline ---- */
 .figs {
@@ -809,7 +891,25 @@ body.landing .grid { display: none; }
   .price { grid-template-columns: 1fr; }
   .price > div + div { border-left: 0; border-top: 1px solid rgba(45,99,240,.16); }
 }
+/* THE PRICE IS THE SECTION'S ANCHOR and is now typeset as one. It was a bold
+   run inside a body paragraph, at 17.5px in the only 1080px-wide measure on the
+   page — the single thing a clinic owner scans for, set smaller than the
+   sentence explaining why there is no second tier. Same words, same two
+   figures, at display scale, with the numbers carrying the colour so the eye
+   lands on them and the sentence still reads as a sentence. */
 .price-tag { margin-top: clamp(30px, 4vw, 44px); }
+.price-line {
+  margin-top: clamp(16px, 2.2vw, 22px);
+  font-size: clamp(28px, 4.2vw, 52px); font-weight: 600;
+  line-height: 1.1; letter-spacing: -0.035em; color: var(--ink);
+  max-width: 20ch; text-wrap: balance;
+}
+.price-line b { font-weight: inherit; }
+.price-fig { color: var(--blue-ink); font-variant-numeric: tabular-nums; }
+.price-tag .d {
+  margin-top: clamp(14px, 2vw, 20px);
+  font-size: clamp(15.5px, 2vw, 17.5px); line-height: 1.65; color: var(--gray); max-width: 56ch;
+}
 
 /* ---- how it works ---- */
 .steps { margin-top: clamp(34px, 5vw, 56px); counter-reset: s; display: grid; gap: 0; }
@@ -826,12 +926,53 @@ body.landing .grid { display: none; }
 .steps p { margin-top: 10px; font-size: clamp(15.5px, 2vw, 17.5px); line-height: 1.65; color: var(--gray); max-width: 62ch; }
 
 /* ---- trust ---- */
-.trust-grid { margin-top: clamp(30px, 4vw, 44px); display: grid; gap: clamp(20px, 4vw, 56px); grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
+/* .82fr against 1.18fr rather than two equal columns: the heading column holds
+   two lines and two links, the prose column holds the argument, and equal
+   columns left the argument at a 46ch measure it did not need. */
+.trust-grid { margin-top: clamp(30px, 4vw, 44px); display: grid; gap: clamp(20px, 4vw, 56px); grid-template-columns: 1fr; align-items: start; }
+/* .82fr against 1.18fr rather than two equal columns, and the links moved under
+   the heading: as two equal columns with four stacked paragraphs on the right,
+   the prose ran 420px past the two-line h2 and the left half of the section was
+   empty for all of it. The links are last in the DOM — which is the order a
+   phone gets, and the order this section always had — and are placed back up
+   into column 1 only where there is a column 1 to place them in. */
+@media (min-width: 761px) {
+  .trust-grid { grid-template-columns: minmax(300px, 0.82fr) minmax(300px, 1.18fr); }
+  .trust-grid > :first-child { grid-area: 1 / 1; }
+  .trust-grid > .prose { grid-area: 1 / 2 / 3 / 3; }
+  .trust-grid > .trust-links { grid-area: 2 / 1; align-self: start; }
+}
+.trust-links { margin-top: clamp(24px, 3.4vw, 34px); display: grid; gap: 12px; }
+.trust-links a {
+  font-size: clamp(14.5px, 1.9vw, 16px); line-height: 1.55; color: var(--blue-ink);
+  text-decoration: underline; text-underline-offset: 3px; max-width: 40ch;
+}
 .trust-grid .prose p { color: var(--gray); }
 .trust-grid .prose p b { color: var(--ink-2); font-weight: 500; }
 
 /* ---- closing CTA ---- */
+/* THE CLOSING CTA IS THE PAGE'S LAST ACTION and was set at the same weight as
+   the two side-by-side buttons in the hero, with its caption hanging off a blue
+   rule below it — three small things stacked in the upper right of a 804px
+   frame, against 230px of empty studio sweep underneath. Same words, one size
+   up, and the caption tucked under the control it belongs to rather than
+   carrying a device of its own.
+
+   The top ranked card is NOT nudged, and that is a measurement rather than an
+   omission: at the section's resting scroll position the card's top edge sits
+   88px down, clear of the 54px header by 34px. It is clipped only mid-scroll,
+   and it cannot be moved down — the section is exactly 16:9 at 1440, so cover
+   has no vertical slack, and every way of creating some (a shorter section)
+   crops from the top, which moves the card UP. The alternative is letterboxing
+   the photograph, which is a worse trade than a fixed header passing over it. */
 .cta-band { text-align: left; }
+.cta-band .btn-primary {
+  padding: clamp(15px, 2vw, 19px) clamp(26px, 3.2vw, 34px);
+  font-size: clamp(15.5px, 2vw, 17px);
+  border-radius: 14px;
+}
+.cta-band .lp-note { margin-top: 16px; }
+.cta-band .lp-note::before { display: none; }
 .cta-band .email-cta { margin-top: clamp(22px, 3vw, 30px); }
 .cta-band .lp-note { margin-top: clamp(22px, 3vw, 28px); }
 
@@ -1634,3 +1775,91 @@ body.landing .grid { display: none; }
 .form-status.is-ok { color: var(--blue-ink); font-weight: 500; }
 .form-status.is-error { color: #B3261E; }
 
+
+/* =========================================================================
+   MOBILE BANDS CARRY THEIR HEADLINE (below 1100)
+
+   The band was 219px tall at 390 with the h2 on page ground above it, and the
+   founder's verdict on the desktop layout applies here too: a photograph that
+   small, with the sentence it illustrates sitting outside it, is decoration.
+   So the band grows and the h2 moves onto it, over a gradient of page colour
+   rising from the edge the picture is quietest at.
+
+   HOW THE H2 GETS ONTO A PICTURE IT IS NOT INSIDE. It lives in .lp-head inside
+   .wrap, two levels above the figure and before it in source order — and that
+   order is load-bearing for a crawler and a screen reader, so it does not
+   change. `display: contents` on the two wrappers drops them out of the box
+   tree for layout only, which makes the eyebrow, the h2 and the lede direct
+   grid items of the section; then the h2 and the figure are placed in the same
+   cell. Nothing moves in the DOM, and the reading order a machine receives is
+   the reading order it always was.
+
+   THE BAND'S HEIGHT IS 40vh CAPPED BY WHAT EACH PICTURE CAN LOSE. Cover from
+   16:9 into 390 x 338 renders the frame 605px wide and shows 390 of it — 64%.
+   Measured against each subject's own span, that is:
+
+     03 windows   x 7-93%   would lose a quarter of each window
+     04 ribbon    x 0-90%   would lose the ribbon's entry or the third panel
+     06 map       x 0-100%  a texture; the pin is the subject and it survives
+
+   So 06 takes the full 40vh, and 03 and 04 are capped at the height that keeps
+   88% of their width — 249px at 390. It is a smaller gain than the brief asked
+   for on two of the three, and the reason is the same one that keeps #why off
+   an overlay: these were composed as full-frame objects.
+   ========================================================================= */
+@media (max-width: 1099px) {
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) {
+    display: grid; grid-template-columns: 100%;
+  }
+  /* `display: contents` changes box generation, NOT selector matching: the h2's
+     parent in the DOM is still .lp-head, so `> .lp-h2` on the section matches
+     nothing and the h2 auto-places itself at the end of the section. Shipped
+     that way for one screenshot — headline and lede below a five-row table. The
+     selectors below walk the DOM; the placement below applies to the boxes. */
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) > .wrap:first-of-type,
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) > .wrap:first-of-type > .lp-head {
+    display: contents;
+  }
+  /* the measure comes back on each item that lost its wrapper */
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) :is(.lp-h2, .lp-sub, .lp-avail) {
+    width: min(var(--wrap), 92vw); margin-inline: auto; max-width: none;
+  }
+  /* The pill is a desktop device. On a phone it is a third of the width of the
+     screen spent saying what the heading under it is about to say. */
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) .lp-head > .eyebrow { display: none; }
+
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) > .shot {
+    grid-row: 1; grid-column: 1;
+    margin: 0 0 clamp(22px, 5vw, 32px); width: 100%;
+    aspect-ratio: auto; height: var(--band-h, min(249px, 40vh));
+  }
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) > .shot img {
+    object-fit: cover; object-position: var(--band-pos, 50% 50%); height: 100%;
+  }
+  /* The gradient rises from the edge the h2 sits on, full strength under the
+     glyphs and gone by three quarters. It is page colour, so the h2 is the same
+     ink on the same ground it would have had above the picture. */
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) > .shot::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(var(--band-grad, to top),
+      rgba(246, 247, 249, .95) 0%, rgba(246, 247, 249, .88) 26%,
+      rgba(246, 247, 249, .45) 52%, rgba(246, 247, 249, 0) 74%);
+  }
+  .bleed:is([data-copy~="left"], [data-copy~="beside"]) .lp-head > .lp-h2 {
+    grid-row: 1; grid-column: 1; z-index: 2;
+    align-self: var(--band-anchor, end);
+    margin-block: 0 clamp(30px, 7vw, 44px);
+  }
+
+  /* Per photograph, from each subject's own span. */
+  #verticals {
+    --band-anchor: start; --band-grad: to bottom; --band-pos: 50% 42%;
+  }
+  #verticals .lp-head > .lp-h2 { margin-block: clamp(16px, 4vw, 24px) 0; }
+  #cap {
+    --band-h: min(340px, 40vh);
+    /* the pin sits at x 50% of the frame; 62% moves it left of centre, off the
+       measure the headline runs along */
+    --band-pos: 62% 50%;
+  }
+}

@@ -143,7 +143,11 @@
       </figure>
 
       <div class="wrap">
-        <p class="lp-lead">Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it — and a great deal of what is on your screen never reaches them. We build yours so that it does, then we run it for you, every month.</p>
+        <!-- Three tiers in this hero, not four. The lede was 46 words over five
+             lines and ended on the monthly-operation claim, which #product then
+             makes again at display scale; the note below the buttons carried a
+             fourth typographic device — its own blue rule — for one sentence. -->
+        <p class="lp-lead">Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it &mdash; and a great deal of what is on your screen never reaches them.</p>
         <div class="lp-actions">
           <a class="btn btn-primary" href="/check/">Check your page free</a>
           <a class="btn btn-ghost" href="/clinics/">What's included</a>
@@ -163,12 +167,17 @@
         </div>
         <p class="lp-sub" data-reveal>This is not a forecast. It is a survey of 1,002 US adults, published this year, counted below. Every figure on this site is listed with its source on <a href="/sources/">our sources page</a>.</p>
 
+        <!-- Two columns: the figure and the sentence it belongs to on the left,
+             what it means on the right. As one column this card was 48% empty
+             white on its right-hand side at every width above 900. The reading
+             order down the left is the sentence itself — "45% / of US consumers,
+             up from 6% a year earlier / asked AI to recommend a local business."
+             — which is what the number beside the caption used to break. -->
         <div class="stat-grid">
           <div class="stat" data-reveal>
             <p class="stat-num">45% <small>of US consumers, up from 6% a year earlier</small></p>
-            <p>asked AI to recommend a local business.</p>
-            <p class="why">Seven times as many people in twelve months. What comes back is a shortlist, not a page of blue links, and being on it is a different job from ranking. How any given assistant assembles that shortlist is not published by the companies that build them, and we do not claim to know. What is not in dispute is the floor: a page that never hands over a sentence cannot have that sentence quoted from it.</p>
-            <p class="src">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. <a href="/sources/#ai-local">Source and sample &rarr;</a></p>
+            <p class="stat-claim">asked AI to recommend a local business.</p>
+            <p class="why">Seven times as many people in twelve months. What comes back is a shortlist, not a page of blue links.</p>
           </div>
         </div>
 
@@ -176,14 +185,19 @@
           <div class="fig" data-reveal>
             <p class="fig-num">64%</p>
             <p>of adults aged 30 to 44 asked AI for a business recommendation in the past year &mdash; the highest of any age band, and the one with the money.</p>
-            <p class="src">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. <a href="/sources/#ai-local-age">Source and sample &rarr;</a></p>
           </div>
           <div class="fig" data-reveal>
             <p class="fig-num">83% &rarr; 71%</p>
             <p>of consumers read reviews on Google &mdash; down twelve points in a year. Google is not going anywhere, but it is no longer the only room the decision happens in.</p>
-            <p class="src">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. This figure is about where people read reviews, not about search generally. <a href="/sources/#google-reviews">Source and sample &rarr;</a></p>
           </div>
         </div>
+
+        <!-- One credit for three figures that share one survey. It replaced
+             three per-card repeats of the same sentence and the same link
+             label; what it must not do is replace the LINKS, which are the
+             sourcing discipline this site is built on. All three anchors are
+             here, and so is the caveat that belonged to the third. -->
+        <p class="src section-src" data-reveal>All three figures come from one survey. BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. Source and sample for <a href="/sources/#ai-local">AI recommendations &rarr;</a>, <a href="/sources/#ai-local-age">the same by age band &rarr;</a>, and <a href="/sources/#google-reviews">reviews read on Google &rarr;</a> &mdash; the last is about where people read reviews, not about search generally.</p>
 
         <p class="lp-sub" data-reveal>Which raises one question, and it is the only one this page is really about: <b>when an assistant goes to read your website on a customer's behalf, what does it actually get?</b></p>
       </div>
@@ -321,9 +335,18 @@
           <h2 class="lp-h2">One build. Then we <span class="accent">run it</span>.</h2>
         </div>
         <p class="lp-sub" data-reveal>We build the site, take it live on your domain, and then run it every month: a performance report, eight posts written to be found and quoted, inquiry and booking tracking, and hosting, maintenance and self-serve editing. One plan, everything in it.</p>
+        <!-- The price is what a clinic owner scans this page for, and it was
+             set in body copy inside the section's one 1080px-wide paragraph.
+             Same two figures, same sentence, at display scale. -->
         <div class="price-tag" data-reveal>
           <span class="badge"><span class="dot" aria-hidden="true"></span>One plan</span>
-          <p class="d"><b>Build from $990. Then $1,490 a month.</b> There is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
+          <!-- The full stop is INSIDE the first span. scripts/lib/html.mjs
+               flattens a tag to a space, which is what makes the copy gate
+               survive a per-word motion layer — and it means `$990</span>.`
+               reaches a crawler as "$990 ." and breaks the sentence. Punctuation
+               does not sit against a tag boundary in a sentence we assert. -->
+          <p class="price-line"><b>Build from <span class="price-fig">$990.</span> Then <span class="price-fig">$1,490</span> a month.</b></p>
+          <p class="d">There is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
         </div>
         <p class="lp-sub" data-reveal><a href="/clinics/#included">What that covers, month by month &rarr;</a></p>
 
@@ -393,6 +416,10 @@
     <section class="lp-section" id="who">
       <div class="wrap">
         <div class="trust-grid">
+          <!-- The two links live under the heading rather than at the end of
+               the prose. As four stacked paragraphs on the right, the column ran
+               420px past the two-line h2 beside it and the left half of the
+               section was empty for all of it. -->
           <div data-reveal>
             <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Who builds it</span></span>
             <h2 class="lp-h2">The <span class="accent">company</span> behind it.</h2>
@@ -400,9 +427,14 @@
           <div class="prose" data-reveal>
             <p>Anaks Labs is a software company that designs, builds and runs its own products — this is one of them. The people who design your site write the code, publish the posts and send the report. There is no account manager in between.</p>
             <p>You won't find a wall of client logos on this page. <b>The build we send you is the reference</b> — judge us on that instead.</p>
-            <p><a href="/clinics/example/">Until we have built yours, here is a specimen we built both sides of &rarr;</a></p>
-            <p><a href="/about/">Company information and public notices &rarr;</a></p>
           </div>
+          <!-- Last in the DOM, which is the order a phone reads and the order
+               this section always had. Above 760 it is placed under the heading
+               instead, where it fills the 420px the two-line h2 left empty. -->
+          <p class="trust-links" data-reveal>
+            <a href="/clinics/example/">Until we have built yours, here is a specimen we built both sides of &rarr;</a>
+            <a href="/about/">Company information and public notices &rarr;</a>
+          </p>
         </div>
       </div>
     </section>

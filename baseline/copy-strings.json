@@ -1,8 +1,8 @@
 {
- "note": "Every visible text string the homepage served on the day this was recorded. verify-acceptance.mjs asserts each is still a substring of the flattened server HTML. A replacement homepage must carry all of them, or the difference must be a deliberate, recorded copy decision — not a side effect of the build. Re-recorded 2026-08-19 for the co-visibility wave, which is the second half of that sentence in practice: five copy decisions, all authorized, all listed in `changes`. Nothing else moved — the other 77 strings are byte-identical to the 2026-08-14 recording.",
+ "note": "Every visible text string the homepage served on the day this was recorded. verify-acceptance.mjs asserts each is still a substring of the flattened server HTML. A replacement homepage must carry all of them, or the difference must be a deliberate, recorded copy decision — not a side effect of the build. Re-recorded 2026-08-19 across two waves — co-visibility, then the layout critique. Every difference from the 2026-08-14 recording is an authorized copy decision listed in `changes`, with the reason it was made and, where the sentence still exists somewhere, where it went.",
  "source": "https://anakslabs.com/ as served by scripts/serve.mjs",
  "recordedAt": "2026-08-19",
- "count": 80,
+ "count": 79,
  "strings": [
   "Anaks Labs — websites built for AI search",
   "Skip to content",
@@ -14,7 +14,7 @@
   "AI-ready websites",
   "Your customers ask AI first. Your site should be",
   "the answer",
-  "Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it — and a great deal of what is on your screen never reaches them. We build yours so that it does, then we run it for you, every month.",
+  "Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it — and a great deal of what is on your screen never reaches them.",
   "Check your page free",
   "What's included",
   "We build your site first. You decide after you've seen it.",
@@ -25,14 +25,13 @@
   "45%",
   "of US consumers, up from 6% a year earlier",
   "asked AI to recommend a local business.",
-  "Seven times as many people in twelve months. What comes back is a shortlist, not a page of blue links, and being on it is a different job from ranking. How any given assistant assembles that shortlist is not published by the companies that build them, and we do not claim to know. What is not in dispute is the floor: a page that never hands over a sentence cannot have that sentence quoted from it.",
+  "Seven times as many people in twelve months. What comes back is a shortlist, not a page of blue links.",
   "BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers.",
-  "Source and sample →",
   "64%",
   "of adults aged 30 to 44 asked AI for a business recommendation in the past year — the highest of any age band, and the one with the money.",
   "83% → 71%",
   "of consumers read reviews on Google — down twelve points in a year. Google is not going anywhere, but it is no longer the only room the decision happens in.",
-  "BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. This figure is about where people read reviews, not about search generally.",
+  "the last is about where people read reviews, not about search generally.",
   "Which raises one question, and it is the only one this page is really about:",
   "when an assistant goes to read your website on a customer's behalf, what does it actually get?",
   "Where it goes wrong",
@@ -118,6 +117,39 @@
    "kind": "removed",
    "was": "There is no countdown here, and no number of seats: the cap is a condition of the work, not an offer that expires.",
    "why": "A footnote denying a scarcity device the page no longer contains."
+  },
+  {
+   "wave": 2,
+   "section": "#demand",
+   "kind": "shortened + moved",
+   "was": "Seven times as many people in twelve months. What comes back is a shortlist, not a page of blue links, and being on it is a different job from ranking. How any given assistant assembles that shortlist is not published by the companies that build them, and we do not claim to know. What is not in dispute is the floor: a page that never hands over a sentence cannot have that sentence quoted from it.",
+   "now": "Seven times as many people in twelve months. What comes back is a shortlist, not a page of blue links.",
+   "movedTo": "/sources/#ai-local, under a new “What we don’t claim” row",
+   "why": "The tail is epistemics — the limits of what we know about how assistants rank. It is the right paragraph in the wrong room: it belongs beside the source it qualifies, not inside a sales page's headline figure. Not deleted; moved verbatim but for the clause that gave it its antecedent."
+  },
+  {
+   "wave": 2,
+   "section": "#demand",
+   "kind": "consolidated",
+   "was": "Source and sample →  (three times, once per card)",
+   "now": "One section credit carrying all three anchors: “Source and sample for AI recommendations →, the same by age band →, and reviews read on Google →”",
+   "why": "Three cards each repeated the survey name and the same link label. The LINKS are the sourcing discipline and all three survive, by name; only the repetition went."
+  },
+  {
+   "wave": 2,
+   "section": "#demand",
+   "kind": "reworded in place",
+   "was": "BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. This figure is about where people read reviews, not about search generally.",
+   "now": "the last is about where people read reviews, not about search generally.",
+   "why": "The survey name and sample size are stated once for all three figures in the consolidated credit; the caveat that belonged to the third figure is kept and attached to it there."
+  },
+  {
+   "wave": 2,
+   "section": "hero",
+   "kind": "shortened",
+   "was": "Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it — and a great deal of what is on your screen never reaches them. We build yours so that it does, then we run it for you, every month.",
+   "now": "Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it — and a great deal of what is on your screen never reaches them.",
+   "why": "46 words over six lines at 1440, with a fourth typographic tier under the buttons. The dropped final sentence is the offer beat, and it is made three more times within a screen of it: the caption directly below (\"We build your site first. You decide after you've seen it.\"), the buttons, and #product's \"One build. Then we run it.\" at display scale. The diagnosis — including \"they read the code underneath it\" — is intact. Now four lines at 1440 and 1600, five at 1100."
   }
  ]
 }
