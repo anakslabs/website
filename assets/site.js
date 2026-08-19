@@ -227,12 +227,17 @@
      on the first and swapped in place when the section that makes the claim
      comes into view. The copy and the picture change at the same moment.
 
-     Triggered off #demand rather than off the figure itself: the figure is on
-     screen for most of the hero, and resolving it there would answer the
-     question before the page has finished asking it. The bottom margin holds
-     the swap until the demand heading is a quarter of the way up the viewport,
-     which is where a reader is looking when they read it — the figure is still
-     fully visible at that scroll position at every width measured.
+     Triggered off the demand HEADING and not off the section, which is the
+     whole difference between the effect landing and the effect happening in an
+     empty room. #demand is a tall section, so its top edge crosses any
+     reasonable trigger line almost immediately: measured, the swap fired at a
+     scroll of 160px with the heading still 863px down the viewport — the
+     picture answered a question the reader had not been asked yet, and on a
+     fresh load with no scroll at all it never fired in 6.5 seconds. Observing
+     the heading with the root's bottom pulled in by 40% fires when the heading
+     itself crosses 60% of the viewport height, which is where a reader is
+     looking when they read it. The hero figure is still on screen there at
+     every width measured, which is the other half of the requirement.
 
      Reduced motion is handled in CSS, which shows the resolved frame from the
      start; this observer may still run and add the class, and doing so is a
@@ -241,13 +246,25 @@
     var pair = document.getElementById("answer-pair");
     var demand = document.getElementById("demand");
     if (!pair || !demand || !("IntersectionObserver" in window)) return;
+    var claim = demand.querySelector("h2") || demand;
+    /* Two lines because the hero figure is two different things. On a desktop it
+       is the section — absolute, inset 0 — so it is on screen for the whole
+       hero and the swap can wait until the claim is well up the viewport: at
+       -40% it fires with the claim at 0.58 of the height and the figure still
+       42-49% visible. On a phone it is a 219px band in the flow, and by the time
+       the claim is 60% up, the band has been gone for 70px of scroll. Measured
+       at 390: the figure's bottom sits 576px above the claim's top, so both are
+       on screen only between scroll 282 and 550, and -15% fires at 409 with the
+       figure 64% visible. Firing at all costs nothing; firing against an empty
+       screen costs the effect. */
+    var pull = window.matchMedia("(min-width: 1100px)").matches ? "-40%" : "-15%";
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         pair.classList.add("resolved");
         io.disconnect();
       });
-    }, { rootMargin: "0px 0px -25% 0px", threshold: 0 });
-    io.observe(demand);
+    }, { rootMargin: "0px 0px " + pull + " 0px", threshold: 0 });
+    io.observe(claim);
   })();
 })();

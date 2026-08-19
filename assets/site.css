@@ -757,28 +757,21 @@ body.landing .grid { display: none; }
 /* on a subpage the list follows a normal h2, so it needs far less air above */
 .page .mech { margin-top: clamp(8px, 1.6vw, 14px); }
 
-/* ---- verticals (industries we actually serve; one card per live vertical) ---- */
-.verticals {
-  margin-top: clamp(34px, 5vw, 56px);
-  display: grid; gap: clamp(16px, 2.2vw, 22px);
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+/* ---- the live-vertical line -------------------------------------------------
+   Was `.verticals`: a one-item auto-fit card grid under the #verticals
+   photograph, which meant a single 320px-minimum card stretched to the full
+   1080px measure and came out 55% empty white. It was also the only thing on
+   screen once the picture had scrolled past it. The card is gone and its copy
+   is a paragraph in the section's overlay; what is left of it is this row —
+   the availability badge and the link, side by side under the lede. */
+.lp-avail {
+  margin-top: clamp(20px, 3vw, 28px);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px;
 }
-.vertical {
-  display: block; text-decoration: none; color: inherit;
-  background: var(--card); border: 1px solid var(--line-2); border-radius: 18px;
-  padding: clamp(26px, 3.6vw, 40px);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  box-shadow: 0 10px 30px rgba(20,26,58,.05);
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-}
-.vertical:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(20,26,58,.09); border-color: rgba(45,99,240,.28); }
-.vertical:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-.vertical h3 { margin: 16px 0 10px; font-size: clamp(24px, 3.4vw, 34px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; color: var(--ink); }
-.vertical p { font-size: clamp(15px, 2vw, 17px); line-height: 1.62; color: var(--gray); max-width: 54ch; }
-.vertical .go {
-  margin-top: 22px; display: inline-flex; align-items: center; gap: 8px;
+.lp-avail .go {
+  display: inline-flex; align-items: center; gap: 8px;
   font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
-  color: var(--blue-ink);
+  color: var(--blue-ink); text-decoration: underline; text-underline-offset: 4px;
 }
 
 /* ---- deliverables ---- */
@@ -1151,8 +1144,8 @@ body.landing .grid { display: none; }
      slack to spend — at 1440 there is none, by design. Both overlay sections
      carry their copy on the right, so any crop is spent moving the subject
      left, away from it. */
-  .bleed[data-copy="right"] > .shot img,
-  .bleed[data-copy="right"] > .pair .frame img { object-position: 34% 50%; }
+  .bleed[data-copy~="right"] > .shot img,
+  .bleed[data-copy~="right"] > .pair .frame img { object-position: 34% 50%; }
   .bleed > .shot img, .bleed > .pair .frame img { object-fit: cover; }
   .bleed > .shot picture, .bleed > .shot img { height: 100%; }
 
@@ -1193,10 +1186,12 @@ body.landing .grid { display: none; }
      alpha, no join to see, and the paint-order problem cannot arise because the
      scrim is no longer inside either wrap.
 
-     This assumes exactly two wraps per overlay section, which is what both have,
-     and the row template says so out loud. A third would need a row. */
-  .bleed[data-copy="left"],
-  .bleed[data-copy="right"] {
+     The row template carries at most two copy blocks. The hero and #contact
+     have two; #verticals and #cap have one, and there both :first-of-type and
+     :last-of-type select it, the later rule wins, it lands in row 3 and row 2
+     collapses to nothing. The scrim still spans exactly the copy either way. */
+  .bleed[data-copy~="left"],
+  .bleed[data-copy~="right"] {
     /* Unitless, because it is needed twice against two different boxes: as a
        max-width on the copy, where the containing block is .wrap, and as a
        length for the scrim, whose containing block is the section. */
@@ -1221,19 +1216,59 @@ body.landing .grid { display: none; }
        and none of this reaches it. */
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 1fr auto auto 1fr;
+    /* `top` on the section pins the copy to the top of the frame instead of
+       centring it, which is the whole placement decision in #verticals and #cap:
+       both photographs are quiet in their upper-left and busy below it. */
+    grid-template-rows: var(--copy-lead, 1fr) auto auto 1fr;
+  }
+  .bleed[data-copy~="top"] { --copy-lead: 0; }
+
+  /* PER PHOTOGRAPH, because the requirement is a property of what is under the
+     glyphs and nothing else. Measured with the scrim suppressed, as the core
+     alpha needed to lift the darkest pixel under each element to its own floor,
+     worst case over 1100/1280/1440/1600:
+
+       hero      .845   the engraved bars inside the glass question bubble
+       contact   .74    the blurred right tips of the ranked cards
+       verticals .82    the junction box's aluminium, under the link at 1100
+       cap       .855   near-black between the map's engraved streets
+
+     The brief for these two said "minimal or none" for #verticals and .80-.85
+     for #cap. Neither survived measurement at the copy's real extent: the block
+     runs well past the frame's blank upper-left corner, and at 1100 it runs the
+     whole height of the section. What DOES buy the headroom is the other lever
+     in the brief — the lede in --ink-2 rather than --gray. --gray needs a ground
+     of 218/255 to clear 4.5:1 and --ink-2 needs 150, which drops #cap's lede
+     from .855 to .60 and leaves the blue link in #verticals as the binding
+     constraint at .82. So the core is .88 here rather than the hero's .93, and
+     the pictures are correspondingly less covered. */
+  .bleed[data-copy~="left"] { --scrim-core: rgba(247, 249, 252, .88); }
+  .bleed[data-copy~="left"] .lp-sub { color: var(--ink-2); }
+
+  /* #cap's column is narrower than the 46% everything else uses, and the number
+     comes from the lit pin. The pin stands at x 46.7-52.9% of the frame, the
+     copy must not touch it, and the scrim reaches pad + skirt + 1.58 feather
+     past the last glyph before its alpha is under .05. Solving
+     gutter + copy + pad + 4.16 feather <= 673px at 1440 gives a 388px column,
+     which is .36 of the measure. The h2 takes a fourth line for it; the section
+     has 400px of slack and the pin is the point of the picture. */
+  #cap {
+    --copy-col: .36;
+    --scrim-pad-x: 30px;
+    --scrim-feather: 18px;
+    --scrim-skirt: 46px;
   }
   /* grid-column is not optional here. The scrim is placed explicitly in column
      1; auto-placement then refuses to put a row-locked item on top of it and
      opens an implicit SECOND column for the wraps, which puts the whole copy off
      the right of the page. Explicit placement is what lets them share a cell. */
-  .bleed[data-copy="left"] > .wrap:first-of-type,
-  .bleed[data-copy="right"] > .wrap:first-of-type { grid-row: 2; grid-column: 1; }
-  .bleed[data-copy="left"] > .wrap:last-of-type,
-  .bleed[data-copy="right"] > .wrap:last-of-type { grid-row: 3; grid-column: 1; }
+  .bleed[data-copy~="left"] > .wrap:first-of-type,
+  .bleed[data-copy~="right"] > .wrap:first-of-type { grid-row: 2; grid-column: 1; }
+  .bleed[data-copy~="left"] > .wrap:last-of-type,
+  .bleed[data-copy~="right"] > .wrap:last-of-type { grid-row: 3; grid-column: 1; }
 
-  .bleed[data-copy="left"]::before,
-  .bleed[data-copy="right"]::before {
+  .bleed[data-copy~="left"]::before,
+  .bleed[data-copy~="right"]::before {
     content: ""; pointer-events: none;
     /* Spanning both copy rows, so the shape is the copy's own box and nothing
        has to know how tall the copy is. z-index 1 puts it above the photograph
@@ -1287,12 +1322,12 @@ body.landing .grid { display: none; }
      that edge. The gutter is (section - wrap) / 2, and below 1174px it is 4vw,
      so there the shape runs off the section and overflow:hidden takes it — a cut
      against page colour, on the one part of every frame that is empty sweep. */
-  .bleed[data-copy="right"]::before {
+  .bleed[data-copy~="right"]::before {
     justify-self: end;
     margin-right: calc((100% - min(var(--wrap), 92vw)) / 2
                        - var(--scrim-pad-x) - var(--scrim-skirt));
   }
-  .bleed[data-copy="left"]::before {
+  .bleed[data-copy~="left"]::before {
     justify-self: start;
     margin-left: calc((100% - min(var(--wrap), 92vw)) / 2
                       - var(--scrim-pad-x) - var(--scrim-skirt));
@@ -1305,14 +1340,14 @@ body.landing .grid { display: none; }
      52px above the headline. Pulling the halo's top back down to the headline is
      the difference between a shape that reads as belonging to the copy and one
      that starts at the header. */
-  .lp-hero[data-copy="right"]::before {
+  .lp-hero[data-copy~="right"]::before {
     margin-top: calc(34px - var(--scrim-skirt));
   }
 
   /* Tone-matched, on the headings only. Body copy was measured without it and
      does not need it: nothing below 24px sits near enough to the falloff. */
-  .bleed[data-copy="left"] > .wrap :is(h1, h2),
-  .bleed[data-copy="right"] > .wrap :is(h1, h2) {
+  .bleed[data-copy~="left"] > .wrap :is(h1, h2),
+  .bleed[data-copy~="right"] > .wrap :is(h1, h2) {
     text-shadow: 0 1px 1px rgba(255, 255, 255, .55), 0 16px 44px rgba(255, 255, 255, .42);
   }
   /* Never on the gradient span, and this shipped wrong for one screenshot.
@@ -1320,8 +1355,8 @@ body.landing .grid { display: none; }
      glyphs ARE that background (background-clip:text over a transparent fill) —
      so a white glow does not sit behind them, it sits on top of them, and
      "the answer" came out washed nearly to the page colour. */
-  .bleed[data-copy="left"] > .wrap :is(h1, h2) .accent,
-  .bleed[data-copy="right"] > .wrap :is(h1, h2) .accent { text-shadow: none; }
+  .bleed[data-copy~="left"] > .wrap :is(h1, h2) .accent,
+  .bleed[data-copy~="right"] > .wrap :is(h1, h2) .accent { text-shadow: none; }
 
   /* The copy column. It no longer has to fit inside anything — the scrim is
      sized FROM it rather than the other way round — so this is now a measure
@@ -1330,11 +1365,17 @@ body.landing .grid { display: none; }
      halo for no gain. Verified by sampling rendered pixels under every text
      node, not by arithmetic; see scripts/verify-contrast.mjs. */
   .bleed > .wrap > * { max-width: calc(var(--copy-col, .46) * 100%); }
-  .bleed[data-copy="right"] > .wrap > * { margin-left: auto; }
+  .bleed[data-copy~="right"] > .wrap > * { margin-left: auto; }
 
-  /* data-copy="above": the photograph spans the whole section width at its own
-     aspect and the copy sits above it on the page ground, with nothing over the
-     picture and no scrim at all.
+  /* THE BAND IS GONE FROM THE DESKTOP LAYOUT and there is no `above` rule left
+     to carry it. A band put the copy on page ground above a full-width
+     photograph, and that is exactly the arrangement the founder rejected: "the
+     image and the text don't show at the same time — then what is the image even
+     for?" Every desktop section now overlays its picture or sits beside it. The
+     band survives in two places only, both deliberate — below 1100, where the
+     copy column would be narrower than the measure, and under
+     prefers-reduced-motion in #why, where the alternative is a picture that
+     leaves the flow.
 
      WHICH SECTIONS CARRY COPY AND WHICH DO NOT is decided by the photographs,
      and it was re-decided from scratch when the plate became a scrim, because
@@ -1364,44 +1405,126 @@ body.landing .grid { display: none; }
                     trap that once cropped this section to a single window.
        04 verticals FITS: 599px of copy inside the 804px floor, aspect exactly
                     16:9, no crop at all. And 26.9% subject is quieter than the
-                    hero's. So density and height both clear, and it stays a
-                    band on WHAT is in those pixels rather than how many: the
-                    quietest box is x 0-46%, y 0-74%, which is precisely the
-                    ribbon and the junction box it feeds. The picture's whole
-                    statement is one stream entering and three leaving; a scrim
-                    at .93 over the junction deletes the entering half of it.
-                    The mirror placement covers the three panels instead. There
-                    is no third option on this frame.
-       06 cap       is the closest call on the page and the numbers say so:
-                    11.9% subject, less than half the hero's, at x 0-46% /
+                    hero's, so density and height both clear.       NOW OVERLAY
+       06 cap       11.9% subject, less than half the hero's, at x 0-46% /
                     y 0-49% — the map's sparse upper-left, with the lit pin at
-                    x 46.7-52.9% falling just outside it. 395px of copy fits
-                    the 804px floor with 409px to spare. It stays a band on the
-                    ledger rather than on the geometry: converting it would put
-                    a new near-opaque blob over 22.5% of a frame that today has
-                    nothing whatsoever on it, and buy nothing the band does not
-                    already give. The brief was to stop whitening half of two
-                    photographs, not to start whitening a third.
+                    x 46.7-52.9% falling just outside it. 395px of copy in the
+                    804px floor with 409px to spare.                NOW OVERLAY
 
-     Every one of these is still full-bleed, edge to edge, unframed. What a band
-     gives up is the overlay, not the bleed — and the framed card in a column is
-     what was actually rejected. */
-  .bleed[data-copy="above"] {
-    display: block; min-height: 0; overflow: visible;
-    padding-top: clamp(64px, 9vw, 116px); padding-bottom: 0;
-  }
-  .bleed[data-copy="above"] > .shot {
-    position: relative; inset: auto; width: 100%;
-    aspect-ratio: 2752 / 1536; margin: clamp(40px, 5vw, 72px) 0 0;
-  }
-  .bleed[data-copy="above"] > .wrap > * { max-width: none; }
-  /* No scrim rule to switch off any more: the scrim is selected by
-     [data-copy="left"|"right"], so a band simply never grows one. */
-  .bleed[data-copy="above"] .mech li { grid-template-columns: minmax(0, 22ch) minmax(0, 1fr); }
+     THE LAST TWO USED TO BE BANDS AND THE MEASUREMENT DID NOT CHANGE; the thing
+     it was being weighed against did. A band is a photograph the reader never
+     sees at the same time as the sentence it illustrates: #why, #verticals and
+     #cap stood 1853, 1532 and 1304px tall at 1440 against an 804px picture, so
+     in a 900px viewport there was no scroll position that held both. The
+     founder's verdict was that this makes the photograph pointless, and it
+     outranks the argument this comment used to make — that converting #cap
+     would newly cover 22.5% of an untouched frame. Co-visibility won; the
+     22.5% is the price and it is a real one.
 
+     What the numbers still decide is HOW each one converts:
+
+       #verticals  takes a scrim after all. The brief said the frame's upper
+                   left is blank paper — min 234 against the 219 that --gray
+                   body copy needs — and that is true of the top two rows of a
+                   6x3 grid, but not of the copy: the block runs down past them
+                   into the junction box and at 1100 the whole height of the
+                   section. Measured under the glyphs, minima are 1-84 and the
+                   requirement is .82.
+       #cap        the same corner of the map is not paper either: the socket
+                   rings put minima of 1-45 under it and the requirement is
+                   .855. The lede in --ink-2 is what pays for it (see below).
+       #why        is still the section a scrim cannot help. Every 46%-wide box
+                   on that frame is more than half subject — 56.5% at best —
+                   and an overlay section would stand 1299px against an 804px
+                   floor, cropping 38% of the frame width and turning two
+                   windows into one. So it gets the other answer to
+                   co-visibility instead: `beside`, below.
+
+     Every one of these is still full-bleed, edge to edge, unframed, except
+     #why, whose picture now occupies a column rather than the full width. */
   /* A five-item two-column list does not fit a 46% column, and the stacked
      variant already exists for narrow screens. Reuse it here. */
   .bleed .mech li { grid-template-columns: 1fr; }
+
+  /* =======================================================================
+     data-copy="beside" — the copy scrolls, the picture stays.
+
+     #why is the one section that can take neither an overlay nor a band. An
+     overlay has nowhere to sit: 56.5% subject in the quietest box, and the
+     section would stand 1299px against an 804px floor and crop the pair into a
+     single window. A band is what the founder rejected: 1853px of section
+     against 804px of picture, so the five failure modes and the photograph of
+     them were never on screen together.
+
+     So the section becomes two columns and the photograph is sticky in the
+     right one. The copy scrolls past it for the whole 1800px of the section and
+     the picture is there the entire time — co-visible for all of it rather than
+     none of it. Sticky and not fixed, so it releases at the section's end
+     without any script.
+
+     WHY THE PICTURE IS SHORTER THAN ASKED FOR. The brief said ~640px tall. At
+     1440 the column is 778px wide and 640px tall is an aspect of 1.22, which
+     `cover` answers by showing 68% of the frame width. The two windows span
+     x 7-93% — 86% of it — so 640px would clip a window off, which is the exact
+     failure this section has already shipped once. The frame is held at
+     2477/1536 instead: 90% of its own width, centred, which keeps x 5-95% and
+     therefore both windows whole, and comes out 482px tall at 1440. Height lost
+     to keep the argument.
+
+     `overflow: hidden` on .bleed would silently kill the sticky — an ancestor
+     with a clipped overflow becomes the sticky element's scrollport and it
+     never sticks. It is set back to visible here on purpose.               */
+  .bleed[data-copy~="beside"] {
+    display: grid;
+    grid-template-columns: 46% 54%;
+    grid-template-rows: auto auto;
+    align-content: start;
+    min-height: 0; overflow: visible;
+    padding-top: clamp(64px, 9vw, 116px);
+    padding-bottom: clamp(64px, 9vw, 116px);
+  }
+  .bleed[data-copy~="beside"] > .wrap:first-of-type { grid-area: 1 / 1; }
+  .bleed[data-copy~="beside"] > .wrap:last-of-type  { grid-area: 2 / 1; }
+  /* The wrap stops being a centred measure and becomes the left column: the
+     page gutter is kept on its left so the copy still lines up with every other
+     section, and the right padding is the only thing keeping the last word off
+     the photograph. */
+  .bleed[data-copy~="beside"] > .wrap {
+    width: auto; margin-inline: 0;
+    padding-left: calc((100vw - min(var(--wrap), 92vw)) / 2);
+    padding-right: clamp(28px, 4vw, 64px);
+  }
+  .bleed[data-copy~="beside"] > .wrap > * { max-width: none; }
+  .bleed[data-copy~="beside"] > .shot {
+    grid-area: 1 / 2 / 3 / 3;
+    position: sticky; top: calc(58px + clamp(12px, 3vh, 40px));
+    align-self: start;
+    inset-inline: auto; width: 100%; margin: 0;
+    /* 90% of the frame's width, centred: keeps x 5-95%, so both windows survive
+       whole. Anything taller crops one of them off. */
+    aspect-ratio: 2477 / 1536;
+  }
+  .bleed[data-copy~="beside"] > .shot img { object-position: 50% 50%; }
+  /* The list stays stacked. Tried as two columns here and the 20ch label took
+     240px of a 419px measure, leaving four words a line for the explanation.
+     The base .bleed rule already stacks it; this is a note that the two-column
+     variant was tried and measured, not overlooked. */
+}
+
+/* A reader who asked for less motion gets the band back: a picture that leaves
+   the flow and holds position under the header is movement, whatever the spec
+   calls it. This is the layout the section had before, unchanged. */
+@media (min-width: 1100px) and (prefers-reduced-motion: reduce) {
+  .bleed[data-copy~="beside"] {
+    display: block; padding-bottom: 0;
+  }
+  .bleed[data-copy~="beside"] > .wrap {
+    width: min(var(--wrap), 92vw); margin-inline: auto; padding-inline: 0;
+  }
+  .bleed[data-copy~="beside"] > .shot {
+    position: relative; top: auto; width: 100%;
+    aspect-ratio: 2752 / 1536; margin: clamp(40px, 5vw, 72px) 0 0;
+  }
 }
 
 /* ---- the answer arriving: the page's one piece of real choreography --------
