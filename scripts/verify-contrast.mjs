@@ -53,10 +53,25 @@ const ratio = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 /** WCAG large text is 18.66px bold or 24px+; its floor is 3:1 rather than 4.5:1. */
 const floorFor = (px, weight) => (px >= 24 || (px >= 18.66 && Number(weight) >= 700) ? 3.0 : 4.5);
 
-const VIEWS = [
-  ["1440", 1440, 900, false],
-  ["390", 390, 844, true],
-];
+/* 1440 and one phone by default, because those are the two the design is drawn
+   at and a default that takes six minutes stops being run. The scrim that
+   replaced the plate is sized from the copy rather than from the section, so its
+   share of the width moves with the viewport (49% at 1100 down to 36% at 1600)
+   and the desktop range has to be sweepable:
+     node scripts/verify-contrast.mjs http://localhost:4311 --widths 1100,1280,1440,1600
+   A width given here is a desktop context; 390 is always appended as a real
+   mobile context, because isMobile changes layout and cannot be inferred from a
+   number. */
+const widthsFlag = process.argv.indexOf("--widths");
+const VIEWS = widthsFlag > -1
+  ? [
+      ...process.argv[widthsFlag + 1].split(",").map((w) => [w.trim(), Number(w), 900, false]),
+      ["390", 390, 844, true],
+    ]
+  : [
+      ["1440", 1440, 900, false],
+      ["390", 390, 844, true],
+    ];
 
 const browser = await chromium.launch();
 const report = [];
@@ -142,7 +157,7 @@ for (const [label, width, height, isMobile] of VIEWS) {
       out.push({
         id: n++,
         section: el.closest("section")?.id || "(hero)",
-        plate: el.closest(".bleed")?.dataset.plate ?? "-",
+        copy: el.closest(".bleed")?.dataset.copy ?? "-",
         tag: el.tagName.toLowerCase() + (el.className && typeof el.className === "string" ? "." + el.className.trim().split(/\s+/)[0] : ""),
         text: text.slice(0, 46),
         color,
@@ -318,7 +333,7 @@ for (const [label, width, height, isMobile] of VIEWS) {
     report.push({
       view: label,
       section: t.section,
-      plate: t.plate,
+      copy: t.copy,
       element: t.tag,
       text: t.text,
       fontPx: t.fontPx,
@@ -344,7 +359,7 @@ for (const [label] of VIEWS) {
   console.table(
     rows.map((r) => ({
       section: r.section,
-      plate: r.plate,
+      copy: r.copy,
       element: r.element,
       px: r.fontPx,
       floor: r.floor,

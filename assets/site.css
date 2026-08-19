@@ -574,7 +574,8 @@ body.landing .grid { display: none; }
 
 /* ---- hero ----------------------------------------------------------------
    The hero is a .bleed section like the others: the photograph fills it edge to
-   edge and the copy sits on the plate. Its plate is on the RIGHT, and that is
+   edge and the copy sits on the picture, on a scrim the size of the copy. The
+   copy is on the RIGHT, and that is
    not an alternation choice — the blue answer well sits left of centre in both
    01-asking and 02-competitor, and it is the one thing on this page that must
    never be covered, because the signature transition happens inside it.
@@ -1028,12 +1029,66 @@ body.landing .grid { display: none; }
    corner for type. So text laid straight onto them cannot clear 4.5:1 anywhere
    consistent, and no amount of choosing a side fixes it.
 
-   The answer is a LOCAL ground, never a wash: a band of page colour across
-   part of the width, full section height, feathering out over a region that
-   holds no glyphs. Contrast then stops depending on the photograph at all —
-   ink on --bg is 15.8:1 — and the remaining 30-45% of the picture is at full
-   fidelity with nothing over it. A full-frame scrim was rejected before on this
-   site for making the image disappear; this deliberately is not one.
+   WHAT USED TO BE HERE, AND WHY IT LOST. The first answer was a plate: a solid
+   band of page colour across 54% of the section width, full section height,
+   feathering to nothing by 68%. It cleared the gate easily — contrast stopped
+   depending on the photograph at all — and it was rejected on sight, correctly.
+   54% of the frame at full opacity for the whole height of the section is not a
+   local ground; it is half the picture deleted, and the copy then reads as
+   sitting on a panel BESIDE the photograph rather than inside it. The 46%
+   copy column existed only to keep every glyph inside that solid band.
+
+   THE SCRIM THAT REPLACED IT is sized from the copy, not from the section: a
+   soft-edged shape the size of the text block plus a small margin, with a
+   Gaussian falloff. Measured off the rendered boxes, as the share of the section
+   covered at full strength / at half strength or more:
+
+              1100                 1280                 1440                 1600
+     hero     49.2x84.6 60.5x101    44.7x83.3 54.4x99    39.8x82.0 48.4x97    35.8x81.3 43.5x96
+     contact  49.2x64.2 60.5x84.4   44.7x55.2 54.4x72.6  39.8x49.1 48.4x64.5  35.8x47.6 43.5x62.6
+
+   against 54 x 100 SOLID for the plate at every width, feathering to nothing by
+   68%. Read it honestly: the full-strength core is narrower than the plate
+   everywhere, and much shorter in #contact, but at 1100 the half-strength
+   contour is wider than the plate's solid band was. The narrow end is where
+   this treatment is weakest and the reason is not the scrim — at 1100 the copy
+   column IS 42.3% of the screen, because .wrap is 92vw there and the gutters are
+   4vw, so no halo around this copy can be much under half the width. What every
+   width does get is the rest of it: the photograph reads through the core at .93
+   instead of being replaced by page colour, the height comes off wherever the
+   copy is short, and there is no edge at any of it.
+
+   NO EDGE IS A MEASUREMENT, not a claim, and it was wrong once. The scrim's own
+   alpha map is recovered by capturing each section twice from one page at one
+   scroll position with the shape toggled, and dividing the difference by
+   (core - photograph) per pixel; the steepest one-pixel step it produces, at
+   each pixel's local swing, is then what a reader can actually see:
+
+     #contact 1440   64.07 / 255  ->  4.66      #contact 1100   58.15  ->  4.73
+     hero     1440   25.15 / 255  ->  4.61      hero     1100   31.00  ->  4.73
+
+   The 64 was a one-pixel hairline on the old shape's own border, invisible over
+   the studio sweep and plainly visible where it crossed the dark ends of the
+   ranked cards. See the ::before rule for what it was and why a border is the
+   thing that cannot be there.
+
+   HOW STRONG IT HAS TO BE, and this is the number that decides the whole
+   treatment. The gate is 4.5:1 under body copy, and body copy on this site is
+   --gray #545C70 at luminance 0.1188, which needs a ground of 0.710 — about
+   219/255 per channel. The darkest photograph pixel under the hero lead is
+   (0,1,22): the engraved bars inside the glass question bubble. Lifting that to
+   219 with a near-white core takes 0.845 alpha. So the scrim cannot be gauzy;
+   the core is set at .93 and the plateau has to be flat under every glyph.
+   Two levers were measured and not pulled: setting the lead in --ink-2 instead
+   of --gray drops the requirement from .845 to .588, and moving the copy would
+   help if there were anywhere to move it — the quietest 46%-wide box anywhere
+   on 01-asking still contains 29.7% subject pixels and a 0.000 darkest pixel.
+
+   A tone-matched white text-shadow rides on the headings, which is what welds
+   the glyphs into the photograph at the soft edge of the scrim where the
+   picture still shows through. It is optical only: verify-contrast.mjs strips
+   every text-shadow on the page before it samples, so it contributes exactly
+   0.00 to every ratio reported and can never be the thing that passes a gate.
    ========================================================================= */
 .bleed { position: relative; isolation: isolate; }
 .bleed > .wrap { position: relative; z-index: 2; }
@@ -1051,7 +1106,7 @@ body.landing .grid { display: none; }
 .shot img { object-fit: cover; }
 
 /* Below 960 the photograph is an edge-to-edge band at its native 16:9 and the
-   copy sits on the page ground above and below it, with no plate and nothing
+   copy sits on the page ground above and below it, with no scrim and nothing
    over the picture.
 
    Not a cover-crop of the whole section, which is what full-bleed usually means
@@ -1080,7 +1135,7 @@ body.landing .grid { display: none; }
 
      min-height at the frame's aspect fixes the floor; the copy has to fit
      inside it, which is why the padding is tighter here than on a plain section
-     and why #why is not a plate section at all. */
+     and why #why does not carry its copy over the picture at all. */
   .bleed {
     overflow: hidden;
     min-height: min(calc(100vw * 1536 / 2752), 92vh);
@@ -1094,78 +1149,255 @@ body.landing .grid { display: none; }
   }
   /* Only bites where a section runs taller than 16:9 and there is horizontal
      slack to spend — at 1440 there is none, by design. Both overlay sections
-     have their plate on the right, so any crop is spent moving the subject
+     carry their copy on the right, so any crop is spent moving the subject
      left, away from it. */
-  .bleed[data-plate="right"] > .shot img,
-  .bleed[data-plate="right"] > .pair .frame img { object-position: 34% 50%; }
+  .bleed[data-copy="right"] > .shot img,
+  .bleed[data-copy="right"] > .pair .frame img { object-position: 34% 50%; }
   .bleed > .shot img, .bleed > .pair .frame img { object-fit: cover; }
   .bleed > .shot picture, .bleed > .shot img { height: 100%; }
 
-  /* The plate. On the section itself rather than on a copy wrapper, so it
-     covers the full section height even where the copy is split into two
-     wraps around the figure — otherwise the ground would stop at the last
-     paragraph and the picture would reappear underneath it. */
-  .bleed::before {
-    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  }
-  .bleed[data-plate="left"]::before {
-    background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 54%, rgba(246,247,249,0) 68%);
-  }
-  .bleed[data-plate="right"]::before {
-    background: linear-gradient(270deg, var(--bg) 0%, var(--bg) 54%, rgba(246,247,249,0) 68%);
-  }
-  /* The copy column, sized so that it lands inside the SOLID part of the plate
-     at every width from 960 up, never in the feather. Worst case is the narrow
-     end: at 960 the solid region reaches 518px and the copy starts at 38px
-     (left) or ends at 921px having started at 515px (right) — 74px of margin.
-     At 1440 that margin is 101px. Verified by sampling rendered pixels under
-     every text node, not by this arithmetic; see scripts/verify-contrast.mjs. */
-  .bleed > .wrap > * { max-width: 46%; }
-  .bleed[data-plate="right"] > .wrap > * { margin-left: auto; }
+  /* THE SCRIM. Sized from the copy rather than from the section: a shape the
+     size of the text plus a margin, instead of a band the size of the frame.
 
-  /* data-plate="band": the photograph spans the whole section width at its own
+     A BLURRED ROUNDED RECT, and not the reference's radial-gradient-to-
+     transparent, for a reason that is arithmetic rather than taste. An
+     `ellipse ... transparent 72%` has no plateau: alpha falls linearly from the
+     centre, so at the horizontal edge of the text block — 1/((1+2*.18) * sqrt2)
+     = 0.52 of the way out on the reference's own -26% -18% inset — it is already
+     down to 0.72 of core, and at the block's CORNERS it is 0.23. Under a 0.845
+     requirement that is a fail under the first and last line of every paragraph.
+     A blurred rect inverts that shape: flat core across the whole plateau, a
+     Gaussian only outside it. The reference is over video with no contrast gate;
+     we have one, and it is what picks the shape.
+
+     WHY IT IS ONE ELEMENT ON THE SECTION AND NOT ONE PER COPY BLOCK. The copy in
+     an overlay section is split into TWO .wrap blocks with the figure between
+     them (see the hero's markup — that order is what a phone reads), and putting
+     a halo on each wrap fails twice over. Each wrap carries z-index 2, so each
+     is its own stacking context and the later one paints entirely on top of the
+     earlier one: a halo on wrap 2 that feathers upwards paints IN FRONT OF wrap
+     1's headline, not behind it. That shipped for one screenshot and put roughly
+     a third of a white veil over "the answer". No z-index inside wrap 2 can fix
+     it — the whole context is above wrap 1. Clipping the two halves flush at the
+     shared edge fixed the veil and cost a one-pixel line of bare photograph
+     where the two clips rounded the same way, landing exactly under the h1's
+     last line because the h1's box bottom IS that edge: 2.72:1 and 2.14:1 at
+     1100 and 1600 against a floor of 3. Overlapping them by 4px closed the gap
+     and left a 4px band composited twice, .93 to .995 — a 15 to 25 level step
+     depending on what was under it, running straight across the copy.
+
+     So the scrim is a single element and the section is a grid: four rows, a
+     spacer, the two copy blocks, a spacer, which centres the pair exactly as the
+     flex column did. The scrim is a grid item spanning both copy rows, at
+     z-index 1 — above the photograph at 0, below both wraps at 2. One shape, one
+     alpha, no join to see, and the paint-order problem cannot arise because the
+     scrim is no longer inside either wrap.
+
+     This assumes exactly two wraps per overlay section, which is what both have,
+     and the row template says so out loud. A third would need a row. */
+  .bleed[data-copy="left"],
+  .bleed[data-copy="right"] {
+    /* Unitless, because it is needed twice against two different boxes: as a
+       max-width on the copy, where the containing block is .wrap, and as a
+       length for the scrim, whose containing block is the section. */
+    --copy-col: .46;
+    /* .93, not gauzier: the hero lead needs .845 over the engraved bars in the
+       glass bubble, and headroom above a hard floor is not decoration. */
+    --scrim-core: rgba(247, 249, 252, .93);
+    /* the plateau: how far full-strength core runs past the copy's own box */
+    --scrim-pad-x: 38px;
+    --scrim-pad-y: 30px;
+    /* the falloff. --scrim-feather is the blur's standard deviation; the skirt
+       is 2.58 x that, which is the distance a Gaussian needs to climb from 0.5
+       to 0.995, so the shape runs a skirt past the plateau and the plateau
+       itself never leaves full core. Raising the feather softens the ramp and
+       moves the half-strength contour out by the same amount, one for one. */
+    --scrim-feather: 24px;
+    --scrim-skirt: 62px;
+    /* Replaces the flex column above for these two sections only. Spacer, copy
+       block, copy block, spacer: the 1fr pair centres the copy exactly as
+       justify-content:center did, and rows 2 and 3 give the scrim something to
+       span. The photograph is absolute and inset:0, so it is not a grid item
+       and none of this reaches it. */
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto auto 1fr;
+  }
+  /* grid-column is not optional here. The scrim is placed explicitly in column
+     1; auto-placement then refuses to put a row-locked item on top of it and
+     opens an implicit SECOND column for the wraps, which puts the whole copy off
+     the right of the page. Explicit placement is what lets them share a cell. */
+  .bleed[data-copy="left"] > .wrap:first-of-type,
+  .bleed[data-copy="right"] > .wrap:first-of-type { grid-row: 2; grid-column: 1; }
+  .bleed[data-copy="left"] > .wrap:last-of-type,
+  .bleed[data-copy="right"] > .wrap:last-of-type { grid-row: 3; grid-column: 1; }
+
+  .bleed[data-copy="left"]::before,
+  .bleed[data-copy="right"]::before {
+    content: ""; pointer-events: none;
+    /* Spanning both copy rows, so the shape is the copy's own box and nothing
+       has to know how tall the copy is. z-index 1 puts it above the photograph
+       at 0 and below both wraps at 2. */
+    grid-row: 2 / 4; grid-column: 1;
+    z-index: 1;
+
+    /* ONE BLURRED SHAPE, NOT A BOX PLUS A SHADOW, and the difference is a defect
+       rather than a preference. A box with an outer box-shadow has a BORDER, and
+       a border is a seam: the shadow is clipped to outside the border box while
+       the background is antialiased along it, so the pixel the border falls on
+       gets partial coverage from each and full coverage from neither. Measured
+       on the rendered page, that pixel came back at .72 alpha between two
+       neighbours at .93 — a one-pixel dark hairline tracing the whole rounded
+       rectangle. Over the studio sweep it is worth 2 levels and invisible; over
+       the dark ends of the ranked cards in #contact it is worth 48, and it is
+       exactly the frosted arc that got this sent back. Widening the spread to
+       2.58 sigma made the FALLOFF continuous — the ramp either side measures 1.7
+       levels per pixel — and did nothing about the hairline, because the
+       hairline is the border, not the falloff.
+
+       So there is no border. The shape is a single rounded rect of core colour,
+       drawn a skirt larger than the plateau on every side, and blurred. Alpha is
+       then continuous everywhere by construction: full core over the copy, 0.5
+       at the shape's own edge, gone about a skirt beyond it. The half-strength
+       contour sits pad + skirt = 100px from the copy, which is exactly where the
+       box-and-shadow version put it, so this costs no footprint — it only
+       removes the seam.
+
+       The blur is one filter pass on a layer of roughly 700x400, and the LCP
+       element is the photograph rather than anything under it. */
+    background: var(--scrim-core);
+    filter: blur(var(--scrim-feather));
+    /* As round as the shape can be while every corner of the COPY box still sits
+       a skirt inside the arc, which is what keeps it at full core. The copy's
+       corner is (pad + skirt) = (100, 92) inside the shape's, so it clears a
+       radius R when sqrt((R-100)^2 + (R-92)^2) <= R - 62, which holds up to
+       R = 178. 160 keeps margin on that, and it can be this round only because
+       the shape is a skirt larger than the plateau on every side: the corners
+       curve in the skirt, where nothing is being carried. */
+    border-radius: 160px;
+
+    /* The copy column plus the plateau plus the skirt, against the same
+       min(--wrap, 92vw) the column itself is measured from. */
+    width: calc(var(--copy-col) * min(var(--wrap), 92vw)
+                + 2 * (var(--scrim-pad-x) + var(--scrim-skirt)));
+    margin-block: calc(-1 * (var(--scrim-pad-y) + var(--scrim-skirt)));
+  }
+  /* The grid area is the full section, so the shape is pushed back to the copy's
+     own edge: the page gutter, less the plateau and skirt it has to hang past
+     that edge. The gutter is (section - wrap) / 2, and below 1174px it is 4vw,
+     so there the shape runs off the section and overflow:hidden takes it — a cut
+     against page colour, on the one part of every frame that is empty sweep. */
+  .bleed[data-copy="right"]::before {
+    justify-self: end;
+    margin-right: calc((100% - min(var(--wrap), 92vw)) / 2
+                       - var(--scrim-pad-x) - var(--scrim-skirt));
+  }
+  .bleed[data-copy="left"]::before {
+    justify-self: start;
+    margin-left: calc((100% - min(var(--wrap), 92vw)) / 2
+                      - var(--scrim-pad-x) - var(--scrim-skirt));
+  }
+
+  /* The hero's eyebrow is an inline span, so neither the column's max-width nor
+     its margin-left:auto applies to it: it stays at the far left of the wrap,
+     over the photograph, where the studio sweep gives it 6.2:1 on its own. So it
+     sits outside the scrim horizontally, but it still sets the wrap's top edge
+     52px above the headline. Pulling the halo's top back down to the headline is
+     the difference between a shape that reads as belonging to the copy and one
+     that starts at the header. */
+  .lp-hero[data-copy="right"]::before {
+    margin-top: calc(34px - var(--scrim-skirt));
+  }
+
+  /* Tone-matched, on the headings only. Body copy was measured without it and
+     does not need it: nothing below 24px sits near enough to the falloff. */
+  .bleed[data-copy="left"] > .wrap :is(h1, h2),
+  .bleed[data-copy="right"] > .wrap :is(h1, h2) {
+    text-shadow: 0 1px 1px rgba(255, 255, 255, .55), 0 16px 44px rgba(255, 255, 255, .42);
+  }
+  /* Never on the gradient span, and this shipped wrong for one screenshot.
+     text-shadow paints in front of the element's background, and .accent's
+     glyphs ARE that background (background-clip:text over a transparent fill) —
+     so a white glow does not sit behind them, it sits on top of them, and
+     "the answer" came out washed nearly to the page colour. */
+  .bleed[data-copy="left"] > .wrap :is(h1, h2) .accent,
+  .bleed[data-copy="right"] > .wrap :is(h1, h2) .accent { text-shadow: none; }
+
+  /* The copy column. It no longer has to fit inside anything — the scrim is
+     sized FROM it rather than the other way round — so this is now a measure
+     decision only, and it is unchanged at 46% because the h1's type scale was
+     tuned against it (see .lp-hero h1) and because a wider column is a wider
+     halo for no gain. Verified by sampling rendered pixels under every text
+     node, not by arithmetic; see scripts/verify-contrast.mjs. */
+  .bleed > .wrap > * { max-width: calc(var(--copy-col, .46) * 100%); }
+  .bleed[data-copy="right"] > .wrap > * { margin-left: auto; }
+
+  /* data-copy="above": the photograph spans the whole section width at its own
      aspect and the copy sits above it on the page ground, with nothing over the
-     picture and no plate at all.
+     picture and no scrim at all.
 
      WHICH SECTIONS CARRY COPY AND WHICH DO NOT is decided by the photographs,
-     from their measured subject positions, and not by rhythm. A plate covers
-     54% of the width; the question per image is whether either side can be
-     covered without losing the thing the picture is of:
+     and it was re-decided from scratch when the plate became a scrim, because
+     the old reasoning turned on a footprint that no longer exists: a plate
+     covered 54% of the width and the whole height, and a scrim covers the copy.
+     So the question was re-asked as a measurement — slide a box the size of
+     that section's copy block over the whole frame in 1% steps and report the
+     placement with the least subject in it, subject being any pixel below 0.72
+     luminance against a studio sweep that sits at 0.90. At 1440, box = 46% of
+     the width by the copy's own share of the height:
 
-       01/02 hero      answer well x 8-52%, question bubble x 50-88%.
-                       A right plate hides the question and keeps the answer
-                       well, which is the one region that must survive because
-                       the signature transition happens inside it.   OVERLAY
-       05 contact      ranked cards x 6-55%. A right plate keeps them.  OVERLAY
-       03 why          two windows spanning x 7-93%, and the argument IS the
-                       pair. Either plate deletes half of it.             BAND
-       04 verticals    ribbon x 0-35%, junction x 30-50%, three panels
-                       x 55-90%. A right plate hides the three specialties,
-                       a left one hides the stream feeding them.          BAND
-       06 cap          the lit pin sits at x=50%, dead centre, so a plate on
-                       either side covers it. Shipped once with a left plate
-                       and the pin was simply gone — a map of empty sockets
-                       illustrating a section about one client per area.   BAND
+       01/02 hero   46 x 81%   best 29.7% subject, darkest 0.000   OVERLAY
+       05 contact   46 x 39%   best  0.0% subject, darkest 0.724   OVERLAY
+       03 why       46 x 89%   best 56.5% subject, darkest 0.000   BAND
+       04 verticals 46 x 75%   best 26.9% subject, darkest 0.001   BAND
+       06 cap       46 x 49%   best 11.9% subject, darkest 0.004   BAND
 
-     #why additionally could not fit: a five-item list in a 46% column made the
-     section 1419px tall at 1440, which cover answers by discarding 43% of the
-     frame width. Widening the plate to fit it leaves 18% of the photograph
-     showing, which is a worse picture than no overlay at all.
+     The hero is the calibration: 29.7% subject under the copy is what we have
+     already accepted and shipped. Read against it,
+
+       03 why       has no quiet region at any size. Every 46%-wide box on that
+                    frame is more than half subject, because the two browser
+                    windows span x 7-93% and the argument IS the pair. It also
+                    does not fit: the copy is 1154px tall, so an overlay section
+                    is 1299px at 1440 against a 16:9 floor of 804, and cover
+                    then answers by discarding 38% of the frame width — the
+                    trap that once cropped this section to a single window.
+       04 verticals FITS: 599px of copy inside the 804px floor, aspect exactly
+                    16:9, no crop at all. And 26.9% subject is quieter than the
+                    hero's. So density and height both clear, and it stays a
+                    band on WHAT is in those pixels rather than how many: the
+                    quietest box is x 0-46%, y 0-74%, which is precisely the
+                    ribbon and the junction box it feeds. The picture's whole
+                    statement is one stream entering and three leaving; a scrim
+                    at .93 over the junction deletes the entering half of it.
+                    The mirror placement covers the three panels instead. There
+                    is no third option on this frame.
+       06 cap       is the closest call on the page and the numbers say so:
+                    11.9% subject, less than half the hero's, at x 0-46% /
+                    y 0-49% — the map's sparse upper-left, with the lit pin at
+                    x 46.7-52.9% falling just outside it. 395px of copy fits
+                    the 804px floor with 409px to spare. It stays a band on the
+                    ledger rather than on the geometry: converting it would put
+                    a new near-opaque blob over 22.5% of a frame that today has
+                    nothing whatsoever on it, and buy nothing the band does not
+                    already give. The brief was to stop whitening half of two
+                    photographs, not to start whitening a third.
 
      Every one of these is still full-bleed, edge to edge, unframed. What a band
      gives up is the overlay, not the bleed — and the framed card in a column is
      what was actually rejected. */
-  .bleed[data-plate="band"] {
+  .bleed[data-copy="above"] {
     display: block; min-height: 0; overflow: visible;
     padding-top: clamp(64px, 9vw, 116px); padding-bottom: 0;
   }
-  .bleed[data-plate="band"] > .shot {
+  .bleed[data-copy="above"] > .shot {
     position: relative; inset: auto; width: 100%;
     aspect-ratio: 2752 / 1536; margin: clamp(40px, 5vw, 72px) 0 0;
   }
-  .bleed[data-plate="band"] > .wrap > * { max-width: none; }
-  .bleed[data-plate="band"]::before { display: none; }
-  .bleed[data-plate="band"] .mech li { grid-template-columns: minmax(0, 22ch) minmax(0, 1fr); }
+  .bleed[data-copy="above"] > .wrap > * { max-width: none; }
+  /* No scrim rule to switch off any more: the scrim is selected by
+     [data-copy="left"|"right"], so a band simply never grows one. */
+  .bleed[data-copy="above"] .mech li { grid-template-columns: minmax(0, 22ch) minmax(0, 1fr); }
 
   /* A five-item two-column list does not fit a 46% column, and the stacked
      variant already exists for narrow screens. Reuse it here. */
