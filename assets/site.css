@@ -242,6 +242,14 @@ body.subpage .grid { animation: grid-sub-in 1400ms ease-out 200ms forwards; } /*
 .wrap { width: min(var(--wrap), 92vw); margin-inline: auto; }
 
 /* ---- header ---- */
+/* The header's own height, declared once because two other things are measured
+   from it: the sticky frame in #why parks below it, and #contact's photograph
+   is judged clear of it. It is not enforced here — the header sizes itself from
+   its padding and its 28px logo — so scripts/verify-layout.mjs asserts that the
+   rendered height and this number agree, and fails pointing at this line if a
+   padding change ever moves one without the other. */
+:root { --header-h: 54px; }
+
 /* OPAQUE, AND NOT A BLUR. It was rgba(246,247,249,.72) over a 12px
    backdrop-filter, which is the standard move and was fine while every section
    under it was page colour. Once the photographs went full bleed it stopped
@@ -1638,7 +1646,14 @@ body.landing .grid { display: none; }
   .bleed[data-copy~="beside"] > .wrap > * { max-width: none; }
   .bleed[data-copy~="beside"] > .shot {
     grid-area: 1 / 2 / 3 / 3;
-    position: sticky; top: calc(58px + clamp(12px, 3vh, 40px));
+    /* A CONSTANT 28px BELOW THE HEADER, and both halves of that matter. It was
+       58px plus 3vh, chosen against a translucent header the frame could be
+       allowed to pass under; now the header is opaque and anything under it is
+       simply cut, so the gap is the whole relationship and it is stated rather
+       than arrived at. The vh term also made the clearance drift from 25px at a
+       700px viewport to 44px at 1400 — a gap that changes size as you resize is
+       read as a mistake, not as air. */
+    position: sticky; top: calc(var(--header-h) + 28px);
     align-self: start;
     inset-inline: auto; width: 100%; margin: 0;
     /* 90% of the frame's width, centred: keeps x 5-95%, so both windows survive

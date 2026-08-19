@@ -167,6 +167,55 @@ console.log("\n--- co-visibility at 1440x900 ---");
   await ctx.close();
 }
 
+// --- A2: the sticky frame parks below the header, by the same gap everywhere -
+/* The header is opaque, so a sticky frame that drifts up is cut by it and one
+   that drifts down opens a hole. Both halves of `top: var(--header-h) + 28px`
+   are checked: that the declared header height still matches the rendered one,
+   and that the gap is the same at every viewport. The vh term this replaced
+   ranged 25-44px across the desktop range. */
+console.log("\n--- the sticky frame against the header ---");
+{
+  const GAP = 28;
+  const rows = [];
+  for (const [w, h] of [[1100, 700], [1280, 900], [1440, 800], [1440, 1200], [1600, 900], [1600, 1400]]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1 });
+    const page = await ctx.newPage();
+    await page.goto(BASE + "/", { waitUntil: "networkidle" });
+    await page.evaluate(async () => {
+      const step = window.innerHeight * 0.6;
+      for (let y = 0; y < document.body.scrollHeight; y += step) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); }
+      window.scrollTo(0, 0);
+    });
+    await page.waitForFunction(() => [...document.querySelectorAll("img")].every((i) => i.complete), null, { timeout: 30000 });
+    const r = await page.evaluate(async () => {
+      const sec = document.getElementById("why");
+      const fig = sec.querySelector("figure.shot");
+      if (getComputedStyle(fig).position !== "sticky") return { skipped: true };
+      window.scrollTo(0, sec.getBoundingClientRect().top + window.scrollY + 500);
+      await new Promise((r) => requestAnimationFrame(r));
+      await new Promise((r) => setTimeout(r, 120));
+      const declared = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-h"));
+      const hdr = document.querySelector(".site-header").getBoundingClientRect();
+      return { declared, rendered: +hdr.bottom.toFixed(1), fig: +fig.getBoundingClientRect().top.toFixed(1) };
+    });
+    await ctx.close();
+    if (r.skipped) continue;
+    rows.push({ view: `${w}x${h}`, ...r, gap: +(r.fig - r.rendered).toFixed(1) });
+  }
+  const hdrWrong = rows.filter((r) => Math.abs(r.rendered - r.declared) > 0.5);
+  check(
+    `--header-h (${rows[0]?.declared}px) matches the header's rendered height at every viewport`,
+    hdrWrong.length === 0,
+    hdrWrong.map((r) => `${r.view}: rendered ${r.rendered}`).join(", "),
+  );
+  const gapWrong = rows.filter((r) => Math.abs(r.gap - GAP) > 1);
+  check(
+    `the pinned frame sits ${GAP}px below the header at every viewport (measured ${[...new Set(rows.map((r) => r.gap))].join(", ")})`,
+    gapWrong.length === 0,
+    gapWrong.map((r) => `${r.view}: ${r.gap}px`).join(", "),
+  );
+}
+
 // --- B: the CTA and its sentence -------------------------------------------
 console.log("\n--- the closing CTA at 390x844 ---");
 {
