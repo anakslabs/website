@@ -1368,8 +1368,14 @@ body.landing .grid { display: none; }
     /* `top` on the section pins the copy to the top of the frame instead of
        centring it, which is the whole placement decision in #verticals and #cap:
        both photographs are quiet in their upper-left and busy below it. */
-    grid-template-rows: var(--copy-lead, 1fr) auto auto 1fr;
+    grid-template-rows: var(--copy-lead, 1fr) auto auto var(--copy-trail, 1fr);
   }
+  /* `top` pins the block to the top of the frame. It is no longer used by any
+     section and is kept because the vocabulary should describe the axis, not
+     the one section that happened to need it. What replaced it is a bias: the
+     two spacer rows are weighted so the copy's own centre lands on the
+     subject's, which is the relationship the hero has and the two overlays
+     did not. See #cap below for the arithmetic. */
   .bleed[data-copy~="top"] { --copy-lead: 0; }
 
   /* PER PHOTOGRAPH, because the requirement is a property of what is under the
@@ -1401,8 +1407,36 @@ body.landing .grid { display: none; }
      gutter + copy + pad + 4.16 feather <= 673px at 1440 gives a 388px column,
      which is .36 of the measure. The h2 takes a fourth line for it; the section
      has 400px of slack and the pin is the point of the picture. */
+  /* #cap's placement is a measurement, and the measurement is the whole of
+     wave 3. The frame's mass sits at y 56.2% — 04 is at 55.0%, 01 at 54.3%,
+     these are all centre-weighted scenes — and the hero, the composition
+     everybody accepts, puts its copy block's centre within 4.3 points of that
+     over 29.7% subject pixels. Pinned to the top of the frame this block's
+     centre sat 26 points off, which is what reads as a label in a corner.
+
+     Sliding the block down the frame and scoring every position on both axes:
+
+       block centre   off centroid   subject under it
+         y 30.0%          26.2          ~20%      where it was
+         y 45.9%          10.3          23.5%
+         y 53.0%           3.2          27.1%     where it is now
+         y 56.6%           0.4          31.7%     past the hero's budget
+
+     So y 53% takes the hero's own centring to within 3.2 points while staying
+     under the hero's own 29.7% of subject. The two spacer rows are weighted
+     1fr : 0.62fr to land it there. */
   #cap {
     --copy-col: .36;
+    --copy-trail: .62fr;
+    /* Firmer than the .88 the other overlays use, and it costs nothing: moving
+       the block to the frame's centre moved it onto BRIGHTER map, so the
+       requirement fell from .855 to .725 and there is room to spend on how the
+       ground reads rather than on whether it passes. At .88 the engraved roads
+       came through the paragraph at 24 levels and the copy read as printed on
+       the map; at .94 they are 13 and it reads as copy on a ground with a map
+       under it. The geometry is untouched — the falloff still ends at x 672
+       against a pin that starts at 673. */
+    --scrim-core: rgba(247, 249, 252, .94);
     --scrim-pad-x: 30px;
     --scrim-feather: 18px;
     --scrim-skirt: 46px;
@@ -1491,6 +1525,20 @@ body.landing .grid { display: none; }
      that starts at the header. */
   .lp-hero[data-copy~="right"]::before {
     margin-top: calc(34px - var(--scrim-skirt));
+  }
+
+  /* THE OVERLAY HEADINGS RUN LARGER THAN THE PAGE'S OTHER h2s, and the reason
+     is the photographs' depth rather than emphasis. .lp-h2 tops out at 48px,
+     which is what a heading on page ground needs; the hero's h1 is 62px and it
+     is the composition everybody accepts. At 48px over a scene with this much
+     depth the heading reads as a label placed on the picture — a caption at
+     body-copy weight relative to the objects behind it. 58px is close enough to
+     the hero's scale to belong to the frame, and the contrast gates are re-run
+     at it rather than assumed: the block grows, so the placement below is
+     re-derived rather than the type simply inflated in place. */
+  .bleed:is([data-copy~="left"], [data-copy~="right"], [data-copy~="beside"]) .lp-h2 {
+    font-size: clamp(32px, 4.2vw, 58px);
+    letter-spacing: -0.034em;
   }
 
   /* Tone-matched, on the headings only. Body copy was measured without it and
@@ -1665,6 +1713,29 @@ body.landing .grid { display: none; }
      240px of a 419px measure, leaving four words a line for the explanation.
      The base .bleed rule already stacks it; this is a note that the two-column
      variant was tried and measured, not overlooked. */
+
+  /* `center` — a beside section whose copy is short enough to sit level with
+     the picture rather than scroll past it. #why is 1948px of table and needs
+     the sticky; #verticals is four elements and needs the opposite, which is
+     for the two columns to read as one frame at one height. The picture takes
+     the larger share here (58/42) because at 46% it came out 434px tall and the
+     junction box inside it was smaller than the headline beside it — the two
+     halves have to carry comparable weight or the picture reads as an inset. */
+  .bleed[data-copy~="beside"][data-copy~="center"] {
+    grid-template-columns: 42% 58%;
+    grid-template-rows: auto;
+    align-content: center; align-items: center;
+    padding-block: clamp(56px, 7vw, 92px);
+  }
+  .bleed[data-copy~="beside"][data-copy~="center"] > .wrap:first-of-type,
+  .bleed[data-copy~="beside"][data-copy~="center"] > .wrap:last-of-type { grid-area: 1 / 1; }
+  .bleed[data-copy~="beside"][data-copy~="center"] > .shot {
+    grid-area: 1 / 2 / 2 / 3;
+    position: static; align-self: center;
+    /* its own aspect, uncropped: nothing here forces a height, so the frame
+       keeps the whole composition the way the band always did */
+    aspect-ratio: 2752 / 1536;
+  }
 }
 
 /* A reader who asked for less motion gets the band back: a picture that leaves
