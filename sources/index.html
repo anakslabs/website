@@ -28,39 +28,57 @@
   {"@context":"https://schema.org","@type":"WebPage","@id":"https://anakslabs.com/sources/","name":"Sources","url":"https://anakslabs.com/sources/","description":"Every figure that appears anywhere on anakslabs.com, with its original source, its sample size, its field dates and the date the link was last checked. External figures link to the primary publication; our own measurements state their sample definition instead.","isPartOf":{"@type":"WebSite","name":"Anaks Labs","url":"https://anakslabs.com"},"publisher":{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","email":"contact@anakslabs.com","url":"https://anakslabs.com"},"dateModified":"2026-08-06"}
   </script>
 </head>
-<body class="subpage">
+<body class="subpage cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer grid" aria-hidden="true"></div>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The reel's two constants, on a page that is read rather than watched.
+       The shared .layer washes are switched off by the cin-* layer: a fixed
+       light aurora cannot sit under an ink opener. Grain, vignette and the
+       leading-edge rail replace them, and all three are pure CSS over tokens
+       that already exist. The node canvas is removed rather than hidden —
+       site.js keeps a per-frame loop over every node pair running on it
+       whether or not anything is drawn on it. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product">Product</a>
-        <a href="/clinics/">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="page" id="main">
-    <div class="wrap">
-      <div class="page-hero">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Sources</span></span>
-        <h1>Every number on this site, and <span class="accent">where it came from</span></h1>
-        <p class="lead">Four of the figures on this website are other people's research, and every one of them links to the original. Three are our own field work, and we say exactly what we measured and on what. The rest belong to the specimen page, and we say exactly how each one was counted.</p>
+  <main class="hm hm-page cin-doc" id="main">
+
+    <!-- ================= THE OPENER · the record ==========================
+         TYPE ONLY, AND NO BED, for the same reason /articles/ has none: this
+         page's subject is other people's publications and our own field
+         notes, and the only honest object for a citation is the citation.
+         62svh, so the first record is on screen with the rule it is kept to.
+
+         Copy is the page hero's, word for word. -->
+    <section class="cin-sc cin-dark cin-title cin-open cin-open-short" id="top" data-ground="dark">
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>Sources</span>
+        <h1 class="cin-h1">Every number on this site, and <span class="accent">where it came from</span></h1>
+        <p class="cin-lead">Four of the figures on this website are other people's research, and every one of them links to the original. Three are our own field work, and we say exactly what we measured and on what. The rest belong to the specimen page, and we say exactly how each one was counted.</p>
       </div>
+    </section>
 
-      <div class="section">
+    <section class="hm-sec cin-doc-first" id="record" data-ground="light">
+      <div class="wrap">
+        <div class="cin-ref">
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <h2>The rule we hold ourselves to</h2>
           <p>A figure with no source is a decoration. Marketing pages in our industry are full of them — striking percentages with no study behind them, or with a study that says something narrower than the sentence quoting it. So we set one rule for this website: <b>if we cannot link to the original publication, the number does not go on the page.</b> Two figures we would have liked to use were removed under that rule rather than softened.</p>
           <p>Everything below was checked by hand on <b>3 August 2026</b>. If a link has since gone dead, tell us <a href="/contact/">on the contact page</a> and we will fix or remove the figure.</p>
@@ -68,10 +86,10 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2>Other people's research</h2>
-        <p class="src-where">Four figures, from two surveys, both of US adults, both published in 2026. Neither was commissioned by us and we have no relationship with either publisher.</p>
+        <h2 data-reveal>Other people's research</h2>
+        <p class="src-where" data-reveal>Four figures, from two surveys, both of US adults, both published in 2026. Neither was commissioned by us and we have no relationship with either publisher.</p>
 
-        <div class="srcs">
+        <div class="srcs" data-reveal>
 
           <div class="src-item" id="ai-health">
             <p class="src-claim">25% of US adults &mdash; about 66 million people &mdash; have asked AI for health information or advice.</p>
@@ -193,10 +211,10 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2>Our own measurements</h2>
-        <p class="src-where">These three have no outside link to give you, because we produced them. So we tell you the sample definition instead &mdash; what we drew from, how many, and what counted as a finding. We hold the individual practices we looked at in confidence and do not name any of them.</p>
+        <h2 data-reveal>Our own measurements</h2>
+        <p class="src-where" data-reveal>These three have no outside link to give you, because we produced them. So we tell you the sample definition instead &mdash; what we drew from, how many, and what counted as a finding. We hold the individual practices we looked at in confidence and do not name any of them.</p>
 
-        <div class="srcs">
+        <div class="srcs" data-reveal>
 
           <div class="src-item ours" id="audit-sample">
             <p class="src-claim">The sample: 182 US clinic websites, in two separate groups.</p>
@@ -302,10 +320,10 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2>The specimen counts</h2>
-        <p class="src-where">The five counts on <a href="/clinics/example/">the specimen page</a> are not a survey of anything. They are measurements of two pages we wrote ourselves, published with the definition of every row.</p>
+        <h2 data-reveal>The specimen counts</h2>
+        <p class="src-where" data-reveal>The five counts on <a href="/clinics/example/">the specimen page</a> are not a survey of anything. They are measurements of two pages we wrote ourselves, published with the definition of every row.</p>
 
-        <div class="srcs">
+        <div class="srcs" data-reveal>
           <div class="src-item ours" id="specimen">
             <p class="src-claim">3 of 5 and 17 of 17 section titles; 716 of 1,506 and 2,629 of 2,629 characters; and the rest of that table.</p>
             <p class="src-where">Appears on the specimen page, and in two articles: <a href="/articles/beautiful-but-invisible/">04, beautiful and invisible</a> quotes the title counts, and <a href="/articles/what-patients-see-what-machines-receive/">05, what machines receive</a> quotes the character counts and the two values derived from them. Both articles carry a chart of these counts as well as the sentence. Both articles say in their own body copy that the specimen is a practice we invented and two pages we wrote, so the figures cannot be read as an industry statistic.</p>
@@ -328,8 +346,8 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2 id="misread">One figure we deliberately do not use</h2>
-        <div class="prose">
+        <h2 id="misread" data-reveal>One figure we deliberately do not use</h2>
+        <div class="prose" data-reveal>
           <p class="src-where">This section is referred to in article <a href="/articles/evaluating-an-agency-seo-claims/">10, evaluating an agency's SEO claims</a>, as the worked example of asking a supplier for the original publication.</p>
           <p>There is a number going round our industry at the moment: <b>&ldquo;59% of US adults use AI for health.&rdquo;</b> You will see it on agency pages and in pitch decks. It is a misreading of the survey we cite at the top of this page, and it is roughly twice the real figure.</p>
           <p>In the West Health&ndash;Gallup study, 59% is a share <b>of the people who already use AI for health</b> &mdash; specifically, those who use it to prepare questions before a doctor's visit. The share of <b>all</b> US adults who have used AI for health information or advice is <b>25%</b>. The two are not the same base, and swapping one for the other roughly doubles the claim.</p>
@@ -339,14 +357,16 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <h2>Corrections</h2>
           <p>If any figure here is wrong, out of date, or misread by us in the way we have just described someone else misreading one, tell us <a href="/contact/">on the contact page</a>. We will correct the page and say what changed.</p>
           <p><a href="/clinics/">Back to the clinics page &rarr;</a></p>
         </div>
 
+        </div>
       </div>
-    </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -356,11 +376,13 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product">Product</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>

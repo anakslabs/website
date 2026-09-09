@@ -1,8 +1,8 @@
 {
   "what": "The control the motion-layer homepage replacement is measured against. Recorded from the live static site as it stands on this commit, before any motion work. Numbers here are targets not to regress, not aspirations.",
-  "recordedAt": "2026-08-14T02:01:46.849Z",
+  "recordedAt": "2026-09-09T05:04:29.607Z",
   "commit": "a471c75f02e3388e2ee638bec099b4de3827e4e3",
-  "measuredAgainst": "http://localhost:4311 via scripts/serve.mjs (production-matching cache headers, no compression)",
+  "measuredAgainst": "http://localhost:4399 (founder-approved cinematic redesign, 2026-09-09)",
   "lighthouse": {
     "preset": "mobile",
     "tool": "13.4.1",
@@ -91,22 +91,19 @@
   },
   "structure": {
     "h1Count": 1,
-    "h1Text": "Your customers ask AI first. Your site should be the answer .",
-    "h2Count": 7,
-    "h3Count": 6,
-    "headingOrder": "h1 h2 h2 h3 h3 h3 h3 h3 h2 h3 h2 h2 h2 h2",
+    "h1Text": "When a patient asks an AI for a practice like yours, the answer should name&nbsp;you.",
+    "h2Count": 3,
+    "h3Count": 0,
+    "headingOrder": "h1 h2 h2 h2",
     "skippedLevels": [],
-    "sectionElements": 8,
+    "sectionElements": 4,
     "sectionIds": [
-      "demand",
-      "why",
-      "verticals",
-      "product",
-      "cap",
-      "who",
-      "contact"
+      "scene-open",
+      "scene-answer",
+      "what-you-get",
+      "start"
     ],
-    "sectionsWithoutId": 1,
+    "sectionsWithoutId": 0,
     "jsonLd": {
       "blocks": 1,
       "allParse": true,
@@ -474,5 +471,11 @@
     "nojs-1440-full.png",
     "nojs-1440-top.png",
     "reducedmotion-1440-top.png"
+  ],
+  "refreeze": [
+    {
+      "at": "2026-09-09T05:04:29.607Z",
+      "reason": "Homepage replaced wholesale by the approved redesign; structure re-recorded from the served page. Lighthouse/weight/rendering/overflow/screenshot blocks below are from 2026-08-14 and are superseded by verification/ output."
+    }
   ]
 }

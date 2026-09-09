@@ -4,66 +4,140 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>See your site first — Anaks Labs</title>
-  <meta name="description" content="Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back." />
+  <meta name="description" content="Send us the link to your current site, or the name of your practice if there isn't one. We build it and send it back." />
   <meta name="theme-color" content="#F6F7F9" />
   <link rel="canonical" href="https://anakslabs.com/contact/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="See your site first — Anaks Labs" />
-  <meta property="og:description" content="Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back." />
+  <meta property="og:description" content="Send us the link to your current site, or the name of your practice if there isn't one. We build it and send it back." />
   <meta property="og:url" content="https://anakslabs.com/contact/" />
   <meta property="og:image" content="https://anakslabs.com/assets/icon-512.png" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="See your site first — Anaks Labs" />
-  <meta name="twitter:description" content="Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back." />
+  <meta name="twitter:description" content="Send us the link to your current site, or the name of your practice if there isn't one. We build it and send it back." />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/assets/site.css" />
+  <link rel="preload" as="image" href="/assets/cin/unreadable-1720.avif" type="image/avif"
+        imagesrcset="/assets/cin/unreadable-840.avif 840w, /assets/cin/unreadable-1080.avif 1080w, /assets/cin/unreadable-1360.avif 1360w, /assets/cin/unreadable-1720.avif 1720w, /assets/cin/unreadable-2160.avif 2160w, /assets/cin/unreadable-2560.avif 2560w, /assets/cin/unreadable-2752.avif 2752w"
+        imagesizes="100vw" fetchpriority="high" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
-<body class="landing">
+<body class="subpage cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The reel's two constants, on a page that is read rather than watched.
+       The shared .layer washes are switched off by the cin-* layer: a fixed
+       light aurora cannot sit under an ink opener. Grain, vignette and the
+       leading-edge rail replace them, and all three are pure CSS over tokens
+       that already exist. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product">Product</a>
-        <a href="/clinics/">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/contact/" aria-current="page">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="lp" id="main">
+  <main class="hm hm-page cin-doc" id="main">
 
-    <section class="lp-hero">
-      <div class="wrap">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Start here</span></span>
-        <h1>See your site <span class="accent">first</span>.</h1>
-        <p class="lp-lead">Send us the link to your current site, or the name of your business if there isn't one. We build it and send it back. There is no brief to write and no meeting to book, and you decide after you have seen it.</p>
+    <!-- ONE SECTION, ONE GRID. This was two stacked sections: a full-width
+         hero carrying the h1 and the lead, then a second section holding the
+         form and the card side by side. That shape left the entire right half
+         of the first screen empty from the header down to the first form
+         label, and pushed the card — the one block that answers "what happens
+         if I send this?" — below the fold on a 720px screen, where the reader
+         deciding whether to type anything never saw it.
+
+         The eyebrow stays full width above the grid so the grid's first row
+         starts exactly at the h1, which is what puts the card level with it.
+         The left column runs h1 -> lead -> h2 -> form as one column; the card
+         is the right column and starts at the top of that column.
+
+         The second "Start here" went with the merge. It was a badge over the
+         h2 repeating the eyebrow 300px above it — two identical labels in one
+         column, which was survivable while a section break sat between them
+         and is not now. -->
+    <!-- ================= THE OPENER ===============================
+         THERE IS A PICTURE, AND THE OBJECTION TO ONE IS ANSWERED RATHER THAN
+         OVERRULED. The reason this opener had no bed was that a full-height
+         photograph in FRONT of the form is a toll gate on the one action the
+         site is asking for. That is an argument about where the form is, not
+         about whether there is a picture: the form is now in the opener, beside
+         the sentence, so the photograph is behind both rather than ahead of
+         either. It is a ground, the copy sits on ink, and the form carries its
+         own panel — nothing on this screen is read off a photograph.
+
+         THE OPENER TOOK THE H1, AND THE MERGED GRID STILL HOLDS. The grid
+         below was built so the "What happens next" card sits level with the
+         first thing in the left column. That was the h1; it is now the h2,
+         and the card starts level with THAT. The defect the merge was built
+         to fix — an empty right half above the first form label — cannot
+         recur on a page whose first screen is the opener.
+
+         Copy is the page's own, word for word: the eyebrow, the headline and
+         the lead all come out of the hero this replaces. -->
+    <section class="cin-sc cin-dark cin-title cin-open cin-open-type cin-open-form" id="top" data-ground="dark">
+      <!-- The reading-head render, not the title one: /check/ took that, and
+           two form pages showing the same photograph would read as one page
+           served twice. This one is already composed for this layout — wet dark
+           street on the left where the sentence goes, the lit reception through
+           the glass on the right where the form goes — and it is the picture
+           the copy beside it is about: a practice that looks open from outside.
+
+           A BED, so no glyph is ever laid on it: aria-hidden with an empty alt.
+           Preloaded and fetchpriority high — it is this page's LCP. -->
+      <div class="cin-bed cin-bed-form cin-bed-reach" aria-hidden="true">
+        <picture>
+          <source type="image/avif" sizes="100vw" srcset="/assets/cin/unreadable-480.avif 480w, /assets/cin/unreadable-640.avif 640w, /assets/cin/unreadable-840.avif 840w, /assets/cin/unreadable-1080.avif 1080w, /assets/cin/unreadable-1360.avif 1360w, /assets/cin/unreadable-1720.avif 1720w, /assets/cin/unreadable-2160.avif 2160w, /assets/cin/unreadable-2560.avif 2560w, /assets/cin/unreadable-2752.avif 2752w" />
+          <img src="/assets/cin/unreadable-1720.webp" sizes="100vw" srcset="/assets/cin/unreadable-480.webp 480w, /assets/cin/unreadable-640.webp 640w, /assets/cin/unreadable-840.webp 840w, /assets/cin/unreadable-1080.webp 1080w, /assets/cin/unreadable-1360.webp 1360w, /assets/cin/unreadable-1720.webp 1720w, /assets/cin/unreadable-2160.webp 2160w, /assets/cin/unreadable-2560.webp 2560w, /assets/cin/unreadable-2752.webp 2752w"
+               width="2752" height="1536" alt="" fetchpriority="high" decoding="async" />
+        </picture>
       </div>
-    </section>
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>Start here</span>
+        <h1 class="cin-h1">See your site <em>first</em>.</h1>
+        <p class="cin-lead">Send us the link to your current site, or the name of your practice if there isn't one. We build it and send it back. There is no brief to write and no meeting to book, and you decide after you have seen it.</p>
 
-    <section class="lp-section" id="contact">
-      <div class="wrap">
+        <!-- THE FORM IS IN THE OPENER, and this is the whole of the change on
+             this page. It used to sit in the section below: the first input
+             began at y=1152 on a 1440x900 screen, and the opener's right-hand
+             40% was empty from the header to the fold. A page whose only job
+             is to receive a link was spending its first screen and a quarter
+             not asking for one.
 
-        <!-- The form posts to the app; the address below is the fallback for
-             anyone whose JavaScript never runs. Both routes reach the same
-             inbox, so neither is a second-class way in. -->
-        <form class="contact-form" id="contact-form" novalidate>
+             MOVED, NOT REWIRED — again, and the rule is the same one the
+             previous restyle wrote down. assets/contact.js finds this form by
+             #contact-form and reads #site, #email, #note, #company and
+             #contact-status by id. Every id, the novalidate, the honeypot and
+             the submit button are exactly as they were; only the element's
+             parent changed.
+
+             THE "See your site first" BUTTON THAT USED TO STAND HERE IS GONE
+             AND ITS WORDS ARE NOT. It was <a href="#contact-form">, a jump to
+             a target that is now in the same view at every width — a control
+             that scrolls nowhere, directly above a submit button carrying the
+             identical label. The string is still on this screen, on the
+             control that actually does the thing. -->
+        <form class="hm-form" id="contact-form" novalidate>
           <div class="field">
-            <label for="site">Your website, or your business name</label>
+            <label for="site">Your website, or your practice name</label>
             <input type="text" id="site" name="site" required autocomplete="url"
                    placeholder="yourclinic.com — or the name, if there isn't a site yet" />
           </div>
@@ -87,13 +161,44 @@
 
           <button class="btn btn-primary" type="submit" id="contact-submit">See your site first</button>
           <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+
+          <noscript>
+            <p class="hm-sub">The form needs JavaScript. Write to <b>contact@anakslabs.com</b> with the link to your site, or the name of your practice, and we will build it and send it back.</p>
+          </noscript>
+
+          <p class="hm-note">We reply with the finished site within 3 business days, not a sales call.</p>
         </form>
+      </div>
+      <span class="cin-cue" aria-hidden="true"><b>Scroll</b><i></i></span>
+    </section>
 
-        <noscript>
-          <p class="lp-sub">The form needs JavaScript. Write to <b>contact@anakslabs.com</b> with the link to your site, or the name of your business, and we will build it and send it back.</p>
-        </noscript>
+    <section class="hm-page-hero hm-contact cin-doc-first" id="contact" data-ground="light">
+      <div class="wrap hm-split hm-contact-split">
 
-        <p class="lp-note">We reply with the finished site, not a sales call.</p>
+        <div class="hm-contact-col">
+
+        <div class="hm-contact-h2" data-reveal>
+          <h2 class="hm-h2">Send the link. <span class="dim">We send back the site.</span></h2>
+        </div>
+
+        <!-- The form that used to live here is in the opener above; see the
+             note on it. What is left is what this section was always for: the
+             heading that says what the exchange is, and the card that says what
+             it costs the reader to start it. -->
+        </div>
+
+        <div class="hm-card" data-reveal>
+          <span class="tag">What happens next</span>
+          <h3>You get a website, not a proposal</h3>
+          <ul class="hm-list">
+            <li>We crawl what you have and read what it hands a machine</li>
+            <li>We build the site — a faithful clone if yours is already good, a rebuild if it is not</li>
+            <li>We send you a link you can open and click through, free</li>
+            <li>You decide. If it is a no, that is the end of it and you owe nothing</li>
+          </ul>
+          <a class="hm-go" href="/products/"><span class="arw" aria-hidden="true">&rarr;</span>How we build it</a>
+        </div>
+
       </div>
     </section>
 
@@ -106,11 +211,13 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product">Product</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>

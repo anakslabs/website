@@ -4,8 +4,10 @@
 
 ## Pages
 
-- [Home](https://anakslabs.com/): What the platform builds and what we run every month — a performance report, eight blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.
+- [Home](https://anakslabs.com/): What an AI assistant's answer looks like when it names a business, and what the product is in four lines — the site copied or rebuilt and made machine-readable, eight posts a month, a monthly report, one business per area — with the price and the two ways in.
+- [Products](https://anakslabs.com/products/): One product — the customer's website made machine-readable and operated monthly. One crawl of the existing site decides how it is built: copied exactly for a site that is already good (byte-faithful, verified pixel by pixel), or rebuilt from scratch for a weak site or none. Either way it goes live on the customer's own domain with the same layer — structured data, an llms.txt, a questions page and an articles page in the site's own chrome — and the same monthly run.
 - [About](https://anakslabs.com/about/): Who Anaks Labs Inc. is — a software company, its two disciplines (engineering and marketing), corporate information, and answers to common questions.
+- [FAQ](https://anakslabs.com/faq/): Every question answered elsewhere on this site, collected on one page and grouped into four — what we build, what happens every month, price and terms, and the company. Fifteen questions and answers, all of them open on the page and repeated verbatim in FAQPage structured data — including the term (month to month, stop any month) and what happens to the domain if you do.
 - [Clinics](https://anakslabs.com/clinics/): The vertical we build for — dental practices and clinics — and what we found when we opened their websites and read what a search engine actually receives.
 - [Specimen rebuild](https://anakslabs.com/clinics/example/): One clinic homepage built twice, before and after, with the structural difference between the two measured on the page.
 - [Sources](https://anakslabs.com/sources/): Every figure that appears anywhere on this site, with its original source, its sample size, and the date we last checked the link.

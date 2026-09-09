@@ -19,6 +19,15 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- The opener figure is this page's largest contentful paint and it sits
+       inside a <picture> below the stylesheet, where the preload scanner
+       cannot reach it — the fetch waits on the CSS. Declared here it starts
+       with the HTML. type="image/avif" scopes the hint to the source the
+       browser will actually choose; anything without AVIF ignores this line
+       and loads the WebP exactly as before. -->
+  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+        imagesizes="(min-width: 1174px) 440px, (min-width: 900px) 40vw, 92vw"
+        imagesrcset="/assets/cin/art-why-the-ai-quotes-your-competitor-480.avif 480w, /assets/cin/art-why-the-ai-quotes-your-competitor-640.avif 640w, /assets/cin/art-why-the-ai-quotes-your-competitor-840.avif 840w, /assets/cin/art-why-the-ai-quotes-your-competitor-1080.avif 1080w, /assets/cin/art-why-the-ai-quotes-your-competitor-1400.avif 1400w" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -36,42 +45,73 @@
   ]}
   </script>
 </head>
-<body class="subpage">
+<body class="subpage cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer grid" aria-hidden="true"></div>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The reel's two constants, on a page that is read rather than watched.
+       The shared .layer washes are switched off by the cin-* layer: a fixed
+       light aurora cannot sit under an ink opener. Grain, vignette and the
+       leading-edge rail replace them, and all three are pure CSS over tokens
+       that already exist. The node canvas is removed rather than hidden —
+       site.js keeps a per-frame loop over every node pair running on it
+       whether or not anything is drawn on it. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product">Product</a>
-        <a href="/clinics/">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/" aria-current="page">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="page" id="main">
-    <div class="wrap">
-      <nav class="crumb" aria-label="Breadcrumb"><a href="/articles/">Articles</a><span aria-hidden="true">/</span>Article 03</nav>
+  <main class="hm hm-page cin-doc" id="main">
 
-      <div class="page-hero">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Article 03</span></span>
-        <h1>When it names <span class="accent">somebody else</span></h1>
-        <p class="lead">You asked an assistant for a dentist in your own town and it recommended the practice four minutes down the road, warmly, at length, with their opening hours attached. This article is about what that observation is worth. It is worth a good deal — but not most of the things people immediately conclude from it.</p>
-        <p class="pub">Published <time datetime="2026-08-06">6 August 2026</time> &middot; Anaks Labs</p>
+    <!-- ================= THE OPENER · the article's own title =============
+         TYPE ONLY, AND NO BED. Every render on this site is an object
+         standing for a claim; an article's claim is its argument, and the
+         only honest object for an argument is the sentence making it. The
+         index above these pages opens the same way and for the same reason.
+
+         .cin-open's scale rather than .cin-open-type's: the index needs the
+         display size because its headline is one word, and an article title
+         is a whole sentence that already carries the frame. 62svh so the
+         first paragraph of the piece is on screen with its title.
+
+         Copy is the page hero's, word for word — the eyebrow, the headline,
+         the standfirst and the publication line. Nothing here is new. -->
+    <section class="cin-sc cin-dark cin-title cin-open cin-open-short cin-open-art" id="top" data-ground="dark">
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>Article 03</span>
+        <h1 class="cin-h1">When it names <span class="accent">somebody else</span></h1>
+        <p class="cin-lead">You asked an assistant for a dentist in your own town and it recommended the practice four minutes down the road, warmly, at length, with their opening hours attached. This article is about what that observation is worth. It is worth a good deal — but not most of the things people immediately conclude from it.</p>
+        <p class="cin-note">Published <time datetime="2026-08-06">6 August 2026</time> &middot; Anaks Labs</p>
+        <figure class="cin-art-shot">
+          <picture>
+            <source type="image/avif" sizes="(min-width: 1174px) 440px, (min-width: 900px) 40vw, 92vw" srcset="/assets/cin/art-why-the-ai-quotes-your-competitor-480.avif 480w, /assets/cin/art-why-the-ai-quotes-your-competitor-640.avif 640w, /assets/cin/art-why-the-ai-quotes-your-competitor-840.avif 840w, /assets/cin/art-why-the-ai-quotes-your-competitor-1080.avif 1080w, /assets/cin/art-why-the-ai-quotes-your-competitor-1400.avif 1400w" />
+            <img src="/assets/cin/art-why-the-ai-quotes-your-competitor-840.webp" sizes="(min-width: 1174px) 440px, (min-width: 900px) 40vw, 92vw" srcset="/assets/cin/art-why-the-ai-quotes-your-competitor-480.webp 480w, /assets/cin/art-why-the-ai-quotes-your-competitor-640.webp 640w, /assets/cin/art-why-the-ai-quotes-your-competitor-840.webp 840w, /assets/cin/art-why-the-ai-quotes-your-competitor-1080.webp 1080w, /assets/cin/art-why-the-ai-quotes-your-competitor-1400.webp 1400w"
+                 width="1400" height="933" fetchpriority="high" decoding="async"
+                 alt="Two blank page-shaped cards side by side; every line in the network reaches the lit right-hand card and none touches the dark one." />
+          </picture>
+        </figure>
       </div>
+    </section>
 
-      <div class="section">
+    <section class="hm-sec cin-doc-first" id="read" data-ground="light">
+      <div class="wrap">
+        <nav class="crumb cin-crumb" aria-label="Breadcrumb"><a href="/articles/">Articles</a><span aria-hidden="true">/</span>Article 03</nav>
+        <div class="cin-art">
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <h2>What it actually looks like</h2>
           <p>It rarely arrives as a single insult. It arrives as a shape you notice after the third or fourth attempt, and the shape usually falls into one of three kinds.</p>
           <p>Sometimes it is one practice, every time, whatever you ask. Sometimes it is a rotating cast of four or five in the area, none of which is yours. And sometimes it is a chain or a hospital group, because a large organisation publishes a great deal of text about itself and there is more of it to draw on. The second kind is the most common and it is also the one people notice least, because no individual reply looks like an omission until you line six of them up.</p>
@@ -81,7 +121,7 @@
           <p>This section is the point of the article. Practice owners lose money on the wrong conclusion here far more often than they lose it on the underlying problem.</p>
         </div>
 
-        <ul class="mech">
+        <ul class="mech" data-reveal>
           <li>
             <h3>It is not a penalty</h3>
             <p>Nothing has been applied to you. There is no strike against your practice, no flag, no blacklist, and nobody has removed you from anything. Being absent from an answer is not the same event as being demoted from one, even though it feels identical from where you are standing.</p>
@@ -108,7 +148,7 @@
           </li>
         </ul>
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <h2>The finding that sits closest to it</h2>
           <p>Our field work covered 182 clinic websites in the United States, and we read what each of them hands over. Across every group we could tell apart, at worst two in three of them never answered a single question a patient would type — cost, insurance, recovery, availability, parking — anywhere on the page. The sites that had already been singled out by other people as well-made examples were inside the same band as the rest.</p>
           <p class="src">Anaks Labs field work, 182 US clinic websites in two separately drawn groups. We publish this as a floor rather than a single figure, and the reason is in the scope note. <a href="/sources/#no-answers">Sample, definition and limits &rarr;</a> &middot; <a href="/sources/#audit-sample">how the two groups were drawn &rarr;</a></p>
@@ -136,7 +176,7 @@
           <p>If you are going to do anything with this observation, it should be to turn it into a record. Four things are worth capturing, and all four are free.</p>
         </div>
 
-        <ul class="mech">
+        <ul class="mech" data-reveal>
           <li>
             <h3>Which practices get named, and how consistently</h3>
             <p>One name recurring is a different finding from five names rotating. Note the split.</p>
@@ -155,14 +195,14 @@
           </li>
         </ul>
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <p>Then leave it alone. Asking an assistant about your practice repeatedly does not improve your standing, and no subscription that monitors your "AI rank" is measuring a thing that exists. <a href="/articles/ask-an-assistant-about-your-practice/">How to run the test properly, and how to avoid over-reading it &rarr;</a></p>
         </div>
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2>Read next</h2>
-        <ul class="post-list">
+        <h2 data-reveal>Read next</h2>
+        <ul class="post-list" data-reveal>
           <li>
             <a href="/articles/beautiful-but-invisible/">
               <h3>Why a beautiful clinic website can be invisible to machines</h3>
@@ -185,12 +225,14 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <p><a href="/clinics/">The audit this article draws on, with both sample groups and what each one was drawn from &rarr;</a></p>
         </div>
 
+        </div>
       </div>
-    </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -200,11 +242,13 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product">Product</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>

@@ -25,58 +25,82 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@graph":[
-    {"@type":"AboutPage","@id":"https://anakslabs.com/about/#page","name":"About — Anaks Labs Inc.","url":"https://anakslabs.com/about/","inLanguage":"en-US","isPartOf":{"@type":"WebSite","@id":"https://anakslabs.com/#website","name":"Anaks Labs","url":"https://anakslabs.com","inLanguage":"en-US"},"about":{"@id":"https://anakslabs.com/#org"},"publisher":{"@id":"https://anakslabs.com/#org"}},
-    {"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","description":"Anaks Labs Inc. is a software company. It builds, hosts and operates websites for businesses on its own platform, engineered so that search engines and AI assistants can read, verify and quote them.","url":"https://anakslabs.com","email":"contact@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},
-    {"@type":"FAQPage","@id":"https://anakslabs.com/about/#faq","inLanguage":"en-US","mainEntity":[
-      {"@type":"Question","name":"What is Anaks Labs?","acceptedAnswer":{"@type":"Answer","text":"Anaks Labs Inc. is a software company that builds and operates websites for businesses on its own AI-powered platform, engineered so that search engines and AI assistants can read them. One build charge, one flat monthly rate."}},
-      {"@type":"Question","name":"Is Anaks Labs related to AKS Labs or Azure Kubernetes Service?","acceptedAnswer":{"@type":"Answer","text":"No. Anaks Labs Inc. is an independent software company and has no relationship to Microsoft Azure, AKS, or Kubernetes training."}},
-      {"@type":"Question","name":"What does Anaks Labs actually do each month?","acceptedAnswer":{"@type":"Answer","text":"Every month, for every site we run: a performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the monthly rate — one flat number, everything included."}}
-    ]}
-  ]}
+  {"@context":"https://schema.org","@graph":[{"@type":"AboutPage","@id":"https://anakslabs.com/about/#page","name":"About — Anaks Labs Inc.","url":"https://anakslabs.com/about/","inLanguage":"en-US","isPartOf":{"@type":"WebSite","@id":"https://anakslabs.com/#website","name":"Anaks Labs","url":"https://anakslabs.com","inLanguage":"en-US"},"about":{"@id":"https://anakslabs.com/#org"},"publisher":{"@id":"https://anakslabs.com/#org"}},{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","description":"Anaks Labs Inc. is a software company. It builds, hosts and operates websites for businesses on its own platform, engineered so that search engines and AI assistants can read, verify and quote them.","url":"https://anakslabs.com","email":"contact@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"}]}
   </script>
 </head>
-<body class="subpage">
+<body class="subpage cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer grid" aria-hidden="true"></div>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The reel's two constants, on a page that is read rather than watched.
+       The shared .layer washes are switched off by the cin-* layer: a fixed
+       light aurora cannot sit under an ink opener. Grain, vignette and the
+       leading-edge rail replace them, and all three are pure CSS over tokens
+       that already exist. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product">Product</a>
-        <a href="/clinics/">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/">Articles</a>
         <a href="/about/" aria-current="page">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="page" id="main">
-    <div class="wrap">
-      <div class="page-hero">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>About</span></span>
-        <h1>The software company <span class="accent">behind the platform</span></h1>
-        <p class="lead">Anaks Labs Inc. is a software company based in the United States. We build and operate an AI-powered website platform: sites are compiled, tested and monitored like software, and every page is engineered so that search engines and AI assistants can read, verify and quote it.</p>
+  <main class="hm hm-page cin-doc" id="main">
+
+    <!-- ================= THE OPENER · the reading head =============
+         THE BED IS THE REEL'S OWN, REUSED AND TURNED DOWN. This is the
+         landing's "read twice" render — the reading head crossing a navy
+         panel — held at luminosity and at a fifth of its strength, so it is
+         a texture behind the sentence rather than a picture competing with
+         it. Reused rather than commissioned because that object IS this
+         company: the whole page below explains a business built around what
+         a machine gets when it reads a page, and inventing a second object
+         for the same idea would be two pictures of one thought.
+
+         Copy is the page hero's, word for word. -->
+    <section class="cin-sc cin-dark cin-title cin-open" id="top" data-ground="dark">
+      <div class="cin-bed cin-bed-open cin-bed-quiet" aria-hidden="true">
+        <picture>
+                <source type="image/avif" sizes="116vw" srcset="/assets/cin/unreadable-480.avif 480w, /assets/cin/unreadable-640.avif 640w, /assets/cin/unreadable-840.avif 840w, /assets/cin/unreadable-1080.avif 1080w, /assets/cin/unreadable-1360.avif 1360w, /assets/cin/unreadable-1720.avif 1720w, /assets/cin/unreadable-2160.avif 2160w, /assets/cin/unreadable-2560.avif 2560w, /assets/cin/unreadable-2752.avif 2752w" />
+                <img src="/assets/cin/unreadable-1080.webp" sizes="116vw" srcset="/assets/cin/unreadable-480.webp 480w, /assets/cin/unreadable-640.webp 640w, /assets/cin/unreadable-840.webp 840w, /assets/cin/unreadable-1080.webp 1080w, /assets/cin/unreadable-1360.webp 1360w, /assets/cin/unreadable-1720.webp 1720w, /assets/cin/unreadable-2160.webp 2160w, /assets/cin/unreadable-2560.webp 2560w, /assets/cin/unreadable-2752.webp 2752w"
+                     width="2752" height="1536" alt="" fetchpriority="high" decoding="async" />
+              </picture>
       </div>
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>About</span>
+        <h1 class="cin-h1">The software company <em>behind the platform</em></h1>
+        <p class="cin-lead">Anaks Labs Inc. is a software company based in the United States. We build and operate an AI-powered website platform: sites are compiled, tested and monitored like software, and every page is engineered so that search engines and AI assistants can read, verify and quote it.</p>
+      </div>
+      <span class="cin-cue" aria-hidden="true"><b>Scroll</b><i></i></span>
+    </section>
 
-      <div class="section">
-        <div class="prose">
-          <h2>What we are</h2>
+    <section class="hm-sec cin-doc-first" id="what-we-are" data-ground="light">
+      <div class="wrap">
+        <div class="hm-prose" data-reveal>
+          <h2 class="hm-h2">What we are</h2>
           <p>Anaks Labs designs, builds and operates its own software — we are not an agency taking briefs. The platform is the product: it produces the websites, and we run those websites month after month for the businesses they belong to.</p>
-          <p><a href="/#product">See what we run every month &rarr;</a></p>
+          <p><a href="/products/#monthly">See what we run every month &rarr;</a></p>
         </div>
+      </div>
+    </section>
 
-        <div class="divider" aria-hidden="true"></div>
-
-        <h2>Two disciplines, one product</h2>
-        <ul class="mech">
+    <section class="hm-sec" id="disciplines" data-ground="light">
+      <div class="wrap">
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>How the work is split</span></span>
+          <h2 class="hm-h2">Two disciplines, <span class="dim">one product</span></h2>
+        </div>
+        <ul class="hm-rows" data-reveal>
           <li>
             <h3>Engineering first</h3>
             <p>The platform builds each site from verified information about the business, runs automated checks before anything is published, and keeps every claim traceable to its source.</p>
@@ -86,20 +110,27 @@
             <p>Search engine optimization is the baseline; answer engine optimization (AEO) and generative engine optimization (GEO) are the product. We measure what machines actually receive from a page, and we publish the method. We take a limited number of clients per area: optimizing competing businesses in the same neighborhood would mean competing against our own clients.</p>
           </li>
         </ul>
+      </div>
+    </section>
 
-        <div class="divider" aria-hidden="true"></div>
-
-        <div class="prose">
-          <h2>We publish the method</h2>
+    <section class="hm-sec" id="method" data-ground="light">
+      <div class="wrap">
+        <div class="hm-prose" data-reveal>
+          <h2 class="hm-h2">We publish the method</h2>
           <p>A claim about machine readability is worth what its measurement is worth, so we put ours on the site. The specimen is one clinic homepage built twice — once in the shape our audit kept finding, once the way our platform builds — with the structural difference between the two counted on the page. The sources page lists every figure that appears anywhere on this site with its original source, its sample size, and the date we last checked the link.</p>
           <p><a href="/clinics/example/">See the specimen, measured &rarr;</a></p>
           <p><a href="/sources/">Every figure, and where it came from &rarr;</a></p>
         </div>
+      </div>
+    </section>
 
-        <div class="divider" aria-hidden="true"></div>
-
-        <h2>Common questions</h2>
-        <ul class="mech">
+    <section class="hm-sec" id="faq" data-ground="light">
+      <div class="wrap">
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>Questions</span></span>
+          <h2 class="hm-h2">Common questions</h2>
+        </div>
+        <ul class="hm-faq" data-reveal>
           <li>
             <h3>What is Anaks Labs?</h3>
             <p>Anaks Labs Inc. is a software company that builds and operates websites for businesses on its own AI-powered platform, engineered so that search engines and AI assistants can read them. One build charge, one flat monthly rate.</p>
@@ -113,11 +144,17 @@
             <p>Every month, for every site we run: a performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the monthly rate — one flat number, everything included.</p>
           </li>
         </ul>
+        <p class="hm-note hm-gap" data-reveal><a class="hm-go" href="/faq/"><span class="arw" aria-hidden="true">&rarr;</span>All questions, on one page</a></p>
+      </div>
+    </section>
 
-        <div class="divider" aria-hidden="true"></div>
-
-        <h2>Corporate information</h2>
-        <ul class="mech">
+    <section class="hm-sec" id="corporate" data-ground="light">
+      <div class="wrap">
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>Corporate</span></span>
+          <h2 class="hm-h2">Corporate information</h2>
+        </div>
+        <ul class="hm-rows" data-reveal>
           <li>
             <h3>Legal name</h3>
             <p>Anaks Labs Inc.</p>
@@ -128,21 +165,37 @@
           </li>
         </ul>
       </div>
-    </div>
+    </section>
+
+    <section class="hm-cta" id="start" data-ground="light">
+      <div class="wrap">
+        <div class="hm-cta-box" data-reveal>
+          <h2 class="hm-h2">See your site <span class="accent">before you decide</span></h2>
+          <p class="hm-sub">Send us the link and we will build the site and send it back. There is no brief to write and no meeting to book.</p>
+          <div class="hm-actions still">
+            <a class="btn btn-primary" href="/contact/">See your site first</a>
+            <a class="btn btn-ghost" href="/products/">See what we build</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <div class="footer-company">
         <p class="footer-brand">&copy; <span id="yr">2026</span> Anaks Labs Inc. &nbsp;·&nbsp; <a href="/contact/">Contact us</a></p>
-        <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
+        <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product">Product</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>

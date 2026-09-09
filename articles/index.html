@@ -19,6 +19,17 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- The first card's picture is this page's largest contentful paint, and
+       the preload scanner cannot find it: it is inside a <picture> below a
+       stylesheet, so the fetch does not start until the CSS has arrived and
+       the layout is known. Measured at 2.10s LCP against a 1.20s first paint
+       — nine hundred milliseconds of waiting on a 15KB file. Declared here it
+       starts with the HTML. type="image/avif" scopes the hint to the source
+       the browser will actually choose; anything without AVIF ignores this
+       line and loads the WebP as before. -->
+  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+        imagesizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw"
+        imagesrcset="/assets/cin/art-patients-ask-ai-first-480.avif 480w, /assets/cin/art-patients-ask-ai-first-640.avif 640w, /assets/cin/art-patients-ask-ai-first-840.avif 840w, /assets/cin/art-patients-ask-ai-first-1080.avif 1080w, /assets/cin/art-patients-ask-ai-first-1400.avif 1400w" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -47,143 +58,240 @@
   ]}
   </script>
 </head>
-<body class="subpage">
+<body class="subpage cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer grid" aria-hidden="true"></div>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The reel's two constants, on a page that is read rather than watched.
+       The shared .layer washes are switched off by the cin-* layer: a fixed
+       light aurora cannot sit under an ink opener. Grain, vignette and the
+       leading-edge rail replace them, and all three are pure CSS over tokens
+       that already exist. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product">Product</a>
-        <a href="/clinics/">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/" aria-current="page">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="page" id="main">
-    <div class="wrap">
-      <div class="page-hero">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Articles</span></span>
-        <h1>Articles</h1>
-        <p class="lead">Research-backed writing for the person who owns the practice. What we measured across US clinic websites, what those findings mean, and what you can check on your own site. Not written for a marketing manager, and not for whoever built the site.</p>
+  <main class="hm hm-page cin-doc" id="main">
+
+    <!-- ================= THE OPENER · reduced to its minimum =============
+         An index is a way through to ten things, and everything that is not
+         one of those ten things is in the reader's way. So the opener keeps
+         the eyebrow, the one-word headline and ONE line of the lead, at
+         40svh, and the first row of cards is on screen with it at every
+         width. The two sentences that came off the lead are not lost: what
+         the articles measure is the clinics page, and what you can check on
+         your own site is what every article ends on.
+
+         No scroll cue: at 40svh the grid is already on screen, and a cue
+         pointing at something the reader can see is noise. -->
+    <section class="cin-sc cin-dark cin-title cin-open cin-open-type cin-open-min" id="top" data-ground="dark">
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>Articles</span>
+        <h1 class="cin-h1">Articles</h1>
+        <p class="cin-lead">Research-backed writing for the person who owns the practice.</p>
       </div>
+    </section>
 
-      <div class="section">
+    <!-- ================= THE INDEX · ten cards and nothing else ==========
+         WHAT CAME OFF THIS PAGE, AND WHY IT IS NOT MISSING. Five sections
+         went: "Where these stop", three themed headings that split ten
+         articles into three groups, "Where these came from", and a closing
+         call-to-action card — 640 words of scaffolding around ten links, on
+         a page a reader arrives at knowing exactly what they want.
 
-        <div class="prose">
-          <h2>Where these stop</h2>
-          <p>They stop at the diagnosis. You will finish an article knowing whether your practice has the problem it describes and how bad it looks — and you will not find instructions for repairing it, because repairing it is the work we are paid for. We would rather say that plainly than publish an article that pretends a website can be fixed by reading one.</p>
-          <p>Two other habits carry over from the rest of this site. Every figure quoted in an article is listed on <a href="/sources/">our sources page</a> with its sample and, where it is somebody else's research, a link to the original publication. And where a number came from the specimen we built, the article says so in the same breath, because a measurement of two pages we wrote ourselves is not a fact about the industry.</p>
-        </div>
+         Every one of those paragraphs is still on the site. What the
+         articles stop at is the last section of each article. Where the
+         findings came from is the clinics page and the sources page, both
+         linked from the footer of every page here. The offer to check your
+         own site is the button in the header of every page here, and it is
+         the whole of /check/.
 
-        <div class="divider" aria-hidden="true"></div>
+         The grouping went with them. Three headings over three lists made
+         the reader choose a category before choosing an article; the ten are
+         numbered 01 to 10 and read in that order, so the order is the
+         structure and one grid states it. -->
+    <section class="hm-sec cin-doc-first" id="all" data-ground="light">
+      <div class="wrap">
+        <ul class="art-grid">
 
-        <h2>Start here</h2>
-        <ul class="post-list">
-          <li>
+          <li class="art-card" data-reveal>
             <a href="/articles/patients-ask-ai-first/">
-              <h3>Your patients now ask AI first — what that changes for a clinic</h3>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-patients-ask-ai-first-480.avif 480w, /assets/cin/art-patients-ask-ai-first-640.avif 640w, /assets/cin/art-patients-ask-ai-first-840.avif 840w, /assets/cin/art-patients-ask-ai-first-1080.avif 1080w, /assets/cin/art-patients-ask-ai-first-1400.avif 1400w" />
+                  <img src="/assets/cin/art-patients-ask-ai-first-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-patients-ask-ai-first-480.webp 480w, /assets/cin/art-patients-ask-ai-first-640.webp 640w, /assets/cin/art-patients-ask-ai-first-840.webp 840w, /assets/cin/art-patients-ask-ai-first-1080.webp 1080w, /assets/cin/art-patients-ask-ai-first-1400.webp 1400w"
+                       width="1400" height="933" fetchpriority="high" decoding="async"
+                       alt="A blank phone-shaped panel of white light at the centre of a wide blue network, dozens of fine lines converging on it." />
+                </picture>
+              </div>
+              <h2>Your patients now ask AI first — what that changes for a clinic</h2>
               <p>The behaviour that changed, counted by two published surveys, and the part of it that actually reaches your front desk.</p>
-              <p class="meta">Article 01</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-          <li>
+
+          <li class="art-card" data-reveal>
             <a href="/articles/ask-an-assistant-about-your-practice/">
-              <h3>Ask an AI assistant about your practice — what the answer tells you</h3>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-ask-an-assistant-about-your-practice-480.avif 480w, /assets/cin/art-ask-an-assistant-about-your-practice-640.avif 640w, /assets/cin/art-ask-an-assistant-about-your-practice-840.avif 840w, /assets/cin/art-ask-an-assistant-about-your-practice-1080.avif 1080w, /assets/cin/art-ask-an-assistant-about-your-practice-1400.avif 1400w" />
+                  <img src="/assets/cin/art-ask-an-assistant-about-your-practice-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-ask-an-assistant-about-your-practice-480.webp 480w, /assets/cin/art-ask-an-assistant-about-your-practice-640.webp 640w, /assets/cin/art-ask-an-assistant-about-your-practice-840.webp 840w, /assets/cin/art-ask-an-assistant-about-your-practice-1080.webp 1080w, /assets/cin/art-ask-an-assistant-about-your-practice-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="One bright node sending a single blue line outward while six fainter lines curve back to it from different directions." />
+                </picture>
+              </div>
+              <h2>Ask an AI assistant about your practice — what the answer tells you</h2>
               <p>Six kinds of answer you might get back, and the symptom each one points at. Takes about ten minutes.</p>
-              <p class="meta">Article 02</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-          <li>
+
+          <li class="art-card" data-reveal>
             <a href="/articles/why-the-ai-quotes-your-competitor/">
-              <h3>Why the AI quotes your competitor, and not you</h3>
-              <p>What it means when someone else's practice keeps turning up in the answer — and the several things it does not mean.</p>
-              <p class="meta">Article 03</p>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-why-the-ai-quotes-your-competitor-480.avif 480w, /assets/cin/art-why-the-ai-quotes-your-competitor-640.avif 640w, /assets/cin/art-why-the-ai-quotes-your-competitor-840.avif 840w, /assets/cin/art-why-the-ai-quotes-your-competitor-1080.avif 1080w, /assets/cin/art-why-the-ai-quotes-your-competitor-1400.avif 1400w" />
+                  <img src="/assets/cin/art-why-the-ai-quotes-your-competitor-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-why-the-ai-quotes-your-competitor-480.webp 480w, /assets/cin/art-why-the-ai-quotes-your-competitor-640.webp 640w, /assets/cin/art-why-the-ai-quotes-your-competitor-840.webp 840w, /assets/cin/art-why-the-ai-quotes-your-competitor-1080.webp 1080w, /assets/cin/art-why-the-ai-quotes-your-competitor-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="Two blank page-shaped cards side by side; every line in the network reaches the lit right-hand card and none touches the dark one." />
+                </picture>
+              </div>
+              <h2>Why the AI quotes your competitor, and not you</h2>
+              <p>What it means when someone else's practice keeps turning up in the answer.</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-        </ul>
 
-        <div class="divider" aria-hidden="true"></div>
-
-        <h2>What machines actually receive</h2>
-        <ul class="post-list">
-          <li>
+          <li class="art-card" data-reveal>
             <a href="/articles/beautiful-but-invisible/">
-              <h3>Why a beautiful clinic website can be invisible to machines</h3>
-              <p>Design quality and machine readability are separate properties of a page. The sites we opened that had been singled out as well made were not spared.</p>
-              <p class="meta">Article 04</p>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-beautiful-but-invisible-480.avif 480w, /assets/cin/art-beautiful-but-invisible-640.avif 640w, /assets/cin/art-beautiful-but-invisible-840.avif 840w, /assets/cin/art-beautiful-but-invisible-1080.avif 1080w, /assets/cin/art-beautiful-but-invisible-1400.avif 1400w" />
+                  <img src="/assets/cin/art-beautiful-but-invisible-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-beautiful-but-invisible-480.webp 480w, /assets/cin/art-beautiful-but-invisible-640.webp 640w, /assets/cin/art-beautiful-but-invisible-840.webp 840w, /assets/cin/art-beautiful-but-invisible-1080.webp 1080w, /assets/cin/art-beautiful-but-invisible-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="A brightly lit blank page-shaped card standing alone; the surrounding blue network lines stop short and never reach its edges." />
+                </picture>
+              </div>
+              <h2>Why a beautiful clinic website can be invisible to machines</h2>
+              <p>Design quality and machine readability are separate properties of a page.</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-          <li>
+
+          <li class="art-card" data-reveal>
             <a href="/articles/what-patients-see-what-machines-receive/">
-              <h3>The gap between what patients see and what machines receive</h3>
-              <p>On the specimen we built both halves of, the difference between the two is a number. Here is that number and what it is a number of.</p>
-              <p class="meta">Article 05</p>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-what-patients-see-what-machines-receive-480.avif 480w, /assets/cin/art-what-patients-see-what-machines-receive-640.avif 640w, /assets/cin/art-what-patients-see-what-machines-receive-840.avif 840w, /assets/cin/art-what-patients-see-what-machines-receive-1080.avif 1080w, /assets/cin/art-what-patients-see-what-machines-receive-1400.avif 1400w" />
+                  <img src="/assets/cin/art-what-patients-see-what-machines-receive-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-what-patients-see-what-machines-receive-480.webp 480w, /assets/cin/art-what-patients-see-what-machines-receive-640.webp 640w, /assets/cin/art-what-patients-see-what-machines-receive-840.webp 840w, /assets/cin/art-what-patients-see-what-machines-receive-1080.webp 1080w, /assets/cin/art-what-patients-see-what-machines-receive-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="Two blank page-shaped cards of the same size: the left one dense with white blocks, the right one holding only a few." />
+                </picture>
+              </div>
+              <h2>The gap between what patients see and what machines receive</h2>
+              <p>On the specimen we built both halves of, the difference between the two is a number.</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-          <li>
+
+          <li class="art-card" data-reveal>
             <a href="/articles/what-a-machine-can-tell-checklist/">
-              <h3>What a machine can tell about your practice right now — a checklist</h3>
-              <p>Twelve questions to put to your own website. Every one can be answered from a phone, and none of them needs a tool.</p>
-              <p class="meta">Article 06</p>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-what-a-machine-can-tell-checklist-480.avif 480w, /assets/cin/art-what-a-machine-can-tell-checklist-640.avif 640w, /assets/cin/art-what-a-machine-can-tell-checklist-840.avif 840w, /assets/cin/art-what-a-machine-can-tell-checklist-1080.avif 1080w, /assets/cin/art-what-a-machine-can-tell-checklist-1400.avif 1400w" />
+                  <img src="/assets/cin/art-what-a-machine-can-tell-checklist-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-what-a-machine-can-tell-checklist-480.webp 480w, /assets/cin/art-what-a-machine-can-tell-checklist-640.webp 640w, /assets/cin/art-what-a-machine-can-tell-checklist-840.webp 840w, /assets/cin/art-what-a-machine-can-tell-checklist-1080.webp 1080w, /assets/cin/art-what-a-machine-can-tell-checklist-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="A blank phone-shaped panel of light beside a vertical column of twelve identical small glowing rings." />
+                </picture>
+              </div>
+              <h2>What a machine can tell about your practice right now — a checklist</h2>
+              <p>Twelve questions to put to your own website, none of which needs a tool.</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-        </ul>
 
-        <div class="divider" aria-hidden="true"></div>
-
-        <h2>Decisions you are being asked to make</h2>
-        <ul class="post-list">
-          <li>
+          <li class="art-card" data-reveal>
             <a href="/articles/what-monthly-content-actually-does/">
-              <h3>What monthly content actually does — an honest take</h3>
-              <p>What publishing every month is genuinely for, what it cannot do, and why nobody can tell you in advance what it will be worth.</p>
-              <p class="meta">Article 07</p>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-what-monthly-content-actually-does-480.avif 480w, /assets/cin/art-what-monthly-content-actually-does-640.avif 640w, /assets/cin/art-what-monthly-content-actually-does-840.avif 840w, /assets/cin/art-what-monthly-content-actually-does-1080.avif 1080w, /assets/cin/art-what-monthly-content-actually-does-1400.avif 1400w" />
+                  <img src="/assets/cin/art-what-monthly-content-actually-does-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-what-monthly-content-actually-does-480.webp 480w, /assets/cin/art-what-monthly-content-actually-does-640.webp 640w, /assets/cin/art-what-monthly-content-actually-does-840.webp 840w, /assets/cin/art-what-monthly-content-actually-does-1080.webp 1080w, /assets/cin/art-what-monthly-content-actually-does-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="A spiral of blank page-shaped cards receding into blue distance, each adding a point of light to a constellation that grows denser." />
+                </picture>
+              </div>
+              <h2>What monthly content actually does — an honest take</h2>
+              <p>What publishing every month is genuinely for, and what it cannot do.</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-          <li>
+
+          <li class="art-card" data-reveal>
             <a href="/articles/redesign-or-rebuild/">
-              <h3>Redesign vs rebuild: what to check before you decide</h3>
-              <p>The two are sold as the same decision and are not. Six questions that tell you which one you are actually being quoted for.</p>
-              <p class="meta">Article 08</p>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-redesign-or-rebuild-480.avif 480w, /assets/cin/art-redesign-or-rebuild-640.avif 640w, /assets/cin/art-redesign-or-rebuild-840.avif 840w, /assets/cin/art-redesign-or-rebuild-1080.avif 1080w, /assets/cin/art-redesign-or-rebuild-1400.avif 1400w" />
+                  <img src="/assets/cin/art-redesign-or-rebuild-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-redesign-or-rebuild-480.webp 480w, /assets/cin/art-redesign-or-rebuild-640.webp 640w, /assets/cin/art-redesign-or-rebuild-840.webp 840w, /assets/cin/art-redesign-or-rebuild-1080.webp 1080w, /assets/cin/art-redesign-or-rebuild-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="A blue line forking to two blank page-shaped cards — one taking a new surface over the old, one being assembled from bare layers." />
+                </picture>
+              </div>
+              <h2>Redesign vs rebuild: what to check before you decide</h2>
+              <p>Six questions that tell you which one you are actually being quoted for.</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-          <li>
+
+          <li class="art-card" data-reveal>
             <a href="/articles/counting-inquiries-not-people/">
-              <h3>Counting inquiries, not people — privacy-conscious clinic analytics</h3>
-              <p>A clinic can know how many people got in touch without holding anything about who they were. What to ask whoever runs your site.</p>
-              <p class="meta">Article 09</p>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-counting-inquiries-not-people-480.avif 480w, /assets/cin/art-counting-inquiries-not-people-640.avif 640w, /assets/cin/art-counting-inquiries-not-people-840.avif 840w, /assets/cin/art-counting-inquiries-not-people-1080.avif 1080w, /assets/cin/art-counting-inquiries-not-people-1400.avif 1400w" />
+                  <img src="/assets/cin/art-counting-inquiries-not-people-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-counting-inquiries-not-people-480.webp 480w, /assets/cin/art-counting-inquiries-not-people-640.webp 640w, /assets/cin/art-counting-inquiries-not-people-840.webp 840w, /assets/cin/art-counting-inquiries-not-people-1080.webp 1080w, /assets/cin/art-counting-inquiries-not-people-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="A row of identical small glowing bars travelling toward a blank page-shaped card, each adding one point of light to a cluster on its edge." />
+                </picture>
+              </div>
+              <h2>Counting inquiries, not people — privacy-conscious clinic analytics</h2>
+              <p>A clinic can know how many people got in touch without holding anything about who they were.</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
-          <li>
+
+          <li class="art-card" data-reveal>
             <a href="/articles/evaluating-an-agency-seo-claims/">
-              <h3>How to evaluate an agency's SEO claims — questions to ask</h3>
-              <p>Nine questions, the answer that should worry you in each case, and one worked example of a statistic our whole industry is quoting wrong.</p>
-              <p class="meta">Article 10</p>
+              <div class="art-shot">
+                <picture>
+                  <source type="image/avif" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-evaluating-an-agency-seo-claims-480.avif 480w, /assets/cin/art-evaluating-an-agency-seo-claims-640.avif 640w, /assets/cin/art-evaluating-an-agency-seo-claims-840.avif 840w, /assets/cin/art-evaluating-an-agency-seo-claims-1080.avif 1080w, /assets/cin/art-evaluating-an-agency-seo-claims-1400.avif 1400w" />
+                  <img src="/assets/cin/art-evaluating-an-agency-seo-claims-840.webp" sizes="(min-width: 1174px) 340px, (min-width: 700px) 45vw, 92vw" srcset="/assets/cin/art-evaluating-an-agency-seo-claims-480.webp 480w, /assets/cin/art-evaluating-an-agency-seo-claims-640.webp 640w, /assets/cin/art-evaluating-an-agency-seo-claims-840.webp 840w, /assets/cin/art-evaluating-an-agency-seo-claims-1080.webp 1080w, /assets/cin/art-evaluating-an-agency-seo-claims-1400.webp 1400w"
+                       width="1400" height="933" loading="lazy" fetchpriority="low" decoding="async"
+                       alt="A blank page-shaped card seen through a thick blue ring, with one horizontal block inside the ring brightly lit and the rest dark." />
+                </picture>
+              </div>
+              <h2>How to evaluate an agency's SEO claims — questions to ask</h2>
+              <p>Nine questions, and the answer that should worry you in each case.</p>
+              <p class="art-date"><time datetime="2026-08-06">6 August 2026</time></p>
             </a>
           </li>
+
         </ul>
-
-        <div class="divider" aria-hidden="true"></div>
-
-        <div class="prose">
-          <h2>Where these came from</h2>
-          <p>We opened 182 US clinic websites and read what each one hands to a search engine before anything on the page runs. Most of what these articles describe is what kept coming back. The findings, the two groups the sites were drawn from and the limits of all of it are set out on <a href="/clinics/">the clinics page</a>, and every count is defined on <a href="/sources/">the sources page</a>.</p>
-          <p>Where an article needed a before-and-after to point at, it points at a specimen: one clinic homepage we built twice, in a practice we invented, published with the difference between the two builds measured. No real practice's website appears in this section, or anywhere else on this site.</p>
-          <p><a href="/clinics/example/">See the specimen, both builds and the count &rarr;</a></p>
-        </div>
-
       </div>
-    </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -193,11 +301,13 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product">Product</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>
