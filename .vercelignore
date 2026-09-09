@@ -11,8 +11,17 @@ tools/
 # are internal: this repo is uploaded as-is, so anything left here answers 200
 # on the public site. scripts/ would publish the checks, baseline/ and
 # verification/ would publish the screenshots and the Lighthouse traces, and
-# package.json would advertise a build step the deployment does not have.
-scripts/
+# package.json would advertise dev dependencies the deployment does not install.
+#
+# One exception, and only one: build.mjs is the deployment's build command, so
+# it has to reach the build. The pattern is `scripts/*` rather than `scripts/`
+# precisely so a single child can be re-included — gitignore semantics, which
+# this file follows, cannot un-ignore a file whose parent directory is ignored.
+# Re-including it does not put it on the site: with outputDirectory set to
+# dist/, the deployment serves dist/ and nothing else, and build.mjs does not
+# copy itself there.
+scripts/*
+!scripts/build.mjs
 baseline/
 verification/
 package.json
