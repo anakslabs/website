@@ -7,3 +7,8 @@ verification/
 
 # a symlinked node_modules is a file, not a directory — the trailing-slash rule above misses it
 node_modules
+
+# scripts/build.mjs writes this. It is a copy of the repo with one file
+# rewritten; committing it would put a second, stale copy of every page under
+# version control and make every future diff twice as long.
+dist/
