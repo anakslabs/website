@@ -113,7 +113,7 @@ for (const [label, width, height, isMobile] of VIEWS) {
        others. That is a site-wide contrast reduction which has nothing to do
        with the photographs, and a checker aimed only at the photographs would
        have reported the homepage clean while the same text failed everywhere. */
-    for (const el of document.querySelectorAll("main h1, main h2, main h3, main p, main a, main span, main li, footer p, footer a")) {
+    for (const el of document.querySelectorAll("main h1, main h2, main h3, main p, main a, main span, main li, main dt, main dd, footer p, footer a")) {
       const text = (el.textContent ?? "").trim();
       if (!text) continue;
       /* Only elements that paint their own glyphs. A wrapper whose text lives
@@ -266,22 +266,69 @@ for (const [label, width, height, isMobile] of VIEWS) {
                              painted by background-clip:text, not by color
 
        None of those is a background any reader could confuse with one. */
+    /* A CAROUSEL IS A MOVING GROUND, exactly like .aurora above, and it was
+       producing worse numbers than the drift ever did. #gets-slider auto-
+       advances every five seconds; three of its four slides sit outside an
+       overflow:hidden stage while it does, and a slide LEFT of the current
+       one has a negative getClientRects().left. The old clamp below turned
+       that into x:0 — a rectangle the element does not occupy — so white
+       type on blue was screenshotted against the top-left corner of the
+       viewport and reported at 1.15:1. Five such "failures" on / and none of
+       them a pixel any reader has ever seen. It also meant the scene's three
+       other slides were measured, or not, according to where the rail
+       happened to be when the walk reached them.
+
+       So the rail is parked before each element is looked at: the slide
+       holding it is selected through its own tab, the same control a reader
+       has, and the transition is waited out. Every slide is now measured,
+       every time, at the position it is actually shown in. Parking is idempotent
+       and costs nothing on the pages that have no carousel. */
+    const moved = await page.evaluate((id) => {
+      const el = document.querySelector(`[data-contrast-id="${id}"]`);
+      const slide = el.closest(".cin-slide");
+      if (!slide || !slide.parentElement) return false;
+      const idx = [...slide.parentElement.children].indexOf(slide);
+      const tab = document.querySelector(`.cin-slider-tab[data-go="${idx}"]`);
+      let moved = false;
+      if (tab && tab.getAttribute("aria-current") !== "true") { tab.click(); moved = true; }
+      /* and stop it advancing again while this element is being measured.
+         Only ever pressed when the control is not already showing paused, so
+         this can never toggle a paused carousel back into motion. */
+      const play = document.querySelector("#gets-slider [data-play]");
+      if (play && !play.closest(".cin-slider").classList.contains("is-paused")) play.click();
+      return moved;
+    }, tg.id);
+    await page.waitForTimeout(moved ? 760 : 0);   // the rail's own 620ms transition, plus slack
+
     await page.evaluate((id) => {
       const el = document.querySelector(`[data-contrast-id="${id}"]`);
       el.style.visibility = "hidden";
       el.scrollIntoView({ block: "center", behavior: "instant" });
+      /* scrollIntoView SCROLLS AN overflow:hidden ANCESTOR, and the carousel
+         stage is one. Asked to reveal a slide, the browser scrolls the stage
+         sideways — and the rail positions its slides with a transform, so the
+         two compose and the slide ends up further out than it started. That
+         is what "no sampleable line fragment" was: a slide parked at index 2
+         sitting at x −1340 because the stage had been scrolled to meet it.
+         The rail owns the horizontal position; the stage is put back to 0. */
+      for (const s of document.querySelectorAll(".cin-slider-stage")) s.scrollLeft = 0;
     }, tg.id);
     await page.waitForTimeout(70);
     const rects = await page.evaluate((id) => {
       const el = document.querySelector(`[data-contrast-id="${id}"]`);
       return [...el.getClientRects()]
         .map((r) => ({
-          x: Math.max(0, Math.floor(r.left)),
+          x: Math.floor(r.left),
           y: Math.max(0, Math.floor(r.top)),
-          width: Math.min(Math.ceil(r.width), window.innerWidth - Math.max(0, Math.floor(r.left))),
+          /* TRUNCATED AT THE RIGHT EDGE, REJECTED AT THE LEFT. Truncating is
+             honest — the part of a wide element that is on screen is the part
+             a reader sees. Sliding a negative left to 0 is not: it moves the
+             rectangle to a place the element is not, and the pixels that come
+             back belong to something else entirely. */
+          width: Math.min(Math.ceil(r.right), window.innerWidth) - Math.floor(r.left),
           height: Math.min(Math.ceil(r.height), window.innerHeight - Math.max(0, Math.floor(r.top))),
         }))
-        .filter((r) => r.width >= 2 && r.height >= 2 && r.y >= 0);
+        .filter((r) => r.x >= 0 && r.width >= 2 && r.height >= 2 && r.y >= 0);
     }, tg.id);
     const rec = { minL: 2, maxL: -1, frags: 0 };
     for (let d = 0; d < DRIFT_ENDS.length; d++) {

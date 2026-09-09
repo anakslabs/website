@@ -19,6 +19,15 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- The opener figure is this page's largest contentful paint and it sits
+       inside a <picture> below the stylesheet, where the preload scanner
+       cannot reach it — the fetch waits on the CSS. Declared here it starts
+       with the HTML. type="image/avif" scopes the hint to the source the
+       browser will actually choose; anything without AVIF ignores this line
+       and loads the WebP exactly as before. -->
+  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+        imagesizes="(min-width: 1174px) 440px, (min-width: 900px) 40vw, 92vw"
+        imagesrcset="/assets/cin/art-ask-an-assistant-about-your-practice-480.avif 480w, /assets/cin/art-ask-an-assistant-about-your-practice-640.avif 640w, /assets/cin/art-ask-an-assistant-about-your-practice-840.avif 840w, /assets/cin/art-ask-an-assistant-about-your-practice-1080.avif 1080w, /assets/cin/art-ask-an-assistant-about-your-practice-1400.avif 1400w" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -43,42 +52,73 @@
   ]}
   </script>
 </head>
-<body class="subpage">
+<body class="subpage cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer grid" aria-hidden="true"></div>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The reel's two constants, on a page that is read rather than watched.
+       The shared .layer washes are switched off by the cin-* layer: a fixed
+       light aurora cannot sit under an ink opener. Grain, vignette and the
+       leading-edge rail replace them, and all three are pure CSS over tokens
+       that already exist. The node canvas is removed rather than hidden —
+       site.js keeps a per-frame loop over every node pair running on it
+       whether or not anything is drawn on it. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product">Product</a>
-        <a href="/clinics/">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/" aria-current="page">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="page" id="main">
-    <div class="wrap">
-      <nav class="crumb" aria-label="Breadcrumb"><a href="/articles/">Articles</a><span aria-hidden="true">/</span>Article 02</nav>
+  <main class="hm hm-page cin-doc" id="main">
 
-      <div class="page-hero">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Article 02</span></span>
-        <h1>Ask an assistant about your practice</h1>
-        <p class="lead">This is the cheapest diagnostic available to a clinic owner and almost nobody has run it. It costs ten minutes and nothing else. What follows is how to ask, six kinds of reply you might get back, what each one is a symptom of, and the several ways to over-interpret a single answer.</p>
-        <p class="pub">Published <time datetime="2026-08-06">6 August 2026</time> &middot; Anaks Labs</p>
+    <!-- ================= THE OPENER · the article's own title =============
+         TYPE ONLY, AND NO BED. Every render on this site is an object
+         standing for a claim; an article's claim is its argument, and the
+         only honest object for an argument is the sentence making it. The
+         index above these pages opens the same way and for the same reason.
+
+         .cin-open's scale rather than .cin-open-type's: the index needs the
+         display size because its headline is one word, and an article title
+         is a whole sentence that already carries the frame. 62svh so the
+         first paragraph of the piece is on screen with its title.
+
+         Copy is the page hero's, word for word — the eyebrow, the headline,
+         the standfirst and the publication line. Nothing here is new. -->
+    <section class="cin-sc cin-dark cin-title cin-open cin-open-short cin-open-art" id="top" data-ground="dark">
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>Article 02</span>
+        <h1 class="cin-h1">Ask an assistant about your practice</h1>
+        <p class="cin-lead">This is the cheapest diagnostic available to a clinic owner and almost nobody has run it. It costs ten minutes and nothing else. What follows is how to ask, six kinds of reply you might get back, what each one is a symptom of, and the several ways to over-interpret a single answer.</p>
+        <p class="cin-note">Published <time datetime="2026-08-06">6 August 2026</time> &middot; Anaks Labs</p>
+        <figure class="cin-art-shot">
+          <picture>
+            <source type="image/avif" sizes="(min-width: 1174px) 440px, (min-width: 900px) 40vw, 92vw" srcset="/assets/cin/art-ask-an-assistant-about-your-practice-480.avif 480w, /assets/cin/art-ask-an-assistant-about-your-practice-640.avif 640w, /assets/cin/art-ask-an-assistant-about-your-practice-840.avif 840w, /assets/cin/art-ask-an-assistant-about-your-practice-1080.avif 1080w, /assets/cin/art-ask-an-assistant-about-your-practice-1400.avif 1400w" />
+            <img src="/assets/cin/art-ask-an-assistant-about-your-practice-840.webp" sizes="(min-width: 1174px) 440px, (min-width: 900px) 40vw, 92vw" srcset="/assets/cin/art-ask-an-assistant-about-your-practice-480.webp 480w, /assets/cin/art-ask-an-assistant-about-your-practice-640.webp 640w, /assets/cin/art-ask-an-assistant-about-your-practice-840.webp 840w, /assets/cin/art-ask-an-assistant-about-your-practice-1080.webp 1080w, /assets/cin/art-ask-an-assistant-about-your-practice-1400.webp 1400w"
+                 width="1400" height="933" fetchpriority="high" decoding="async"
+                 alt="One bright node sending a single blue line outward while six fainter lines curve back to it from different directions." />
+          </picture>
+        </figure>
       </div>
+    </section>
 
-      <div class="section">
+    <section class="hm-sec cin-doc-first" id="read" data-ground="light">
+      <div class="wrap">
+        <nav class="crumb cin-crumb" aria-label="Breadcrumb"><a href="/articles/">Articles</a><span aria-hidden="true">/</span>Article 02</nav>
+        <div class="cin-art">
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <h2>Three questions, asked cold</h2>
           <p>Open whichever assistants your patients are likely to be using, and start a fresh conversation in each — not one you have already been talking to about something else, because it will remember and the memory will flatter you. Then put three things to it.</p>
           <p>First, your practice by name, together with the town: <i>tell me about</i> and then the name over your door. Second, the way a stranger would arrive at you, with no name in it at all: somebody describing what they need and where they are. Third, one question you know a patient asks at the desk every week — what something costs, whether a plan is taken, how long a recovery runs, whether anyone can be seen today.</p>
@@ -90,9 +130,9 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2>Six answers, and what each one points at</h2>
-        <p class="lp-sub">Find the row that matches your transcript. The right-hand column is what the result indicates, and it stops there.</p>
-        <div class="scrollx">
+        <h2 data-reveal>Six answers, and what each one points at</h2>
+        <p class="hm-sub" data-reveal>Find the row that matches your transcript. The right-hand column is what the result indicates, and it stops there.</p>
+        <div class="scrollx" data-reveal>
           <table class="tbl two">
             <colgroup><col class="k" /><col /></colgroup>
             <thead>
@@ -127,12 +167,12 @@
           </table>
         </div>
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <h2>Three ways to read too much into this</h2>
           <p>We would rather this article made you sceptical than confident, so here is where it stops being evidence.</p>
         </div>
 
-        <ul class="mech">
+        <ul class="mech" data-reveal>
           <li>
             <h3>The answer you get is not the answer a patient gets</h3>
             <p>Replies vary with the wording, the product, the day, the account and whatever the person asked five minutes earlier. Your transcript is a sample of one, taken from a device that has been reading your own website all morning.</p>
@@ -147,7 +187,7 @@
           </li>
         </ul>
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <h2>What this exercise cannot tell you</h2>
           <p>It cannot tell you why. An assistant will not explain which of the things it read about you it believed, and it will not tell you what it failed to obtain from your own pages. The transcript tells you there is a discrepancy between what is true about your practice and what is being said about it. Locating that discrepancy is a different job, and it starts with what your website hands over rather than with what any assistant replies.</p>
           <p><a href="/articles/what-a-machine-can-tell-checklist/">The other half of the diagnosis: what your own site currently hands over &rarr;</a></p>
@@ -155,8 +195,8 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2>Questions</h2>
-        <ul class="mech">
+        <h2 data-reveal>Questions</h2>
+        <ul class="mech" data-reveal>
           <li>
             <h3>Does a wrong answer mean my website is broken?</h3>
             <p>Not on its own. An assistant can be wrong about a practice whose site is perfectly readable, because it also draws on directories, map listings, review sites and pages other people wrote about you. A wrong answer tells you the question is worth pursuing. It does not tell you where the fault lives.</p>
@@ -181,8 +221,8 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <h2>Read next</h2>
-        <ul class="post-list">
+        <h2 data-reveal>Read next</h2>
+        <ul class="post-list" data-reveal>
           <li>
             <a href="/articles/why-the-ai-quotes-your-competitor/">
               <h3>Why the AI quotes your competitor, and not you</h3>
@@ -205,12 +245,14 @@
 
         <div class="divider" aria-hidden="true"></div>
 
-        <div class="prose">
+        <div class="prose" data-reveal>
           <p>We ran the equivalent exercise across 182 US clinic websites, reading what each hands over before anything on the page runs. <a href="/clinics/">What came back is on the clinics page &rarr;</a> &middot; <a href="/sources/#audit-sample">how those 182 were drawn &rarr;</a></p>
         </div>
 
+        </div>
       </div>
-    </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
@@ -220,11 +262,13 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product">Product</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>

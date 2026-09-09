@@ -3,16 +3,6 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/products/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/products/:path+/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/guides/",
       "destination": "/articles/",
       "permanent": true

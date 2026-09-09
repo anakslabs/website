@@ -4,3 +4,6 @@ node_modules/
 .claude/
 __pycache__/
 verification/
+
+# a symlinked node_modules is a file, not a directory — the trailing-slash rule above misses it
+node_modules

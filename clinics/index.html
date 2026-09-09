@@ -28,108 +28,145 @@
   {"@context":"https://schema.org","@graph":[{"@type":"Service","@id":"https://anakslabs.com/clinics/#service","name":"Clinic website build and monthly operation","serviceType":"Website design and management for clinics","provider":{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","url":"https://anakslabs.com","email":"contact@anakslabs.com"},"description":"We build a clinic's website — from the site it already has, or from scratch — so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","priceCurrency":"USD","minPrice":990,"valueAddedTaxIncluded":false},{"@type":"UnitPriceSpecification","name":"Monthly operation","priceCurrency":"USD","minPrice":1490,"billingDuration":1,"billingIncrement":1,"unitCode":"MON","valueAddedTaxIncluded":false}]}},{"@type":"FAQPage","@id":"https://anakslabs.com/clinics/#faq","mainEntity":[{"@type":"Question","name":"What does the build cover?","acceptedAnswer":{"@type":"Answer","text":"Building your website and taking it live on your domain. It is a one-time charge, and it comes after you have seen the finished site."}},{"@type":"Question","name":"What do I get every month?","acceptedAnswer":{"@type":"Answer","text":"A performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the monthly rate — one flat number, everything included."}},{"@type":"Question","name":"Do you handle patient data?","acceptedAnswer":{"@type":"Answer","text":"The tracking is designed so that no patient data ever touches our systems. We count that an inquiry happened, not who made it."}},{"@type":"Question","name":"Can any practice sign up?","acceptedAnswer":{"@type":"Answer","text":"We build the site first and send it to the practice, and we take a limited number of clients in each area — optimizing competing practices in the same neighborhood would mean competing against our own clients."}},{"@type":"Question","name":"How do we start?","acceptedAnswer":{"@type":"Answer","text":"Check your page first — paste your address and see what a search engine receives from it. The result ends with the offer: we rebuild the site and send it back, free, and you decide after you have seen it."}}]}]}
   </script>
 </head>
-<body class="landing">
+<body class="subpage cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <div class="layer aurora" aria-hidden="true">
-    <b class="b1 drift1"></b><b class="b2 drift2"></b><b class="b3 drift3"></b>
-  </div>
-  <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The site's three constants, replacing the four this page used to run.
+       .cin-page switches .layer off, so leaving them here would have left the
+       aurora and the node canvas in the markup doing nothing — and the canvas
+       is not nothing: site.js keeps a per-frame loop over every node pair
+       running on it whether or not it is drawn. Removed rather than hidden.
+
+       The washes were also the reason four label pills on this page measured
+       4.35:1: .aurora is mix-blend-mode multiply at opacity .5, so it darkened
+       the ground under every one of them. With the fixed light layers gone the
+       pills sit on their own flattened ground and nothing can reach them.
+
+       .subpage, NOT .landing, AND THAT IS A MEASUREMENT AND NOT A TIDY-UP.
+       The class was here for the lp-* layout, which this page no longer
+       carries — and `body.landing.cin-page .site-header > .wrap` widens the
+       chrome to the reel's 1340 rail. Measured at 1440 before this change:
+       the wordmark started 108px left of the h1 under it and the footer
+       links ended 108px right of the last paragraph, on a page whose content
+       is on the document's 1080. Same class of defect as "ONE RAIL PER PAGE"
+       in the stylesheet, acquired the same way — by a page keeping a class it
+       needed for something else. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product">Product</a>
-        <a href="/clinics/" aria-current="page">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="lp" id="main">
+  <main class="hm hm-page cin-doc" id="main">
 
-    <!-- ============================ hero ============================ -->
-    <section class="lp-hero">
-      <div class="wrap">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Clinics</span></span>
-        <h1>Patients ask AI first. Your clinic should be <span class="accent">the answer</span>.</h1>
-        <p class="lp-lead">When a patient asks an assistant to find them a dentist, what comes back is an answer, not ten blue links. How that answer is assembled is not published, and we do not claim to know it. What we can show you is what your site hands over when something reads it — because nothing can quote what it was never given. We build yours so that it hands over the right things, then we run it for you, every month.</p>
-        <div class="lp-actions">
+    <!-- ================= THE OPENER · the area ============================
+         THE BED IS THE PAGE'S ARGUMENT AS AN OBJECT. A whole neighbourhood
+         from the air at blue hour, and exactly one business in it lit well
+         enough to be seen from up there. That is what this page sells and
+         what the section under it caps: one practice per area, findable,
+         while the street it stands on is dark.
+
+         Copy is the page hero's, word for word — the eyebrow, the headline,
+         the lead, both buttons and the note under them. Nothing here is new
+         writing, and no glyph is laid on the photograph: the shop sits at
+         about 68% across the frame and the sentence holds the left, on ink,
+         behind a scrim that is dense there and opens toward the subject. -->
+    <section class="cin-sc cin-dark cin-title cin-open cin-open-area" id="top" data-ground="dark">
+      <div class="cin-bed cin-bed-open cin-bed-area" aria-hidden="true">
+        <picture>
+          <source type="image/avif" sizes="116vw" srcset="/assets/cin/area-480.avif 480w, /assets/cin/area-640.avif 640w, /assets/cin/area-840.avif 840w, /assets/cin/area-1080.avif 1080w, /assets/cin/area-1360.avif 1360w, /assets/cin/area-1720.avif 1720w, /assets/cin/area-2160.avif 2160w, /assets/cin/area-2560.avif 2560w, /assets/cin/area-2752.avif 2752w" />
+          <img src="/assets/cin/area-1080.webp" sizes="116vw" srcset="/assets/cin/area-480.webp 480w, /assets/cin/area-640.webp 640w, /assets/cin/area-840.webp 840w, /assets/cin/area-1080.webp 1080w, /assets/cin/area-1360.webp 1360w, /assets/cin/area-1720.webp 1720w, /assets/cin/area-2160.webp 2160w, /assets/cin/area-2560.webp 2560w, /assets/cin/area-2752.webp 2752w"
+               width="2752" height="1536" alt="" fetchpriority="high" decoding="async" />
+        </picture>
+      </div>
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>Clinics</span>
+        <h1 class="cin-h1">Patients ask AI first. Your clinic should be <span class="accent">the answer</span>.</h1>
+        <p class="cin-lead">When a patient asks an assistant to find them a dentist, what comes back is an answer, not ten blue links. How that answer is assembled is not published, and we do not claim to know it. What we can show you is what your site hands over when something reads it — because nothing can quote what it was never given. We build yours so that it hands over the right things, then we run it for you, every month.</p>
+        <div class="cin-actions">
           <a class="btn btn-primary" href="/check/">Check your page free</a>
           <a class="btn btn-ghost" href="#demand">See the numbers</a>
         </div>
-        <p class="lp-note">We build your site first. You decide after you've seen it.</p>
+        <p class="cin-note">We build your site first. You decide after you've seen it.</p>
       </div>
+      <span class="cin-cue" aria-hidden="true"><b>Scroll</b><i></i></span>
     </section>
 
     <!-- ============================ the demand (this comes first: the world,
          then them, then us. Every figure here is external, primary-sourced and
          listed with its sample on /sources/) ================================ -->
-    <section class="lp-section" id="demand">
+    <section class="hm-sec cin-doc-first" id="demand" data-ground="light">
       <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What changed</span></span>
-          <h2 class="lp-h2">Your patients have already started asking AI.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>What changed</span></span>
+          <h2 class="hm-h2">Your patients have already started asking AI.</h2>
         </div>
-        <p class="lp-sub" data-reveal>This is not a forecast. Two independent surveys of US adults, both published this year, both counted below with the number of people they asked. Every figure on this site is listed with its source on <a href="/sources/">our sources page</a>.</p>
+        <p class="hm-sub" data-reveal>This is not a forecast. Two independent surveys of US adults, both published this year, both counted below with the number of people they asked. Every figure on this site is listed with its source on <a href="/sources/">our sources page</a>.</p>
 
-        <div class="stat-grid">
-          <div class="stat" data-reveal>
-            <p class="stat-num">25% <small>of US adults — about 66 million people</small></p>
+        <div class="hm-stats cin-pair">
+          <div class="hm-stat" data-reveal>
+            <p class="hm-fig">25% <small>of US adults — about 66 million people</small></p>
             <p>have asked AI for health information or advice.</p>
-            <p class="why">A quarter of the adult population is now putting health questions to something that goes and reads websites before it answers. What it finds on your website is what it will say about your practice.</p>
-            <p class="src">West Health&ndash;Gallup Center on Healthcare in America. 5,660 US adults aged 18+, surveyed 27 Oct &ndash; 22 Dec 2025, published 15 April 2026. <a href="/sources/#ai-health">Source and sample &rarr;</a></p>
+            <p class="hm-why">A quarter of the adult population is now putting health questions to something that goes and reads websites before it answers. What it finds on your website is what it will say about your practice.</p>
+            <p class="hm-cite">West Health&ndash;Gallup Center on Healthcare in America. 5,660 US adults aged 18+, surveyed 27 Oct &ndash; 22 Dec 2025, published 15 April 2026. <a href="/sources/#ai-health">Source and sample &rarr;</a></p>
           </div>
-          <div class="stat" data-reveal>
-            <p class="stat-num">45% <small>of US consumers, up from 6% a year earlier</small></p>
+          <div class="hm-stat" data-reveal>
+            <p class="hm-fig">45% <small>of US consumers, up from 6% a year earlier</small></p>
             <p>asked AI to recommend a local business.</p>
-            <p class="why">Seven times as many people in twelve months. This is the fastest-moving number on this page, and it is the one that decides whether a new patient ever arrives at your website at all.</p>
-            <p class="src">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. <a href="/sources/#ai-local">Source and sample &rarr;</a></p>
+            <p class="hm-why">Seven times as many people in twelve months. This is the fastest-moving number on this page, and it is the one that decides whether a new patient ever arrives at your website at all.</p>
+            <p class="hm-cite">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. <a href="/sources/#ai-local">Source and sample &rarr;</a></p>
           </div>
         </div>
 
-        <div class="figs">
-          <div class="fig" data-reveal>
-            <p class="fig-num">64%</p>
+        <div class="hm-stats cin-pair">
+          <div class="hm-stat hm-stat-soft" data-reveal>
+            <p class="hm-fig">64%</p>
             <p>of adults aged 30 to 44 asked AI for a business recommendation in the past year &mdash; the age band that books the family's dental appointments.</p>
-            <p class="src">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. <a href="/sources/#ai-local-age">Source and sample &rarr;</a></p>
+            <p class="hm-cite">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. <a href="/sources/#ai-local-age">Source and sample &rarr;</a></p>
           </div>
-          <div class="fig" data-reveal>
-            <p class="fig-num">83% &rarr; 71%</p>
+          <div class="hm-stat hm-stat-soft" data-reveal>
+            <p class="hm-fig">83% &rarr; 71%</p>
             <p>of consumers read reviews on Google &mdash; down twelve points in a year. Google is not going anywhere, but it is no longer the only room the decision happens in.</p>
-            <p class="src">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. This figure is about where people read reviews, not about search generally. <a href="/sources/#google-reviews">Source and sample &rarr;</a></p>
+            <p class="hm-cite">BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. This figure is about where people read reviews, not about search generally. <a href="/sources/#google-reviews">Source and sample &rarr;</a></p>
           </div>
         </div>
 
-        <p class="lp-sub" data-reveal>Which raises one question, and it is the only one this page is really about: <b>when an assistant goes to read your website on a patient's behalf, what does it actually get?</b> So we went and looked.</p>
+        <p class="hm-sub hm-gap" data-reveal>Which raises one question, and it is the only one this page is really about: <b>when an assistant goes to read your website on a patient's behalf, what does it actually get?</b> So we went and looked.</p>
       </div>
     </section>
 
     <!-- ============================ the audit ============================ -->
-    <section class="lp-section" id="audit">
+    <section class="hm-sec" id="audit" data-ground="light">
       <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What we found</span></span>
-          <h2 class="lp-h2">We opened 182 US clinic websites.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>What we found</span></span>
+          <h2 class="hm-h2">We opened 182 US clinic websites.</h2>
         </div>
-        <p class="lp-sub" data-reveal>Not a survey. 122 of them came from a random draw of the federal provider registry. The other 60 are a comparison set — clinic sites someone had already picked out as good examples — so we could see which problems survive being built well. Here is what came back.</p>
+        <p class="hm-sub" data-reveal>Not a survey. 122 of them came from a random draw of the federal provider registry. The other 60 are a comparison set — clinic sites someone had already picked out as good examples — so we could see which problems survive being built well. Here is what came back.</p>
 
-        <div class="stat-grid">
-          <div class="stat" data-reveal>
-            <p class="stat-num">2 in 3 <small>at the very lowest</small></p>
+        <div class="hm-stats cin-pair">
+          <div class="hm-stat" data-reveal>
+            <p class="hm-fig">2 in 3 <small>at the very lowest</small></p>
             <p>never answer a patient question on the page.</p>
-            <p class="why">Cost, insurance, recovery time, parking — the things patients actually type. If your page never answers them, something else answers for the patient. We split the sites into three groups and the best any group managed was 66.7%; the worst was 81.7%. The sites picked out as good examples came in at 71.7%. Being built well did not help.</p>
+            <p class="hm-why">Cost, insurance, recovery time, parking — the things patients actually type. If your page never answers them, something else answers for the patient. We split the sites into three groups and the best any group managed was 66.7%; the worst was 81.7%. The sites picked out as good examples came in at 71.7%. Being built well did not help.</p>
           </div>
-          <div class="stat" data-reveal>
-            <p class="stat-num">1 in 3 <small>of the practices we drew</small></p>
+          <div class="hm-stat" data-reveal>
+            <p class="hm-fig">1 in 3 <small>of the practices we drew</small></p>
             <p>had no website we could find.</p>
-            <p class="why">Not a bad site — no site. A directory listing, a Facebook page, and nothing a patient can be sent to. We searched by name, city and phone, then went back over every one of them a second time using a public map index instead, and that turned up two more. So this is not a number our searching produced. We build those from scratch rather than rebuilding them.</p>
+            <p class="hm-why">Not a bad site — no site. A directory listing, a Facebook page, and nothing a patient can be sent to. We searched by name, city and phone, then went back over every one of them a second time using a public map index instead, and that turned up two more. So this is not a number our searching produced. We build those from scratch rather than rebuilding them.</p>
           </div>
         </div>
 
@@ -160,40 +197,42 @@
     </section>
 
     <!-- ============================ what you get ============================ -->
-    <section class="lp-section" id="included">
+    <section class="hm-sec" id="included" data-ground="light">
       <div class="wrap">
-        <div class="lp-head" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
-          <h2 class="lp-h2">One build. Then we <span class="accent">run it</span>.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
+          <h2 class="hm-h2">One build. Then we <span class="accent">run it</span>.</h2>
         </div>
-        <p class="lp-sub" data-reveal>Four things, every month, for every clinic. There is one plan and everything is in it. SEO is the baseline, not the product — the product is being the answer when a patient asks.</p>
+        <p class="hm-sub" data-reveal>Four things, every month, for every clinic. There is one plan and everything is in it. SEO is the baseline, not the product — the product is being the answer when a patient asks.</p>
 
-        <div class="deliv">
-          <article data-reveal>
-            <span class="idx">01</span>
+        <ol class="hm-deliv" data-reveal>
+          <li>
+            <span class="n" aria-hidden="true">01</span>
             <h3>A monthly performance report</h3>
             <p>What changed on your site, what moved, and what we are doing next month. Written to be read in five minutes, not decoded.</p>
-          </article>
-          <article data-reveal>
-            <span class="idx">02</span>
+          </li>
+          <li>
+            <span class="n" aria-hidden="true">02</span>
             <h3>Eight blog posts a month</h3>
             <p>Classic SEO comes standard — structure, speed, indexing, the fundamentals every page should already have. Then we write for the engines that answer: the questions your patients actually ask, answered on your own site so both search results and AI assistants can find and quote it.</p>
-          </article>
-          <article data-reveal>
-            <span class="idx">03</span>
+          </li>
+          <li>
+            <span class="n" aria-hidden="true">03</span>
             <h3>Inquiry and booking tracking</h3>
             <p>You see how many people reached out and how many booked. Designed so that no patient data ever touches our systems — we count the inquiry, not the patient.</p>
-          </article>
-          <article data-reveal>
-            <span class="idx">04</span>
+          </li>
+          <li>
+            <span class="n" aria-hidden="true">04</span>
             <h3>Hosting, maintenance and self-serve editing</h3>
             <p>Your site stays up and stays current. Change your hours, your staff, your prices yourself — no ticket, no waiting on us.</p>
-          </article>
-        </div>
+          </li>
+        </ol>
 
-        <div class="price-tag" data-reveal>
-          <span class="badge"><span class="dot" aria-hidden="true"></span>One plan</span>
-          <p class="d"><b>Build from $990. Then $1,490 a month.</b> Everything above is in it — there is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
+        <div class="hm-price cin-price-flat" data-reveal>
+          <div class="hm-price-main">
+            <p class="plan">One plan</p>
+            <p class="hm-sub"><b>Build from $990. Then $1,490 a month.</b> Everything above is in it — there is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
+          </div>
         </div>
 
       </div>
@@ -202,75 +241,79 @@
     <!-- ============================ how we take clients ==================
          The cap is a condition of the work, not a scarcity device. No seat
          count, no deadline, no number that could go stale. ================ -->
-    <section class="lp-section" id="cap">
+    <section class="hm-sec" id="cap" data-ground="light">
       <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>How we take clients</span></span>
-          <h2 class="lp-h2">One practice per area, <span class="accent">and that is the cap</span>.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>How we take clients</span></span>
+          <h2 class="hm-h2">One practice per area, <span class="accent">and that is the cap</span>.</h2>
         </div>
-        <p class="lp-sub" data-reveal>We cap how many clients we take in each area. Search results and AI answers are ranked lists &mdash; if we optimized two competing practices in the same neighborhood, we would be competing against our own clients. One practice wins, or nobody does.</p>
-        <p class="lp-note" data-reveal>There is no countdown here, and no number of seats: the cap is a condition of the work, not an offer that expires.</p>
+        <p class="hm-sub" data-reveal>We cap how many clients we take in each area. Search results and AI answers are ranked lists &mdash; if we optimized two competing practices in the same neighborhood, we would be competing against our own clients. One practice wins, or nobody does.</p>
+        <p class="hm-note hm-gap" data-reveal>There is no countdown here, and no number of seats: the cap is a condition of the work, not an offer that expires.</p>
       </div>
     </section>
 
     <!-- ============================ how it works ============================ -->
-    <section class="lp-section" id="how">
+    <section class="hm-sec" id="how" data-ground="light">
       <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>How it works</span></span>
-          <h2 class="lp-h2">We build your site first. You see it before you pay.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>How it works</span></span>
+          <h2 class="hm-h2">We build your site first. You see it before you pay.</h2>
         </div>
 
-        <ol class="steps">
-          <li data-reveal>
+        <ol class="hm-deliv" data-reveal>
+          <li>
+            <span class="n" aria-hidden="true">01</span>
             <h3>We build it before we talk.</h3>
             <p>You don't write a brief. We look at your clinic, build your website, and send you the link to the finished thing.</p>
           </li>
-          <li data-reveal>
+          <li>
+            <span class="n" aria-hidden="true">02</span>
             <h3>You open it on your own phone.</h3>
             <p>Next to the site you have now. If it isn't obviously better, that is the end of it — and you have spent nothing.</p>
           </li>
-          <li data-reveal>
+          <li>
+            <span class="n" aria-hidden="true">03</span>
             <h3>You approve, and we sign.</h3>
             <p>One build charge to take the site live, one flat monthly rate to run it. We put both numbers in front of you before you sign anything.</p>
           </li>
-          <li data-reveal>
+          <li>
+            <span class="n" aria-hidden="true">04</span>
             <h3>We launch, and the monthly work starts.</h3>
             <p>The new site goes live on your domain. From there: the report, the eight posts, the tracking — every month.</p>
           </li>
         </ol>
 
-        <p class="lp-sub" data-reveal>It works the same way for every clinic. <a href="/#how">The same process, on the product page &rarr;</a></p>
+        <p class="hm-sub hm-gap" data-reveal>It works the same way for every clinic. <a href="/products/#how">The same process, on the product page &rarr;</a></p>
       </div>
     </section>
 
     <!-- ============================ faq ============================ -->
-    <section class="lp-section" id="faq">
+    <section class="hm-sec" id="faq" data-ground="light">
       <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Questions</span></span>
-          <h2 class="lp-h2">Answered on the page, where they belong.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>Questions</span></span>
+          <h2 class="hm-h2">Answered on the page, where they belong.</h2>
         </div>
-        <p class="lp-sub" data-reveal>We just told you that at least two in three of the clinic sites we opened never answer a patient question on the page. It would be strange not to answer yours here.</p>
+        <p class="hm-sub" data-reveal>We just told you that at least two in three of the clinic sites we opened never answer a patient question on the page. It would be strange not to answer yours here.</p>
 
-        <ul class="mech">
-          <li data-reveal>
+        <ul class="hm-faq" data-reveal>
+          <li>
             <h3>What does the build cover?</h3>
             <p>Building your website and taking it live on your domain. It is a one-time charge, and it comes after you have seen the finished site.</p>
           </li>
-          <li data-reveal>
+          <li>
             <h3>What do I get every month?</h3>
             <p>A performance report, eight blog posts written for search engines and AI assistants, inquiry and booking tracking, and hosting, maintenance and self-serve editing. That is the monthly rate — one flat number, everything included.</p>
           </li>
-          <li data-reveal>
+          <li>
             <h3>Do you handle patient data?</h3>
             <p>The tracking is designed so that no patient data ever touches our systems. We count that an inquiry happened, not who made it.</p>
           </li>
-          <li data-reveal>
+          <li>
             <h3>Can any practice sign up?</h3>
             <p>We build the site first and send it to the practice, and we take a limited number of clients in each area — optimizing competing practices in the same neighborhood would mean competing against our own clients.</p>
           </li>
-          <li data-reveal>
+          <li>
             <h3>How do we start?</h3>
             <p>Check your page first — paste your address and see what a search engine receives from it. The result ends with the offer: we rebuild the site and send it back, free, and you decide after you have seen it.</p>
           </li>
@@ -279,15 +322,15 @@
     </section>
 
     <!-- ============================ closing cta ============================ -->
-    <section class="lp-section cta-band" id="contact">
+    <section class="hm-cta" id="contact" data-ground="light">
       <div class="wrap">
-        <div class="lp-head" data-reveal>
-          <h2 class="lp-h2">Start with your own page.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>Send us the link to your current site, or the name of your practice if there isn't one. We build it and send it back.</p>
-        <div data-reveal>
-          <a class="btn btn-primary" href="/check/">Check your page free</a>
-          <p class="lp-note">For dental practices and clinics.</p>
+        <div class="hm-cta-box" data-reveal>
+          <h2 class="hm-h2">Start with your own page.</h2>
+          <p class="hm-sub">Send us the link to your current site, or the name of your practice if there isn't one. We build it and send it back.</p>
+          <div class="hm-actions still">
+            <a class="btn btn-primary" href="/check/">Check your page free</a>
+          </div>
+          <p class="hm-note hm-tight">For dental practices and clinics.</p>
         </div>
       </div>
     </section>
@@ -301,11 +344,13 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product">Product</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>

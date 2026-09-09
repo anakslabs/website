@@ -4,508 +4,405 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Anaks Labs — websites built for AI search</title>
-  <meta name="description" content="Your customers ask AI first. We build your website so search engines and AI assistants can read it, then run it for you every month. One plan, everything included." />
+  <meta name="description" content="When a patient asks an AI for a practice like yours, the answer should name you. We build your practice website so search engines and AI assistants can read it, then run it every month. Build from $990, then $1,490 a month." />
   <meta name="theme-color" content="#F6F7F9" />
   <link rel="canonical" href="https://anakslabs.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Anaks Labs — websites built for AI search" />
-  <meta property="og:description" content="We build your website so search engines and AI assistants can read it — then run it for you every month." />
+  <meta property="og:description" content="We build your website so search engines and AI assistants can read, verify and quote it — then run it for you every month." />
   <meta property="og:url" content="https://anakslabs.com/" />
   <meta property="og:image" content="https://anakslabs.com/assets/icon-512.png" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Anaks Labs — websites built for AI search" />
-  <meta name="twitter:description" content="We build your website so search engines and AI assistants can read it — then run it for you every month." />
+  <meta name="twitter:description" content="We build your website so search engines and AI assistants can read, verify and quote it — then run it for you every month." />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/assets/site.css" />
+  <!-- TWO PRELOADS, ONE LCP. The hero bed is art-directed: a phone gets a
+       portrait render, not a crop of the panorama, because a 21:9 master is
+       height-locked on a 390x844 frame — object-position Y does nothing when
+       the image already exactly fills the height, so the subject sits dead
+       centre behind the copy at every value. The `media` on each preload has
+       to match the <source media> in the <picture> exactly, or the preloader
+       fetches one resource and the parser then asks for the other. -->
+  <link rel="preload" as="image" media="(min-width: 900px)" href="/assets/cin/title-1720.avif" type="image/avif"
+        imagesrcset="/assets/cin/title-840.avif 840w, /assets/cin/title-1080.avif 1080w, /assets/cin/title-1360.avif 1360w, /assets/cin/title-1720.avif 1720w, /assets/cin/title-2160.avif 2160w, /assets/cin/title-2560.avif 2560w, /assets/cin/title-2752.avif 2752w"
+        imagesizes="100vw" fetchpriority="high" />
+  <link rel="preload" as="image" media="(max-width: 899px)" href="/assets/cin/title-m-840.avif" type="image/avif"
+        imagesrcset="/assets/cin/title-m-480.avif 480w, /assets/cin/title-m-640.avif 640w, /assets/cin/title-m-840.avif 840w, /assets/cin/title-m-1073.avif 1073w"
+        imagesizes="100vw" fetchpriority="high" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <!-- Organization is duplicated word-for-word in about/index.html, same @id and
+       same description. Changing one means changing both in the same commit, or
+       the site publishes two different answers to "what is Anaks Labs?".
+       The FAQPage node that used to sit beside them moved to /products/ with
+       the FAQ itself when the landing was cut; structured data has to describe
+       the page that serves it. -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","description":"Anaks Labs Inc. is a software company. It builds, hosts and operates websites for businesses on its own platform, engineered so that search engines and AI assistants can read, verify and quote them.","url":"https://anakslabs.com","email":"contact@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},{"@type":"Service","@id":"https://anakslabs.com/#service","name":"Website build and monthly operation","serviceType":"Website design and management","provider":{"@id":"https://anakslabs.com/#org"},"description":"We build a website — from the site you already have, or from scratch — so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","priceCurrency":"USD","minPrice":990,"valueAddedTaxIncluded":false},{"@type":"UnitPriceSpecification","name":"Monthly operation","priceCurrency":"USD","minPrice":1490,"billingDuration":1,"billingIncrement":1,"unitCode":"MON","valueAddedTaxIncluded":false}]}}]}
+  {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","description":"Anaks Labs Inc. is a software company. It builds, hosts and operates websites for clinics and practices on its own platform, engineered so that search engines and AI assistants can read, verify and quote them.","url":"https://anakslabs.com","email":"contact@anakslabs.com","logo":"https://anakslabs.com/assets/icon-512.png"},{"@type":"Service","@id":"https://anakslabs.com/#service","name":"Website build and monthly operation","serviceType":"Website design and management","provider":{"@id":"https://anakslabs.com/#org"},"description":"We build a website — a faithful clone of the site you already have, or a rebuild from scratch — so that search engines and AI assistants can read it, then run it every month: a performance report, eight SEO/AEO blog posts, inquiry and booking tracking, and hosting, maintenance and self-serve editing.","hasOfferCatalog":{"@type":"OfferCatalog","name":"One product, built the way the crawl decides","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Faithful clone","description":"For a practice whose site is already good. We copy it exactly — logo, fonts, layout and content preserved byte-faithfully and verified pixel by pixel — host it on our infrastructure, and add what machines need: structured data, an llms.txt, a questions page and an articles page in the site's own chrome."}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Rebuild","description":"For a practice with a weak site or none at all. We build it from scratch, in a design language chosen for the industry, engineered so that search engines and AI assistants can read, verify and quote it."}}]},"offers":{"@type":"Offer","priceCurrency":"USD","priceSpecification":[{"@type":"UnitPriceSpecification","name":"Build","priceCurrency":"USD","minPrice":990,"valueAddedTaxIncluded":false},{"@type":"UnitPriceSpecification","name":"Monthly operation","priceCurrency":"USD","minPrice":1490,"billingDuration":1,"billingIncrement":1,"unitCode":"MON","valueAddedTaxIncluded":false}]}}]}
   </script>
 </head>
-<body class="landing">
+<body class="landing cin-page cin-reel">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <div class="layer aurora" aria-hidden="true">
-    <b class="b1 drift1"></b><b class="b2 drift2"></b><b class="b3 drift3"></b>
-  </div>
-  <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The reel's own atmosphere. The shared .layer washes are switched off on
+       this page (see the cin-* layer in site.css): a fixed light aurora cannot
+       sit under scenes that alternate ink and paper. Grain and vignette are the
+       two constants of the film instead, and both are pure CSS over the
+       existing tokens — no new hue enters here. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/check/">Check your site</a>
-        <a href="/clinics/">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="lp" id="main">
+  <main class="hm cin" id="main">
 
-    <!-- ============================ hero ============================ -->
-    <section class="lp-hero bleed" data-copy="right">
-      <!-- Flat, with no copy wrapper, and that is load-bearing rather than
-           tidy. In source order the figure sits between the headline and the
-           lead, which is what a phone gets: headline, photograph, then the
-           argument — so the picture is high on the screen without the h1 ever
-           losing first position. On a desktop the same six elements are placed
-           by grid, the five text ones stacked in column 1 and the figure
-           spanning every row of column 2. One DOM, no duplicated markup, and
-           nothing reordered away from the reading order a screen reader or a
-           crawler receives. -->
-      <div class="wrap">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>AI-ready websites</span></span>
-        <h1>Your customers ask AI first. Your site should be <span class="accent">the answer</span>.</h1>
-
-      </div>
-
-        <!-- The signature transition, and the only place on this page where two
-             images share one box. 01-asking and 02-competitor are the same
-             objects photographed twice, from the same camera, with the same
-             lighting: measured over the encoded 1080px pair, 93.7% of the frame
-             is bit-identical and every pixel that differs falls inside the near
-             bubble's answer well. So the top frame is swapped by opacity alone
-             and nothing else moves — which is why it reads as the answer
-             arriving rather than as one picture dissolving into another. A
-             transform of any kind here would slide the shared aluminium against
-             itself and give the whole trick away as a cross-fade.
-
-             The withheld state is the enhancement, not the content: the
-             answered frame is opaque by default, and only a browser that runs
-             site.js (and has not asked for reduced motion) gets to see it held
-             back and then resolve. With scripting off the page simply shows the
-             resolved photograph. -->
-      <figure class="pair" id="answer-pair">
-          <picture class="frame frame-asked">
-            <source type="image/avif" sizes="100vw"
-                    srcset="/assets/sections/01-asking-480.avif 480w,
-                            /assets/sections/01-asking-640.avif 640w,
-                            /assets/sections/01-asking-840.avif 840w,
-                            /assets/sections/01-asking-1080.avif 1080w,
-                            /assets/sections/01-asking-1360.avif 1360w,
-                            /assets/sections/01-asking-1720.avif 1720w,
-                            /assets/sections/01-asking-2160.avif 2160w,
-                            /assets/sections/01-asking-2560.avif 2560w,
-                            /assets/sections/01-asking-2752.avif 2752w" />
-            <img src="/assets/sections/01-asking-1080.webp" sizes="100vw"
-                 srcset="/assets/sections/01-asking-480.webp 480w,
-                         /assets/sections/01-asking-640.webp 640w,
-                         /assets/sections/01-asking-840.webp 840w,
-                         /assets/sections/01-asking-1080.webp 1080w,
-                         /assets/sections/01-asking-1360.webp 1360w,
-                         /assets/sections/01-asking-1720.webp 1720w,
-                         /assets/sections/01-asking-2160.webp 2160w,
-                         /assets/sections/01-asking-2560.webp 2560w,
-                         /assets/sections/01-asking-2752.webp 2752w"
-                 width="2752" height="1536" loading="eager" decoding="async" fetchpriority="high"
-                 alt="Two machined speech bubbles on a studio table: the question is set in glass, and the aluminium answer bubble beside it is lit from within but empty." />
-          </picture>
-          <!-- alt="" deliberately: this is the same scene as the frame beneath
-               it, and a screen reader announcing the table twice describes the
-               swap as duplication rather than as change. What changes is stated
-               in the copy, which is where this site argues meaning belongs. -->
-          <picture class="frame frame-answered">
-            <source type="image/avif" sizes="100vw"
-                    srcset="/assets/sections/02-competitor-480.avif 480w,
-                            /assets/sections/02-competitor-640.avif 640w,
-                            /assets/sections/02-competitor-840.avif 840w,
-                            /assets/sections/02-competitor-1080.avif 1080w,
-                            /assets/sections/02-competitor-1360.avif 1360w,
-                            /assets/sections/02-competitor-1720.avif 1720w,
-                            /assets/sections/02-competitor-2160.avif 2160w,
-                            /assets/sections/02-competitor-2560.avif 2560w,
-                            /assets/sections/02-competitor-2752.avif 2752w" />
-            <img src="/assets/sections/02-competitor-1080.webp" sizes="100vw"
-                 srcset="/assets/sections/02-competitor-480.webp 480w,
-                         /assets/sections/02-competitor-640.webp 640w,
-                         /assets/sections/02-competitor-840.webp 840w,
-                         /assets/sections/02-competitor-1080.webp 1080w,
-                         /assets/sections/02-competitor-1360.webp 1360w,
-                         /assets/sections/02-competitor-1720.webp 1720w,
-                         /assets/sections/02-competitor-2160.webp 2160w,
-                         /assets/sections/02-competitor-2560.webp 2560w,
-                         /assets/sections/02-competitor-2752.webp 2752w"
-                 width="2752" height="1536" loading="eager" decoding="async" fetchpriority="low"
-                 alt="" />
-          </picture>
-      </figure>
-
-      <div class="wrap">
-        <!-- Three tiers in this hero, not four. The lede was 46 words over five
-             lines and ended on the monthly-operation claim, which #product then
-             makes again at display scale; the note below the buttons carried a
-             fourth typographic device — its own blue rule — for one sentence. -->
-        <p class="lp-lead">Google, and the assistants your customers ask, do not see your website the way you do. They read the code underneath it &mdash; and a great deal of what is on your screen never reaches them.</p>
-        <div class="lp-actions">
-          <a class="btn btn-primary" href="/check/">Check your page free</a>
-          <a class="btn btn-ghost" href="/clinics/">What's included</a>
+    <!-- ================= SCENE 1 · the title card ==================
+         One idea, one screen: the sentence the whole company is downstream of.
+         The render sits behind it as a ground, never under a paragraph of grey
+         type — it is held at luminosity over --ink so the pale studio plate
+         becomes a navy ghost rather than a light band across dark type. -->
+    <section class="cin-sc cin-dark cin-title" id="scene-open" data-ground="dark">
+      <div class="cin-bed cin-bed-hero" aria-hidden="true">
+        <picture>
+                <source media="(max-width: 899px)" type="image/avif" sizes="100vw" srcset="/assets/cin/title-m-480.avif 480w, /assets/cin/title-m-640.avif 640w, /assets/cin/title-m-840.avif 840w, /assets/cin/title-m-1073.avif 1073w" />
+                <source media="(max-width: 899px)" type="image/webp" sizes="100vw" srcset="/assets/cin/title-m-480.webp 480w, /assets/cin/title-m-640.webp 640w, /assets/cin/title-m-840.webp 840w, /assets/cin/title-m-1073.webp 1073w" />
+                <source type="image/avif" sizes="100vw" srcset="/assets/cin/title-480.avif 480w, /assets/cin/title-640.avif 640w, /assets/cin/title-840.avif 840w, /assets/cin/title-1080.avif 1080w, /assets/cin/title-1360.avif 1360w, /assets/cin/title-1720.avif 1720w, /assets/cin/title-2160.avif 2160w, /assets/cin/title-2560.avif 2560w, /assets/cin/title-2752.avif 2752w" />
+                <img src="/assets/cin/title-1720.webp" sizes="100vw" srcset="/assets/cin/title-480.webp 480w, /assets/cin/title-640.webp 640w, /assets/cin/title-840.webp 840w, /assets/cin/title-1080.webp 1080w, /assets/cin/title-1360.webp 1360w, /assets/cin/title-1720.webp 1720w, /assets/cin/title-2160.webp 2160w, /assets/cin/title-2560.webp 2560w, /assets/cin/title-2752.webp 2752w"
+                     width="3168" height="1344" alt="A deep blue space filled with a constellation of small glowing nodes joined by fine lines of light; on the right, thin concentric rings of royal-blue light close in on the one node that shines brighter than the rest, and that node holds a small translucent card laid out in blank off-white blocks — the website the search has found." fetchpriority="high" decoding="async" />
+              </picture>
+        <!-- THE SEARCH KEEPS LOOKING. Four elements, no image, no video: an arc
+             sweeping the outer ring once every nine seconds, three light pulses
+             running inward along the render's own converging lines, and the
+             found node breathing. Everything here is transform and opacity on
+             plain divs — no filter, no layout property, nothing the compositor
+             cannot own — and every child rests at opacity 0, so a reader with
+             scripting off is given the still and nothing else. JS adds .run and
+             writes --fx/--fy/--r from the image's real cover geometry; see the
+             note on .cin-scan in site.css for why those cannot be vw constants. -->
+        <div class="cin-scan" aria-hidden="true">
+          <i class="cin-scan-core"></i>
+          <i class="cin-scan-sweep"></i>
+          <b class="cin-scan-pulse"></b>
+          <b class="cin-scan-pulse"></b>
+          <b class="cin-scan-pulse"></b>
         </div>
-        <p class="lp-note">We build your site first. You decide after you've seen it.</p>
       </div>
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>AI-ready websites</span>
+        <h1 class="cin-h1">When a patient asks an AI for a practice like yours, the answer should <em>name&nbsp;you.</em></h1>
+        <p class="cin-lead">We build your website so that search engines and AI assistants can read, verify and quote it — then run it for you every month. <b>Build from $990. Then $1,490 a month.</b></p>
+        <div class="cin-actions">
+          <a class="btn btn-primary" href="/check/">Check your site free</a>
+          <a class="btn btn-ghost" href="/products/">See what we build</a>
+        </div>
+      </div>
+      <span class="cin-cue" aria-hidden="true"><b>Scroll</b><i></i></span>
     </section>
 
-    <!-- ============================ the demand (this comes first: the world,
-         then them, then us. Every figure here is external, primary-sourced and
-         listed with its sample on /sources/) ================================ -->
-    <section class="lp-section" id="demand">
-      <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What changed</span></span>
-          <h2 class="lp-h2">Your customers have already started asking AI.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>This is not a forecast. It is a survey of 1,002 US adults, published this year, counted below. Every figure on this site is listed with its source on <a href="/sources/">our sources page</a>.</p>
+    <!-- ================= SCENE 2 · the answer =====================
+         Pinned. The card rises into the middle of the screen and the words are
+         drawn across it word by word — a clip edge stepping over text that was
+         already in the DOM at the first byte, so a crawler, a reader with
+         scripting off and a reader who asked for reduced motion all receive the
+         finished conversation. Nothing here is injected.
 
-        <!-- Two columns: the figure and the sentence it belongs to on the left,
-             what it means on the right. As one column this card was 48% empty
-             white on its right-hand side at every width above 900. The reading
-             order down the left is the sentence itself — "45% / of US consumers,
-             up from 6% a year earlier / asked AI to recommend a local business."
-             — which is what the number beside the caption used to break. -->
-        <div class="stat-grid">
-          <div class="stat" data-reveal>
-            <p class="stat-num">45% <small>of US consumers, up from 6% a year earlier</small></p>
-            <p class="stat-claim">asked AI to recommend a local business.</p>
-            <p class="why">Seven times as many people in twelve months. What comes back is a shortlist, not a page of blue links.</p>
+         On a desktop pointer the card takes a few degrees of tilt toward the
+         cursor. That is the whole of the pointer-aware behaviour on this page,
+         and it is off on touch and under reduced motion. -->
+    <section class="cin-sc cin-pin cin-answer" id="scene-answer" data-ground="light">
+      <div class="cin-track" style="--track: 130vh">
+        <div class="cin-stage">
+          <!-- INSIDE THE STAGE, NOT THE SECTION. The section here is a 130vh
+               track and a bed pinned to it would be 130vh tall and would slide
+               up behind a card that is deliberately not moving. The stage is
+               the sticky box, so a bed with inset:0 on it is the only one that
+               stays with the scene while the scene is held. Not eager, not
+               preloaded: the hero is the LCP and this is two screens down. -->
+          <div class="cin-bed cin-bed-answer" aria-hidden="true">
+            <picture>
+              <source type="image/avif" sizes="100vw" srcset="/assets/cin/answer-480.avif 480w, /assets/cin/answer-640.avif 640w, /assets/cin/answer-840.avif 840w, /assets/cin/answer-1080.avif 1080w, /assets/cin/answer-1360.avif 1360w, /assets/cin/answer-1720.avif 1720w, /assets/cin/answer-2160.avif 2160w, /assets/cin/answer-2560.avif 2560w, /assets/cin/answer-2752.avif 2752w" />
+              <img src="/assets/cin/answer-1360.webp" sizes="100vw" srcset="/assets/cin/answer-480.webp 480w, /assets/cin/answer-640.webp 640w, /assets/cin/answer-840.webp 840w, /assets/cin/answer-1080.webp 1080w, /assets/cin/answer-1360.webp 1360w, /assets/cin/answer-1720.webp 1720w, /assets/cin/answer-2160.webp 2160w, /assets/cin/answer-2560.webp 2560w, /assets/cin/answer-2752.webp 2752w"
+                   width="3168" height="1344" alt="" loading="lazy" fetchpriority="low" decoding="async" />
+            </picture>
+          </div>
+          <div class="wrap cin-answer-in">
+            <div class="cin-answer-side">
+              <span class="cin-label">Example answer</span>
+              <h2 class="cin-say">What an answer looks like when it names a practice.</h2>
+              <!-- One sentence. The disclosure is not optional — the practices
+                   in the mock are invented and the page has to say so beside
+                   them — but the two sentences that used to follow it (the
+                   specimen, and a link to it) were an invitation to leave, on
+                   the one screen that is doing the persuading. The specimen is
+                   still reachable from /clinics/. -->
+              <p class="cin-sub cin-say-sub">We make your site readable, quotable and measurable. Whether an assistant names you is its call — we measure that every month.</p>
+              <p class="cin-note">The three practices in this answer are invented, and so are their addresses and phone numbers.</p>
+            </div>
+            <div class="cin-card-holder">
+              <div class="cin-card" id="cin-tilt">
+                <figure class="hm-answer hm-chat" id="hero-chat">
+               <div class="hm-topbar" aria-hidden="true">
+                <span class="ttl">Find a dentist near Lincoln Park</span>
+                <span class="shr">Share</span>
+              </div>
+               <div class="hm-thread">
+                <div class="hm-msg hm-msg-user">
+                  <p class="hm-line"><span class="w" style="--i:0"><span class="t">Which</span></span> <span class="w" style="--i:1"><span class="t">dentist</span></span> <span class="w" style="--i:2"><span class="t">near</span></span> <span class="w" style="--i:3"><span class="t">Lincoln</span></span> <span class="w" style="--i:4"><span class="t">Park</span></span> <span class="w" style="--i:5"><span class="t">can</span></span> <span class="w" style="--i:6"><span class="t">see</span></span> <span class="w" style="--i:7"><span class="t">me</span></span> <span class="w" style="--i:8"><span class="t">today?</span></span></p>
+                </div>
+                 <div class="hm-worked"><span class="hm-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="wk">Worked for 12s<span class="chev" aria-hidden="true">&rsaquo;</span></span></div>
+                 <div class="hm-bubble hm-ans">
+                  <p class="hm-line"><span class="w" style="--i:0"><span class="t">Here</span></span> <span class="w" style="--i:1"><span class="t">are</span></span> <span class="w" style="--i:2"><span class="t">three</span></span> <span class="w" style="--i:3"><span class="t">practices</span></span> <span class="w" style="--i:4"><span class="t">near</span></span> <span class="w" style="--i:5"><span class="t">Lincoln</span></span> <span class="w" style="--i:6"><span class="t">Park:</span></span></p>
+                  <ul>
+                    <li style="--at:7"><b><mark><span class="w" style="--i:7"><span class="t">Specimen</span></span> <span class="w" style="--i:8"><span class="t">Dental</span></span></mark></b> <span class="w" style="--i:9"><span class="t">—</span></span> <span class="w" style="--i:10"><span class="t">1420</span></span> <span class="w" style="--i:11"><span class="t">N</span></span> <span class="w" style="--i:12"><span class="t">Cleaver</span></span> <span class="w" style="--i:13"><span class="t">St.</span></span> <span class="w" style="--i:14"><span class="t">Publishes</span></span> <span class="w" style="--i:15"><span class="t">open</span></span> <span class="w" style="--i:16"><span class="t">appointment</span></span> <span class="w" style="--i:17"><span class="t">times</span></span> <span class="w" style="--i:18"><span class="t">for</span></span> <span class="w" style="--i:19"><span class="t">today.</span></span><span class="chiprow"><span class="w u" style="--i:20"><span class="t"><a href="tel:3125550164" tabindex="-1"><svg class="fv" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c1.7 1.9 2.6 4 2.6 6.2S9.7 12.3 8 14.2C6.3 12.3 5.4 10.2 5.4 8S6.3 3.7 8 1.8Z"/></svg>(312) 555-0164</a><span class="sep">·</span><a href="/clinics/example/" tabindex="-1"><span class="fv dot t1" aria-hidden="true"></span>Clinic details</a><span class="sep">·</span><a href="/clinics/example/" tabindex="-1"><span class="fv dot t2" aria-hidden="true"></span>Directions</a></span></span></span></li>
+                    <li style="--at:21"><b><span class="w" style="--i:21"><span class="t">Harbor</span></span> <span class="w" style="--i:22"><span class="t">Row</span></span> <span class="w" style="--i:23"><span class="t">Dental</span></span></b> <span class="w" style="--i:24"><span class="t">—</span></span> <span class="w" style="--i:25"><span class="t">908</span></span> <span class="w" style="--i:26"><span class="t">W</span></span> <span class="w" style="--i:27"><span class="t">Kestrel</span></span> <span class="w" style="--i:28"><span class="t">Ave.</span></span> <span class="w" style="--i:29"><span class="t">Evening</span></span> <span class="w" style="--i:30"><span class="t">hours</span></span> <span class="w" style="--i:31"><span class="t">on</span></span> <span class="w" style="--i:32"><span class="t">weekdays.</span></span><span class="chiprow"><span class="w u" style="--i:33"><span class="t"><a href="tel:3125550198" tabindex="-1"><svg class="fv" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c1.7 1.9 2.6 4 2.6 6.2S9.7 12.3 8 14.2C6.3 12.3 5.4 10.2 5.4 8S6.3 3.7 8 1.8Z"/></svg>(312) 555-0198</a><span class="sep">·</span><a href="/clinics/example/" tabindex="-1"><span class="fv dot t1" aria-hidden="true"></span>Clinic details</a><span class="sep">·</span><a href="/clinics/example/" tabindex="-1"><span class="fv dot t2" aria-hidden="true"></span>Directions</a></span></span></span></li>
+                    <li style="--at:34"><b><span class="w" style="--i:34"><span class="t">Nine</span></span> <span class="w" style="--i:35"><span class="t">Elms</span></span> <span class="w" style="--i:36"><span class="t">Family</span></span> <span class="w" style="--i:37"><span class="t">Dental</span></span></b> <span class="w" style="--i:38"><span class="t">—</span></span> <span class="w" style="--i:39"><span class="t">233</span></span> <span class="w" style="--i:40"><span class="t">S</span></span> <span class="w" style="--i:41"><span class="t">Marchmont</span></span> <span class="w" style="--i:42"><span class="t">Rd.</span></span> <span class="w" style="--i:43"><span class="t">States</span></span> <span class="w" style="--i:44"><span class="t">which</span></span> <span class="w" style="--i:45"><span class="t">insurers</span></span> <span class="w" style="--i:46"><span class="t">it</span></span> <span class="w" style="--i:47"><span class="t">takes.</span></span><span class="chiprow"><span class="w u" style="--i:48"><span class="t"><a href="tel:3125550142" tabindex="-1"><svg class="fv" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M1.8 8h12.4M8 1.8c1.7 1.9 2.6 4 2.6 6.2S9.7 12.3 8 14.2C6.3 12.3 5.4 10.2 5.4 8S6.3 3.7 8 1.8Z"/></svg>(312) 555-0142</a><span class="sep">·</span><a href="/clinics/example/" tabindex="-1"><span class="fv dot t1" aria-hidden="true"></span>Clinic details</a><span class="sep">·</span><a href="/clinics/example/" tabindex="-1"><span class="fv dot t2" aria-hidden="true"></span>Directions</a></span></span></span></li>
+                  </ul>
+                  <p class="hm-line hm-close"><b><span class="w" style="--i:49"><span class="t">My</span></span> <span class="w" style="--i:50"><span class="t">first</span></span> <span class="w" style="--i:51"><span class="t">call</span></span> <span class="w" style="--i:52"><span class="t">would</span></span> <span class="w" style="--i:53"><span class="t">be</span></span> <span class="w" style="--i:54"><span class="t">Specimen</span></span> <span class="w" style="--i:55"><span class="t">Dental</span></span></b> <span class="w" style="--i:56"><span class="t">for</span></span> <span class="w" style="--i:57"><span class="t">same-day</span></span> <span class="w" style="--i:58"><span class="t">care</span></span> <span class="w" style="--i:59"><span class="t">—</span></span> <span class="w" style="--i:60"><span class="t">it</span></span> <span class="w" style="--i:61"><span class="t">publishes</span></span> <span class="w" style="--i:62"><span class="t">open</span></span> <span class="w" style="--i:63"><span class="t">times</span></span> <span class="w" style="--i:64"><span class="t">a</span></span> <span class="w" style="--i:65"><span class="t">machine</span></span> <span class="w" style="--i:66"><span class="t">can</span></span> <span class="w" style="--i:67"><span class="t">read.</span></span> <span class="w" style="--i:68"><span class="t">Hours</span></span> <span class="w" style="--i:69"><span class="t">and</span></span> <span class="w" style="--i:70"><span class="t">availability</span></span> <span class="w" style="--i:71"><span class="t">change,</span></span> <span class="w" style="--i:72"><span class="t">so</span></span> <span class="w" style="--i:73"><span class="t">confirm</span></span> <span class="w" style="--i:74"><span class="t">before</span></span> <span class="w" style="--i:75"><span class="t">you</span></span> <span class="w" style="--i:76"><span class="t">go.</span></span></p>
+                  <div class="hm-acts" aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 7V4.8A1.8 1.8 0 0 1 8.8 3h6.4A1.8 1.8 0 0 1 17 4.8v6.4a1.8 1.8 0 0 1-1.8 1.8H13M4.8 7h6.4A1.8 1.8 0 0 1 13 8.8v6.4A1.8 1.8 0 0 1 11.2 17H4.8A1.8 1.8 0 0 1 3 15.2V8.8A1.8 1.8 0 0 1 4.8 7Z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 17V9m0 0 3-5c1.2 0 1.9.8 1.7 2L10.3 9H15a1.6 1.6 0 0 1 1.5 2l-1.3 5A1.9 1.9 0 0 1 13.4 17H6Zm0 0H3.6V9H6"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 3v8m0 0 3 5c1.2 0 1.9-.8 1.7-2L10.3 11H15a1.6 1.6 0 0 0 1.5-2l-1.3-5A1.9 1.9 0 0 0 13.4 3H6Zm0 0H3.6v8H6"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13V3m0 0L6.8 6.2M10 3l3.2 3.2M4 11.5V15a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3.5"/></svg></div>
+                </div>
+              </div>
+               <!-- Decorative, and aria-hidden because of it: a text box that
+                   cannot be typed into is a control that lies. -->
+              <div class="hm-composer" aria-hidden="true">
+                <div class="cp-top"><span class="hm-ph">Ask anything</span></div>
+                <div class="cp-bot">
+                  <span class="cp-l"><span class="plus">+</span><span class="tool"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 10.5V6.2a1.2 1.2 0 0 1 2.4 0v3.1m0-3.9a1.2 1.2 0 0 1 2.4 0v3.4m0-2.6a1.2 1.2 0 0 1 2.4 0v2.9m0-1.8a1.2 1.2 0 1 1 2.4 0v5.1a4.2 4.2 0 0 1-4.2 4.2H9.4a4.2 4.2 0 0 1-4.2-4.2v-.6"/></svg>Choose tools</span></span>
+                  <span class="cp-r"><span class="auto">Auto &#9662;</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.2a2.2 2.2 0 0 1 2.2 2.2v4.2a2.2 2.2 0 0 1-4.4 0V5.4A2.2 2.2 0 0 1 10 3.2ZM5 9.4a5 5 0 0 0 10 0M10 14.4V17"/></svg><span class="send" aria-hidden="true"></span></span>
+                </div>
+              </div>
+               <figcaption class="hm-ans-foot"><span class="lit">Readable enough to be quoted</span><span>Not a screenshot</span></figcaption>
+            </figure>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="figs">
-          <div class="fig" data-reveal>
-            <p class="fig-num">64%</p>
-            <p>of adults aged 30 to 44 asked AI for a business recommendation in the past year &mdash; the highest of any age band, and the one with the money.</p>
+    <!-- ================= SCENE 3 · what you get ===================
+         ONE SCREEN, FOUR LINES, NO PARAGRAPHS. This replaces six scenes — the
+         four-verb strip, the readability comparison, the two product plates,
+         the monthly loop, the survey figures and the one-per-area argument.
+         Every one of them is still published, in full and word for word, on
+         /products/; what changed is who reads them and when. The landing is
+         read by somebody deciding in ten seconds whether this is worth another
+         click, and six screens of argument is the wrong answer to that.
+
+         Each line is its own scene-scrubbed reveal rather than a list item with
+         a bullet: four claims arriving one after another, and nothing under
+         them to qualify or soften. The detail is one link away. -->
+    <section class="cin-sc cin-dark cin-brief" id="what-you-get" data-ground="dark">
+      <div class="wrap cin-brief-in">
+        <!-- No .cin-label above this one. The label on every other scene names
+             the chapter and the heading says the thing; here they were the same
+             three words twice, eight pixels apart. -->
+        <h2 class="cin-h2">What you get.</h2>
+        <!-- FOUR CLAIMS, ONE AT A TIME, AND ALL FOUR NAMED ABOVE THE STAGE.
+             The 2x2 grid of tiles this replaced was a screen and a half tall;
+             a slider is one viewport at every size, and the four labels across
+             the top are the part that makes that honest — the whole offer is
+             legible at a glance before anything plays, and a reader who does
+             not want to wait can jump straight to the one they care about.
+
+             THE MARKUP IS THE NO-JS STATE. There is no `hidden` anywhere and no
+             slide is styled away: with scripting off the rail is a plain
+             stacked list of four slides and the head — labels, arrows, pause —
+             is display:none, because a control that cannot do anything should
+             not be in the tab order. site.js adds .is-slider and everything
+             below turns on. Two of the four pictures are real screenshots of
+             the product, so the two slides that carry them say in a line that
+             the data in them is our demo workspace's, not a client's. -->
+        <div class="cin-slider" id="gets-slider" role="region" aria-roledescription="carousel" aria-label="What you get">
+          <div class="cin-slider-head">
+            <div class="cin-slider-tabs">
+              <button type="button" class="cin-slider-tab" data-go="0" aria-current="true"><span>Machine-readable</span><i aria-hidden="true"></i></button>
+              <button type="button" class="cin-slider-tab" data-go="1"><span>Eight posts</span><i aria-hidden="true"></i></button>
+              <button type="button" class="cin-slider-tab" data-go="2"><span>Monthly report</span><i aria-hidden="true"></i></button>
+              <button type="button" class="cin-slider-tab" data-go="3"><span>One per area</span><i aria-hidden="true"></i></button>
+            </div>
+            <div class="cin-slider-ctl">
+              <button type="button" class="cin-slider-btn" data-prev aria-label="Previous slide"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
+              <button type="button" class="cin-slider-btn" data-play aria-label="Pause automatic slide rotation"><svg class="ic-pause" viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5v11M12.5 4.5v11"/></svg><svg class="ic-play" viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4.5 15 10l-8.5 5.5Z"/></svg></button>
+              <button type="button" class="cin-slider-btn" data-next aria-label="Next slide"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button>
+            </div>
           </div>
-          <div class="fig" data-reveal>
-            <p class="fig-num">83% &rarr; 71%</p>
-            <p>of consumers read reviews on Google &mdash; down twelve points in a year. Google is not going anywhere, but it is no longer the only room the decision happens in.</p>
+          <div class="cin-slider-stage">
+            <div class="cin-slider-rail">
+              <!-- SLIDE 1 · THE ANSWER, BEFORE AND AFTER.
+                   TWO EARLIER VERSIONS OF THIS SLIDE FAILED THE SAME WAY, and
+                   the failure is worth keeping written down. The first was a
+                   screenshot of the same clinic built twice — two RENDERINGS
+                   of a difference that exists in the MARKUP, and at the size a
+                   slide is read the only visible difference is that the right
+                   one has more paragraphs. The second quoted the two <h1>s as
+                   code, which is legible to somebody who reads HTML and to
+                   nobody else; the reader this page is written for is a
+                   practice owner, and `alt=""` is not a sentence to them.
+
+                   So the slide shows THE RESULT instead of the cause. One
+                   question, put to an assistant against the before build and
+                   against the after build, and the two answers that come
+                   back. That is the product stated in the only terms the
+                   buyer cares about: what an assistant can say about their
+                   practice.
+
+                   BOTH ANSWERS ARE OURS AND BOTH CARDS SAY SO, in the
+                   figcaption, on the card, at every size. The before answer
+                   claims only what the before build hands over — the name,
+                   the locality, and hours as a sentence with no record behind
+                   them, which it says it cannot confirm. Every fact in the
+                   after answer is a record on the after build: the two
+                   OpeningHoursSpecifications, the six MedicalProcedures, and
+                   the Question that answers same-day pain. Every figure is
+                   read out of the builds by scripts/extract-specimen.mjs and
+                   pinned by scripts/verify-specimen-counts.mjs — including
+                   the two opening times inside the sentence, so a change to
+                   a record changes the answer or fails the gate.
+
+                   The cards are .hm-answer.hm-chat, the same mock the hero
+                   draws its answer in, with no vendor name, wordmark or logo
+                   on either side. The link goes to the section on
+                   /clinics/example/ that shows the same pair at full size. -->
+              <div class="cin-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                <div class="xo">
+                  <div class="o3-ask">
+                    <span class="k">Patient asks</span>
+                    <span class="q">Is there a dentist near Anytown open on Saturdays?</span>
+                  </div>
+                  <div class="xo-panes">
+                    <div class="xo-pane">
+                      <header><span class="who">Before the build</span></header>
+                      <figure class="hm-answer hm-chat o3-card">
+                        <div class="hm-topbar" aria-hidden="true"><span class="ttl">Dentist near Anytown, open Saturday</span><span class="shr">Share</span></div>
+                        <div class="hm-thread">
+                          <div class="hm-worked"><span class="wk">Worked for 9s<span class="chev" aria-hidden="true">&rsaquo;</span></span></div>
+                          <div class="hm-bubble hm-ans">
+                            <p class="hm-line">I found <b>Specimen Dental</b> in Anytown. A line of text mentions Saturday hours, but nothing on the page states them as a record, and it lists no services. I could not confirm either.</p>
+                          </div>
+                        </div>
+                        <figcaption class="hm-ans-foot"><span>Simulated on the specimen practice</span></figcaption>
+                      </figure>
+                    </div>
+                    <div class="xo-pane">
+                      <header><span class="who">After the build</span></header>
+                      <figure class="hm-answer hm-chat o3-card">
+                        <div class="hm-topbar" aria-hidden="true"><span class="ttl">Dentist near Anytown, open Saturday</span><span class="shr">Share</span></div>
+                        <div class="hm-thread">
+                          <div class="hm-worked"><span class="wk">Worked for 9s<span class="chev" aria-hidden="true">&rsaquo;</span></span></div>
+                          <div class="hm-bubble hm-ans">
+                            <p class="hm-line">Yes &mdash; <b><mark>Specimen Dental</mark></b> in Anytown is open Saturdays, <span data-xr="after.hours.saturday">9am to 1pm</span>, and <span data-xr="after.hours.weekday">9am to 6pm</span> on weekdays. It lists <span data-xr="after.services.records">6</span> treatments including emergency visits, and holds same-day slots for pain.</p>
+                          </div>
+                        </div>
+                        <figcaption class="hm-ans-foot"><span class="lit">Simulated on the specimen practice</span></figcaption>
+                      </figure>
+                    </div>
+                  </div>
+                  <p class="xo-cap">Hours as a record <b><span data-xr="before.hours.records">0</span> &rarr; <span data-xr="after.hours.records">2</span></b><span class="sep">&middot;</span>Services it can name <b><span data-xr="before.services.inPage">0</span> of <span data-xr="before.services.deferred">6</span> &rarr; <span data-xr="after.services.inPage">6</span> of <span data-xr="after.services.records">6</span></b><span class="sep">&middot;</span>Questions answered <b><span data-xr="before.questions.count">0</span> &rarr; <span data-xr="after.questions.count">4</span></b></p>
+                </div>
+                <div class="cin-slide-copy">
+                  <p class="cin-tile-copy">Same question, same practice. Only the page changed.</p>
+                  <p class="cin-slide-note">Both answers are written by us and labelled as simulated. Every fact in the right-hand one is a record on the after build.</p>
+                  <a class="btn btn-ghost cin-tile-btn" href="/clinics/example/#xray" aria-label="See the difference — the same question, answered before and after the build">See the difference</a>
+                </div>
+              </div>
+              <div class="cin-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                <span class="cin-tile-shot is-shot">
+                  <picture>
+                    <source type="image/avif" sizes="(min-width: 900px) 52vw, 92vw" srcset="/assets/cin/gets-posts-480.avif 480w, /assets/cin/gets-posts-640.avif 640w, /assets/cin/gets-posts-840.avif 840w, /assets/cin/gets-posts-1080.avif 1080w, /assets/cin/gets-posts-1280.avif 1280w" />
+                    <img src="/assets/cin/gets-posts-840.webp" sizes="(min-width: 900px) 52vw, 92vw" srcset="/assets/cin/gets-posts-480.webp 480w, /assets/cin/gets-posts-640.webp 640w, /assets/cin/gets-posts-840.webp 840w, /assets/cin/gets-posts-1080.webp 1080w, /assets/cin/gets-posts-1280.webp 1280w"
+                         width="1280" height="860" alt="A published article page on a practice's site: &quot;Questions to ask before you decide&quot;, with a bar chart of what patients ask about before booking." loading="lazy" fetchpriority="low" decoding="async" />
+                  </picture>
+                </span>
+                <div class="cin-slide-copy">
+                  <p class="cin-tile-copy">Eight posts a month, answering the questions patients ask.</p>
+                  <p class="cin-slide-note">Sample data from our demo workspace.</p>
+                </div>
+              </div>
+              <div class="cin-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                <span class="cin-tile-shot is-shot">
+                  <picture>
+                    <source type="image/avif" sizes="(min-width: 900px) 52vw, 92vw" srcset="/assets/cin/gets-report-480.avif 480w, /assets/cin/gets-report-640.avif 640w, /assets/cin/gets-report-840.avif 840w, /assets/cin/gets-report-1080.avif 1080w, /assets/cin/gets-report-1280.avif 1280w" />
+                    <img src="/assets/cin/gets-report-840.webp" sizes="(min-width: 900px) 52vw, 92vw" srcset="/assets/cin/gets-report-480.webp 480w, /assets/cin/gets-report-640.webp 640w, /assets/cin/gets-report-840.webp 840w, /assets/cin/gets-report-1080.webp 1080w, /assets/cin/gets-report-1280.webp 1280w"
+                         width="1280" height="1040" alt="The monthly report in the practice's dashboard: headline numbers with six-month trends, weekly calls, directions and inquiries, and traffic sources." loading="lazy" fetchpriority="low" decoding="async" />
+                  </picture>
+                </span>
+                <div class="cin-slide-copy">
+                  <p class="cin-tile-copy">A monthly report you can read in one sitting.</p>
+                  <p class="cin-slide-note">Sample data from our demo workspace.</p>
+                </div>
+              </div>
+              <div class="cin-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                <span class="cin-tile-shot">
+                  <picture>
+                    <source type="image/avif" sizes="(min-width: 900px) 52vw, 92vw" srcset="/assets/cin/gets-area-480.avif 480w, /assets/cin/gets-area-640.avif 640w, /assets/cin/gets-area-840.avif 840w, /assets/cin/gets-area-1080.avif 1080w, /assets/cin/gets-area-1360.avif 1360w" />
+                    <img src="/assets/cin/gets-area-840.webp" sizes="(min-width: 900px) 52vw, 92vw" srcset="/assets/cin/gets-area-480.webp 480w, /assets/cin/gets-area-640.webp 640w, /assets/cin/gets-area-840.webp 840w, /assets/cin/gets-area-1080.webp 1080w, /assets/cin/gets-area-1360.webp 1360w"
+                         width="2528" height="1696" alt="" loading="lazy" fetchpriority="low" decoding="async" />
+                  </picture>
+                </span>
+                <div class="cin-slide-copy">
+                  <p class="cin-tile-copy">One practice per area. If yours is taken, we say so.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <!-- One credit for three figures that share one survey. It replaced
-             three per-card repeats of the same sentence and the same link
-             label; what it must not do is replace the LINKS, which are the
-             sourcing discipline this site is built on. All three anchors are
-             here, and so is the caveat that belonged to the third. -->
-        <p class="src section-src" data-reveal>All three figures come from one survey. BrightLocal Local Consumer Review Survey 2026. 1,002 US adult consumers. Source and sample for <a href="/sources/#ai-local">AI recommendations &rarr;</a>, <a href="/sources/#ai-local-age">the same by age band &rarr;</a>, and <a href="/sources/#google-reviews">reviews read on Google &rarr;</a> &mdash; the last is about where people read reviews, not about search generally.</p>
-
-        <p class="lp-sub" data-reveal>Which raises one question, and it is the only one this page is really about: <b>when an assistant goes to read your website on a customer's behalf, what does it actually get?</b></p>
       </div>
     </section>
 
-    <!-- ============================ the mechanism (no figures — the measured
-         findings live on the clinics page, where the audit was done) ======== -->
-    <!-- The one section whose photograph cannot take an overlay: the two
-         windows span x 7-93% of the frame and the argument IS the pair, so
-         there is no region a scrim could sit on. It gets the other answer to
-         the same problem — the copy scrolls in a column and the picture is
-         sticky beside it, co-visible for the whole section instead of for none
-         of it. Below 1100, and for a reader who asked for less motion, this
-         falls back to the band it was. -->
-    <section class="lp-section bleed" data-copy="beside" id="why">
-      <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Where it goes wrong</span></span>
-          <h2 class="lp-h2">It looks finished. It can still be unreadable.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>None of this shows up when you look at your own website.</p>
+    <!-- ================= SCENE 4 · the price, and the close =======
+         The two numbers and the two ways in, on one screen. There is no price
+         table because there is no second tier, and no closing argument because
+         the page has not made one — it has shown an answer and said what it
+         costs. The quiet link is for the reader who wants the six screens that
+         used to be here.
+
+         PAPER, AND THE FOOTER FOLLOWS IT ON PAPER. The landing used to close on
+         ink and declared `footer-ink` on <body> to match; this scene is the
+         last one and it is light, so that class is gone and the shared footer
+         paints its own paper ground again. -->
+    <section class="cin-sc cin-close" id="start" data-ground="light">
+      <!-- The last picture on the page, and the quietest: the search has
+           finished and one site is sitting inside one ring. It is a ground for
+           two price figures and two buttons, so it is held at .42 and the copy
+           column keeps its own paper under it. Lazy — this is four screens
+           down and the hero owns the LCP. -->
+      <div class="cin-bed cin-bed-close" aria-hidden="true">
+        <picture>
+          <source type="image/avif" sizes="100vw" srcset="/assets/cin/close-480.avif 480w, /assets/cin/close-640.avif 640w, /assets/cin/close-840.avif 840w, /assets/cin/close-1080.avif 1080w, /assets/cin/close-1360.avif 1360w, /assets/cin/close-1720.avif 1720w, /assets/cin/close-2160.avif 2160w, /assets/cin/close-2560.avif 2560w, /assets/cin/close-2752.avif 2752w" />
+          <img src="/assets/cin/close-1360.webp" sizes="100vw" srcset="/assets/cin/close-480.webp 480w, /assets/cin/close-640.webp 640w, /assets/cin/close-840.webp 840w, /assets/cin/close-1080.webp 1080w, /assets/cin/close-1360.webp 1360w, /assets/cin/close-1720.webp 1720w, /assets/cin/close-2160.webp 2160w, /assets/cin/close-2560.webp 2560w, /assets/cin/close-2752.webp 2752w"
+               width="3168" height="1344" alt="" loading="lazy" fetchpriority="low" decoding="async" />
+        </picture>
       </div>
-
-      <figure class="shot" data-reveal>
-          <picture>
-            <source type="image/avif" sizes="100vw"
-                    srcset="/assets/sections/03-unreadable-480.avif 480w,
-                            /assets/sections/03-unreadable-640.avif 640w,
-                            /assets/sections/03-unreadable-840.avif 840w,
-                            /assets/sections/03-unreadable-1080.avif 1080w,
-                            /assets/sections/03-unreadable-1360.avif 1360w,
-                            /assets/sections/03-unreadable-1720.avif 1720w,
-                            /assets/sections/03-unreadable-2160.avif 2160w,
-                            /assets/sections/03-unreadable-2560.avif 2560w,
-                            /assets/sections/03-unreadable-2752.avif 2752w" />
-            <img src="/assets/sections/03-unreadable-1080.webp" sizes="100vw"
-                 srcset="/assets/sections/03-unreadable-480.webp 480w,
-                         /assets/sections/03-unreadable-640.webp 640w,
-                         /assets/sections/03-unreadable-840.webp 840w,
-                         /assets/sections/03-unreadable-1080.webp 1080w,
-                         /assets/sections/03-unreadable-1360.webp 1360w,
-                         /assets/sections/03-unreadable-1720.webp 1720w,
-                         /assets/sections/03-unreadable-2160.webp 2160w,
-                         /assets/sections/03-unreadable-2560.webp 2560w,
-                         /assets/sections/03-unreadable-2752.webp 2752w"
-                 width="2752" height="1536" loading="lazy" decoding="async"
-                 alt="Two machined browser windows side by side: the left one fully furnished with panels, bars and lines of type, the right one blank metal but for a single small lit block." />
-          </picture>
-      </figure>
-
-      <div class="wrap">
-        <ul class="mech">
-          <li data-reveal>
-            <h3>Your most important sentence is a picture</h3>
-            <p>Your best line is set into the page as an image, so the type looks exactly right. A person reads it. Google receives an empty box where that sentence should be, and nothing can quote a sentence it was never given.</p>
-          </li>
-          <li data-reveal>
-            <h3>Text inside a slider</h3>
-            <p>The panels that change on their own. Usually they are not in the page when it arrives — a script adds them a moment later. What a visitor swipes through, Google and the assistants are often never handed at all.</p>
-          </li>
-          <li data-reveal>
-            <h3>Answers locked in a PDF</h3>
-            <p>Prices, details and instructions posted as downloads. A person can open it. An assistant is far less likely to quote it.</p>
-          </li>
-          <li data-reveal>
-            <h3>Nothing tells a machine what you actually do</h3>
-            <p>No questions answered in the format search engines recognise, no page for each thing you offer, no opening hours anywhere a machine can pick them up. Organised to a person, one undifferentiated block of text to a machine.</p>
-          </li>
-          <li data-reveal>
-            <h3>Nothing you can measure</h3>
-            <p>A phone number and a contact form, and no way to tell which visits turned into customers.</p>
-          </li>
-        </ul>
+      <div class="wrap cin-end-in">
+        <h2 class="cin-h2 cin-h2-big">$990 to build. <br><em>$1,490 a month to run.</em></h2>
+        <p class="cin-sub">We build the site first and send it back within 3 business days. You decide after you have seen it. Our platform does most of the building, which is why we can afford to show you first.</p>
+        <div class="cin-actions">
+          <a class="btn btn-primary" href="/check/">Check your site free</a>
+          <a class="btn btn-ghost" href="/contact/">See your site first</a>
+        </div>
+        <a class="cin-go" href="/products/">How it works, in detail <span aria-hidden="true">&rarr;</span></a>
       </div>
     </section>
-    <!-- ============================ the offer, in one line =================
-         The four deliverables, the process and the FAQ now live on /clinics/,
-         where someone who is actually buying reads them. Home keeps only the
-         shape of the offer and the two numbers, because a price the visitor
-         has to click through to find reads as a price being withheld. ==== -->
-
-    <!-- ============================ verticals ============================ -->
-    <!-- Beside, not over. Measured against the hero's own composition — copy
-         block centred within 4.3 points of the subject's centroid, over 29.7%
-         subject pixels — this frame cannot do both: reaching a comparable
-         centring costs 43.9% subject, squarely on the junction box, because the
-         ribbon-junction-panels fan spans the whole frame and leaves its quiet
-         corner at the top. So the copy stops competing for the frame and takes
-         a column beside it, at the same height, which is the hero's
-         relationship without the overlay. -->
-    <section class="lp-section bleed" data-copy="beside center" id="verticals">
-      <div class="wrap">
-        <div class="lp-head" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Who we build for</span></span>
-          <h2 class="lp-h2">We build for <span class="accent">clinics</span>.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>We pick an industry, go and audit it properly, and build the offer around what we actually find there.</p>
-        <!-- What is left of a card that was a one-item grid below the
-             photograph, 55% empty white, and the only thing on screen once the
-             picture had scrolled past. It is a badge and a link now because
-             anything longer does not fit: measured with the card's paragraph
-             still here, the copy block ran 430px at 1440 and past 500px at
-             1100, down through the junction box and into the ribbon, and the
-             scrim it then needed was .88 — enough to erase one of the three
-             panels the picture is about. -->
-        <p class="lp-avail" data-reveal>
-          <span class="badge"><span class="dot" aria-hidden="true"></span>Available now</span>
-          <a class="go" href="/clinics/">See the clinics page &rarr;</a>
-        </p>
-      </div>
-
-      <figure class="shot" data-reveal>
-          <picture>
-            <source type="image/avif" sizes="100vw"
-                    srcset="/assets/sections/04-verticals-480.avif 480w,
-                            /assets/sections/04-verticals-640.avif 640w,
-                            /assets/sections/04-verticals-840.avif 840w,
-                            /assets/sections/04-verticals-1080.avif 1080w,
-                            /assets/sections/04-verticals-1360.avif 1360w,
-                            /assets/sections/04-verticals-1720.avif 1720w,
-                            /assets/sections/04-verticals-2160.avif 2160w,
-                            /assets/sections/04-verticals-2560.avif 2560w,
-                            /assets/sections/04-verticals-2752.avif 2752w" />
-            <img src="/assets/sections/04-verticals-1080.webp" sizes="100vw"
-                 srcset="/assets/sections/04-verticals-480.webp 480w,
-                         /assets/sections/04-verticals-640.webp 640w,
-                         /assets/sections/04-verticals-840.webp 840w,
-                         /assets/sections/04-verticals-1080.webp 1080w,
-                         /assets/sections/04-verticals-1360.webp 1360w,
-                         /assets/sections/04-verticals-1720.webp 1720w,
-                         /assets/sections/04-verticals-2160.webp 2160w,
-                         /assets/sections/04-verticals-2560.webp 2560w,
-                         /assets/sections/04-verticals-2752.webp 2752w"
-                 width="2752" height="1536" loading="lazy" decoding="async"
-                 alt="A machined junction box on a studio table: one blue ribbon runs into it and three separate lit cables leave it, each ending at its own small site panel." />
-          </picture>
-      </figure>
-    </section>
-    <section class="lp-section" id="product">
-      <div class="wrap">
-        <div class="lp-head" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What you get</span></span>
-          <h2 class="lp-h2">One build. Then we <span class="accent">run it</span>.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>We build the site, take it live on your domain, and then run it every month: a performance report, eight posts written to be found and quoted, inquiry and booking tracking, and hosting, maintenance and self-serve editing. One plan, everything in it.</p>
-        <!-- The price is what a clinic owner scans this page for, and it was
-             set in body copy inside the section's one 1080px-wide paragraph.
-             Same two figures, same sentence, at display scale. -->
-        <div class="price-tag" data-reveal>
-          <span class="badge"><span class="dot" aria-hidden="true"></span>One plan</span>
-          <!-- The full stop is INSIDE the first span. scripts/lib/html.mjs
-               flattens a tag to a space, which is what makes the copy gate
-               survive a per-word motion layer — and it means `$990</span>.`
-               reaches a crawler as "$990 ." and breaks the sentence. Punctuation
-               does not sit against a tag boundary in a sentence we assert. -->
-          <p class="price-line"><b>Build from <span class="price-fig">$990.</span> Then <span class="price-fig">$1,490</span> a month.</b></p>
-          <p class="d">There is no second tier to be upsold to. Your exact numbers come with the finished site, before you sign anything.</p>
-        </div>
-        <p class="lp-sub" data-reveal><a href="/clinics/#included">What that covers, month by month &rarr;</a></p>
-
-        <!-- RESERVED: the product shot goes here, and it is deliberately not a
-             photograph of a machined model. Every other picture on this page is
-             an argument rendered as an object; this section is the one place
-             that describes a thing we actually ship, and a sculpture standing in
-             for a real screen would be the only dishonest image on the site.
-             When the product is ready to be shown, drop a <figure class="shot">
-             in exactly here — the class, the aspect ratio and the reveal all
-             already work — and no other change is needed.
-
-             Nothing occupies the space in the meantime. A dashed empty box on a
-             production page is not a placeholder, it is a defect with a comment
-             attached, and it would also be the only element on this page that
-             reserves height for content that does not exist. -->
-      </div>
-    </section>
-
-
-
-    <!-- ============================ how we take clients ==================
-         The cap is a condition of the work, not a scarcity device. No seat
-         count, no deadline, no number that could go stale. ================ -->
-    <!-- The copy sits top-left, which is where the map is quietest, and stops
-         there: the lit pin is at x 46.7-52.9% and the last word should hand the
-         eye straight to it. -->
-    <section class="lp-section bleed" data-copy="left" id="cap">
-      <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>How we take clients</span></span>
-          <h2 class="lp-h2">One business per area, <span class="accent">and that is the cap</span>.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>Search results and AI answers are ranked lists &mdash; if we optimized two competing businesses in the same neighborhood, we would be competing against our own clients.</p>
-      </div>
-
-      <figure class="shot" data-reveal>
-          <picture>
-            <source type="image/avif" sizes="100vw"
-                    srcset="/assets/sections/06-exclusivity-480.avif 480w,
-                            /assets/sections/06-exclusivity-640.avif 640w,
-                            /assets/sections/06-exclusivity-840.avif 840w,
-                            /assets/sections/06-exclusivity-1080.avif 1080w,
-                            /assets/sections/06-exclusivity-1360.avif 1360w,
-                            /assets/sections/06-exclusivity-1720.avif 1720w,
-                            /assets/sections/06-exclusivity-2160.avif 2160w,
-                            /assets/sections/06-exclusivity-2560.avif 2560w,
-                            /assets/sections/06-exclusivity-2752.avif 2752w" />
-            <img src="/assets/sections/06-exclusivity-1080.webp" sizes="100vw"
-                 srcset="/assets/sections/06-exclusivity-480.webp 480w,
-                         /assets/sections/06-exclusivity-640.webp 640w,
-                         /assets/sections/06-exclusivity-840.webp 840w,
-                         /assets/sections/06-exclusivity-1080.webp 1080w,
-                         /assets/sections/06-exclusivity-1360.webp 1360w,
-                         /assets/sections/06-exclusivity-1720.webp 1720w,
-                         /assets/sections/06-exclusivity-2160.webp 2160w,
-                         /assets/sections/06-exclusivity-2560.webp 2560w,
-                         /assets/sections/06-exclusivity-2752.webp 2752w"
-                 width="2752" height="1536" loading="lazy" decoding="async"
-                 alt="A machined street map with one lit pin standing in a district; the other mounting sockets across the map are empty." />
-          </picture>
-      </figure>
-
-    </section>
-
-    <!-- ============================ who builds it ============================ -->
-    <section class="lp-section" id="who">
-      <div class="wrap">
-        <div class="trust-grid">
-          <!-- The two links live under the heading rather than at the end of
-               the prose. As four stacked paragraphs on the right, the column ran
-               420px past the two-line h2 beside it and the left half of the
-               section was empty for all of it. -->
-          <div data-reveal>
-            <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Who builds it</span></span>
-            <h2 class="lp-h2">The <span class="accent">company</span> behind it.</h2>
-          </div>
-          <div class="prose" data-reveal>
-            <p>Anaks Labs is a software company that designs, builds and runs its own products — this is one of them. The people who design your site write the code, publish the posts and send the report. There is no account manager in between.</p>
-            <p>You won't find a wall of client logos on this page. <b>The build we send you is the reference</b> — judge us on that instead.</p>
-          </div>
-          <!-- Last in the DOM, which is the order a phone reads and the order
-               this section always had. Above 760 it is placed under the heading
-               instead, where it fills the 420px the two-line h2 left empty. -->
-          <p class="trust-links" data-reveal>
-            <a href="/clinics/example/">Until we have built yours, here is a specimen we built both sides of &rarr;</a>
-            <a href="/about/">Company information and public notices &rarr;</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ============================ closing cta ============================ -->
-    <section class="lp-section cta-band bleed" data-copy="right" id="contact">
-
-      <div class="wrap">
-        <div class="lp-head" data-reveal>
-          <h2 class="lp-h2">Start with your own page.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>Paste your address and see what a search engine actually receives from your site. The rebuild offer is at the end of the result.</p>
-      </div>
-
-
-      <div class="wrap">
-        <div data-reveal>
-          <a class="btn btn-primary" href="/check/">Check your page free</a>
-          <p class="lp-note">Free, no signup, a few seconds.</p>
-        </div>
-      </div>
-      <!-- LAST, and its position is a fix twice over. In source order this
-           figure used to sit between the paragraph and the button, which on
-           a phone put a 219px band between the sentence that asks for the
-           click and the control that takes it. Moving it to the top fixed
-           that and broke something quieter: it left the closing note 228px
-           from the end of the document, too close for the checker to scroll
-           it to the middle of the viewport, so it was measured near the
-           bottom where the fixed vignette is darkest and came back 4.33:1
-           against a 4.5 floor. At the end of the section the note clears the
-           page bottom by the height of the band and measures 5.34:1. On a
-           desktop the figure is absolute and inset:0, so none of this moves
-           anything there. scripts/verify-layout.mjs asserts the adjacency. -->
-      <figure class="shot" data-reveal>
-          <picture>
-            <source type="image/avif" sizes="100vw"
-                    srcset="/assets/sections/05-winning-480.avif 480w,
-                            /assets/sections/05-winning-640.avif 640w,
-                            /assets/sections/05-winning-840.avif 840w,
-                            /assets/sections/05-winning-1080.avif 1080w,
-                            /assets/sections/05-winning-1360.avif 1360w,
-                            /assets/sections/05-winning-1720.avif 1720w,
-                            /assets/sections/05-winning-2160.avif 2160w,
-                            /assets/sections/05-winning-2560.avif 2560w,
-                            /assets/sections/05-winning-2752.avif 2752w" />
-            <img src="/assets/sections/05-winning-1080.webp" sizes="100vw"
-                 srcset="/assets/sections/05-winning-480.webp 480w,
-                         /assets/sections/05-winning-640.webp 640w,
-                         /assets/sections/05-winning-840.webp 840w,
-                         /assets/sections/05-winning-1080.webp 1080w,
-                         /assets/sections/05-winning-1360.webp 1360w,
-                         /assets/sections/05-winning-1720.webp 1720w,
-                         /assets/sections/05-winning-2160.webp 2160w,
-                         /assets/sections/05-winning-2560.webp 2560w,
-                         /assets/sections/05-winning-2752.webp 2752w"
-                 width="2752" height="1536" loading="lazy" decoding="async"
-                 alt="Five machined result cards stacked in a ranked column, the top one lifted clear of the rest and lit from beneath." />
-          </picture>
-      </figure>
-
-    </section>
-
   </main>
 
   <footer class="site-footer">
@@ -515,15 +412,17 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/check/">Check your site</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>
 
-  <script src="/assets/site.js"></script>
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>

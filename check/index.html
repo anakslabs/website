@@ -20,51 +20,113 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
   <link rel="preload" href="/assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="/assets/site.css" />
+  <link rel="preload" as="image" href="/assets/cin/title-1720.avif" type="image/avif"
+        imagesrcset="/assets/cin/title-840.avif 840w, /assets/cin/title-1080.avif 1080w, /assets/cin/title-1360.avif 1360w, /assets/cin/title-1720.avif 1720w, /assets/cin/title-2160.avif 2160w, /assets/cin/title-2560.avif 2560w, /assets/cin/title-2752.avif 2752w"
+        imagesizes="100vw" fetchpriority="high" />
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
-<body class="landing">
+<body class="landing cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The same three constants every other page on the site carries. This page
+       used to run the shared .layer washes instead, which is why it read as a
+       different site: no rail, no grain, and a fixed light aurora that cannot
+       sit under an ink opener. .cin-page switches the washes off, so the two
+       divs that used to be here would have been inert markup and a decode for
+       nothing — they are replaced rather than hidden.
+
+       NOT .cin-reel. That class is what hides the header on the first screen,
+       and it belongs to the landing alone.
+
+       .landing IS VESTIGIAL NOW, AND IT IS LOAD-BEARING ANYWAY. It was here for
+       the lp-* result panels, which are gone — but a rule in the stylesheet
+       (`body.landing.cin-page:not(.cin-reel)`) uses exactly this combination to
+       pull the header and footer back onto the 1080 rail this page's content is
+       on. Dropping .landing happens to land on the same 1080 by falling through
+       to plain .wrap, so nothing breaks either way; it stops being the same
+       measurement, which is why it is written down rather than tidied. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/check/">Check your site</a>
-        <a href="/clinics/">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/" aria-current="page">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="lp" id="main">
+  <!-- cin-doc paints the page's paper ground under the ink opener, exactly as
+       it does on /contact/ and /about/: the opener paints its own --dark, every
+       section under it is transparent, and the body's colour is demoted to
+       whatever sits behind an overscroll. -->
+  <main class="hm hm-page cin-doc" id="main">
 
-    <section class="lp-hero">
-      <div class="wrap">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Free, no signup</span></span>
-        <h1>See what a machine <span class="accent">actually gets</span> from your page.</h1>
-        <p class="lp-lead">Your browser runs your scripts, loads your fonts and draws your layout. A search engine reads the file that arrives before any of that happens. Paste your address and we will fetch it the same way, then show you what came back.</p>
+    <!-- ================= THE OPENER · ink, and the field is in it =========
+         This was a paper .lp-hero with a 50px h1 — half the size of the
+         headline on every other opener on the site — and the check field
+         underneath it, with the right half of the frame empty from the header
+         down. Two findings, one shape: the page did not look like the site it
+         belongs to, and the one control it exists for was standing in the
+         second half of the screen.
 
-        <form class="contact-form check-form" id="check-form" novalidate>
+         Same pattern as /contact/: the sentence holds the left, the field holds
+         the right, and the first screen contains both the claim and the thing
+         that acts on it. The copy is the hero's, word for word — the eyebrow,
+         the headline and the lead — and .accent becomes <em> because that is
+         the emphasis idiom every cin headline already uses, which is also what
+         puts it in --blue-on-dark instead of a gradient tuned for paper.
+
+         MOVED, NOT REWIRED. assets/check.js finds this form by #check-form and
+         reads #url, #check-submit and #check-status by id, then unhides
+         #result and #after below. Every one of those is untouched. -->
+    <section class="cin-sc cin-dark cin-title cin-open cin-open-type cin-open-form" id="top" data-ground="dark">
+      <!-- The landing's title render, and it is on this page for a reason
+           rather than for decoration: a website hanging in the air as a pane of
+           glass with a beam passing through it and an answer glowing where the
+           beam leaves is a picture of what this form does. Pushed right so the
+           pane sits under the field and the left of the frame stays the empty
+           dark room the sentence needs.
+
+           A BED, so no glyph is ever laid on it: aria-hidden with an empty alt,
+           because the h1 beside it already says what it says. Preloaded and
+           fetchpriority high — it is this page's LCP now, exactly as the same
+           render is the landing's. -->
+      <div class="cin-bed cin-bed-form cin-bed-check" aria-hidden="true">
+        <picture>
+          <source type="image/avif" sizes="100vw" srcset="/assets/cin/title-480.avif 480w, /assets/cin/title-640.avif 640w, /assets/cin/title-840.avif 840w, /assets/cin/title-1080.avif 1080w, /assets/cin/title-1360.avif 1360w, /assets/cin/title-1720.avif 1720w, /assets/cin/title-2160.avif 2160w, /assets/cin/title-2560.avif 2560w, /assets/cin/title-2752.avif 2752w" />
+          <img src="/assets/cin/title-1720.webp" sizes="100vw" srcset="/assets/cin/title-480.webp 480w, /assets/cin/title-640.webp 640w, /assets/cin/title-840.webp 840w, /assets/cin/title-1080.webp 1080w, /assets/cin/title-1360.webp 1360w, /assets/cin/title-1720.webp 1720w, /assets/cin/title-2160.webp 2160w, /assets/cin/title-2560.webp 2560w, /assets/cin/title-2752.webp 2752w"
+               width="2752" height="1168" alt="" fetchpriority="high" decoding="async" />
+        </picture>
+      </div>
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>Free, no signup</span>
+        <h1 class="cin-h1">See what a machine <em>actually gets</em> from your page.</h1>
+        <p class="cin-lead">Your browser runs your scripts, loads your fonts and draws your layout. A search engine reads the file that arrives before any of that happens. Paste your address and we will fetch it the same way, then show you what came back.</p>
+
+        <form class="hm-form" id="check-form" novalidate>
           <div class="field">
             <label for="url">Your website</label>
             <input type="url" id="url" name="url" required autocomplete="url" placeholder="yourclinic.com" />
           </div>
           <button class="btn btn-primary" type="submit" id="check-submit">Check my page</button>
           <p class="form-status" id="check-status" role="status" aria-live="polite"></p>
-        </form>
 
-        <noscript>
-          <p class="lp-note">This check needs JavaScript. <a href="/contact/">Send us the address instead</a> and we will run it and reply.</p>
-        </noscript>
+          <noscript>
+            <p class="hm-note">This check needs JavaScript. <a href="/contact/">Send us the address instead</a> and we will run it and reply.</p>
+          </noscript>
+        </form>
       </div>
     </section>
 
@@ -72,15 +134,36 @@
          what it did not. The grade is deliberately small and last — a letter
          printed large is a thing to react to instead of read, and the whole
          point of this page is the reading. -->
-    <section class="lp-section" id="result" hidden>
+    <!-- THE LAST lp-* MARKUP ON THE SITE WAS HERE, and it was invisible in
+         review because it ships `hidden`: this section and the one below only
+         exist after a check has run, so every pass over the page saw the opener
+         and stopped. Converted to the shared document classes /products/ uses —
+         .hm-sec / .badge / .hm-h2 / .hm-sub / .hm-rows / .hm-note — so the state
+         a reader actually gets to, the one carrying the argument for the offer
+         underneath it, is the same page they have been reading all along.
+
+         .hm-rows, not .mech: check.js builds each finding as
+         <li><h3>label</h3><p>detail</p></li>, and .hm-rows is precisely that
+         shape in the shared vocabulary — a label column and a paragraph column
+         at 840 and up, stacked below it, hairline between rows.
+
+         NO data-reveal IN HERE, deliberately. On a .cin-doc page a [data-reveal]
+         block takes its opacity from a scroll-driven --p, and this section is
+         revealed by an ACTION rather than by scrolling: check.js unhides it and
+         smooth-scrolls to it, so its entrance would be racing a timeline that
+         starts measuring the moment it stops being display:none. A result panel
+         that is sometimes transparent is a worse defect than one that simply
+         appears. Measured after a live scan: every block here is opacity 1.
+
+         Every id is untouched — #result, #result-title, #result-lead,
+         #result-findings, #result-score. -->
+    <section class="hm-sec" id="result" data-ground="light" hidden>
       <div class="wrap">
-        <div class="lp-head wide">
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>What came back</span></span>
-          <h2 class="lp-h2" id="result-title">Here is what your page handed over.</h2>
-        </div>
-        <p class="lp-sub" id="result-lead"></p>
-        <ul class="mech" id="result-findings"></ul>
-        <p class="lp-note" id="result-score"></p>
+        <span class="badge"><span class="dot" aria-hidden="true"></span><span>What came back</span></span>
+        <h2 class="hm-h2" id="result-title">Here is what your page handed over.</h2>
+        <p class="hm-sub" id="result-lead"></p>
+        <ul class="hm-rows" id="result-findings"></ul>
+        <p class="hm-note hm-gap" id="result-score"></p>
       </div>
     </section>
 
@@ -88,14 +171,13 @@
          Sending someone to another page to ask for the rebuild would lose the
          one thing that makes the ask land: they have just seen what is
          missing. The site field is prefilled with the address they scanned. -->
-    <section class="lp-section cta-band" id="after" hidden>
+    <section class="hm-cta" id="after" data-ground="light" hidden>
       <div class="wrap">
-        <div class="lp-head">
-          <h2 class="lp-h2">See your site first.</h2>
-        </div>
-        <p class="lp-sub">We rebuild it and send it back &mdash; free. You decide after you&rsquo;ve seen it.</p>
+        <div class="hm-cta-box hm-cta-form">
+          <h2 class="hm-h2">See your site first.</h2>
+          <p class="hm-sub">We rebuild it and send it back &mdash; free. You decide after you&rsquo;ve seen it.</p>
 
-        <form class="contact-form" id="rebuild-form" novalidate>
+        <form class="hm-form" id="rebuild-form" novalidate>
           <div class="field">
             <label for="r-site">Your website</label>
             <input type="text" id="r-site" name="site" required autocomplete="url" />
@@ -118,7 +200,8 @@
           <p class="form-status" id="rebuild-status" role="status" aria-live="polite"></p>
         </form>
 
-        <p class="lp-note">We reply with the finished site, not a sales call.</p>
+        <p class="hm-note">We reply with the finished site within 3 business days, not a sales call.</p>
+        </div>
       </div>
     </section>
 
@@ -131,11 +214,13 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/check/">Check your site</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>

@@ -28,66 +28,111 @@
   {"@context":"https://schema.org","@type":"WebPage","@id":"https://anakslabs.com/clinics/example/","name":"A specimen rebuild, before and after","url":"https://anakslabs.com/clinics/example/","description":"Two builds of the same fictional clinic homepage, both authored by Anaks Labs: one reproducing markup patterns measured across the clinic websites we audited, one rebuilt so that search engines and AI assistants can read it. The structural difference between the two is measured and disclosed on the page.","isPartOf":{"@type":"WebSite","name":"Anaks Labs","url":"https://anakslabs.com"},"publisher":{"@type":"Organization","@id":"https://anakslabs.com/#org","name":"Anaks Labs","legalName":"Anaks Labs Inc.","email":"contact@anakslabs.com","url":"https://anakslabs.com"},"about":{"@type":"Thing","name":"Machine-readable website structure"},"mentions":{"@type":"Dentist","name":"Specimen Dental","description":"A fictional dental practice invented by Anaks Labs for this demonstration. It does not exist and no real practice's content appears on this page."}}
   </script>
 </head>
-<body class="landing">
+<body class="subpage cin-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="layer wash" aria-hidden="true"></div>
-  <div class="layer aurora" aria-hidden="true">
-    <b class="b1 drift1"></b><b class="b2 drift2"></b><b class="b3 drift3"></b>
-  </div>
-  <canvas class="layer" id="net" aria-hidden="true"></canvas>
-  <div class="layer vignette" aria-hidden="true"></div>
+  <!-- The site's three constants, replacing the four this page used to run.
+       .cin-page switches .layer off, so leaving them here would have left the
+       aurora and the node canvas in the markup doing nothing — and the canvas
+       is not nothing: site.js keeps a per-frame loop over every node pair
+       running on it whether or not it is drawn. Removed rather than hidden. -->
+  <div class="cin-grain" aria-hidden="true"></div>
+  <div class="cin-vig" aria-hidden="true"></div>
+  <div class="cin-rail" aria-hidden="true"><i></i></div>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Anaks Labs home"><picture><source type="image/avif" sizes="44px" srcset="/assets/logo-inline-48.avif 48w, /assets/logo-inline-64.avif 64w, /assets/logo-inline-96.avif 96w, /assets/logo-inline-144.avif 144w, /assets/logo-inline-192.avif 192w" /><img src="/assets/logo-inline-96.png" sizes="44px" srcset="/assets/logo-inline-48.webp 48w, /assets/logo-inline-64.webp 64w, /assets/logo-inline-96.webp 96w, /assets/logo-inline-144.webp 144w, /assets/logo-inline-192.webp 192w" width="680" height="431" alt="Anaks Labs" /></picture></a>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#product">Product</a>
-        <a href="/clinics/" aria-current="page">Clinics</a>
+        <a href="/products/">Products</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
       </nav>
+      <a class="nav-cta" href="/check/">Check<span class="cta-rest">&nbsp;your site</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </header>
 
-  <main class="lp" id="main">
+  <main class="hm hm-page cin-doc" id="main">
 
-    <!-- ==================== the disclosure, first thing inside the content
-         (inside <main>, so "Skip to content" cannot jump past it) ========== -->
-    <aside class="specimen-notice" aria-label="What this page is">
-      <div class="wrap">
-        <span class="badge"><span class="dot" aria-hidden="true"></span>Specimen</span>
-        <div>
-          <p><b>Both versions on this page were built by us. The "before" reproduces patterns we measured across the clinic websites we audited. No real practice's content appears here.</b></p>
-          <p>Specimen Dental is invented. There is no such practice and no such address, and nothing on this page is a screenshot, a copy or a link of anyone's live website. We opened 182 US clinic websites, and we hold what we found there in confidence — so where we needed a "before" to show you, we wrote one.</p>
-        </div>
-      </div>
-    </aside>
+    <!-- ================= THE OPENER · the specimen =========================
+         TYPE ONLY, AND NO BED. The page's subject is two pages, and both of
+         them are further down as live frames you can scroll. A photograph
+         standing in for them here would be a picture of the thing on a page
+         that already contains the thing.
 
-    <!-- ============================ hero ============================ -->
-    <section class="lp-hero">
-      <div class="wrap">
-        <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Example rebuild</span></span>
-        <h1>The same clinic, built twice. Only one can be <span class="accent">read</span>.</h1>
-        <p class="lp-lead">We build your site before we talk, and that build is the reference. Here is one, made before there is a client to point at: a clinic homepage in the shape the audit kept finding, and the same content rebuilt the way we build. Both are real pages you can open. What separates them is counted further down.</p>
-        <div class="lp-actions">
+         THE DISCLOSURE IS INSIDE THE OPENER, and that placement is the whole
+         point of it. It was a paper strip directly under the header — above
+         an ink opener that reads as chrome that failed to load — and moving
+         it below the opener would put the disclosure after the claim it
+         qualifies. Inside the scene it is still the first thing in <main>
+         after the title, so "Skip to content" cannot jump past it, which is
+         the reason it was put inside <main> in the first place.
+
+         Copy is the page's own throughout: the eyebrow, the headline, the
+         lead, both buttons, the note, and both paragraphs of the band. -->
+    <section class="cin-sc cin-dark cin-title cin-open cin-open-notice" id="top" data-ground="dark">
+      <div class="wrap cin-title-in">
+        <span class="cin-eyebrow"><i aria-hidden="true"></i>Example rebuild</span>
+        <h1 class="cin-h1">The same clinic, built twice. Only one can be <span class="accent">read</span>.</h1>
+        <p class="cin-lead">We build your site before we talk, and that build is the reference. Here is one, made before there is a client to point at: a clinic homepage in the shape the audit kept finding, and the same content rebuilt the way we build. Both are real pages you can open. What separates them is counted further down.</p>
+        <div class="cin-actions">
           <a class="btn btn-primary" href="#compare">Open both builds</a>
           <a class="btn btn-ghost" href="#diff">See what was counted</a>
         </div>
-        <p class="lp-note">A specimen, not a case study. We have written both sides, and we say so at the top.</p>
+        <p class="cin-note">A specimen, not a case study. We have written both sides, and we say so at the top.</p>
+        <!-- THE RIGHT HALF OF THIS OPENER WAS BARE BLUE at every width above
+             1120, on the one page whose entire job is to prove the product.
+             Two counts fill it, and both are read out of the two builds by
+             scripts/extract-specimen.mjs rather than typed here — every
+             figure below carries a data-xr key that
+             scripts/verify-specimen-counts.mjs resolves against that
+             script's output, and the two bars carry the ratio they are drawn
+             at, so neither a number nor a bar can drift from the builds. -->
+        <aside class="rx-card rx-side" aria-labelledby="rx-side-t">
+          <p class="rx-k" id="rx-side-t"><span>What the machine receives</span></p>
+          <div class="rx-tiles">
+            <div class="rx-tile">
+              <p class="k">Characters received</p>
+              <p class="v"><span data-xr="before.chars.received">716</span> <span aria-hidden="true">&rarr;</span> <span data-xr="after.chars.received">2,629</span></p>
+              <svg class="rx-spark" viewBox="0 0 120 22" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <rect class="was" x="0" y="1" width="32.7" height="9" rx="4.5" data-xr-bar="before.chars.received/after.chars.received@120" />
+                <rect class="now" x="0" y="12" width="120" height="9" rx="4.5" />
+              </svg>
+            </div>
+            <div class="rx-tile">
+              <p class="k">Titles it can read</p>
+              <p class="v"><span data-xr="before.headings.readable">3</span> <span aria-hidden="true">&rarr;</span> <span data-xr="after.headings.readable">17</span></p>
+              <svg class="rx-spark" viewBox="0 0 120 22" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <rect class="was" x="0" y="1" width="21.2" height="9" rx="4.5" data-xr-bar="before.headings.readable/after.headings.readable@120" />
+                <rect class="now" x="0" y="12" width="120" height="9" rx="4.5" />
+              </svg>
+            </div>
+          </div>
+          <p class="rx-spark-cap">Counted on each build exactly as it arrives, before anything on the page has run.</p>
+        </aside>
+      </div>
+      <div class="wrap">
+        <aside class="cin-notice" aria-label="What this page is">
+          <span class="badge"><span class="dot" aria-hidden="true"></span>Specimen</span>
+          <div>
+            <p><b>Both versions on this page were built by us. The "before" reproduces patterns we measured across the clinic websites we audited. No real practice's content appears here.</b></p>
+            <p>Specimen Dental is invented. There is no such practice and no such address, and nothing on this page is a screenshot, a copy or a link of anyone's live website. We opened 182 US clinic websites, and we hold what we found there in confidence — so where we needed a "before" to show you, we wrote one.</p>
+          </div>
+        </aside>
       </div>
     </section>
 
     <!-- ============================ the two builds ============================ -->
-    <section class="lp-section" id="compare">
+    <section class="hm-sec cin-doc-first" id="compare" data-ground="light">
       <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>The two builds</span></span>
-          <h2 class="lp-h2">Open them both. They say the same thing.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>The two builds</span></span>
+          <h2 class="hm-h2">Open them both. They say the same thing.</h2>
         </div>
-        <p class="lp-sub" data-reveal>Same practice, same six services, same hours, same headline. One of them hands all of that to a machine. The other hands over an empty box and a slider that is still empty when it arrives. Both are a single page on purpose — a real build follows the structure of the site it came from, and each says so at the top.</p>
+        <p class="hm-sub" data-reveal>Same practice, same six services, same hours, same headline. One of them hands all of that to a machine. The other hands over an empty box and a slider that is still empty when it arrives. Both are a single page on purpose — a real build follows the structure of the site it came from, and each says so at the top.</p>
 
         <div class="compare" id="compare-viewer" data-reveal>
           <div class="compare-tabs" role="tablist" aria-label="Which build to show" hidden>
@@ -124,14 +169,249 @@
       </div>
     </section>
 
-    <!-- ============================ the diff ============================ -->
-    <section class="lp-section" id="diff">
+    <!-- ============================ the x-ray ============================
+         WHY THIS SECTION EXISTS AND THE SECTION ABOVE IT DOES NOT SUFFICE.
+         Two live builds side by side are two RENDERINGS, and the difference
+         this company sells lives in the MARKUP. Read at any real size, the
+         only visible difference between them is that the after build has
+         more paragraphs — "a few more words" — and the table below then
+         proves the point two screens further down, in words, to a reader who
+         has already decided. The argument was correct and invisible.
+
+         SO THIS SHOWS THE ANSWER. Three moves, in the order a reader can
+         absorb them: the drawing that says what "a machine" means here, then
+         the same question put to an assistant against each build and the two
+         answers it comes back with, then the five counts as bars.
+
+         WHAT THIS REPLACED. The middle move used to be a build switch, a
+         live iframe of each page and a scrolling console of schema types and
+         character counts. The designer's finding, and it is the right one:
+         none of that is legible to a dentist. A practice owner does not read
+         `alt=""`, has no use for the word OpeningHoursSpecification, and
+         cannot tell from two screenshots which page a machine could read.
+         The claim being made is about what an assistant can SAY, so the
+         section now says it in those terms and leaves the schema inventory
+         to the counted rows and to #diff below.
+
+         BOTH ANSWERS ARE WRITTEN BY US AND BOTH CARDS SAY SO. That label is
+         not decoration and it is not removable: these are our words in the
+         shape of an assistant's reply, and the figcaption says as much on
+         each card at every width. The before answer claims only what the
+         before build hands over, and says in its own voice that it cannot
+         confirm the hours it found as prose. Every fact in the after answer
+         is a record on the after build — the two OpeningHoursSpecifications,
+         the six MedicalProcedures, the Question about same-day pain.
+
+         EVERY FIGURE AND EVERY BAR IS COMPUTED. Each carries a data-xr or
+         data-xr-bar key naming a path into the output of
+         scripts/extract-specimen.mjs, which reads the two builds off disk;
+         scripts/verify-specimen-counts.mjs resolves each key and fails if
+         the rendered text or the drawn width differs. That now includes the
+         two opening times inside the after answer's sentence, so a change to
+         a record changes the sentence or fails the gate. Add a service to
+         the after build and this section is wrong until it is updated.
+
+         NO SCRIPT RUNS IN THIS SECTION AT ALL, which is the only honest way
+         to build it: the subject is what a page hands over before anything
+         runs.
+
+         THE BARS ARE SCALED PER ROW, largest value in the row = full track,
+         so a row is read against itself and not against the page. Four rows
+         read long-white-is-better; the row that counts pictures cannot, so
+         it carries three words saying which way it runs. -->
+    <section class="hm-sec hm-dark cin-dark xr-sec" id="xray" data-ground="dark">
       <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>The difference, measured</span></span>
-          <h2 class="lp-h2">What each build hands to a machine.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>The difference, x-rayed</span></span>
+          <h2 class="hm-h2">A patient sees two good websites. <span class="accent">A machine sees one.</span></h2>
         </div>
-        <p class="lp-sub" data-reveal>Five counts, taken from each of those two pages exactly as it arrives — before anything on the page has had a chance to run. That is where a search engine starts, and on the before build it is also where it stops. Three of the five are given against the total on the page, so you can see how much is being lost and not only which way it goes. The exact definitions are underneath the table.</p>
+        <div class="xr-intro" data-reveal>
+          <!-- NOT "same practice, same six services, same hours, same
+               headline": that clause is already the opening of #compare's
+               own sub, word for word, and the two sections sit one screen
+               apart. This one says what THIS section does instead. -->
+          <p class="xr-lead">The same practice and the same question, put to an assistant before the build and after it. The only thing that changed in between is what the page hands over.</p>
+          <!-- THE ONE DRAWING OF THE MECHANISM ON THE WHOLE SITE. The company
+               sells "a machine can read your page" and until now every
+               illustration of that was a screenshot of the result. Three
+               boxes and two arrows, inline, fixed viewBox — a reserved box,
+               no request, no decode, CLS 0. It sits here because it is the
+               legend for the pair underneath: page, machine, answer, in that
+               order, and the pair shows the third box twice. -->
+          <div class="rx-sys">
+            <p class="rx-k"><span>How the layer works</span></p>
+            <svg viewBox="0 0 420 96" role="img" aria-label="Three steps: your page is read by a machine, and the machine produces an answer that names your practice.">
+              <defs>
+                <marker id="rx-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                  <path d="M0 0 L10 5 L0 10 z" fill="rgba(255,255,255,.62)" />
+                </marker>
+              </defs>
+              <rect x="4" y="18" width="86" height="58" rx="7" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.38)" />
+              <g fill="rgba(255,255,255,.62)">
+                <rect x="15" y="29" width="46" height="5" rx="2.5" />
+                <rect x="15" y="40" width="64" height="3.5" rx="1.75" />
+                <rect x="15" y="49" width="58" height="3.5" rx="1.75" />
+                <rect x="15" y="58" width="38" height="3.5" rx="1.75" />
+              </g>
+              <text x="47" y="90" text-anchor="middle">YOUR PAGE</text>
+              <line x1="94" y1="47" x2="140" y2="47" stroke="rgba(255,255,255,.62)" stroke-width="1.4" marker-end="url(#rx-ar)" />
+
+              <rect x="148" y="18" width="104" height="58" rx="7" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.38)" />
+              <g stroke="#DCE9FF" stroke-width="1.3" fill="none">
+                <path d="M168 47 L186 34 L212 47 L232 34" />
+                <path d="M168 47 L186 60 L212 47 L232 60" />
+              </g>
+              <g fill="#FFFFFF">
+                <circle cx="168" cy="47" r="3.4" /><circle cx="186" cy="34" r="2.6" /><circle cx="186" cy="60" r="2.6" />
+                <circle cx="212" cy="47" r="3.4" /><circle cx="232" cy="34" r="2.6" /><circle cx="232" cy="60" r="2.6" />
+              </g>
+              <text x="200" y="90" text-anchor="middle">THE MACHINE</text>
+              <line x1="256" y1="47" x2="302" y2="47" stroke="rgba(255,255,255,.62)" stroke-width="1.4" marker-end="url(#rx-ar)" />
+
+              <rect x="310" y="18" width="106" height="58" rx="7" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.52)" />
+              <g fill="rgba(255,255,255,.55)">
+                <rect x="322" y="30" width="60" height="3.5" rx="1.75" />
+                <rect x="322" y="39" width="72" height="3.5" rx="1.75" />
+              </g>
+              <rect x="322" y="50" width="82" height="14" rx="4" fill="#FFFFFF" />
+              <text class="pill" x="363" y="60" text-anchor="middle">Your practice</text>
+              <text x="363" y="90" text-anchor="middle">THE ANSWER</text>
+            </svg>
+          </div>
+        </div>
+
+        <!-- 2 · one question, two answers -->
+        <div class="xo" data-reveal>
+          <div class="o3-ask">
+            <span class="k">Patient asks</span>
+            <span class="q">Is there a dentist near Anytown open on Saturdays?</span>
+          </div>
+
+          <div class="xo-panes xo-rows-3">
+            <div class="xo-pane">
+              <header><span class="who">Before the build</span><span class="sub">name and locality, hours as prose</span></header>
+              <figure class="hm-answer hm-chat o3-card">
+                <div class="hm-topbar" aria-hidden="true">
+                  <span class="ttl">Dentist near Anytown, open Saturday</span>
+                  <span class="shr">Share</span>
+                </div>
+                <div class="hm-thread">
+                  <div class="hm-worked"><span class="wk">Worked for 9s<span class="chev" aria-hidden="true">&rsaquo;</span></span></div>
+                  <div class="hm-bubble hm-ans">
+                    <p class="hm-line">I found <b>Specimen Dental</b> in Anytown. A line of text mentions Saturday hours, but nothing on the page states them as a record, and it lists no services. I could not confirm either.</p>
+                    <div class="hm-acts" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M7 7V4.8A1.8 1.8 0 0 1 8.8 3h6.4A1.8 1.8 0 0 1 17 4.8v6.4a1.8 1.8 0 0 1-1.8 1.8H13M4.8 7h6.4A1.8 1.8 0 0 1 13 8.8v6.4A1.8 1.8 0 0 1 11.2 17H4.8A1.8 1.8 0 0 1 3 15.2V8.8A1.8 1.8 0 0 1 4.8 7Z"/></svg><svg viewBox="0 0 20 20"><path d="M6 17V9m0 0 3-5c1.2 0 1.9.8 1.7 2L10.3 9H15a1.6 1.6 0 0 1 1.5 2l-1.3 5A1.9 1.9 0 0 1 13.4 17H6Zm0 0H3.6V9H6"/></svg><svg viewBox="0 0 20 20"><path d="M6 3v8m0 0 3 5c1.2 0 1.9-.8 1.7-2L10.3 11H15a1.6 1.6 0 0 0 1.5-2l-1.3-5A1.9 1.9 0 0 0 13.4 3H6Zm0 0H3.6v8H6"/></svg></div>
+                  </div>
+                </div>
+                <figcaption class="hm-ans-foot"><span>Simulated on the specimen practice</span><span>Not a screenshot</span></figcaption>
+              </figure>
+              <div class="o3-keys">
+                <span class="o3-key off">Hours as a record <b><span data-xr="before.hours.records">0</span></b></span>
+                <span class="o3-key off">Services it can name <b><span data-xr="before.services.inPage">0</span> of <span data-xr="before.services.deferred">6</span></b></span>
+                <span class="o3-key off">Questions answered <b><span data-xr="before.questions.count">0</span></b></span>
+              </div>
+            </div>
+
+            <div class="xo-pane">
+              <header><span class="who">After the build</span><span class="sub">every fact below is a record</span></header>
+              <figure class="hm-answer hm-chat o3-card">
+                <div class="hm-topbar" aria-hidden="true">
+                  <span class="ttl">Dentist near Anytown, open Saturday</span>
+                  <span class="shr">Share</span>
+                </div>
+                <div class="hm-thread">
+                  <div class="hm-worked"><span class="wk">Worked for 9s<span class="chev" aria-hidden="true">&rsaquo;</span></span></div>
+                  <div class="hm-bubble hm-ans">
+                    <p class="hm-line">Yes &mdash; <b><mark>Specimen Dental</mark></b> in Anytown is open Saturdays, <span data-xr="after.hours.saturday">9am to 1pm</span>, and <span data-xr="after.hours.weekday">9am to 6pm</span> on weekdays. It lists <span data-xr="after.services.records">6</span> treatments including emergency visits, and holds same-day slots for pain.</p>
+                    <div class="hm-acts" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M7 7V4.8A1.8 1.8 0 0 1 8.8 3h6.4A1.8 1.8 0 0 1 17 4.8v6.4a1.8 1.8 0 0 1-1.8 1.8H13M4.8 7h6.4A1.8 1.8 0 0 1 13 8.8v6.4A1.8 1.8 0 0 1 11.2 17H4.8A1.8 1.8 0 0 1 3 15.2V8.8A1.8 1.8 0 0 1 4.8 7Z"/></svg><svg viewBox="0 0 20 20"><path d="M6 17V9m0 0 3-5c1.2 0 1.9.8 1.7 2L10.3 9H15a1.6 1.6 0 0 1 1.5 2l-1.3 5A1.9 1.9 0 0 1 13.4 17H6Zm0 0H3.6V9H6"/></svg><svg viewBox="0 0 20 20"><path d="M6 3v8m0 0 3 5c1.2 0 1.9-.8 1.7-2L10.3 11H15a1.6 1.6 0 0 0 1.5-2l-1.3-5A1.9 1.9 0 0 0 13.4 3H6Zm0 0H3.6v8H6"/></svg></div>
+                  </div>
+                </div>
+                <figcaption class="hm-ans-foot"><span class="lit">Simulated on the specimen practice</span><span>Not a screenshot</span></figcaption>
+              </figure>
+              <div class="o3-keys">
+                <span class="o3-key">Hours as a record <b><span data-xr="after.hours.records">2</span></b></span>
+                <span class="o3-key">Services it can name <b><span data-xr="after.services.inPage">6</span> of <span data-xr="after.services.records">6</span></b></span>
+                <span class="o3-key">Questions answered <b><span data-xr="after.questions.count">4</span></b></span>
+              </div>
+            </div>
+          </div>
+
+          <p class="xo-note">Both answers are ours, and labelled as simulated on both cards. Whether an assistant names a practice is its call; what the build changes is whether it has anything to name it from.</p>
+        </div>
+
+        <!-- 3 · the counts -->
+        <div class="xr-counts" data-reveal>
+          <!-- NOT "The difference, measured": that is the badge on #diff,
+               one section down, and two headings with the same words two
+               screens apart read as the same section printed twice. -->
+          <h3>Counted on arrival</h3>
+          <p>Five counts, taken from each build exactly as it arrives.</p>
+
+          <div class="xr-row">
+            <p class="cn">Section titles Google can actually read</p>
+            <div class="xr-bars">
+              <p class="xr-b"><span class="t">before &middot; <span data-xr="before.headings.readable">3</span> of <span data-xr="before.headings.total">5</span></span><span class="xr-bar"><b style="width: 17.6%" data-xr-bar="before.headings.readable/after.headings.readable@%"></b></span></p>
+              <p class="xr-b now"><span class="t">after &middot; <span data-xr="after.headings.readable">17</span> of <span data-xr="after.headings.total">17</span></span><span class="xr-bar now"><b style="width: 100%"></b></span></p>
+            </div>
+            <p class="xr-delta"><span data-xr="after.headings.readable">17</span><small>of <span data-xr="after.headings.total">17</span></small></p>
+          </div>
+
+          <div class="xr-row">
+            <p class="cn">Section titles that are pictures<span class="xr-inv">fewer is better</span></p>
+            <div class="xr-bars">
+              <p class="xr-b"><span class="t">before &middot; <span data-xr="before.headings.pictures">2</span> of <span data-xr="before.headings.total">5</span></span><span class="xr-bar none"><b style="width: 100%"></b></span></p>
+              <p class="xr-b now"><span class="t">after &middot; <span data-xr="after.headings.pictures">0</span> of <span data-xr="after.headings.total">17</span></span><span class="xr-bar"></span></p>
+            </div>
+            <p class="xr-delta"><span data-xr="after.headings.pictures">0</span><small>pictures left</small></p>
+          </div>
+
+          <div class="xr-row">
+            <p class="cn">Patient questions in the format Google recognises</p>
+            <div class="xr-bars">
+              <p class="xr-b"><span class="t">before &middot; none</span><span class="xr-bar"></span></p>
+              <p class="xr-b now"><span class="t">after &middot; <span data-xr="after.questions.count">4</span> of <span data-xr="after.questions.count">4</span></span><span class="xr-bar now"><b style="width: 100%"></b></span></p>
+            </div>
+            <p class="xr-delta"><span data-xr="after.questions.count">4</span><small>questions</small></p>
+          </div>
+
+          <div class="xr-row">
+            <p class="cn">Summaries of the practice written for machines</p>
+            <div class="xr-bars">
+              <p class="xr-b"><span class="t">before &middot; <span data-xr="before.structured.blocks">0</span> blocks</span><span class="xr-bar"></span></p>
+              <p class="xr-b now"><span class="t">after &middot; <span data-xr="after.structured.blocks">2</span> blocks</span><span class="xr-bar now"><b style="width: 100%"></b></span></p>
+            </div>
+            <p class="xr-delta"><span data-xr="after.structured.blocks">2</span><small>blocks</small></p>
+          </div>
+
+          <div class="xr-row">
+            <p class="cn">How much of the page a search engine actually receives</p>
+            <div class="xr-bars">
+              <p class="xr-b"><span class="t">before &middot; <span data-xr="before.chars.received">716</span> of <span data-xr="before.chars.total">1,506</span></span><span class="xr-bar"><b style="width: 27.2%" data-xr-bar="before.chars.received/after.chars.received@%"></b></span></p>
+              <p class="xr-b now"><span class="t">after &middot; <span data-xr="after.chars.received">2,629</span> of <span data-xr="after.chars.total">2,629</span></span><span class="xr-bar now"><b style="width: 100%"></b></span></p>
+            </div>
+            <p class="xr-delta"><span data-xr="delta.textMultiple">3.7</span>&times;<small>more text</small></p>
+          </div>
+
+          <!-- THE FAIRNESS NOTE IS NOT REPEATED HERE. It is written out in
+               full in the method block below, and printing the same
+               paragraph twice on one page — once in white on blue and once
+               in grey on paper, two screens apart — is the padding this
+               redesign is supposed to be removing. A line and a link
+               instead. -->
+          <p class="xr-fair"><a href="#diff">How each of these five was counted, and the one thing to be fair about <span aria-hidden="true">&rarr;</span></a></p>
+        </div>
+
+        <p class="xr-foot">A specimen, not a case study. Both builds are ours; Specimen Dental is invented, and no real practice&rsquo;s content appears here. Every count on this page is read out of the two builds by a build-time script, so it cannot drift from them.</p>
+      </div>
+    </section>
+
+    <!-- ============================ the diff ============================ -->
+    <section class="hm-sec" id="diff" data-ground="light">
+      <div class="wrap">
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>The difference, measured</span></span>
+          <h2 class="hm-h2">What each build hands to a machine.</h2>
+        </div>
+        <p class="hm-sub" data-reveal>Five counts, taken from each of those two pages exactly as it arrives — before anything on the page has had a chance to run. That is where a search engine starts, and on the before build it is also where it stops. Three of the five are given against the total on the page, so you can see how much is being lost and not only which way it goes. The exact definitions are underneath the table.</p>
 
         <div class="diff" data-reveal>
           <div class="diff-row diff-head">
@@ -142,14 +422,14 @@
 
           <div class="diff-row">
             <p class="diff-metric">Section titles Google can actually read<small>Titles that are real text rather than a picture, counted against every title on the page.</small></p>
-            <p class="diff-val a">3 <small>of 5 titles</small></p>
-            <p class="diff-val b">17 <small>of 17 titles</small></p>
+            <p class="diff-val a"><span data-xr="before.headings.readable">3</span> <small>of <span data-xr="before.headings.total">5</span> titles</small></p>
+            <p class="diff-val b"><span data-xr="after.headings.readable">17</span> <small>of <span data-xr="after.headings.total">17</span> titles</small></p>
           </div>
 
           <div class="diff-row">
             <p class="diff-metric">Section titles that are pictures<small>Titles holding an image where the text should be, against the same total.</small></p>
-            <p class="diff-val a">2 <small>of 5 titles</small></p>
-            <p class="diff-val b">0 <small>of 17 titles</small></p>
+            <p class="diff-val a"><span data-xr="before.headings.pictures">2</span> <small>of <span data-xr="before.headings.total">5</span> titles</small></p>
+            <p class="diff-val b"><span data-xr="after.headings.pictures">0</span> <small>of <span data-xr="after.headings.total">17</span> titles</small></p>
           </div>
 
           <div class="diff-row">
@@ -160,14 +440,14 @@
 
           <div class="diff-row">
             <p class="diff-metric">Summaries of the practice written for machines<small>Short records that sit inside the page and are never shown to a visitor. In the after build: the hours, address and services, and the four questions.</small></p>
-            <p class="diff-val a">0</p>
-            <p class="diff-val b">2</p>
+            <p class="diff-val a"><span data-xr="before.structured.blocks">0</span></p>
+            <p class="diff-val b"><span data-xr="after.structured.blocks">2</span></p>
           </div>
 
           <div class="diff-row">
             <p class="diff-metric">How much of the page a search engine actually receives<small>Characters in the page as it arrives, against every character a patient can read once it has finished loading.</small></p>
-            <p class="diff-val a">716 <small>of 1,506 characters</small></p>
-            <p class="diff-val b">2,629 <small>of 2,629 characters</small></p>
+            <p class="diff-val a"><span data-xr="before.chars.received">716</span> <small>of <span data-xr="before.chars.total">1,506</span> characters</small></p>
+            <p class="diff-val b"><span data-xr="after.chars.received">2,629</span> <small>of <span data-xr="after.chars.total">2,629</span> characters</small></p>
           </div>
         </div>
 
@@ -196,19 +476,19 @@
               <dd>The words that arrive with the page itself, compared with everything a patient can eventually read. In the before build, the six services are only added after the page loads &mdash; a patient swipes through them, but they were never handed to the machine.</dd>
             </div>
           </dl>
-          <p class="subtract"><b>One thing to be fair about.</b> 878 of the after build's 2,629 characters are the four patient questions and their answers &mdash; content the before build never carried in any form. Set those aside and it is still 1,751 characters against 716: the same services, the same hours, the same headline, and nearly two and a half times as much of it reaching the machine.</p>
+          <p class="subtract"><b>One thing to be fair about.</b> <span data-xr="delta.questionChars">878</span> of the after build's <span data-xr="after.chars.received">2,629</span> characters are the four patient questions and their answers &mdash; content the before build never carried in any form. Set those aside and it is still <span data-xr="delta.afterWithoutQuestions">1,751</span> characters against <span data-xr="before.chars.received">716</span>: the same services, the same hours, the same headline, and nearly two and a half times as much of it reaching the machine.</p>
         </div>
       </div>
     </section>
 
     <!-- ============================ mechanism ============================ -->
-    <section class="lp-section" id="why">
+    <section class="hm-sec" id="why" data-ground="light">
       <div class="wrap">
-        <div class="lp-head wide" data-reveal>
-          <span class="eyebrow"><span class="dot" aria-hidden="true"></span><span>Why it happens</span></span>
-          <h2 class="lp-h2">Nothing in the before build is broken. That is the problem.</h2>
+        <div data-reveal>
+          <span class="badge"><span class="dot" aria-hidden="true"></span><span>Why it happens</span></span>
+          <h2 class="hm-h2">Nothing in the before build is broken. That is the problem.</h2>
         </div>
-        <p class="lp-sub" data-reveal>It loads fast, it reads well, it works on a phone. Every one of its problems is invisible to the person who owns it, because every one of them is in the code underneath — and that code is the only part a machine ever sees.</p>
+        <p class="hm-sub" data-reveal>It loads fast, it reads well, it works on a phone. Every one of its problems is invisible to the person who owns it, because every one of them is in the code underneath — and that code is the only part a machine ever sees.</p>
 
         <ul class="mech">
           <li data-reveal>
@@ -229,20 +509,20 @@
           </li>
         </ul>
 
-        <p class="lp-sub" data-reveal>Two of the five patterns we describe on <a href="/#why">the product page</a> are not reproduced here — answers locked inside a PDF, and having no way to measure what visitors do. Those need a file and an audience, not a change to the code, so a specimen cannot honestly show them.</p>
+        <p class="hm-sub hm-gap" data-reveal>Two of the patterns we describe in <a href="/articles/what-a-machine-can-tell-checklist/">the checklist</a> are not reproduced here — answers locked inside a PDF, and having no way to measure what visitors do. Those need a file and an audience, not a change to the code, so a specimen cannot honestly show them.</p>
       </div>
     </section>
 
     <!-- ============================ closing cta ============================ -->
-    <section class="lp-section cta-band" id="contact">
+    <section class="hm-cta" id="contact" data-ground="light">
       <div class="wrap">
-        <div class="lp-head" data-reveal>
-          <h2 class="lp-h2">Yours is the one that counts.</h2>
-        </div>
-        <p class="lp-sub" data-reveal>This page is a specimen, and a specimen only proves we can build. We build your site first — from what you already have, or from scratch. This one is a rebuild because there was a site to start from; when there is no site, or nothing on it can be reached, we build from nothing instead. Either way it is the build we send you, not this page, that you should judge us on.</p>
-        <div data-reveal>
-          <a class="btn btn-primary" href="/contact/">See your site first</a>
-          <p class="lp-note">A link if you have one, the name of the practice if you don't. <a href="/clinics/">Back to the clinics page &rarr;</a></p>
+        <div class="hm-cta-box" data-reveal>
+          <h2 class="hm-h2">Yours is the one that counts.</h2>
+          <p class="hm-sub">This page is a specimen, and a specimen only proves we can build. We build your site first — from what you already have, or from scratch. This one is a rebuild because there was a site to start from; when there is no site, or nothing on it can be reached, we build from nothing instead. Either way it is the build we send you, not this page, that you should judge us on.</p>
+          <div class="hm-actions still">
+            <a class="btn btn-primary" href="/contact/">See your site first</a>
+          </div>
+          <p class="hm-note hm-tight">A link if you have one, the name of the practice if you don't. <a href="/clinics/">Back to the clinics page &rarr;</a></p>
         </div>
       </div>
     </section>
@@ -256,11 +536,13 @@
         <p class="footer-legal">Anaks Labs Inc. &nbsp;·&nbsp; <a href="/about/">Company information</a> &nbsp;·&nbsp; <a href="/sources/">Sources</a></p>
       </div>
       <nav class="footer-nav" aria-label="Footer">
-        <a href="/#product">Product</a>
+        <a href="/products/">Products</a>
         <a href="/clinics/">Clinics</a>
         <a href="/articles/">Articles</a>
         <a href="/about/">About</a>
+        <a href="/faq/">FAQ</a>
         <a href="/contact/">Contact</a>
+        <a href="/check/">Check your site</a>
       </nav>
     </div>
   </footer>

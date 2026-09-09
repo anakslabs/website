@@ -96,7 +96,11 @@ const TYPES = {
 /* vercel.json's redirects, so a link the homepage carries to a retired URL
    behaves locally the way it behaves in production. */
 const REDIRECTS = [
-  [/^\/products\/(.*)$/, "/"],
+  /* /products/ was here, sending a retired URL to the root. It is a real page
+     again, and the entry has to come out of BOTH lists or the two disagree:
+     production would serve the page while every local check followed a 308 to
+     the homepage and reported the homepage's numbers under the product page's
+     name. This table mirrors vercel.json and has to be edited with it. */
   [/^\/guides\/$/, "/articles/"],
   [/^\/guides\/(.+)$/, "/articles/$1"],
   [/^\/blog\/hello\/(.*)$/, "/"],

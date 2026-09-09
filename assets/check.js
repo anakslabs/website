@@ -176,7 +176,7 @@
         .then(function (r) {
           if (r.ok) {
             rform.reset();
-            rstatus.textContent = 'We reply with the finished site, not a sales call.';
+            rstatus.textContent = 'We reply with the finished site within 3 business days, not a sales call.';
             rstatus.className = 'form-status is-ok';
             if (window.va) window.va('event', { name: 'rebuild_request' });
             return;
