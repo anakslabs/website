@@ -2834,7 +2834,7 @@ body.cin-page.landing .lp-hero h1 { font-size: var(--cin-h2); }
 .hm-chat .hm-ans-foot {
   display: flex; justify-content: space-between; gap: 1em; flex-wrap: wrap;
   padding-top: 1em; margin-top: .2em;
-  font-family: var(--mono); font-size: .74em; letter-spacing: .1em;
+  font-family: var(--mono); font-size: max(.74em, 10.5px); letter-spacing: .1em;
   text-transform: uppercase; color: var(--gpt-sec);
 }
 .hm-chat .hm-ans-foot .lit { color: var(--gpt-link); }
@@ -3486,7 +3486,7 @@ body.landing.cin-page .site-footer > .wrap {
   letter-spacing: -.030em; color: var(--on-dark-h1);
   max-width: 17ch; text-wrap: balance;
 }
-.cin-h1 em { font-style: normal; color: var(--blue-on-dark); }
+.cin-h1 em { font-style: normal; font-weight: 700; color: #FFFFFF; }
 .cin-h2 {
   font-size: var(--cin-h2); font-weight: 600; line-height: 1.0;
   letter-spacing: -.032em; color: var(--ink); max-width: 20ch; text-wrap: balance;
@@ -4137,14 +4137,16 @@ body.landing.cin-page .site-footer > .wrap {
   transition: color .2s ease;
 }
 .cin-slider-tab:hover { color: var(--on-dark-2); }
-.cin-slider-tab[aria-current="true"] { color: var(--on-dark); }
+.cin-slider-tab[aria-current="true"] { color: var(--on-dark); font-weight: 700; }
 .cin-slider-tab i {
   position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
-  background: var(--cin-od-16); border-radius: 2px; overflow: hidden;
+  background: rgba(255, 255, 255, .18); border-radius: 2px; overflow: hidden;
 }
+.cin-slider-tab[aria-current="true"] i { height: 3px; background: var(--cin-od-45); }
 .cin-slider-tab i::after {
   content: ""; position: absolute; inset: 0;
   background: var(--blue-on-dark); transform-origin: left center; transform: scaleX(0);
+  transition: transform .22s ease;
 }
 /* THE PROGRESS BAR IS THE TIMER, and that is the whole reason there is no
    setInterval in this component. The bar is a CSS animation on transform; when
@@ -4154,7 +4156,19 @@ body.landing.cin-page .site-footer > .wrap {
 .cin-slider.is-slider:not(.is-paused) .cin-slider-tab[aria-current="true"] i::after {
   animation: cin-tabfill var(--cin-slide-ms, 5000ms) linear forwards;
 }
-.cin-slider.is-slider.is-paused .cin-slider-tab[aria-current="true"] i::after { transform: scaleX(.001); }
+/* PAUSED IS NOT EMPTY. Hover, focus, a finger and the pause button all pause the
+   clock, and a click on a tab always happens while the pointer is inside — so an
+   empty bar on pause left the reader with no way to see which slide they were on
+   or whether the click took (founder, 2026-09-09). Paused, the active bar is full:
+   a plain selected-underline. Playing, it fills from zero as the timer. */
+.cin-slider.is-slider.is-paused .cin-slider-tab[aria-current="true"] i::after { transform: scaleX(1); }
+/* JS-off and reduced-motion (no .is-slider): the current tab still shows a full bar */
+.cin-slider:not(.is-slider) .cin-slider-tab[aria-current="true"] i::after { transform: scaleX(1); }
+.cin-slider-count {
+  align-self: center; margin-right: 6px; font-family: var(--mono); font-size: 11.5px;
+  letter-spacing: .13em; color: var(--on-dark-3); font-variant-numeric: tabular-nums;
+}
+.cin-slider-count b { color: var(--on-dark); font-weight: 600; }
 @keyframes cin-tabfill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
 .cin-slider-ctl { display: flex; gap: 8px; }
@@ -4489,7 +4503,7 @@ body.landing.cin-page .site-footer > .wrap {
   .cin-title { min-height: 100svh; }
   .cin-cue { display: none; }
   .cin-card { transform: none; opacity: 1; }
-  .cin-say { display: none; }
+  .cin-say { font-size: clamp(24px, 6.4vw, 28px); max-width: 16ch; }
   .cin-answer-side .cin-label { margin-bottom: 16px; }
   .cin-loop { padding-top: 0; }
   .cin-loop-line { display: none; }
@@ -6256,15 +6270,15 @@ body.landing.cin-page:not(.cin-reel) .site-footer > .wrap {
    invites a reader to compare two questions instead of two answers. */
 .o3-ask {
   display: flex; align-items: center; gap: 12px;
-  padding: 14px 18px; margin-bottom: 4px;
-  border: 1px solid var(--dark-line); border-radius: var(--r-pill);
-  background: rgba(0, 24, 88, .30);
+  padding: 12px 18px; margin-bottom: 4px;
+  border: 0; border-radius: var(--r-md) var(--r-md) var(--r-md) 4px;
+  background: #FFFFFF;
 }
 .o3-ask .k {
   font-family: var(--mono); font-size: 10.5px; letter-spacing: .13em;
-  text-transform: uppercase; color: var(--on-dark-3); flex: 0 0 auto;
+  text-transform: uppercase; color: var(--gray-soft); flex: 0 0 auto;
 }
-.o3-ask .q { font-size: 16px; color: var(--on-dark); }
+.o3-ask .q { font-size: 17px; font-weight: 500; color: var(--ink); }
 
 /* SUBGRID, BECAUSE THE TWO HEADERS ARE NOT THE SAME LENGTH. "Before the
    build" is one line and "every fact below is a record" can wrap to two, so
@@ -6292,11 +6306,23 @@ body.landing.cin-page:not(.cin-reel) .site-footer > .wrap {
 .xo-panes.xo-rows-3 { grid-template-rows: auto minmax(0, 1fr) auto; }
 .xo-panes.xo-rows-3 > .xo-pane { grid-row: span 3; }
 .xo-pane > header {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  font-size: 14px; font-weight: 600; letter-spacing: .01em;
   line-height: 1.4;
 }
-.xo-pane > header .who { color: var(--on-dark); }
+/* BEFORE IS OUTLINED, AFTER IS LIT — the two cards are 90 % pixel-identical, so
+   the label pair carries the verdict (Fable review 2026-09-09). */
+.xo-pane > header .who {
+  display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px;
+  border-radius: var(--r-pill); color: var(--on-dark); border: 1px solid var(--cin-od-45);
+}
+.xo-pane + .xo-pane > header .who { background: #FFFFFF; color: var(--dark-2); border-color: #FFFFFF; }
+.xo-pane + .xo-pane > header .who::before { content: "\2192"; }
+.xo-pane:first-child .o3-card { background: var(--gpt-pill); }
+/* the recessed card lowers --gpt-sec to 4.54:1 at its worst pixel; the gate
+   wants 4.5 everywhere, so the secondary greys on that card go one step darker */
+.xo-pane:first-child .o3-card :is(.wk, .hm-ans-foot, .hm-topbar) { color: #5C5C6E; }
+.xo-pane + .xo-pane .o3-card { box-shadow: 0 0 0 2px #FFFFFF, 0 24px 60px -22px rgba(0, 14, 64, .62); }
 /* --on-dark-2, NOT --on-dark-3, and that is a measurement rather than a
    preference. This label sits at the far right of the section, which on this
    scene is exactly where --rx-lit puts its light source: the ground under it
@@ -6375,9 +6401,9 @@ body.landing.cin-page:not(.cin-reel) .site-footer > .wrap {
   .hm-chat.o3-card { font-size: 12.5px; }
   .o3-ask { padding: 8px 12px; gap: 8px; margin-bottom: 2px; }
   .o3-ask .k { font-size: 10px; letter-spacing: .1em; }
-  .o3-ask .q { font-size: 14.5px; }
+  .o3-ask .q { font-size: 15.5px; }
   .xo-panes { gap: 12px; margin-top: 12px; }
-  .xo-pane > header { font-size: 9.5px; letter-spacing: .1em; }
+  .xo-pane > header { font-size: 12.5px; }
   .xo-pane > header .sub { font-size: 9.5px; }
   .xo-cap { font-size: 12.5px; margin-top: 12px; }
   .xo-note { font-size: 9.5px; }
@@ -6402,7 +6428,7 @@ body.landing.cin-page:not(.cin-reel) .site-footer > .wrap {
   .o3-ask .q { font-size: 15px; }
   .xo-panes, .xo-panes.xo-rows-3 { grid-template-columns: 1fr; grid-template-rows: auto; gap: 16px; margin-top: 14px; }
   .xo-pane, .xo-panes.xo-rows-3 > .xo-pane { grid-row: auto; grid-template-rows: none; }
-  .xo-pane > header { font-size: 10px; }
+  .xo-pane > header { font-size: 13px; }
   .xo-pane > header .sub { font-size: 10px; }
   .xo-cap { font-size: 14px; }
   .xo-note { font-size: 10.5px; }
@@ -6500,3 +6526,12 @@ body.landing.cin-page:not(.cin-reel) .site-footer > .wrap {
    #diff at 390: 8 of 24px covered; /products/ #price fully covered. */
 :where(section, .hm-sec, [id]) { scroll-margin-top: 72px; }
 @media (max-width: 899px) { :where(section, .hm-sec, [id]) { scroll-margin-top: 84px; } }
+
+/* Fable review 2026-09-09: the scene heading was set at h1 size (64.8px vs the
+   hero's 66px) and dominated the squint test; the slide's claim comes first
+   on a phone so the reader knows what the device is before scrolling it. */
+.cin-brief .cin-h2 { font-size: clamp(26px, 3.2vw, 46px); }
+@media (max-width: 899px) {
+  .cin-slider.is-slider .cin-slide > .cin-slide-copy { display: contents; }
+  .cin-slider.is-slider .cin-slide > .cin-slide-copy > .cin-tile-copy { order: -1; }
+}

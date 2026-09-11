@@ -728,6 +728,8 @@
       if (on) tabs[n].setAttribute("aria-current", "true"); else tabs[n].removeAttribute("aria-current");
     }
     root.classList.toggle("is-paused", paused());
+    var count = root.querySelector("[data-count] b");
+    if (count) count.textContent = String(i + 1);
     if (playBtn) playBtn.setAttribute("aria-label", userPaused ? "Start automatic slide rotation" : "Pause automatic slide rotation");
     /* announce only when nothing is moving on its own */
     if (paused()) rail.setAttribute("aria-live", "polite"); else rail.removeAttribute("aria-live");

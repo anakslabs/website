@@ -1,6 +1,6 @@
 {
   "what": "The control the motion-layer homepage replacement is measured against. Recorded from the live static site as it stands on this commit, before any motion work. Numbers here are targets not to regress, not aspirations.",
-  "recordedAt": "2026-09-09T05:04:29.607Z",
+  "recordedAt": "2026-09-11T14:25:43.957Z",
   "commit": "a471c75f02e3388e2ee638bec099b4de3827e4e3",
   "measuredAgainst": "http://localhost:4399 (founder-approved cinematic redesign, 2026-09-09)",
   "lighthouse": {
@@ -91,7 +91,7 @@
   },
   "structure": {
     "h1Count": 1,
-    "h1Text": "When a patient asks an AI for a practice like yours, the answer should name&nbsp;you.",
+    "h1Text": "Your website is the only place an AI finds the details of your&nbsp;practice.",
     "h2Count": 3,
     "h3Count": 0,
     "headingOrder": "h1 h2 h2 h2",
@@ -473,6 +473,10 @@
     "reducedmotion-1440-top.png"
   ],
   "refreeze": [
+    {
+      "at": "2026-09-11T14:25:43.957Z",
+      "reason": "Hook rewrite approved 2026-09-11; structure re-recorded from the served page."
+    },
     {
       "at": "2026-09-09T05:04:29.607Z",
       "reason": "Homepage replaced wholesale by the approved redesign; structure re-recorded from the served page. Lighthouse/weight/rendering/overflow/screenshot blocks below are from 2026-08-14 and are superseded by verification/ output."
